@@ -1,7 +1,5 @@
 <?php
 
-require_once('WMException.php');
-
 class WMRequestSigner
 {
     private $_power, $_modulus;
