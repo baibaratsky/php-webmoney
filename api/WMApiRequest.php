@@ -9,4 +9,6 @@ abstract class WMApiRequest
     abstract public function getXml();
 
     abstract public function getResponseClassName();
+
+    abstract public function sign(WMRequestSigner $requestSigner);
 }

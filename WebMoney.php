@@ -1,10 +1,10 @@
 <?php
 
-spl_autoload_register(array('WebMoney', 'loadClassName'));
+spl_autoload_register(array('WebMoney', 'loadClass'));
 
 class WebMoney
 {
-    protected static $directories = array('api');
+    protected static $_directories = array('api');
 
     private $_requestPerformer;
 
@@ -18,9 +18,9 @@ class WebMoney
         return $this->_requestPerformer->perform($requestObject);
     }
 
-    public static function loadClassName($className)
+    public static function loadClass($className)
     {
-        foreach (self::$directories as $directory) {
+        foreach (self::$_directories as $directory) {
             $file = implode(DIRECTORY_SEPARATOR, array(__DIR__, $directory, $className)) . '.php';
             if (file_exists($file)) {
                 require_once($file);

@@ -1,10 +1,9 @@
 <?php
 
-
 class WMX19Request extends WMApiRequest
 {
-    protected $_reqn;
-    protected $_lang;
+    protected $_requestNumber;
+    protected $_language;
     protected $_signerWmid;
     protected $_operationType;
     protected $_operationDirection;
@@ -12,9 +11,9 @@ class WMX19Request extends WMApiRequest
     protected $_operationAmount;
     protected $_sign;
     protected $_userWmid;
-    protected $_userPNomer;
-    protected $_userFName;
-    protected $_userIName;
+    protected $_userPassportNum;
+    protected $_userLastName;
+    protected $_userFirstName;
     protected $_userBankName;
     protected $_userBankAccount;
     protected $_userCardNumber;
@@ -65,8 +64,8 @@ class WMX19Request extends WMApiRequest
     public function getXml()
     {
         $xml = '<passport.request>';
-        $xml .= '<reqn>' . $this->_reqn . '</reqn>';
-        $xml .= '<lang>' . $this->_lang . '</lang>';
+        $xml .= '<reqn>' . $this->_requestNumber . '</reqn>';
+        $xml .= '<lang>' . $this->_language . '</lang>';
         $xml .= '<signerwmid>' . $this->_signerWmid . '</signerwmid>';
         $xml .= '<sign>' . $this->_sign . '</sign>';
         $xml .= '<operation>';
@@ -77,9 +76,9 @@ class WMX19Request extends WMApiRequest
         $xml .= '</operation>';
         $xml .= '<userinfo>';
         $xml .= '<wmid>' . $this->_userWmid . '</wmid>';
-        $xml .= '<pnomer>' . $this->_userPNomer . '</pnomer>';
-        $xml .= '<fname>' . $this->_userFName . '</fname>';
-        $xml .= '<iname>' . $this->getUserIName() . '</iname>';
+        $xml .= '<pnomer>' . $this->_userPassportNum . '</pnomer>';
+        $xml .= '<fname>' . $this->_userLastName . '</fname>';
+        $xml .= '<iname>' . $this->_userFirstName . '</iname>';
         $xml .= '<bank_name>' . $this->_userBankName . '</bank_name>';
         $xml .= '<bank_account>' . $this->_userBankAccount . '</bank_account>';
         $xml .= '<card_number>' . $this->_userCardNumber . '</card_number>';
@@ -97,20 +96,65 @@ class WMX19Request extends WMApiRequest
         return 'WMX19Response';
     }
 
-    /**
-     * @param string $lang
-     */
-    public function setLang($lang)
+    public function sign(WMRequestSigner $requestSigner)
     {
-        $this->_lang = $lang;
+        $this->_sign = $requestSigner->sign($this->_requestNumber . $this->_operationType . $this->_userWmid);
+    }
+
+    /**
+     * @return int
+     */
+    public function getRequestNumber()
+    {
+        return $this->_requestNumber;
+    }
+
+    /**
+     * @param int $requestNumber
+     */
+    public function setRequestNumber($requestNumber)
+    {
+        $this->_requestNumber = $requestNumber;
     }
 
     /**
      * @return string
      */
-    public function getLang()
+    public function getLanguage()
     {
-        return $this->_lang;
+        return $this->_language;
+    }
+
+    /**
+     * @param string $language
+     */
+    public function setLanguage($language)
+    {
+        $this->_language = $language;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSignerWmid()
+    {
+        return $this->_signerWmid;
+    }
+
+    /**
+     * @param string $signerWmid
+     */
+    public function setSignerWmid($signerWmid)
+    {
+        $this->_signerWmid = $signerWmid;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOperationType()
+    {
+        return $this->_operationType;
     }
 
     /**
@@ -124,9 +168,9 @@ class WMX19Request extends WMApiRequest
     /**
      * @return int
      */
-    public function getOperationType()
+    public function getOperationDirection()
     {
-        return $this->_operationType;
+        return $this->_operationDirection;
     }
 
     /**
@@ -138,27 +182,11 @@ class WMX19Request extends WMApiRequest
     }
 
     /**
-     * @param float $operationAmount
+     * @return string
      */
-    public function setOperationAmount($operationAmount)
+    public function getOperationPurseType()
     {
-        $this->_operationAmount = $operationAmount;
-    }
-
-    /**
-     * @return float
-     */
-    public function getOperationAmount()
-    {
-        return $this->_operationAmount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getOperationDirection()
-    {
-        return $this->_operationDirection;
+        return $this->_operationPurseType;
     }
 
     /**
@@ -170,27 +198,27 @@ class WMX19Request extends WMApiRequest
     }
 
     /**
+     * @return float
+     */
+    public function getOperationAmount()
+    {
+        return $this->_operationAmount;
+    }
+
+    /**
+     * @param float $operationAmount
+     */
+    public function setOperationAmount($operationAmount)
+    {
+        $this->_operationAmount = $operationAmount;
+    }
+
+    /**
      * @return string
      */
-    public function getOperationPurseType()
+    public function getSign()
     {
-        return $this->_operationPurseType;
-    }
-
-    /**
-     * @param int $reqn
-     */
-    public function setReqn($reqn)
-    {
-        $this->_reqn = $reqn;
-    }
-
-    /**
-     * @return int
-     */
-    public function getReqn()
-    {
-        return $this->_reqn;
+        return $this->_sign;
     }
 
     /**
@@ -204,25 +232,9 @@ class WMX19Request extends WMApiRequest
     /**
      * @return string
      */
-    public function getSign()
+    public function getUserWmid()
     {
-        return $this->_sign;
-    }
-
-    /**
-     * @param string $signerWmid
-     */
-    public function setSignerWmid($signerWmid)
-    {
-        $this->_signerWmid = $signerWmid;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSignerWmid()
-    {
-        return $this->_signerWmid;
+        return $this->_userWmid;
     }
 
     /**
@@ -234,59 +246,59 @@ class WMX19Request extends WMApiRequest
     }
 
     /**
-     * @return string
-     */
-    public function getUserWmid()
-    {
-        return $this->_userWmid;
-    }
-
-    /**
-     * @param int $userPNomer
-     */
-    public function setUserPNomer($userPNomer)
-    {
-        $this->_userPNomer = $userPNomer;
-    }
-
-    /**
      * @return int
      */
-    public function getUserPNomer()
+    public function getUserPassportNum()
     {
-        return $this->_userPNomer;
+        return $this->_userPassportNum;
+    }
+
+    /**
+     * @param int $userPassportNum
+     */
+    public function setUserPassportNum($userPassportNum)
+    {
+        $this->_userPassportNum = $userPassportNum;
     }
 
     /**
      * @return string
      */
-    public function getUserFName()
+    public function getUserLastName()
     {
-        return $this->_userFName;
+        return $this->_userLastName;
     }
 
     /**
-     * @param string $userFName
+     * @param string $userLastName
      */
-    public function setUserFName($userFName)
+    public function setUserLastName($userLastName)
     {
-        $this->_userFName = $userFName;
+        $this->_userLastName = $userLastName;
     }
 
     /**
      * @return string
      */
-    public function getUserIName()
+    public function getUserFirstName()
     {
-        return $this->_userIName;
+        return $this->_userFirstName;
     }
 
     /**
-     * @param string $userIName
+     * @param string $userFirstName
      */
-    public function setUserIName($userIName)
+    public function setUserFirstName($userFirstName)
     {
-        $this->_userIName = $userIName;
+        $this->_userFirstName = $userFirstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserBankName()
+    {
+        return $this->_userBankName;
     }
 
     /**
@@ -300,9 +312,9 @@ class WMX19Request extends WMApiRequest
     /**
      * @return string
      */
-    public function getUserBankName()
+    public function getUserBankAccount()
     {
-        return $this->_userBankName;
+        return $this->_userBankAccount;
     }
 
     /**
@@ -316,9 +328,9 @@ class WMX19Request extends WMApiRequest
     /**
      * @return string
      */
-    public function getUserBankAccount()
+    public function getUserCardNumber()
     {
-        return $this->_userBankAccount;
+        return $this->_userCardNumber;
     }
 
     /**
@@ -332,9 +344,9 @@ class WMX19Request extends WMApiRequest
     /**
      * @return string
      */
-    public function getUserCardNumber()
+    public function getUserEMoneyName()
     {
-        return $this->_userCardNumber;
+        return $this->_userEMoneyName;
     }
 
     /**
@@ -348,9 +360,9 @@ class WMX19Request extends WMApiRequest
     /**
      * @return string
      */
-    public function getUserEMoneyName()
+    public function getUserEMoneyId()
     {
-        return $this->_userEMoneyName;
+        return $this->_userEMoneyId;
     }
 
     /**
@@ -364,9 +376,9 @@ class WMX19Request extends WMApiRequest
     /**
      * @return string
      */
-    public function getUserEMoneyId()
+    public function getUserPhone()
     {
-        return $this->_userEMoneyId;
+        return $this->_userPhone;
     }
 
     /**
@@ -375,13 +387,5 @@ class WMX19Request extends WMApiRequest
     public function setUserPhone($userPhone)
     {
         $this->_userPhone = $userPhone;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUserPhone()
-    {
-        return $this->_userPhone;
     }
 }
