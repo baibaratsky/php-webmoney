@@ -11,4 +11,9 @@ abstract class WMApiRequest
     abstract public function getResponseClassName();
 
     abstract public function sign(WMRequestSigner $requestSigner);
+
+    protected function _generateRequestNumber()
+    {
+        return str_replace('.', '', microtime(true));
+    }
 }

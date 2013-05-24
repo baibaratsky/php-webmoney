@@ -10,15 +10,12 @@ class WMX19Response extends WMApiResponse
 
     public function __construct($response)
     {
-        $response = preg_replace('/ encoding=\"(.*)\"/', '', $response);
-
-        $xmlObject = new SimpleXMLElement($response);
-
-        $this->_returnCode = (int)$xmlObject->retval;
-        $this->_returnDescription = (string)$xmlObject->retdesc;
-        $this->_returnId = (string)$xmlObject->retid;
-        $this->_userFirstName = (string)$xmlObject->userinfo->iname;
-        $this->_userMiddleName = (string)$xmlObject->userinfo->oname;
+        $responseObject = new SimpleXMLElement($response);
+        $this->_returnCode = (int)$responseObject->retval;
+        $this->_returnDescription = (string)$responseObject->retdesc;
+        $this->_returnId = (string)$responseObject->retid;
+        $this->_userFirstName = (string)$responseObject->userinfo->iname;
+        $this->_userMiddleName = (string)$responseObject->userinfo->oname;
     }
 
     /**

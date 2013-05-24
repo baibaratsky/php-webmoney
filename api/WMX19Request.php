@@ -2,24 +2,8 @@
 
 class WMX19Request extends WMApiRequest
 {
-    protected $_requestNumber;
-    protected $_language;
-    protected $_signerWmid;
-    protected $_operationType;
-    protected $_operationDirection;
-    protected $_operationPurseType;
-    protected $_operationAmount;
-    protected $_sign;
-    protected $_userWmid;
-    protected $_userPassportNum;
-    protected $_userLastName;
-    protected $_userFirstName;
-    protected $_userBankName;
-    protected $_userBankAccount;
-    protected $_userCardNumber;
-    protected $_userEMoneyName;
-    protected $_userEMoneyId;
-    protected $_userPhone;
+    const AUTH_CLASSIC = 'classic';
+    const AUTH_LIGHT = 'light';
 
     const LANG_RU = 'ru';
     const LANG_EN = 'en';
@@ -50,6 +34,35 @@ class WMX19Request extends WMApiRequest
     const EMONEY_YAM = 'money.yandex.ru';
     const EMONEY_ESP = 'easypay.by';
 
+    protected $_authType;
+    protected $_requestNumber;
+    protected $_language;
+    protected $_signerWmid;
+    protected $_operationType;
+    protected $_operationDirection;
+    protected $_operationPurseType;
+    protected $_operationAmount;
+    protected $_sign;
+    protected $_userWmid;
+    protected $_userPassportNum;
+    protected $_userLastName;
+    protected $_userFirstName;
+    protected $_userBankName;
+    protected $_userBankAccount;
+    protected $_userCardNumber;
+    protected $_userEMoneyName;
+    protected $_userEMoneyId;
+    protected $_userPhone;
+
+    protected $_xml;
+    protected $_errors;
+
+    public function __construct($authType = self::AUTH_CLASSIC)
+    {
+        $this->_authType = $authType;
+        $this->_requestNumber = $this->_generateRequestNumber();
+    }
+
     public function validate()
     {
 
@@ -57,38 +70,41 @@ class WMX19Request extends WMApiRequest
 
     public function getUrl()
     {
-        //@TODO keeper light https://apipassport.webmoney.ru/XMLCheckUserCert.aspx
-        return 'https://apipassport.webmoney.ru/XMLCheckUser.aspx';
+        if ($this->_authType == self::AUTH_CLASSIC) {
+            return 'https://apipassport.webmoney.ru/XMLCheckUser.aspx';
+        }
+
+        return 'https://apipassport.webmoney.ru/XMLCheckUserCert.aspx';
     }
 
     public function getXml()
     {
-        $xml = '<passport.request>';
-        $xml .= '<reqn>' . $this->_requestNumber . '</reqn>';
-        $xml .= '<lang>' . $this->_language . '</lang>';
-        $xml .= '<signerwmid>' . $this->_signerWmid . '</signerwmid>';
-        $xml .= '<sign>' . $this->_sign . '</sign>';
-        $xml .= '<operation>';
-        $xml .= '<type>' . $this->_operationType . '</type>';
-        $xml .= '<direction>' . $this->_operationDirection . '</direction>';
-        $xml .= '<pursetype>' . $this->_operationPurseType . '</pursetype>';
-        $xml .= '<amount>' . $this->_operationAmount . '</amount>';
-        $xml .= '</operation>';
-        $xml .= '<userinfo>';
-        $xml .= '<wmid>' . $this->_userWmid . '</wmid>';
-        $xml .= '<pnomer>' . $this->_userPassportNum . '</pnomer>';
-        $xml .= '<fname>' . $this->_userLastName . '</fname>';
-        $xml .= '<iname>' . $this->_userFirstName . '</iname>';
-        $xml .= '<bank_name>' . $this->_userBankName . '</bank_name>';
-        $xml .= '<bank_account>' . $this->_userBankAccount . '</bank_account>';
-        $xml .= '<card_number>' . $this->_userCardNumber . '</card_number>';
-        $xml .= '<emoney_name>' . $this->_userEMoneyName . '</emoney_name>';
-        $xml .= '<emoney_id>' . $this->_userEMoneyId . '</emoney_id>';
-        $xml .= '<phone>' . $this->_userPhone . '</phone>';
-        $xml .= '</userinfo>';
-        $xml .= '</passport.request>';
+        $this->_xml = '<passport.request>';
+        $this->_addToXml('reqn', $this->_requestNumber);
+        $this->_addToXml('lang', $this->_language);
+        $this->_addToXml('signerwmid', $this->_signerWmid);
+        $this->_addToXml('sign', $this->_sign);
+        $this->_xml .= '<operation>';
+        $this->_addToXml('type', $this->_operationType);
+        $this->_addToXml('direction', $this->_operationDirection);
+        $this->_addToXml('pursetype', $this->_operationPurseType);
+        $this->_addToXml('amount', $this->_operationAmount);
+        $this->_xml .= '</operation>';
+        $this->_xml .= '<userinfo>';
+        $this->_addToXml('wmid', $this->_userWmid);
+        $this->_addToXml('pnomer', $this->_userPassportNum);
+        $this->_addToXml('fname', $this->_userLastName);
+        $this->_addToXml('iname', $this->_userFirstName);
+        $this->_addToXml('bank_name', $this->_userBankName);
+        $this->_addToXml('bank_account', $this->_userBankAccount);
+        $this->_addToXml('card_number', $this->_userCardNumber);
+        $this->_addToXml('emoney_name', $this->_userEMoneyName);
+        $this->_addToXml('emoney_id', $this->_userEMoneyId);
+        $this->_addToXml('phone', $this->_userPhone);
+        $this->_xml .= '</userinfo>';
+        $this->_xml .= '</passport.request>';
 
-        return $xml;
+        return $this->_xml;
     }
 
     public function getResponseClassName()
@@ -98,7 +114,17 @@ class WMX19Request extends WMApiRequest
 
     public function sign(WMRequestSigner $requestSigner)
     {
-        $this->_sign = $requestSigner->sign($this->_requestNumber . $this->_operationType . $this->_userWmid);
+        if ($this->_authType == self::AUTH_CLASSIC) {
+            $this->_sign = $requestSigner->sign($this->_requestNumber . $this->_operationType . $this->_userWmid);
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthType()
+    {
+        return $this->_authType;
     }
 
     /**
@@ -211,22 +237,6 @@ class WMX19Request extends WMApiRequest
     public function setOperationAmount($operationAmount)
     {
         $this->_operationAmount = $operationAmount;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSign()
-    {
-        return $this->_sign;
-    }
-
-    /**
-     * @param string $sign
-     */
-    public function setSign($sign)
-    {
-        $this->_sign = $sign;
     }
 
     /**
@@ -387,5 +397,21 @@ class WMX19Request extends WMApiRequest
     public function setUserPhone($userPhone)
     {
         $this->_userPhone = $userPhone;
+    }
+
+    public function getErrors()
+    {
+
+    }
+
+    /**
+     * @param string $paramName
+     * @param string|int|float $value
+     */
+    protected function _addToXml($paramName, $value)
+    {
+        if (!empty($value)) {
+            $this->_xml .= '<' . $paramName . '>' . $value . '</' . $paramName . '>';
+        }
     }
 }
