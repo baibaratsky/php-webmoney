@@ -1,7 +1,5 @@
 <?php
 
-require_once('WMException.php');
-
 class WMRequestSigner
 {
     private $_power, $_modulus;
@@ -40,6 +38,7 @@ class WMRequestSigner
      * Create signature for given data
      *
      * @param string $data
+     *
      * @return string
      */
     public function sign($data)
@@ -79,11 +78,13 @@ class WMRequestSigner
      * @param string $keyBuffer
      * @param string $wmid
      * @param string $keyPassword
+     *
      * @return string
      */
     private function _encryptKey($keyBuffer, $wmid, $keyPassword)
     {
         $hash = hash('md4', $wmid . $keyPassword, true);
+
         return $this->_xor($keyBuffer, $hash, 6);
     }
 
@@ -93,6 +94,7 @@ class WMRequestSigner
      * @param string $subject
      * @param string $modifier
      * @param int $shift
+     *
      * @return string
      */
     private function _xor($subject, $modifier, $shift = 0)
@@ -107,6 +109,7 @@ class WMRequestSigner
                 $j = 0;
             }
         }
+
         return $subject;
     }
 
@@ -114,16 +117,18 @@ class WMRequestSigner
      * Verify hash of the key
      *
      * @param $keyData
+     *
      * @return bool
      */
     private function _verifyHash($keyData)
     {
         $verificationString = pack('v', $keyData['reserved'])
-                . pack('v', 0)
-                . pack('V4', 0, 0, 0, 0)
-                . pack('V', $keyData['length'])
-                . $keyData['buffer'];
+            . pack('v', 0)
+            . pack('V4', 0, 0, 0, 0)
+            . pack('V', $keyData['length'])
+            . $keyData['buffer'];
         $hash = hash('md4', $verificationString, true);
+
         return strcmp($hash, $keyData['hash']) == 0;
     }
 
@@ -137,7 +142,7 @@ class WMRequestSigner
         $data = unpack('Vreserved/vpowerLength', $keyBuffer);
         $data = unpack('Vreserved/vpowerLength/a' . $data['powerLength'] . 'power/vmodulusLength', $keyBuffer);
         $data = unpack('Vreserved/vpowerLength/a' . $data['powerLength'] . 'power/vmodulusLength/a'
-                       . $data['modulusLength'] . 'modulus', $keyBuffer);
+        . $data['modulusLength'] . 'modulus', $keyBuffer);
         $this->_power = $this->_rev2dec($data['power']);
         $this->_modulus = $this->_rev2dec($data['modulus']);
     }
@@ -146,6 +151,7 @@ class WMRequestSigner
      * Reverse byte order and convert binary data to decimal string
      *
      * @param string $binaryData
+     *
      * @return string
      */
     private function _rev2dec($binaryData)
