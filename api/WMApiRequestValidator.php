@@ -176,12 +176,19 @@ class WMApiRequestValidator
             $this->_errors[$type] = array();
         }
 
+        if (!$this->_hasError($type, $param)) {
+            $this->_errors[$type][] = $param;
+        }
+    }
+
+    protected function _hasError($type, $param)
+    {
         foreach ($this->_errors[$type] as $errorParam) {
             if ($errorParam == $param) {
-                return;
+                return true;
             }
         }
 
-        $this->_errors[$type][] = $param;
+        return false;
     }
 }
