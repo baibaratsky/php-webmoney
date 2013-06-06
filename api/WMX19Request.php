@@ -63,8 +63,9 @@ class WMX19Request extends WMApiRequest
     public function validate()
     {
         $rules = array(
-            WMApiRequestValidator::TYPE_REQUIRED => array('requestNumber', 'signerWmid', 'operationAmount', 'userWmid', 'operationType', 'operationDirection', 'operationPurseType'),
+            WMApiRequestValidator::TYPE_REQUIRED => array('requestNumber', 'operationAmount', 'userWmid', 'operationType', 'operationDirection', 'operationPurseType'),
             WMApiRequestValidator::TYPE_DEPEND_REQUIRED => array(
+                'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
                 'userPassportNum' => array('operationType' => array(self::TYPE_CASH)),
                 'userFirstName' => array('operationType' => array(self::TYPE_CASH, self::TYPE_SDP, self::TYPE_BANK, self::TYPE_CARD)),
                 'userLastName' => array('operationType' => array(self::TYPE_CASH, self::TYPE_SDP, self::TYPE_BANK, self::TYPE_CARD)),
@@ -96,6 +97,9 @@ class WMX19Request extends WMApiRequest
         return count($this->_errors) == 0;
     }
 
+    /**
+     * @return string
+     */
     public function getUrl()
     {
         if ($this->_authType == self::AUTH_CLASSIC) {
@@ -105,6 +109,9 @@ class WMX19Request extends WMApiRequest
         return 'https://apipassport.webmoney.ru/XMLCheckUserCert.aspx';
     }
 
+    /**
+     * @return string
+     */
     public function getXml()
     {
         $this->_xml = '<passport.request>';
@@ -206,8 +213,7 @@ class WMX19Request extends WMApiRequest
     /**
      * @return int
      */
-    public
-    function getOperationType()
+    public function getOperationType()
     {
         return $this->_operationType;
     }
@@ -431,6 +437,7 @@ class WMX19Request extends WMApiRequest
     public function toArray()
     {
         return array(
+            'authType' => $this->_authType,
             'requestNumber' => $this->_requestNumber,
             'language' => $this->_language,
             'signerWmid' => $this->_signerWmid,

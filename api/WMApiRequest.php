@@ -18,6 +18,9 @@ abstract class WMApiRequest
      */
     abstract public function getUrl();
 
+    /**
+     * @return string
+     */
     abstract public function getXml();
 
     /**

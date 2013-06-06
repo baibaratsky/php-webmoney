@@ -2,12 +2,24 @@
 
 class WMX19Response extends WMApiResponse
 {
+    /** @var int */
     protected $_returnCode;
+
+    /** @var string */
     protected $_returnDescription;
+
+    /** @var string */
     protected $_returnId;
+
+    /** @var string */
     protected $_userFirstName;
+
+    /** @var string */
     protected $_userMiddleName;
 
+    /**
+     * @param string $response
+     */
     public function __construct($response)
     {
         $responseObject = new SimpleXMLElement($response);
@@ -19,7 +31,7 @@ class WMX19Response extends WMApiResponse
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getReturnCode()
     {
@@ -27,7 +39,7 @@ class WMX19Response extends WMApiResponse
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getReturnDescription()
     {
@@ -35,7 +47,7 @@ class WMX19Response extends WMApiResponse
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getReturnId()
     {
@@ -43,7 +55,7 @@ class WMX19Response extends WMApiResponse
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getUserFirstName()
     {
@@ -51,7 +63,7 @@ class WMX19Response extends WMApiResponse
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getUserMiddleName()
     {
