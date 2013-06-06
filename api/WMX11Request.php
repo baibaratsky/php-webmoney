@@ -11,12 +11,25 @@ class WMX11Request extends WMApiRequest
     const MODE_CHECK = 1;
     const MODE_NOT_CHECK = 0;
 
+    /**@var string */
     protected $_authType;
+
+    /** @var string */
     protected $_signerWmid;
+
+    /** @var string */
     protected $_passportWmid;
+
+    /** @var string */
     protected $_sign;
+
+    /** @var int */
     protected $_paramDict;
+
+    /** @var int */
     protected $_paramInfo;
+
+    /** @var int */
     protected $_paramMode;
 
     public function __construct($authType = self::AUTH_CLASSIC)
@@ -95,7 +108,7 @@ class WMX11Request extends WMApiRequest
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSignerWmid()
     {
@@ -103,7 +116,7 @@ class WMX11Request extends WMApiRequest
     }
 
     /**
-     * @param mixed $signerWmid
+     * @param string $signerWmid
      */
     public function setSignerWmid($signerWmid)
     {
@@ -111,7 +124,7 @@ class WMX11Request extends WMApiRequest
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPassportWmid()
     {
@@ -119,7 +132,7 @@ class WMX11Request extends WMApiRequest
     }
 
     /**
-     * @param mixed $passportWmid
+     * @param string $passportWmid
      */
     public function setPassportWmid($passportWmid)
     {
@@ -127,7 +140,7 @@ class WMX11Request extends WMApiRequest
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getParamDict()
     {
@@ -135,7 +148,7 @@ class WMX11Request extends WMApiRequest
     }
 
     /**
-     * @param mixed $paramDict
+     * @param int $paramDict
      */
     public function setParamDict($paramDict)
     {
@@ -143,7 +156,7 @@ class WMX11Request extends WMApiRequest
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getParamInfo()
     {
@@ -151,7 +164,7 @@ class WMX11Request extends WMApiRequest
     }
 
     /**
-     * @param mixed $paramInfo
+     * @param int $paramInfo
      */
     public function setParamInfo($paramInfo)
     {
@@ -159,7 +172,7 @@ class WMX11Request extends WMApiRequest
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getParamMode()
     {
@@ -167,7 +180,7 @@ class WMX11Request extends WMApiRequest
     }
 
     /**
-     * @param mixed $paramMode
+     * @param int $paramMode
      */
     public function setParamMode($paramMode)
     {

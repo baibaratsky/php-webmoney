@@ -5,7 +5,10 @@ abstract class WMApiRequest
     const AUTH_CLASSIC = 'classic';
     const AUTH_LIGHT = 'light';
 
+    /** @var array */
     protected $_errors = array();
+
+    /** @var string */
     protected $_xml;
 
     /**

@@ -31,24 +31,61 @@ class WMX19Request extends WMApiRequest
     const EMONEY_YAM = 'money.yandex.ru';
     const EMONEY_ESP = 'easypay.by';
 
+    /** @var string */
     protected $_authType;
+
+    /** @var string */
     protected $_requestNumber;
+
+    /** @var string */
     protected $_language;
+
+    /** @var string */
     protected $_signerWmid;
+
+    /** @var int */
     protected $_operationType;
+
+    /** @var int */
     protected $_operationDirection;
+
+    /** @var string */
     protected $_operationPurseType;
+
+    /** @var float */
     protected $_operationAmount;
+
+    /** @var string */
     protected $_sign;
+
+    /** @var string */
     protected $_userWmid;
+
+    /** @var string */
     protected $_userPassportNum;
+
+    /** @var string */
     protected $_userLastName;
+
+    /** @var string */
     protected $_userFirstName;
+
+    /** @var string */
     protected $_userBankName;
+
+    /** @var string */
     protected $_userBankAccount;
+
+    /** @var string */
     protected $_userCardNumber;
+
+    /** @var string */
     protected $_userEMoneyName;
+
+    /** @var string */
     protected $_userEMoneyId;
+
+    /** @var string */
     protected $_userPhone;
 
     public function __construct($authType = self::AUTH_CLASSIC)
@@ -291,7 +328,7 @@ class WMX19Request extends WMApiRequest
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getUserPassportNum()
     {
@@ -299,7 +336,7 @@ class WMX19Request extends WMApiRequest
     }
 
     /**
-     * @param int $userPassportNum
+     * @param string $userPassportNum
      */
     public function setUserPassportNum($userPassportNum)
     {
