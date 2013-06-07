@@ -6,6 +6,9 @@ class WMX11Response extends WMApiResponse
     /** @var int */
     protected $_returnCode;
 
+    /** @var string */
+    protected $_returnDescription;
+
     /** @var int */
     protected $_hasFullAccess;
 
@@ -47,18 +50,26 @@ class WMX11Response extends WMApiResponse
         $responseObject = new SimpleXMLElement($response);
 
         $this->_returnCode = (int)$responseObject['retval'];
+        $this->_returnDescription = (string)$responseObject['retdesc'];
         $this->_hasFullAccess = (int)$responseObject->fullAccess;
         $certInfo = $responseObject->certinfo;
         $this->_wmid = (string)$certInfo['wmid'];
-        $this->_legalStatuses = $this->_dirtyXmlToArray($certInfo->directory->ctype);
-        $this->_legalPositionStatuses = $this->_dirtyXmlToArray($certInfo->directory->jstatus);
-        $this->_certificateTypes = $this->_dirtyXmlToArray($certInfo->directory->tid);
+
+        if (isset($certInfo->directory)) {
+            $this->_legalStatuses = $this->_dirtyXmlToArray($certInfo->directory->ctype);
+            $this->_legalPositionStatuses = $this->_dirtyXmlToArray($certInfo->directory->jstatus);
+            $this->_certificateTypes = $this->_dirtyXmlToArray($certInfo->directory->tid);
+        }
+
         $this->_certificates = $this->_rowAttributesXmlToArray($certInfo->attestat);
         $this->_wmids = $this->_rowAttributesXmlToArray($certInfo->wmids);
-        $this->_userInfo = $this->_rowAttributesXmlToArray($certInfo->userinfo->value);
-        $this->_checkLock = $this->_rowAttributesXmlToArray($certInfo->userinfo->{'check-lock'});
-        $this->_webList = $this->_rowAttributesXmlToArray($certInfo->userinfo->weblist);
-        $this->_extendedData = $this->_rowAttributesXmlToArray($certInfo->userinfo->extendeddata);
+
+        if (isset($certInfo->userinfo)) {
+            $this->_userInfo = $this->_rowAttributesXmlToArray($certInfo->userinfo->value);
+            $this->_checkLock = $this->_rowAttributesXmlToArray($certInfo->userinfo->{'check-lock'});
+            $this->_webList = $this->_rowAttributesXmlToArray($certInfo->userinfo->weblist);
+            $this->_extendedData = $this->_rowAttributesXmlToArray($certInfo->userinfo->extendeddata);
+        }
     }
 
     /**
@@ -67,6 +78,14 @@ class WMX11Response extends WMApiResponse
     public function getReturnCode()
     {
         return $this->_returnCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReturnDescription()
+    {
+        return $this->_returnDescription;
     }
 
     /**
@@ -179,8 +198,12 @@ class WMX11Response extends WMApiResponse
      *
      * @return array
      */
-    protected function _rowAttributesXmlToArray(SimpleXMLElement $xml)
+    protected function _rowAttributesXmlToArray($xml)
     {
+        if ($xml === null) {
+            return null;
+        }
+
         $returnArray = array();
         foreach ($xml->row as $object) {
             $returnArray[] = current($object);
