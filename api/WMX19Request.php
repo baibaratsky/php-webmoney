@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class WMX19Request
+ *
+ * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X19
+ */
 class WMX19Request extends WMApiRequest
 {
     const LANG_RU = 'ru';
@@ -34,58 +39,58 @@ class WMX19Request extends WMApiRequest
     /** @var string */
     protected $_authType;
 
-    /** @var string */
+    /** @var string reqn */
     protected $_requestNumber;
 
-    /** @var string */
+    /** @var string lang */
     protected $_language;
 
-    /** @var string */
+    /** @var string signerwmid */
     protected $_signerWmid;
 
-    /** @var int */
-    protected $_operationType;
-
-    /** @var int */
-    protected $_operationDirection;
-
-    /** @var string */
-    protected $_operationPurseType;
-
-    /** @var float */
-    protected $_operationAmount;
-
-    /** @var string */
+    /** @var string sign */
     protected $_sign;
 
-    /** @var string */
+    /** @var int operation/type */
+    protected $_operationType;
+
+    /** @var int operation/direction */
+    protected $_operationDirection;
+
+    /** @var string operation/pursetype */
+    protected $_operationPurseType;
+
+    /** @var float operation/amount */
+    protected $_operationAmount;
+
+    /** @var string userinfo/wmid */
     protected $_userWmid;
 
-    /** @var string */
+    /** @var string userinfo/pnomer */
     protected $_userPassportNum;
 
-    /** @var string */
+    /** @var string userinfo/fname */
     protected $_userLastName;
 
-    /** @var string */
+    /** @var string userinfo/iname */
     protected $_userFirstName;
 
-    /** @var string */
+    /** @var string userinfo/bankname */
     protected $_userBankName;
 
-    /** @var string */
+    /** @var string userinfo/bank_account */
     protected $_userBankAccount;
 
-    /** @var string */
+    /** @var string userinfo/card_number */
     protected $_userCardNumber;
 
-    /** @var string */
+    /** @var string userinfo/emoney_name */
     protected $_userEMoneyName;
 
-    /** @var string */
+    /** @var string userinfo/emoney_id */
     protected $_userEMoneyId;
 
-    /** @var string */
+    /** @var string userinfo/phone */
     protected $_userPhone;
 
     public function __construct($authType = self::AUTH_CLASSIC)

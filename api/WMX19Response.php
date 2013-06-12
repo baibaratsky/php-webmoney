@@ -1,20 +1,25 @@
 <?php
 
+/**
+ * Class WMX19Response
+ *
+ * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X19
+ */
 class WMX19Response extends WMApiResponse
 {
-    /** @var int */
+    /** @var int retval */
     protected $_returnCode;
 
-    /** @var string */
+    /** @var string retdesc */
     protected $_returnDescription;
 
-    /** @var string */
+    /** @var string retid */
     protected $_returnId;
 
-    /** @var string */
+    /** @var string userinfo/iname */
     protected $_userFirstName;
 
-    /** @var string */
+    /** @var string userinfo/oname */
     protected $_userMiddleName;
 
     /**

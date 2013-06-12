@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class WMX11Request
+ *
+ * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X11
+ */
 class WMX11Request extends WMApiRequest
 {
     const DICT_SHOW = 1;
@@ -14,22 +19,22 @@ class WMX11Request extends WMApiRequest
     /**@var string */
     protected $_authType;
 
-    /** @var string */
+    /** @var string wmid */
     protected $_signerWmid;
 
-    /** @var string */
+    /** @var string passportwmid */
     protected $_passportWmid;
 
-    /** @var string */
+    /** @var string sign */
     protected $_sign;
 
-    /** @var int */
+    /** @var int params/dict */
     protected $_paramDict;
 
-    /** @var int */
+    /** @var int params/info */
     protected $_paramInfo;
 
-    /** @var int */
+    /** @var int params/mode */
     protected $_paramMode;
 
     public function __construct($authType = self::AUTH_CLASSIC)
