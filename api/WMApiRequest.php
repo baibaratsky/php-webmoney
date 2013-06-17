@@ -11,7 +11,14 @@ abstract class WMApiRequest
     /**
      * @return bool
      */
-    abstract public function validate();
+    public function validate()
+    {
+        $validator = new WMApiRequestValidator($this->toArray());
+        $this->_errors = $validator->validate($this->_getValidationRules());
+
+        return count($this->_errors) == 0;
+    }
+
 
     /**
      * @return string
@@ -44,6 +51,11 @@ abstract class WMApiRequest
     {
         return $this->_errors;
     }
+
+    /**
+     * @return array
+     */
+    abstract protected function _getValidationRules();
 
     /**
      * @param string $name
