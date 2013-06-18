@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class WMX19Request
+ *
+ * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X19
+ */
 class WMX19Request extends WMApiRequest
 {
     const LANG_RU = 'ru';
@@ -31,24 +36,61 @@ class WMX19Request extends WMApiRequest
     const EMONEY_YAM = 'money.yandex.ru';
     const EMONEY_ESP = 'easypay.by';
 
+    /** @var string */
     protected $_authType;
+
+    /** @var string reqn */
     protected $_requestNumber;
+
+    /** @var string lang */
     protected $_language;
+
+    /** @var string signerwmid */
     protected $_signerWmid;
-    protected $_operationType;
-    protected $_operationDirection;
-    protected $_operationPurseType;
-    protected $_operationAmount;
+
+    /** @var string sign */
     protected $_sign;
+
+    /** @var int operation/type */
+    protected $_operationType;
+
+    /** @var int operation/direction */
+    protected $_operationDirection;
+
+    /** @var string operation/pursetype */
+    protected $_operationPurseType;
+
+    /** @var float operation/amount */
+    protected $_operationAmount;
+
+    /** @var string userinfo/wmid */
     protected $_userWmid;
+
+    /** @var string userinfo/pnomer */
     protected $_userPassportNum;
+
+    /** @var string userinfo/fname */
     protected $_userLastName;
+
+    /** @var string userinfo/iname */
     protected $_userFirstName;
+
+    /** @var string userinfo/bankname */
     protected $_userBankName;
+
+    /** @var string userinfo/bank_account */
     protected $_userBankAccount;
+
+    /** @var string userinfo/card_number */
     protected $_userCardNumber;
+
+    /** @var string userinfo/emoney_name */
     protected $_userEMoneyName;
+
+    /** @var string userinfo/emoney_id */
     protected $_userEMoneyId;
+
+    /** @var string userinfo/phone */
     protected $_userPhone;
 
     public function __construct($authType = self::AUTH_CLASSIC)
@@ -57,11 +99,15 @@ class WMX19Request extends WMApiRequest
         $this->_requestNumber = $this->_generateRequestNumber();
     }
 
+    /**
+     * @return array
+     */
     protected function _getValidationRules()
     {
         return array(
-            WMApiRequestValidator::TYPE_REQUIRED => array('requestNumber', 'signerWmid', 'operationAmount', 'userWmid', 'operationType', 'operationDirection', 'operationPurseType'),
+            WMApiRequestValidator::TYPE_REQUIRED => array('requestNumber', 'operationAmount', 'userWmid', 'operationType', 'operationDirection', 'operationPurseType'),
             WMApiRequestValidator::TYPE_DEPEND_REQUIRED => array(
+                'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
                 'userPassportNum' => array('operationType' => array(self::TYPE_CASH)),
                 'userFirstName' => array('operationType' => array(self::TYPE_CASH, self::TYPE_SDP, self::TYPE_BANK, self::TYPE_CARD)),
                 'userLastName' => array('operationType' => array(self::TYPE_CASH, self::TYPE_SDP, self::TYPE_BANK, self::TYPE_CARD)),
@@ -88,6 +134,9 @@ class WMX19Request extends WMApiRequest
         );
     }
 
+    /**
+     * @return string
+     */
     public function getUrl()
     {
         if ($this->_authType == self::AUTH_CLASSIC) {
@@ -97,6 +146,9 @@ class WMX19Request extends WMApiRequest
         return 'https://apipassport.webmoney.ru/XMLCheckUserCert.aspx';
     }
 
+    /**
+     * @return string
+     */
     public function getXml()
     {
         $this->_xml = '<passport.request>';
@@ -276,7 +328,7 @@ class WMX19Request extends WMApiRequest
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getUserPassportNum()
     {
@@ -284,7 +336,7 @@ class WMX19Request extends WMApiRequest
     }
 
     /**
-     * @param int $userPassportNum
+     * @param string $userPassportNum
      */
     public function setUserPassportNum($userPassportNum)
     {
@@ -422,6 +474,7 @@ class WMX19Request extends WMApiRequest
     public function toArray()
     {
         return array(
+            'authType' => $this->_authType,
             'requestNumber' => $this->_requestNumber,
             'language' => $this->_language,
             'signerWmid' => $this->_signerWmid,

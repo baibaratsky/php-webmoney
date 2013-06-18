@@ -2,11 +2,20 @@
 
 class WMCurlApiRequestPerformer extends WMApiRequestPerformer
 {
+    /**
+     * @param WMRequestSigner $requestSigner
+     */
     public function __construct(WMRequestSigner $requestSigner)
     {
         $this->_requestSigner = $requestSigner;
     }
 
+    /**
+     * @param WMApiRequest $request
+     *
+     * @return string
+     * @throws WMException
+     */
     protected function _request(WMApiRequest $request)
     {
         $handler = curl_init($request->getUrl());
