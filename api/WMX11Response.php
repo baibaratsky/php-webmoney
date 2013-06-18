@@ -52,7 +52,6 @@ class WMX11Response extends WMApiResponse
     public function __construct($response)
     {
         $responseObject = new SimpleXMLElement($response);
-
         $this->_returnCode = (int)$responseObject['retval'];
         $this->_returnDescription = (string)$responseObject['retdesc'];
         $this->_hasFullAccess = (int)$responseObject->fullAccess;
