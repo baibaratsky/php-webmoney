@@ -40,14 +40,17 @@ class WMX11Request extends WMApiRequest
     public function __construct($authType = self::AUTH_CLASSIC)
     {
         $this->_authType = $authType;
+        $this->_paramDict = self::DICT_SHOW;
+        $this->_paramInfo = self::INFO_SHOW;
+        $this->_paramMode = self::MODE_CHECK;
     }
 
     /**
-     * @return bool
+     * @return array
      */
-    public function validate()
+    public function _getValidationRules()
     {
-        $rules = array(
+        return array(
             WMApiRequestValidator::TYPE_REQUIRED => array('passportWmid', 'paramDict', 'paramInfo', 'paramMode'),
             WMApiRequestValidator::TYPE_DEPEND_REQUIRED => array(
                 'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
@@ -58,11 +61,6 @@ class WMX11Request extends WMApiRequest
                 'paramMode' => array(self::MODE_CHECK, self::MODE_NOT_CHECK),
             ),
         );
-
-        $validator = new WMApiRequestValidator($this->toArray());
-        $this->_errors = $validator->validate($rules);
-
-        return count($this->_errors) == 0;
     }
 
     /**
@@ -82,11 +80,13 @@ class WMX11Request extends WMApiRequest
         $this->_addElementToXml('wmid', $this->_signerWmid);
         $this->_addElementToXml('passportwmid', $this->_passportWmid);
         $this->_addElementToXml('sign', $this->_sign);
-        $this->_xml .= '<params>';
-        $this->_addElementToXml('dict', $this->_paramDict);
-        $this->_addElementToXml('info', $this->_paramInfo);
-        $this->_addElementToXml('mode', $this->_paramMode);
-        $this->_xml .= '</params>';
+        if (!empty($this->_paramDict) || !empty($this->_paramInfo) || !empty($this->_paramMode)) {
+            $this->_xml .= '<params>';
+            $this->_addElementToXml('dict', $this->_paramDict);
+            $this->_addElementToXml('info', $this->_paramInfo);
+            $this->_addElementToXml('mode', $this->_paramMode);
+            $this->_xml .= '</params>';
+        }
         $this->_xml .= '</request>';
 
         return $this->_xml;

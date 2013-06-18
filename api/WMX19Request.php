@@ -100,11 +100,11 @@ class WMX19Request extends WMApiRequest
     }
 
     /**
-     * @return bool
+     * @return array
      */
-    public function validate()
+    protected function _getValidationRules()
     {
-        $rules = array(
+        return array(
             WMApiRequestValidator::TYPE_REQUIRED => array('requestNumber', 'operationAmount', 'userWmid', 'operationType', 'operationDirection', 'operationPurseType'),
             WMApiRequestValidator::TYPE_DEPEND_REQUIRED => array(
                 'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
@@ -132,11 +132,6 @@ class WMX19Request extends WMApiRequest
                 ),
             ),
         );
-
-        $validator = new WMApiRequestValidator($this->toArray());
-        $this->_errors = $validator->validate($rules);
-
-        return count($this->_errors) == 0;
     }
 
     /**

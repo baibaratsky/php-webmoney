@@ -2,10 +2,10 @@
 
 class WMApiRequestValidator
 {
-    const TYPE_REQUIRED = 'required';
-    const TYPE_DEPEND_REQUIRED = 'dependRequired';
-    const TYPE_RIGHT_VALUE = 'rightValue';
-    const TYPE_CONDITIONAL = 'conditional';
+    const TYPE_REQUIRED = 1;
+    const TYPE_DEPEND_REQUIRED = 2;
+    const TYPE_RIGHT_VALUE = 3;
+    const TYPE_CONDITIONAL = 4;
 
     /** @var array */
     protected $_values;

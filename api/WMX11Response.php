@@ -59,35 +59,47 @@ class WMX11Response extends WMApiResponse
         $certInfo = $responseObject->certinfo;
         $this->_wmid = (string)$certInfo['wmid'];
 
-        if (isset($certInfo->directory)) {
+        if ($certInfo->directory !== null) {
             static::$_legalStatuses = $this->_dirtyXmlToArray($certInfo->directory->ctype);
             static::$_legalPositionStatuses = $this->_dirtyXmlToArray($certInfo->directory->jstatus);
             static::$_certificateTypes = $this->_dirtyXmlToArray($certInfo->directory->tid);
         }
 
-        foreach ($this->_rowAttributesXmlToArray($certInfo->attestat) as $certificate) {
-            $this->_certificates[] = new WMX11ResponseCertificate($certificate);
+        if ($certInfo->attestat !== null) {
+            foreach ($this->_rowAttributesXmlToArray($certInfo->attestat) as $certificate) {
+                $this->_certificates[] = new WMX11ResponseCertificate($certificate);
+            }
         }
 
-        foreach ($this->_rowAttributesXmlToArray($certInfo->wmids) as $wmid) {
-            $this->_wmids[] = new WMX11ResponseWmid($wmid);
+        if ($certInfo->wmids !== null) {
+            foreach ($this->_rowAttributesXmlToArray($certInfo->wmids) as $wmid) {
+                $this->_wmids[] = new WMX11ResponseWmid($wmid);
+            }
         }
 
-        if (isset($certInfo->userinfo)) {
-            foreach ($this->_rowAttributesXmlToArray($certInfo->userinfo->value) as $userInfo) {
-                $this->_userInfo[] = new WMX11ResponseUserInfo($userInfo);
+        if ($certInfo->userinfo !== null) {
+            if ($certInfo->userinfo->value !== null) {
+                foreach ($this->_rowAttributesXmlToArray($certInfo->userinfo->value) as $userInfo) {
+                    $this->_userInfo[] = new WMX11ResponseUserInfo($userInfo);
+                }
             }
 
-            foreach ($this->_rowAttributesXmlToArray($certInfo->userinfo->{'check-lock'}) as $checkLock) {
-                $this->_checkLock[] = new WMX11ResponseCheckLock($checkLock);
+            if ($certInfo->userinfo->{'check-lock'} !== null) {
+                foreach ($this->_rowAttributesXmlToArray($certInfo->userinfo->{'check-lock'}) as $checkLock) {
+                    $this->_checkLock[] = new WMX11ResponseCheckLock($checkLock);
+                }
             }
 
-            foreach ($this->_rowAttributesXmlToArray($certInfo->userinfo->weblist) as $webList) {
-                $this->_webList[] = new WMX11ResponseWebList($webList);
+            if ($certInfo->userinfo->weblist !== null) {
+                foreach ($this->_rowAttributesXmlToArray($certInfo->userinfo->weblist) as $webList) {
+                    $this->_webList[] = new WMX11ResponseWebList($webList);
+                }
             }
 
-            foreach ($this->_rowAttributesXmlToArray($certInfo->userinfo->extendeddata) as $extendedData) {
-                $this->_extendedData[] = new WMX11ResponseExtendedData($extendedData);
+            if ($certInfo->userinfo->extendeddata !== null) {
+                foreach ($this->_rowAttributesXmlToArray($certInfo->userinfo->extendeddata) as $extendedData) {
+                    $this->_extendedData[] = new WMX11ResponseExtendedData($extendedData);
+                }
             }
         }
     }
@@ -127,7 +139,7 @@ class WMX11Response extends WMApiResponse
     /**
      * @return array
      */
-    public function getCertificateTypes()
+    public static function getCertificateTypes()
     {
         return static::$_certificateTypes;
     }
@@ -135,7 +147,7 @@ class WMX11Response extends WMApiResponse
     /**
      * @return array
      */
-    public function getLegalStatuses()
+    public static function getLegalStatuses()
     {
         return static::$_legalStatuses;
     }
@@ -143,7 +155,7 @@ class WMX11Response extends WMApiResponse
     /**
      * @return array
      */
-    public function getLegalPositionStatuses()
+    public static function getLegalPositionStatuses()
     {
         return static::$_legalPositionStatuses;
     }
@@ -260,7 +272,7 @@ class WMX11ResponseCertificate
     private $_issuanceDiff;
 
     /** @var string regnickname */
-    private $_registrantNickName;
+    private $_registrantNickname;
 
     /** @var string regwmid */
     private $_registrantWmid;
@@ -284,7 +296,7 @@ class WMX11ResponseCertificate
         $this->_recalled = (bool)$params['recalled'];
         $this->_issuanceDt = $params['datecrt'];
         $this->_issuanceDiff = (int)$params['datediff'];
-        $this->_registrantNickName = $params['regnickname'];
+        $this->_registrantNickname = $params['regnickname'];
         $this->_registrantWmid = $params['regwmid'];
         $this->_status = $params['status'];
         $this->_notary = $params['notary'];
@@ -358,9 +370,9 @@ class WMX11ResponseCertificate
     /**
      * @return string
      */
-    public function getRegistrantNickName()
+    public function getRegistrantNickname()
     {
-        return $this->_registrantNickName;
+        return $this->_registrantNickname;
     }
 
     /**
@@ -397,7 +409,7 @@ class WMX11ResponseWmid
     private $_information;
 
     /** @var string nickname */
-    private $_nickName;
+    private $_nickname;
 
     /** @var string datereg */
     private $_registrationDt;
@@ -442,7 +454,7 @@ class WMX11ResponseWmid
     {
         $this->_wmid = $params['wmid'];
         $this->_information = $params['info'];
-        $this->_nickName = $params['nickname'];
+        $this->_nickname = $params['nickname'];
         $this->_registrationDt = $params['datereg'];
         $this->_registrationYear = (int)$params['yearreg'];
         $this->_registrationMonth = (int)$params['monthreg'];
@@ -476,9 +488,9 @@ class WMX11ResponseWmid
     /**
      * @return string
      */
-    public function getNickName()
+    public function getNickname()
     {
-        return $this->_nickName;
+        return $this->_nickname;
     }
 
     /**
@@ -593,7 +605,7 @@ class WMX11ResponseUserInfo
     private $_locked;
 
     /** @var string nickname */
-    private $_nickName;
+    private $_nickname;
 
     /** @var string infoopen */
     private $_additionalInformation;
@@ -793,7 +805,7 @@ class WMX11ResponseUserInfo
         $this->_legalPositionStatusId = (int)$params['jstatus'];
         $this->_basisActs = $params['osnovainfo'];
         $this->_locked = (bool)$params['locked'];
-        $this->_nickName = $params['nickname'];
+        $this->_nickname = $params['nickname'];
         $this->_additionalInformation = $params['infoopen'];
         $this->_city = $params['city'];
         $this->_region = $params['region'];
@@ -894,9 +906,9 @@ class WMX11ResponseUserInfo
     /**
      * @return string
      */
-    public function getNickName()
+    public function getNickname()
     {
-        return $this->_nickName;
+        return $this->_nickname;
     }
 
     /**
