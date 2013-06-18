@@ -1,13 +1,30 @@
 <?php
 
+/**
+ * Class WMX19Response
+ *
+ * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X19
+ */
 class WMX19Response extends WMApiResponse
 {
+    /** @var int retval */
     protected $_returnCode;
+
+    /** @var string retdesc */
     protected $_returnDescription;
+
+    /** @var string retid */
     protected $_returnId;
+
+    /** @var string userinfo/iname */
     protected $_userFirstName;
+
+    /** @var string userinfo/oname */
     protected $_userMiddleName;
 
+    /**
+     * @param string $response
+     */
     public function __construct($response)
     {
         $responseObject = new SimpleXMLElement($response);
@@ -19,7 +36,7 @@ class WMX19Response extends WMApiResponse
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getReturnCode()
     {
@@ -27,7 +44,7 @@ class WMX19Response extends WMApiResponse
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getReturnDescription()
     {
@@ -35,7 +52,7 @@ class WMX19Response extends WMApiResponse
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getReturnId()
     {
@@ -43,7 +60,7 @@ class WMX19Response extends WMApiResponse
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getUserFirstName()
     {
@@ -51,7 +68,7 @@ class WMX19Response extends WMApiResponse
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getUserMiddleName()
     {

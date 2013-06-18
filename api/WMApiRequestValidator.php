@@ -181,6 +181,12 @@ class WMApiRequestValidator
         }
     }
 
+    /**
+     * @param string $type
+     * @param string $param
+     *
+     * @return bool
+     */
     protected function _hasError($type, $param)
     {
         foreach ($this->_errors[$type] as $errorParam) {
