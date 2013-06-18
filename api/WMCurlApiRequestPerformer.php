@@ -3,14 +3,6 @@
 class WMCurlApiRequestPerformer extends WMApiRequestPerformer
 {
     /**
-     * @param WMRequestSigner $requestSigner
-     */
-    public function __construct(WMRequestSigner $requestSigner)
-    {
-        $this->_requestSigner = $requestSigner;
-    }
-
-    /**
      * @param WMApiRequest $request
      *
      * @return string

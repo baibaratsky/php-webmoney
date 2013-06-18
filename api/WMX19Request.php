@@ -36,12 +36,6 @@ class WMX19Request extends WMApiRequest
     const EMONEY_YAM = 'money.yandex.ru';
     const EMONEY_ESP = 'easypay.by';
 
-    /** @var string */
-    protected $_authType;
-
-    /** @var string reqn */
-    protected $_requestNumber;
-
     /** @var string lang */
     protected $_language;
 
@@ -93,12 +87,6 @@ class WMX19Request extends WMApiRequest
     /** @var string userinfo/phone */
     protected $_userPhone;
 
-    public function __construct($authType = self::AUTH_CLASSIC)
-    {
-        $this->_authType = $authType;
-        $this->_requestNumber = $this->_generateRequestNumber();
-    }
-
     /**
      * @return array
      */
@@ -118,7 +106,7 @@ class WMX19Request extends WMApiRequest
                 'userEMoneyId' => array('operationType' => array(self::TYPE_EMONEY)),
                 'userPhone' => array('operationType' => array(self::TYPE_SMS, self::TYPE_MOBILE)),
             ),
-            WMApiRequestValidator::TYPE_RIGHT_VALUE => array(
+            WMApiRequestValidator::TYPE_RANGE => array(
                 'language' => array(self::LANG_RU, self::LANG_EN),
                 'operationType' => array(self::TYPE_CASH, self::TYPE_SDP, self::TYPE_BANK, self::TYPE_CARD, self::TYPE_EMONEY, self::TYPE_SMS, self::TYPE_MOBILE),
                 'operationDirection' => array(self::DIRECTION_OUTPUT, self::DIRECTION_INPUT),
@@ -189,30 +177,6 @@ class WMX19Request extends WMApiRequest
         if ($this->_authType == self::AUTH_CLASSIC) {
             $this->_sign = $requestSigner->sign($this->_requestNumber . $this->_operationType . $this->_userWmid);
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getAuthType()
-    {
-        return $this->_authType;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRequestNumber()
-    {
-        return $this->_requestNumber;
-    }
-
-    /**
-     * @param int $requestNumber
-     */
-    public function setRequestNumber($requestNumber)
-    {
-        $this->_requestNumber = $requestNumber;
     }
 
     /**

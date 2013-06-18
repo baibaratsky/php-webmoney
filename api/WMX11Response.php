@@ -2031,7 +2031,7 @@ class WMX11ResponseWebList
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIsCheck()
     {
@@ -2039,7 +2039,7 @@ class WMX11ResponseWebList
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIsLock()
     {

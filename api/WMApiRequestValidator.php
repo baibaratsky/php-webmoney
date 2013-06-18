@@ -4,7 +4,7 @@ class WMApiRequestValidator
 {
     const TYPE_REQUIRED = 1;
     const TYPE_DEPEND_REQUIRED = 2;
-    const TYPE_RIGHT_VALUE = 3;
+    const TYPE_RANGE = 3;
     const TYPE_CONDITIONAL = 4;
 
     /** @var array */
@@ -38,8 +38,8 @@ class WMApiRequestValidator
                     case self::TYPE_DEPEND_REQUIRED:
                         $this->_validateDependRequired($key, $param);
                         break;
-                    case self::TYPE_RIGHT_VALUE:
-                        $this->_validateRightValue($key, $param);
+                    case self::TYPE_RANGE:
+                        $this->_validateRange($key, $param);
                         break;
                     case self::TYPE_CONDITIONAL:
                         $this->_validateConditional($key, $param);
@@ -104,22 +104,22 @@ class WMApiRequestValidator
 
     /**
      * @param $paramName
-     * @param $rightValues
+     * @param $range
      *
      * @throws WMException
      */
-    protected function _validateRightValue($paramName, $rightValues)
+    protected function _validateRange($paramName, $range)
     {
-        if (!is_array($rightValues)) {
-            throw new WMException('RightValues should be an array: ' . print_r($rightValues, true));
+        if (!is_array($range)) {
+            throw new WMException('Range should be an array: ' . print_r($range, true));
         }
 
         if (empty($this->_values[$paramName])) {
             return;
         }
 
-        if (!in_array($this->_values[$paramName], $rightValues)) {
-            $this->_addError(self::TYPE_RIGHT_VALUE, $paramName);
+        if (!in_array($this->_values[$paramName], $range)) {
+            $this->_addError(self::TYPE_RANGE, $paramName);
         }
     }
 
@@ -133,7 +133,7 @@ class WMApiRequestValidator
     protected function _validateConditional($paramName, $rule)
     {
         if (empty($this->_values[$paramName])) {
-            return;
+            return false;
         }
 
         foreach ($rule as $item) {

@@ -16,9 +16,6 @@ class WMX11Request extends WMApiRequest
     const MODE_CHECK = 1;
     const MODE_NOT_CHECK = 0;
 
-    /**@var string */
-    protected $_authType;
-
     /** @var string wmid */
     protected $_signerWmid;
 
@@ -39,10 +36,11 @@ class WMX11Request extends WMApiRequest
 
     public function __construct($authType = self::AUTH_CLASSIC)
     {
-        $this->_authType = $authType;
         $this->_paramDict = self::DICT_SHOW;
         $this->_paramInfo = self::INFO_SHOW;
         $this->_paramMode = self::MODE_CHECK;
+
+        parent::__construct($authType);
     }
 
     /**
@@ -55,7 +53,7 @@ class WMX11Request extends WMApiRequest
             WMApiRequestValidator::TYPE_DEPEND_REQUIRED => array(
                 'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
             ),
-            WMApiRequestValidator::TYPE_RIGHT_VALUE => array(
+            WMApiRequestValidator::TYPE_RANGE => array(
                 'paramDict' => array(self::DICT_SHOW, self::DICT_NOT_SHOW),
                 'paramInfo' => array(self::INFO_SHOW, self::INFO_NOT_SHOW),
                 'paramMode' => array(self::MODE_CHECK, self::MODE_NOT_CHECK),

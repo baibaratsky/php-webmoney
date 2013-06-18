@@ -5,11 +5,23 @@ abstract class WMApiRequest
     const AUTH_CLASSIC = 'classic';
     const AUTH_LIGHT = 'light';
 
+    /** @var string */
+    protected $_authType;
+
+    /** @var string reqn */
+    protected $_requestNumber;
+
     /** @var array */
     protected $_errors = array();
 
     /** @var string */
     protected $_xml;
+
+    public function __construct($authType = self::AUTH_CLASSIC)
+    {
+        $this->_authType = $authType;
+        $this->_requestNumber = $this->_generateRequestNumber();
+    }
 
     /**
      * @return bool
@@ -44,6 +56,30 @@ abstract class WMApiRequest
      * @return void
      */
     abstract public function sign(WMRequestSigner $requestSigner);
+
+    /**
+     * @return string
+     */
+    public function getAuthType()
+    {
+        return $this->_authType;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRequestNumber()
+    {
+        return $this->_requestNumber;
+    }
+
+    /**
+     * @param int $requestNumber
+     */
+    public function setRequestNumber($requestNumber)
+    {
+        $this->_requestNumber = $requestNumber;
+    }
 
     /**
      * @return array
