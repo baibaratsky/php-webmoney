@@ -253,7 +253,7 @@ class WMX11ResponsePassport
     private $_registrantId;
 
     /** @var int tid */
-    private $_typeId;
+    private $_type;
 
     /** @var bool locked */
     private $_rightToIssue;
@@ -289,7 +289,7 @@ class WMX11ResponsePassport
     {
         $this->_id = (int)$params['cid'];
         $this->_registrantId = (int)$params['regcid'];
-        $this->_typeId = (int)$params['tid'];
+        $this->_type = (int)$params['tid'];
         $this->_rightToIssue = (bool)$params['locked'];
         $this->_admRightToIssue = (bool)$params['admlocked'];
         $this->_recalled = (bool)$params['recalled'];
@@ -320,9 +320,9 @@ class WMX11ResponsePassport
     /**
      * @return int
      */
-    public function getTypeId()
+    public function getType()
     {
-        return $this->_typeId;
+        return $this->_type;
     }
 
     /**
@@ -426,7 +426,7 @@ class WMX11ResponseWmid
     private $_registrationTime;
 
     /** @var int ctype */
-    private $_passportTypeId;
+    private $_passportType;
 
     /** @var string companyname */
     private $_companyName;
@@ -459,7 +459,7 @@ class WMX11ResponseWmid
         $this->_registrationMonth = (int)$params['monthreg'];
         $this->_registrationDay = (int)$params['dayreg'];
         $this->_registrationTime = $params['timereg'];
-        $this->_passportTypeId = (int)$params['ctype'];
+        $this->_passportType = (int)$params['ctype'];
         $this->_companyName = $params['companyname'];
         $this->_companyId = (int)$params['companyid'];
         $this->_phone = $params['phone'];
@@ -535,9 +535,9 @@ class WMX11ResponseWmid
     /**
      * @return int
      */
-    public function getPassportTypeId()
+    public function getPassportType()
     {
-        return $this->_passportTypeId;
+        return $this->_passportType;
     }
 
     /**
@@ -592,10 +592,10 @@ class WMX11ResponseWmid
 class WMX11ResponseUserInfo
 {
     /** @var int ctype */
-    private $_legalStatusId;
+    private $_legalStatus;
 
     /** @var int jstatus */
-    private $_legalPositionStatusId;
+    private $_legalPositionStatus;
 
     /** @var string osnovainfo */
     private $_basisActs;
@@ -800,8 +800,8 @@ class WMX11ResponseUserInfo
      */
     public function __construct(array $params)
     {
-        $this->_legalStatusId = (int)$params['ctype'];
-        $this->_legalPositionStatusId = (int)$params['jstatus'];
+        $this->_legalStatus = (int)$params['ctype'];
+        $this->_legalPositionStatus = (int)$params['jstatus'];
         $this->_basisActs = $params['osnovainfo'];
         $this->_locked = (bool)$params['locked'];
         $this->_nickname = $params['nickname'];
@@ -873,17 +873,17 @@ class WMX11ResponseUserInfo
     /**
      * @return int
      */
-    public function getLegalStatusId()
+    public function getLegalStatus()
     {
-        return $this->_legalStatusId;
+        return $this->_legalStatus;
     }
 
     /**
      * @return int
      */
-    public function getLegalPositionStatusId()
+    public function getLegalPositionStatus()
     {
-        return $this->_legalPositionStatusId;
+        return $this->_legalPositionStatus;
     }
 
     /**
@@ -1418,10 +1418,10 @@ class WMX11ResponseUserInfo
 class WMX11ResponseCheckLock
 {
     /** @var string ctype */
-    private $_passportTypeId;
+    private $_passportType;
 
     /** @var string jstatus */
-    private $_legalPositionStatusId;
+    private $_legalPositionStatus;
 
     /** @var string osnovainfo */
     private $_basisActs;
@@ -1563,8 +1563,8 @@ class WMX11ResponseCheckLock
      */
     public function __construct(array $params)
     {
-        $this->_passportTypeId = $params['ctype'];
-        $this->_legalPositionStatusId = $params['jstatus'];
+        $this->_passportType = $params['ctype'];
+        $this->_legalPositionStatus = $params['jstatus'];
         $this->_basisActs = $params['osnovainfo'];
         $this->_nickName = $params['nickname'];
         $this->_additionalInformation = $params['infoopen'];
@@ -1615,17 +1615,17 @@ class WMX11ResponseCheckLock
     /**
      * @return string
      */
-    public function getPassportTypeId()
+    public function getPassportType()
     {
-        return $this->_passportTypeId;
+        return $this->_passportType;
     }
 
     /**
      * @return string
      */
-    public function getLegalPositionStatusId()
+    public function getLegalPositionStatus()
     {
-        return $this->_legalPositionStatusId;
+        return $this->_legalPositionStatus;
     }
 
     /**
