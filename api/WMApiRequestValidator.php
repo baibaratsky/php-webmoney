@@ -133,7 +133,7 @@ class WMApiRequestValidator
     protected function _validateConditional($paramName, $rule)
     {
         if (empty($this->_values[$paramName])) {
-            return false;
+            return null;
         }
 
         foreach ($rule as $item) {
