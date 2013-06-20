@@ -1,6 +1,6 @@
 <?php
 
-class WMX18Response
+class WMX18Response extends WMApiResponse
 {
 
 }

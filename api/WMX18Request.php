@@ -4,12 +4,14 @@
  * Class WMX18Request
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X18
- *
- * @todo: validation rules
- * @todo: lmi_payment_no_type constants
  */
 class WMX18Request extends WMApiRequest
 {
+    const PAYMENT_NUMBER_TYPE_DEFAULT = 0;
+    const PAYMENT_NUMBER_TYPE_ORDER = 1;
+    const PAYMENT_NUMBER_TYPE_INVOICE = 2;
+    const PAYMENT_NUMBER_TYPE_TRANSACTION = 3;
+
     /** @var string wmid */
     protected $_signerWmid;
 
@@ -31,6 +33,11 @@ class WMX18Request extends WMApiRequest
     /** @var string secret_key */
     protected $_secretKey;
 
+    /**
+     * @param string $authType
+     * @param string $secretKey
+     * @throws WMException
+     */
     public function __construct($authType = self::AUTH_CLASSIC, $secretKey = null)
     {
         if ($secretKey === null && ($authType === self::AUTH_MD5 || $authType === self::AUTH_SECRET_KEY)) {
@@ -42,11 +49,33 @@ class WMX18Request extends WMApiRequest
         parent::__construct($authType);
     }
 
+    /**
+     * @return array
+     */
+    protected function _getValidationRules()
+    {
+        return array(
+            WMApiRequestValidator::TYPE_REQUIRED => array('signerWmid', 'payeePurse', 'paymentNumber'),
+            WMApiRequestValidator::TYPE_RANGE => array(
+                self::PAYMENT_NUMBER_TYPE_DEFAULT,
+                self::PAYMENT_NUMBER_TYPE_ORDER,
+                self::PAYMENT_NUMBER_TYPE_INVOICE,
+                self::PAYMENT_NUMBER_TYPE_TRANSACTION,
+            ),
+        );
+    }
+
+    /**
+     * @return string
+     */
     public function getUrl()
     {
         return 'https://merchant.webmoney.ru/conf/xml/XMLTransGet.asp';
     }
 
+    /**
+     * @return string
+     */
     public function getXml()
     {
         $this->_xml = '<merchant.request>';
