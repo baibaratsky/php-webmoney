@@ -77,7 +77,7 @@ class WMX8Request extends WMApiRequest
      */
     public function sign(WMRequestSigner $requestSigner)
     {
-        if ($this->_authType == self::AUTH_CLASSIC) {
+        if ($this->_authType === self::AUTH_CLASSIC) {
             $this->_sign = $requestSigner->sign($this->_wmid . $this->_purse);
         }
     }
@@ -120,6 +120,7 @@ class WMX8Request extends WMApiRequest
     public function toArray()
     {
         return array(
+            'authType' => $this->_authType,
             'requestNumber' => $this->_requestNumber,
             'signerWmid' => $this->_signerWmid,
             'wmid' => $this->_wmid,

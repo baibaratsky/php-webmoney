@@ -4,6 +4,8 @@ abstract class WMApiRequest
 {
     const AUTH_CLASSIC = 'classic';
     const AUTH_LIGHT = 'light';
+    const AUTH_MD5 = 'md5';
+    const AUTH_SECRET_KEY = 'secret_key';
 
     /** @var string */
     protected $_url;

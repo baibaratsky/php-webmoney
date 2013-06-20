@@ -103,7 +103,7 @@ class WMX11Request extends WMApiRequest
      */
     public function sign(WMRequestSigner $requestSigner)
     {
-        if ($this->_authType == self::AUTH_CLASSIC) {
+        if ($this->_authType === self::AUTH_CLASSIC) {
             $this->_sign = $requestSigner->sign($this->_signerWmid . $this->_passportWmid);
         }
     }

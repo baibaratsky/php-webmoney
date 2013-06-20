@@ -185,7 +185,7 @@ class WMX19Request extends WMApiRequest
      */
     public function sign(WMRequestSigner $requestSigner)
     {
-        if ($this->_authType == self::AUTH_CLASSIC) {
+        if ($this->_authType === self::AUTH_CLASSIC) {
             $this->_sign = $requestSigner->sign($this->_requestNumber . $this->_operationType . $this->_userWmid);
         }
     }
