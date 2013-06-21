@@ -44,6 +44,7 @@ class WMX18Request extends WMApiRequest
             throw new WMException('Secret key is required for this authentication type.');
         }
 
+        $this->_url = 'https://merchant.webmoney.ru/conf/xml/XMLTransGet.asp';
         $this->_secretKey = $secretKey;
 
         parent::__construct($authType);
@@ -68,38 +69,36 @@ class WMX18Request extends WMApiRequest
     /**
      * @return string
      */
-    public function getUrl()
+    public function getXml()
     {
-        return 'https://merchant.webmoney.ru/conf/xml/XMLTransGet.asp';
+        $xml = '<merchant.request>';
+        $xml .= self::_xmlElement('wmid', $this->_signerWmid);
+        $xml .= self::_xmlElement('lmi_payee_purse', $this->_payeePurse);
+        $xml .= self::_xmlElement('lmi_payment_no', $this->_paymentNumber);
+        $xml .= self::_xmlElement('lmi_payment_no_type', $this->_paymentNumberType);
+        $xml .= self::_xmlElement('sign', $this->_sign);
+        $xml .= self::_xmlElement('md5', $this->_md5);
+
+        if ($this->_authType === self::AUTH_SECRET_KEY) {
+            $xml .= self::_xmlElement('secret_key', $this->_secretKey);
+        }
+
+        $xml .= '</merchant.request>';
+
+        return $xml;
     }
 
     /**
      * @return string
      */
-    public function getXml()
-    {
-        $this->_xml = '<merchant.request>';
-        $this->_addElementToXml('wmid', $this->_signerWmid);
-        $this->_addElementToXml('lmi_payee_purse', $this->_payeePurse);
-        $this->_addElementToXml('lmi_payment_no', $this->_paymentNumber);
-        $this->_addElementToXml('lmi_payment_no_type', $this->_paymentNumberType);
-        $this->_addElementToXml('sign', $this->_sign);
-        $this->_addElementToXml('md5', $this->_md5);
-
-        if ($this->_authType === self::AUTH_SECRET_KEY) {
-            $this->_addElementToXml('secret_key', $this->_secretKey);
-        }
-
-        $this->_xml .= '</merchant.request>';
-
-        return $this->_xml;
-    }
-
     public function getResponseClassName()
     {
         return 'WMX18Response';
     }
 
+    /**
+     * @param WMRequestSigner $requestSigner
+     */
     public function sign(WMRequestSigner $requestSigner)
     {
         if ($this->_authType === self::AUTH_CLASSIC) {
