@@ -139,32 +139,32 @@ class WMX19Request extends WMApiRequest
      */
     public function getXml()
     {
-        $this->_xml = '<passport.request>';
-        $this->_addElementToXml('reqn', $this->_requestNumber);
-        $this->_addElementToXml('lang', $this->_language);
-        $this->_addElementToXml('signerwmid', $this->_signerWmid);
-        $this->_addElementToXml('sign', $this->_sign);
-        $this->_xml .= '<operation>';
-        $this->_addElementToXml('type', $this->_operationType);
-        $this->_addElementToXml('direction', $this->_operationDirection);
-        $this->_addElementToXml('pursetype', $this->_operationPurseType);
-        $this->_addElementToXml('amount', $this->_operationAmount);
-        $this->_xml .= '</operation>';
-        $this->_xml .= '<userinfo>';
-        $this->_addElementToXml('wmid', $this->_userWmid);
-        $this->_addElementToXml('pnomer', $this->_userPassportNum);
-        $this->_addElementToXml('fname', $this->_userLastName);
-        $this->_addElementToXml('iname', $this->_userFirstName);
-        $this->_addElementToXml('bank_name', $this->_userBankName);
-        $this->_addElementToXml('bank_account', $this->_userBankAccount);
-        $this->_addElementToXml('card_number', $this->_userCardNumber);
-        $this->_addElementToXml('emoney_name', $this->_userEMoneyName);
-        $this->_addElementToXml('emoney_id', $this->_userEMoneyId);
-        $this->_addElementToXml('phone', $this->_userPhone);
-        $this->_xml .= '</userinfo>';
-        $this->_xml .= '</passport.request>';
+        $xml = '<passport.request>';
+        $xml .= self::_xmlElement('reqn', $this->_requestNumber);
+        $xml .= self::_xmlElement('lang', $this->_language);
+        $xml .= self::_xmlElement('signerwmid', $this->_signerWmid);
+        $xml .= self::_xmlElement('sign', $this->_sign);
+        $xml .= '<operation>';
+        $xml .= self::_xmlElement('type', $this->_operationType);
+        $xml .= self::_xmlElement('direction', $this->_operationDirection);
+        $xml .= self::_xmlElement('pursetype', $this->_operationPurseType);
+        $xml .= self::_xmlElement('amount', $this->_operationAmount);
+        $xml .= '</operation>';
+        $xml .= '<userinfo>';
+        $xml .= self::_xmlElement('wmid', $this->_userWmid);
+        $xml .= self::_xmlElement('pnomer', $this->_userPassportNum);
+        $xml .= self::_xmlElement('fname', $this->_userLastName);
+        $xml .= self::_xmlElement('iname', $this->_userFirstName);
+        $xml .= self::_xmlElement('bank_name', $this->_userBankName);
+        $xml .= self::_xmlElement('bank_account', $this->_userBankAccount);
+        $xml .= self::_xmlElement('card_number', $this->_userCardNumber);
+        $xml .= self::_xmlElement('emoney_name', $this->_userEMoneyName);
+        $xml .= self::_xmlElement('emoney_id', $this->_userEMoneyId);
+        $xml .= self::_xmlElement('phone', $this->_userPhone);
+        $xml .= '</userinfo>';
+        $xml .= '</passport.request>';
 
-        return $this->_xml;
+        return $xml;
     }
 
     public function getResponseClassName()

@@ -37,17 +37,17 @@ class WMX8Request extends WMApiRequest
 
     public function getXml()
     {
-        $this->_xml = '<w3s.request>';
-        $this->_addElementToXml('reqn', $this->_requestNumber);
-        $this->_addElementToXml('wmid', $this->_signerWmid);
-        $this->_addElementToXml('sign', $this->_sign);
-        $this->_xml .= '<testwmpurse>';
-        $this->_addElementToXml('wmid', $this->_wmid);
-        $this->_addElementToXml('purse', $this->_purse);
-        $this->_xml .= '</testwmpurse>';
-        $this->_xml .= '</w3s.request>';
+        $xml = '<w3s.request>';
+        $xml .= self::_xmlElement('reqn', $this->_requestNumber);
+        $xml .= self::_xmlElement('wmid', $this->_signerWmid);
+        $xml .= self::_xmlElement('sign', $this->_sign);
+        $xml .= '<testwmpurse>';
+        $xml .= self::_xmlElement('wmid', $this->_wmid);
+        $xml .= self::_xmlElement('purse', $this->_purse);
+        $xml .= '</testwmpurse>';
+        $xml .= '</w3s.request>';
 
-        return $this->_xml;
+        return $xml;
     }
 
     public function getResponseClassName()

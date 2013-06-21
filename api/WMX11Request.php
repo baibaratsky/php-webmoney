@@ -74,20 +74,20 @@ class WMX11Request extends WMApiRequest
      */
     public function getXml()
     {
-        $this->_xml = '<request>';
-        $this->_addElementToXml('wmid', $this->_signerWmid);
-        $this->_addElementToXml('passportwmid', $this->_passportWmid);
-        $this->_addElementToXml('sign', $this->_sign);
+        $xml = '<request>';
+        $xml .= self::_xmlElement('wmid', $this->_signerWmid);
+        $xml .= self::_xmlElement('passportwmid', $this->_passportWmid);
+        $xml .= self::_xmlElement('sign', $this->_sign);
         if (!empty($this->_paramDict) || !empty($this->_paramInfo) || !empty($this->_paramMode)) {
-            $this->_xml .= '<params>';
-            $this->_addElementToXml('dict', $this->_paramDict);
-            $this->_addElementToXml('info', $this->_paramInfo);
-            $this->_addElementToXml('mode', $this->_paramMode);
-            $this->_xml .= '</params>';
+            $xml .= '<params>';
+            $xml .= self::_xmlElement('dict', $this->_paramDict);
+            $xml .= self::_xmlElement('info', $this->_paramInfo);
+            $xml .= self::_xmlElement('mode', $this->_paramMode);
+            $xml .= '</params>';
         }
-        $this->_xml .= '</request>';
+        $xml .= '</request>';
 
-        return $this->_xml;
+        return $xml;
     }
 
     /**

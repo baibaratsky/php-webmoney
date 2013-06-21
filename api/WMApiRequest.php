@@ -14,9 +14,6 @@ abstract class WMApiRequest
     /** @var array */
     protected $_errors = array();
 
-    /** @var string */
-    protected $_xml;
-
     public function __construct($authType = self::AUTH_CLASSIC)
     {
         $this->_authType = $authType;
@@ -100,21 +97,20 @@ abstract class WMApiRequest
     abstract protected function _getValidationRules();
 
     /**
-     * @param string $name
-     * @param string|int|float $value
-     */
-    protected function _addElementToXml($name, $value)
-    {
-        if (!empty($value)) {
-            $this->_xml .= '<' . $name . '>' . $value . '</' . $name . '>';
-        }
-    }
-
-    /**
      * @return string
      */
     protected function _generateRequestNumber()
     {
         return str_replace('.', '', microtime(true));
+    }
+
+    /**
+     * @param string $name
+     * @param string|int|float $value
+     * @return string
+     */
+    protected static function _xmlElement($name, $value)
+    {
+        return !empty($value) ? '<' . $name . '>' . $value . '</' . $name . '>' : '';
     }
 }
