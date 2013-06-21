@@ -49,10 +49,10 @@ class WMX18Response extends WMApiResponse
     protected $_paymentDescription;
 
     /** @var string operation/pursefrom */
-    protected $_payerPurse;
+    protected $_fromPurse;
 
     /** @var string operation/wmidfrom */
-    protected $_payerWmid;
+    protected $_fromWmid;
 
     /** @var bool operation/capitallerflag */
     protected $_isCapitallerPurseUsed;
@@ -107,8 +107,8 @@ class WMX18Response extends WMApiResponse
             $this->_amount = (float)$operation->amount;
             $this->_date = self::_createDateTime((string)$operation->operdate);
             $this->_paymentDescription = (string)$operation->purpose;
-            $this->_payerPurse = (string)$operation->pursefrom;
-            $this->_payerWmid = (string)$operation->wmidfrom;
+            $this->_fromPurse = (string)$operation->pursefrom;
+            $this->_fromWmid = (string)$operation->wmidfrom;
             $this->_isCapitallerPurseUsed = (bool)$operation->capitallerflag;
             $this->_isAuthorizedViaEnum = (bool)$operation->enumflag;
             $this->_ip = (string)$operation->IPAddress;
@@ -203,17 +203,17 @@ class WMX18Response extends WMApiResponse
     /**
      * @return string
      */
-    public function getPayerPurse()
+    public function getFromPurse()
     {
-        return $this->_payerPurse;
+        return $this->_fromPurse;
     }
 
     /**
      * @return string
      */
-    public function getPayerWmid()
+    public function getFromWmid()
     {
-        return $this->_payerWmid;
+        return $this->_fromWmid;
     }
 
     /**
