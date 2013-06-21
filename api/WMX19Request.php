@@ -95,7 +95,7 @@ class WMX19Request extends WMApiRequest
     {
         if ($authType === self::AUTH_CLASSIC) {
             $this->_url = 'https://apipassport.webmoney.ru/XMLCheckUser.aspx';
-        } else if ($authType === self::AUTH_LIGHT) {
+        } elseif ($authType === self::AUTH_LIGHT) {
             $this->_url = 'https://apipassport.webmoney.ru/XMLCheckUserCert.aspx';
         } else {
             throw new WMException('This interface doesn\'t support the authentication type given.');

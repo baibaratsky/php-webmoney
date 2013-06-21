@@ -27,7 +27,7 @@ class WMX8Request extends WMApiRequest
     {
         if ($authType === self::AUTH_CLASSIC) {
             $this->_url = 'https://w3s.webmoney.ru/asp/XMLFindWMPurseNew.asp';
-        } else if ($authType === self::AUTH_LIGHT) {
+        } elseif ($authType === self::AUTH_LIGHT) {
             $this->_url = 'https://w3s.wmtransfer.com/asp/XMLFindWMPurseCertNew.asp';
         } else {
             throw new WMException('This interface doesn\'t support the authentication type given.');

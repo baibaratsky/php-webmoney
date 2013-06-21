@@ -103,7 +103,7 @@ class WMX18Request extends WMApiRequest
     {
         if ($this->_authType === self::AUTH_CLASSIC) {
             $this->_sign = $requestSigner->sign($this->_signerWmid . $this->_payeePurse . $this->_paymentNumber);
-        } else if ($this->_authType === self::AUTH_MD5) {
+        } elseif ($this->_authType === self::AUTH_MD5) {
             $this->_md5 = md5($this->_signerWmid . $this->_payeePurse . $this->_paymentNumber . $this->_secretKey);
         }
     }

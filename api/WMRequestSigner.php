@@ -142,7 +142,7 @@ class WMRequestSigner
         $data = unpack('Vreserved/vpowerLength', $keyBuffer);
         $data = unpack('Vreserved/vpowerLength/a' . $data['powerLength'] . 'power/vmodulusLength', $keyBuffer);
         $data = unpack('Vreserved/vpowerLength/a' . $data['powerLength'] . 'power/vmodulusLength/a'
-        . $data['modulusLength'] . 'modulus', $keyBuffer);
+                    . $data['modulusLength'] . 'modulus', $keyBuffer);
         $this->_power = $this->_rev2dec($data['power']);
         $this->_modulus = $this->_rev2dec($data['modulus']);
     }
