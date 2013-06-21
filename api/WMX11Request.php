@@ -36,6 +36,12 @@ class WMX11Request extends WMApiRequest
 
     public function __construct($authType = self::AUTH_CLASSIC)
     {
+        if ($authType !== self::AUTH_CLASSIC && $authType !== self::AUTH_LIGHT) {
+            throw new WMException('This interface doesn\'t support the authentication type given.');
+        }
+
+        $this->_url = 'https://passport.webmoney.ru/asp/XMLGetWMPassport.asp';
+
         $this->_paramDict = self::DICT_SHOW;
         $this->_paramInfo = self::INFO_SHOW;
         $this->_paramMode = self::MODE_CHECK;
@@ -59,14 +65,6 @@ class WMX11Request extends WMApiRequest
                 'paramMode' => array(self::MODE_CHECK, self::MODE_NOT_CHECK),
             ),
         );
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return 'https://passport.webmoney.ru/asp/XMLGetWMPassport.asp';
     }
 
     /**

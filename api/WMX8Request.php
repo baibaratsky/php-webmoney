@@ -19,6 +19,26 @@ class WMX8Request extends WMApiRequest
     /** @var string testwmpurse/purse */
     protected $_purse;
 
+    /**
+     * @param string $authType
+     * @throws WMException
+     */
+    public function __construct($authType = self::AUTH_CLASSIC)
+    {
+        if ($authType === self::AUTH_CLASSIC) {
+            $this->_url = 'https://w3s.webmoney.ru/asp/XMLFindWMPurseNew.asp';
+        } else if ($authType === self::AUTH_LIGHT) {
+            $this->_url = 'https://w3s.wmtransfer.com/asp/XMLFindWMPurseCertNew.asp';
+        } else {
+            throw new WMException('This interface doesn\'t support the authentication type given.');
+        }
+
+        parent::__construct($authType);
+    }
+
+    /**
+     * @return array
+     */
     protected function _getValidationRules()
     {
         return array(
@@ -26,15 +46,9 @@ class WMX8Request extends WMApiRequest
         );
     }
 
-    public function getUrl()
-    {
-        if ($this->_authType == self::AUTH_CLASSIC) {
-            return 'https://w3s.webmoney.ru/asp/XMLFindWMPurseNew.asp';
-        }
-
-        return 'https://w3s.wmtransfer.com/asp/XMLFindWMPurseCertNew.asp';
-    }
-
+    /**
+     * @return string
+     */
     public function getXml()
     {
         $xml = '<w3s.request>';
@@ -50,11 +64,17 @@ class WMX8Request extends WMApiRequest
         return $xml;
     }
 
+    /**
+     * @return string
+     */
     public function getResponseClassName()
     {
         return 'WMX8Response';
     }
 
+    /**
+     * @param WMRequestSigner $requestSigner
+     */
     public function sign(WMRequestSigner $requestSigner)
     {
         if ($this->_authType == self::AUTH_CLASSIC) {
@@ -94,6 +114,9 @@ class WMX8Request extends WMApiRequest
         return $this->_purse;
     }
 
+    /**
+     * @return array
+     */
     public function toArray()
     {
         return array(

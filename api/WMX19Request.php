@@ -88,6 +88,23 @@ class WMX19Request extends WMApiRequest
     protected $_userPhone;
 
     /**
+     * @param string $authType
+     * @throws WMException
+     */
+    public function __construct($authType = self::AUTH_CLASSIC)
+    {
+        if ($authType === self::AUTH_CLASSIC) {
+            $this->_url = 'https://apipassport.webmoney.ru/XMLCheckUser.aspx';
+        } else if ($authType === self::AUTH_LIGHT) {
+            $this->_url = 'https://apipassport.webmoney.ru/XMLCheckUserCert.aspx';
+        } else {
+            throw new WMException('This interface doesn\'t support the authentication type given.');
+        }
+
+        parent::__construct($authType);
+    }
+
+    /**
      * @return array
      */
     protected function _getValidationRules()
@@ -125,18 +142,6 @@ class WMX19Request extends WMApiRequest
     /**
      * @return string
      */
-    public function getUrl()
-    {
-        if ($this->_authType == self::AUTH_CLASSIC) {
-            return 'https://apipassport.webmoney.ru/XMLCheckUser.aspx';
-        }
-
-        return 'https://apipassport.webmoney.ru/XMLCheckUserCert.aspx';
-    }
-
-    /**
-     * @return string
-     */
     public function getXml()
     {
         $xml = '<passport.request>';
@@ -167,11 +172,17 @@ class WMX19Request extends WMApiRequest
         return $xml;
     }
 
+    /**
+     * @return string
+     */
     public function getResponseClassName()
     {
         return 'WMX19Response';
     }
 
+    /**
+     * @param WMRequestSigner $requestSigner
+     */
     public function sign(WMRequestSigner $requestSigner)
     {
         if ($this->_authType == self::AUTH_CLASSIC) {
@@ -435,6 +446,9 @@ class WMX19Request extends WMApiRequest
         $this->_userPhone = $userPhone;
     }
 
+    /**
+     * @return array
+     */
     public function toArray()
     {
         return array(

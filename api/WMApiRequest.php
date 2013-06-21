@@ -6,6 +6,9 @@ abstract class WMApiRequest
     const AUTH_LIGHT = 'light';
 
     /** @var string */
+    protected $_url;
+
+    /** @var string */
     protected $_authType;
 
     /** @var string reqn */
@@ -35,7 +38,10 @@ abstract class WMApiRequest
     /**
      * @return string
      */
-    abstract public function getUrl();
+    public function getUrl()
+    {
+        return $this->_url;
+    }
 
     /**
      * @return string
