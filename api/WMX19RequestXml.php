@@ -128,7 +128,7 @@ class WMX19RequestXml extends WMXmlApiRequest
                 'operationType' => array(self::TYPE_CASH, self::TYPE_SDP, self::TYPE_BANK, self::TYPE_CARD, self::TYPE_EMONEY, self::TYPE_SMS, self::TYPE_MOBILE),
                 'operationDirection' => array(self::DIRECTION_OUTPUT, self::DIRECTION_INPUT),
                 'operationPurseType' => array(self::PURSE_WMZ, self::PURSE_WMR, self::PURSE_WME, self::PURSE_WMU, self::PURSE_WMB, self::PURSE_WMY, self::PURSE_WMG),
-                'userEMoneyType' => array(self::EMONEY_RBKM, self::EMONEY_PP, self::EMONEY_SK, self::EMONEY_QW, self::EMONEY_YAM, self::EMONEY_ESP),
+                'userEMoneyId' => array(self::EMONEY_RBKM, self::EMONEY_PP, self::EMONEY_SK, self::EMONEY_QW, self::EMONEY_YAM, self::EMONEY_ESP),
             ),
             WMApiRequestValidator::TYPE_CONDITIONAL => array(
                 'operationType' => array(
@@ -444,32 +444,5 @@ class WMX19RequestXml extends WMXmlApiRequest
     public function setUserPhone($userPhone)
     {
         $this->_userPhone = $userPhone;
-    }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        return array(
-            'authType' => $this->_authType,
-            'requestNumber' => $this->_requestNumber,
-            'language' => $this->_language,
-            'signerWmid' => $this->_signerWmid,
-            'operationType' => $this->_operationType,
-            'operationDirection' => $this->_operationDirection,
-            'operationPurseType' => $this->_operationPurseType,
-            'operationAmount' => $this->_operationAmount,
-            'userWmid' => $this->_userWmid,
-            'userPassportNum' => $this->_userPassportNum,
-            'userLastName' => $this->_userLastName,
-            'userFirstName' => $this->_userFirstName,
-            'userBankName' => $this->_userBankName,
-            'userBankAccount' => $this->_userBankAccount,
-            'userCardNumber' => $this->_userCardNumber,
-            'userEMoneyName' => $this->_userEMoneyName,
-            'userEMoneyId' => $this->_userEMoneyId,
-            'userPhone' => $this->_userPhone,
-        );
     }
 }

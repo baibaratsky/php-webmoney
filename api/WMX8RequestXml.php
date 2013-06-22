@@ -113,18 +113,4 @@ class WMX8RequestXml extends WMXmlApiRequest
     {
         return $this->_purse;
     }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        return array(
-            'authType' => $this->_authType,
-            'requestNumber' => $this->_requestNumber,
-            'signerWmid' => $this->_signerWmid,
-            'wmid' => $this->_wmid,
-            'purse' => $this->_purse,
-        );
-    }
 }
