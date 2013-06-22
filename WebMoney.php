@@ -19,11 +19,11 @@ class WebMoney
     }
 
     /**
-     * @param WMApiRequest $requestObject
+     * @param WMXmlApiRequest $requestObject
      *
      * @return WMApiResponse
      */
-    public function request(WMApiRequest $requestObject)
+    public function request(WMXmlApiRequest $requestObject)
     {
         return $this->_requestPerformer->perform($requestObject);
     }

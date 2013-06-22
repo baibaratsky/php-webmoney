@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Class WMX19Request
+ * Class WMX19RequestXml
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X19
  */
-class WMX19Request extends WMApiRequest
+class WMX19RequestXml extends WMXmlApiRequest
 {
     const LANG_RU = 'ru';
     const LANG_EN = 'en';

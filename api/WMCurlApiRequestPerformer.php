@@ -3,12 +3,12 @@
 class WMCurlApiRequestPerformer extends WMApiRequestPerformer
 {
     /**
-     * @param WMApiRequest $request
+     * @param WMXmlApiRequest $request
      *
      * @return string
      * @throws WMException
      */
-    protected function _request(WMApiRequest $request)
+    protected function _request(WMXmlApiRequest $request)
     {
         $handler = curl_init($request->getUrl());
 

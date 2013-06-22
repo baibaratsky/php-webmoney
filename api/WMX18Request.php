@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Class WMX18Request
+ * Class WMX18RequestXml
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X18
  */
-class WMX18Request extends WMApiRequest
+class WMX18RequestXml extends WMXmlApiRequest
 {
     const PAYMENT_NUMBER_TYPE_DEFAULT = 0;
     const PAYMENT_NUMBER_TYPE_ORDER = 1;
