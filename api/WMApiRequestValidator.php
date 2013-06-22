@@ -149,12 +149,13 @@ class WMApiRequestValidator
             if ($propertyValue == $item['value']) {
                 $hasErrors = false;
                 foreach ($item['conditional'] as $conditionalParam => $conditionalValue) {
-                    if (empty($this->_request[$conditionalParam])) {
+                    $conditionalParamValue = call_user_func(array($this->_request, 'get' . ucfirst($conditionalParam)));
+                    if (empty($conditionalParamValue)) {
                         $hasErrors = true;
                         break;
                     }
 
-                    if ($this->_request[$conditionalParam] != $conditionalValue) {
+                    if ($conditionalParamValue != $conditionalValue) {
                         $hasErrors = true;
                         break;
                     }
