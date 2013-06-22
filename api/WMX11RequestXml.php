@@ -187,19 +187,4 @@ class WMX11RequestXml extends WMXmlApiRequest
     {
         $this->_paramMode = $paramMode;
     }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        return array(
-            'authType' => $this->_authType,
-            'signerWmid' => $this->_signerWmid,
-            'passportWmid' => $this->_passportWmid,
-            'paramDict' => $this->_paramDict,
-            'paramInfo' => $this->_paramInfo,
-            'paramMode' => $this->_paramMode,
-        );
-    }
 }

@@ -7,18 +7,18 @@ class WMApiRequestValidator
     const TYPE_RANGE = 3;
     const TYPE_CONDITIONAL = 4;
 
-    /** @var array */
-    protected $_values;
+    /** @var WMApiRequest */
+    protected $_request;
 
     /** @var array */
     protected $_errors = array();
 
     /**
-     * @param array $values
+     * @param WMApiRequest $request
      */
-    public function __construct(array $values)
+    public function __construct(WMApiRequest $request)
     {
-        $this->_values = $values;
+        $this->_request = $request;
     }
 
     /**
@@ -60,7 +60,8 @@ class WMApiRequestValidator
      */
     protected function _validateRequired($paramName)
     {
-        if (empty($this->_values[$paramName])) {
+        $paramValue = call_user_func(array($this->_request, 'get' . ucfirst($paramName)));
+        if (empty($paramValue)) {
             $this->_addError(self::TYPE_REQUIRED, $paramName);
 
             return false;
@@ -84,10 +85,12 @@ class WMApiRequestValidator
             throw new WMException('DependValue should be an array.');
         }
 
+        $propertyDependValue = call_user_func(array($this->_request, 'get' . ucfirst($dependName)));
+        $propertyParamValue = call_user_func(array($this->_request, 'get' . ucfirst($paramName)));
         if ($this->_validateRequired($dependName)) {
             $hasErrors = false;
             foreach ($dependValue as $value) {
-                if ($this->_values[$dependName] == $value && empty($this->_values[$paramName])) {
+                if ($propertyDependValue == $value && empty($propertyParamValue)) {
                     $hasErrors = true;
                 }
             }
@@ -114,11 +117,12 @@ class WMApiRequestValidator
             throw new WMException('Range should be an array: ' . print_r($range, true));
         }
 
-        if (empty($this->_values[$paramName])) {
+        $propertyValue = call_user_func(array($this->_request, 'get' . ucfirst($paramName)));
+        if (empty($propertyValue)) {
             return;
         }
 
-        if (!in_array($this->_values[$paramName], $range)) {
+        if (!in_array($propertyValue, $range)) {
             $this->_addError(self::TYPE_RANGE, $paramName);
         }
     }
@@ -132,7 +136,8 @@ class WMApiRequestValidator
      */
     protected function _validateConditional($paramName, $rule)
     {
-        if (empty($this->_values[$paramName])) {
+        $propertyValue = call_user_func(array($this->_request, 'get' . ucfirst($paramName)));
+        if (empty($propertyValue)) {
             return null;
         }
 
@@ -141,15 +146,15 @@ class WMApiRequestValidator
                 throw new WMException('Wrong rule data: ' . print_r($item, true));
             }
 
-            if ($this->_values[$paramName] == $item['value']) {
+            if ($propertyValue == $item['value']) {
                 $hasErrors = false;
                 foreach ($item['conditional'] as $conditionalParam => $conditionalValue) {
-                    if (empty($this->_values[$conditionalParam])) {
+                    if (empty($this->_request[$conditionalParam])) {
                         $hasErrors = true;
                         break;
                     }
 
-                    if ($this->_values[$conditionalParam] != $conditionalValue) {
+                    if ($this->_request[$conditionalParam] != $conditionalValue) {
                         $hasErrors = true;
                         break;
                     }

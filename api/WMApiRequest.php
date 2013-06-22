@@ -13,7 +13,7 @@ abstract class WMApiRequest
      */
     public function validate()
     {
-        $validator = new WMApiRequestValidator($this->toArray());
+        $validator = new WMApiRequestValidator($this);
         $this->_errors = $validator->validate($this->_getValidationRules());
 
         return count($this->_errors) == 0;
@@ -33,11 +33,6 @@ abstract class WMApiRequest
      * @return void
      */
     abstract public function sign(WMRequestSigner $requestSigner);
-
-    /**
-     * @return array
-     */
-    abstract public function toArray();
 
     /**
      * @return array
