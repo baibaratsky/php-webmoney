@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Class WMX11RequestXml
+ * Class WMX11Request
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X11
  */
-class WMX11RequestXml extends WMXmlApiRequest
+class WMX11Request extends WMXmlApiRequest
 {
     const DICT_SHOW = 1;
     const DICT_NOT_SHOW = 0;

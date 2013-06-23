@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Class WMX8RequestXml
+ * Class WMX8Request
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X8
  */
-class WMX8RequestXml extends WMXmlApiRequest
+class WMX8Request extends WMXmlApiRequest
 {
     /** @var string wmid */
     protected $_signerWmid;
