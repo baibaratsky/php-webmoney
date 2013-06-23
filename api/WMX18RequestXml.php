@@ -155,18 +155,4 @@ class WMX18RequestXml extends WMXmlApiRequest
     {
         return $this->_paymentNumberType;
     }
-
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        return array(
-            'authType' => $this->_authType,
-            'signerWmid' => $this->_signerWmid,
-            'payeePurse' => $this->_payeePurse,
-            'paymentNumber' => $this->_paymentNumber,
-            'paymentNumberType' => $this->_paymentNumberType,
-        );
-    }
 }
