@@ -46,4 +46,9 @@ abstract class WMApiRequest
      * @return array
      */
     abstract protected function _getValidationRules();
+
+    /**
+     * @return string
+     */
+    abstract public function getResponseClassName();
 }

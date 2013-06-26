@@ -42,7 +42,10 @@ class WMX8Request extends WMXmlApiRequest
     protected function _getValidationRules()
     {
         return array(
-            WMApiRequestValidator::TYPE_REQUIRED => array('requestNumber', 'signerWmid'),
+            WMApiRequestValidator::TYPE_REQUIRED => array('requestNumber'),
+            WMApiRequestValidator::TYPE_DEPEND_REQUIRED => array(
+                'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
+            ),
         );
     }
 

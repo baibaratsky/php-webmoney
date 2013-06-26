@@ -20,12 +20,24 @@ class WebMoney
 
     /**
      * @param WMXmlApiRequest $requestObject
-     *
+     * @param WMApiRequestPerformer $requestPerformer
      * @return WMApiResponse
      */
-    public function request(WMXmlApiRequest $requestObject)
+    public function request(WMXmlApiRequest $requestObject, WMApiRequestPerformer $requestPerformer = null)
     {
-        return $this->_requestPerformer->perform($requestObject);
+        if ($requestPerformer === null) {
+            if (get_class($requestObject) === 'WMCapitallerPaymentRequest') {
+                $requestPerformerReflection = new ReflectionObject($this->_requestPerformer);
+                $requestSignerProperty = $requestPerformerReflection->getProperty('requestSigner');
+                $requestSignerProperty->setAccessible(true);
+                $requestPerformer = new WMSoapApiRequestPerformer(
+                    $requestSignerProperty->getValue($this->_requestPerformer)
+                );
+            } else {
+                $requestPerformer = $this->_requestPerformer;
+            }
+        }
+        return $requestPerformer->perform($requestObject);
     }
 
     /**

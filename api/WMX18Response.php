@@ -217,7 +217,7 @@ class WMX18Response extends WMApiResponse
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIsCapitallerPurseUsed()
     {
@@ -225,7 +225,7 @@ class WMX18Response extends WMApiResponse
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getIsAuthorizedViaEnum()
     {

@@ -7,9 +7,6 @@
  */
 class WMX19Response extends WMApiResponse
 {
-    /** @var int retval */
-    protected $_returnCode;
-
     /** @var string retdesc */
     protected $_returnDescription;
 
@@ -35,13 +32,6 @@ class WMX19Response extends WMApiResponse
         $this->_userMiddleName = (string)$responseObject->userinfo->oname;
     }
 
-    /**
-     * @return int
-     */
-    public function getReturnCode()
-    {
-        return $this->_returnCode;
-    }
 
     /**
      * @return string

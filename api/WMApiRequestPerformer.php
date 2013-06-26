@@ -14,11 +14,11 @@ abstract class WMApiRequestPerformer
     }
 
     /**
-     * @param WMXmlApiRequest $request
+     * @param WMApiRequest $request
      *
      * @return WMApiResponse
      */
-    public function perform(WMXmlApiRequest $request)
+    public function perform(WMApiRequest $request)
     {
         $request->sign($this->_requestSigner);
         $response = $this->_request($request);
@@ -28,9 +28,9 @@ abstract class WMApiRequestPerformer
     }
 
     /**
-     * @param WMXmlApiRequest $request
+     * @param WMApiRequest $request
      *
      * @return mixed
      */
-    abstract protected function _request(WMXmlApiRequest $request);
+    abstract protected function _request(WMApiRequest $request);
 }

@@ -5,6 +5,9 @@ abstract class WMApiResponse
     /** @var DateTimeZone */
     private static $_timeZone;
 
+    /** @var int retval (SendWMResult for Capitaller) */
+    protected $_returnCode;
+
     /**
      * @param string $response
      */
@@ -30,5 +33,13 @@ abstract class WMApiResponse
             self::$_timeZone = new DateTimeZone('Europe/Moscow');
         }
         return self::$_timeZone;
+    }
+
+    /**
+     * @return int
+     */
+    public function getReturnCode()
+    {
+        return $this->_returnCode;
     }
 }

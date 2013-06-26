@@ -27,11 +27,6 @@ abstract class WMXmlApiRequest extends WMApiRequest
     /**
      * @return string
      */
-    abstract public function getResponseClassName();
-
-    /**
-     * @return string
-     */
     public function getAuthType()
     {
         return $this->_authType;
