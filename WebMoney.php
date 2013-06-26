@@ -28,7 +28,7 @@ class WebMoney
         if ($requestPerformer === null) {
             if (get_class($requestObject) === 'WMCapitallerPaymentRequest') {
                 $requestPerformerReflection = new ReflectionObject($this->_requestPerformer);
-                $requestSignerProperty = $requestPerformerReflection->getProperty('requestSigner');
+                $requestSignerProperty = $requestPerformerReflection->getProperty('_requestSigner');
                 $requestSignerProperty->setAccessible(true);
                 $requestPerformer = new WMSoapApiRequestPerformer(
                     $requestSignerProperty->getValue($this->_requestPerformer)
