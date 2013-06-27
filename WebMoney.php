@@ -8,36 +8,38 @@ class WebMoney
     protected static $_directories = array('api');
 
     /** @var WMApiRequestPerformer */
-    private $_requestPerformer;
+    private $_xmlRequestPerformer;
+
+    /** @var WMSoapApiRequestPerformer */
+    private $_soapRequestPerformer;
 
     /**
-     * @param WMApiRequestPerformer $requestPerformer
+     * @param WMApiRequestPerformer $xmlRequestPerformer
+     * @param WMSoapApiRequestPerformer $soapRequestPerformer
      */
-    public function __construct(WMApiRequestPerformer $requestPerformer)
+    public function __construct(WMApiRequestPerformer $xmlRequestPerformer, WMSoapApiRequestPerformer $soapRequestPerformer = null)
     {
-        $this->_requestPerformer = $requestPerformer;
+        $this->_xmlRequestPerformer = $xmlRequestPerformer;
+        if ($soapRequestPerformer !== null) {
+            $this->_soapRequestPerformer = $soapRequestPerformer;
+        }
     }
 
     /**
-     * @param WMXmlApiRequest $requestObject
-     * @param WMApiRequestPerformer $requestPerformer
+     * @param WMApiRequest $requestObject
+     *
      * @return WMApiResponse
+     * @throws WMException
      */
-    public function request(WMXmlApiRequest $requestObject, WMApiRequestPerformer $requestPerformer = null)
+    public function request(WMApiRequest $requestObject)
     {
-        if ($requestPerformer === null) {
-            if (get_class($requestObject) === 'WMCapitallerPaymentRequest') {
-                $requestPerformerReflection = new ReflectionObject($this->_requestPerformer);
-                $requestSignerProperty = $requestPerformerReflection->getProperty('_requestSigner');
-                $requestSignerProperty->setAccessible(true);
-                $requestPerformer = new WMSoapApiRequestPerformer(
-                    $requestSignerProperty->getValue($this->_requestPerformer)
-                );
-            } else {
-                $requestPerformer = $this->_requestPerformer;
-            }
+        if ($requestObject instanceof WMXmlApiRequest) {
+            return $this->_xmlRequestPerformer->perform($requestObject);
+        } elseif ($requestObject instanceof WMCapitallerPaymentRequest) {
+            return $this->_soapRequestPerformer->perform($requestObject);
         }
-        return $requestPerformer->perform($requestObject);
+
+        throw new WMException('Wrong class of requestObject.');
     }
 
     /**
