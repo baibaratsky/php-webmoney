@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class WMX17Request
+ * Class WMX17CreateRequest
  *
  * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X17
  */
