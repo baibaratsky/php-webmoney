@@ -11,7 +11,7 @@ class WMX17ContractInfoResponse extends WMApiResponse
     protected $_returnDescription;
 
     /** @var WMX17ContractInfoResponseAcceptance[] contractinfo */
-    protected $_contractsInfo = array();
+    protected $_acceptances = array();
 
     /**
      * @param string $response
@@ -23,7 +23,7 @@ class WMX17ContractInfoResponse extends WMApiResponse
         $this->_returnDescription = (string)$responseObject->retdesc;
 
         foreach ($responseObject->contract->row as $contract) {
-            $this->_contractsInfo[] = new WMX17ContractInfoResponseAcceptance(
+            $this->_acceptances[] = new WMX17ContractInfoResponseAcceptance(
                 $contract['contractid'],
                 $contract['wmid'],
                 $contract['acceptdate']
