@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Class WMX17CreateRequest
+ * Class WMX17CreateContractRequest
  *
  * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X17
  */
-class WMX17CreateRequest extends WMXmlApiRequest
+class WMX17CreateContractRequest extends WMXmlApiRequest
 {
     const CONTRACT_TYPE_OPEN_ACCESS = 1;
     const CONTRACT_TYPE_RESTRICTED_ACCESS = 1;

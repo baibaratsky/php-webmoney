@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Class WMX17InformationResponse
+ * Class WMX17ContractInfoResponse
  *
  * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X17
  */
-class WMX17InformationResponse extends WMApiResponse
+class WMX17ContractInfoResponse extends WMApiResponse
 {
     /** @var string retdesc */
     protected $_returnDescription;
 
-    /** @var WMX17InformationResponseContractInfo[] contractinfo */
+    /** @var WMX17ContractInfoResponseAcceptance[] contractinfo */
     protected $_contractsInfo = array();
 
     /**
@@ -23,7 +23,7 @@ class WMX17InformationResponse extends WMApiResponse
         $this->_returnDescription = (string)$responseObject->retdesc;
 
         foreach ($responseObject->contract->row as $contract) {
-            $this->_contractsInfo[] = new WMX17InformationResponseContractInfo(
+            $this->_contractsInfo[] = new WMX17ContractInfoResponseAcceptance(
                 $contract['contractid'],
                 $contract['wmid'],
                 $contract['acceptdate']
@@ -32,7 +32,7 @@ class WMX17InformationResponse extends WMApiResponse
     }
 }
 
-class WMX17InformationResponseContractInfo
+class WMX17ContractInfoResponseAcceptance
 {
     /** @var int @contractid */
     protected $_contractId;

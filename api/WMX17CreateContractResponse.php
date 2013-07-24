@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Class WMX17CreateResponse
+ * Class WMX17CreateContractResponse
  *
  * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X17
  */
-class WMX17CreateResponse extends WMApiResponse
+class WMX17CreateContractResponse extends WMApiResponse
 {
     /** @var string retdesc */
     protected $_returnDescription;
