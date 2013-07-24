@@ -1,5 +1,11 @@
 <?php
+/**
+ * @copyright 2013 Andrei Baibaratsky
+ */
 
+/**
+ * Class WMRequestSigner
+ */
 class WMRequestSigner
 {
     private $_power, $_modulus;
