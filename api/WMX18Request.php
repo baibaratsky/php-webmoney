@@ -58,10 +58,12 @@ class WMX18Request extends WMXmlApiRequest
         return array(
             WMApiRequestValidator::TYPE_REQUIRED => array('signerWmid', 'payeePurse', 'paymentNumber'),
             WMApiRequestValidator::TYPE_RANGE => array(
-                self::PAYMENT_NUMBER_TYPE_DEFAULT,
-                self::PAYMENT_NUMBER_TYPE_ORDER,
-                self::PAYMENT_NUMBER_TYPE_INVOICE,
-                self::PAYMENT_NUMBER_TYPE_TRANSACTION,
+                'paymentNumberType' => array(
+                    self::PAYMENT_NUMBER_TYPE_DEFAULT,
+                    self::PAYMENT_NUMBER_TYPE_ORDER,
+                    self::PAYMENT_NUMBER_TYPE_INVOICE,
+                    self::PAYMENT_NUMBER_TYPE_TRANSACTION,
+                ),
             ),
         );
     }
