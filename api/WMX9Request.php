@@ -14,7 +14,7 @@ class WMX9Request extends WMXmlApiRequest
     protected $_sign;
 
     /** @var array getpurses */
-    protected $_requestedWmids;
+    protected $_requestedWmid;
 
     public function __construct($authType = self::AUTH_CLASSIC)
     {
@@ -50,9 +50,7 @@ class WMX9Request extends WMXmlApiRequest
         $xml .= self::_xmlElement('wmid', $this->_signerWmid);
         $xml .= self::_xmlElement('sign', $this->_sign);
         $xml .= '<getpurses>';
-        foreach ($this->_requestedWmids as $wmid) {
-            $xml .= self::_xmlElement('wmid', $wmid);
-        }
+        $xml .= self::_xmlElement('wmid', $this->_requestedWmid);
         $xml .= '</getpurses>';
         $xml .= '</w3s.response>';
 
@@ -75,7 +73,7 @@ class WMX9Request extends WMXmlApiRequest
     public function sign(WMRequestSigner $requestSigner)
     {
         if ($this->_authType === self::AUTH_CLASSIC) {
-            $this->_sign = $requestSigner->sign($this->_signerWmid . $this->_requestNumber);
+            $this->_sign = $requestSigner->sign($this->_requestedWmid . $this->_requestNumber);
         }
     }
 
@@ -96,18 +94,18 @@ class WMX9Request extends WMXmlApiRequest
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getRequestedWmids()
+    public function getRequestedWmid()
     {
-        return $this->_requestedWmids;
+        return $this->_requestedWmid;
     }
 
     /**
-     * @param array $requestedWmids
+     * @param string $requestedWmid
      */
-    public function setRequestedWmids($requestedWmids)
+    public function setRequestedWmid($requestedWmid)
     {
-        $this->_requestedWmids = $requestedWmids;
+        $this->_requestedWmid = $requestedWmid;
     }
 }
