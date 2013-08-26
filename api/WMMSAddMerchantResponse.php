@@ -11,7 +11,7 @@ class WMMSAddMerchantResponse extends WMApiResponse
     protected $_returnDescription;
 
     /** @var int resourceid */
-    protected $_resourceId;
+    protected $_resourceId = null;
 
     /**
      * @param string $response

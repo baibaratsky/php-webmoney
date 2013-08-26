@@ -32,7 +32,7 @@ class WMMSAddMerchantRequest extends WMMSApiRequest
     protected $_beneficiaryWmid;
 
     /** @var string url */
-    protected $_url;
+    protected $_merchantUrl;
 
     /** @var int group */
     protected $_categoryId;
@@ -54,6 +54,13 @@ class WMMSAddMerchantRequest extends WMMSApiRequest
 
     /** @var string sign */
     protected $_sign;
+
+    public function __construct($loginType = self::LOGIN_TYPE_PROCESSING, $salt = null)
+    {
+        parent::__construct($loginType, $salt);
+
+        $this->_url = 'https://www.megastock.ru/xml/int/AddMerchant.ashx';
+    }
 
     /**
      * @return array
@@ -85,7 +92,6 @@ class WMMSAddMerchantRequest extends WMMSApiRequest
         $xml = '<ms.request>';
         $xml .= '<login type="' . $this->_loginType . '"></login>';
         $xml .= self::_xmlElement('int_id', $this->_integratorId);
-        $xml .= self::_xmlElement('int_wmid', $this->_integratorWmid);
         $xml .= self::_xmlElement('int_wmid', $this->_integratorWmid);
 
         $xml .= '<beneficiary type="' . $this->_beneficiaryType . '">';
@@ -247,17 +253,17 @@ class WMMSAddMerchantRequest extends WMMSApiRequest
     /**
      * @return string
      */
-    public function getUrl()
+    public function getMerchantUrl()
     {
-        return $this->_url;
+        return $this->_merchantUrl;
     }
 
     /**
-     * @param string $url
+     * @param $merchantUrl
      */
-    public function setUrl($url)
+    public function setMerchantUrl($merchantUrl)
     {
-        $this->_url = $url;
+        $this->_merchantUrl = $merchantUrl;
     }
 
     /**
@@ -355,23 +361,6 @@ class WMMSAddMerchantRequest extends WMMSApiRequest
     {
         $this->_geoBindings = $geoBindings;
     }
-    
-    /**
-     * @return string
-     */
-    public function getSign()
-    {
-        return $this->_sign;
-    }
-
-    /**
-     * @param string $sign
-     */
-    public function setSign($sign)
-    {
-        $this->_sign = $sign;
-    }
-
 }
 
 class WMMSAddMerchantRequestAbout
