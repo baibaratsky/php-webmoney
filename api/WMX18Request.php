@@ -5,7 +5,7 @@
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X18
  */
-class WMX18Request extends WMXmlApiRequest
+class WMX18Request extends WMXApiRequest
 {
     const PAYMENT_NUMBER_TYPE_DEFAULT = 0;
     const PAYMENT_NUMBER_TYPE_ORDER = 1;

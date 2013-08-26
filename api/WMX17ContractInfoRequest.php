@@ -5,7 +5,7 @@
  *
  * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X17
  */
-class WMX17ContractInfoRequest extends WMXmlApiRequest
+class WMX17ContractInfoRequest extends WMXApiRequest
 {
     const TYPE_ACCEPT_DATE = 'acceptdate';
 

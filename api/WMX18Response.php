@@ -24,9 +24,6 @@ class WMX18Response extends WMApiResponse
     const SDP_TYPE_SBERBANK_THANK_YOU = 7;
     const SDP_TYPE_UA_TERMINALS_AND_BANKS = 8;
 
-    /** @var int retval */
-    protected $_returnCode;
-
     /** @var string retdesc */
     protected $_returnDescription;
 
@@ -134,14 +131,6 @@ class WMX18Response extends WMApiResponse
                 $this->_paymentType = self::PAYMENT_TYPE_USUAL;
             }
         }
-    }
-
-    /**
-     * @return int
-     */
-    public function getReturnCode()
-    {
-        return $this->_returnCode;
     }
 
     /**

@@ -7,9 +7,6 @@
  */
 class WMX11Response extends WMApiResponse
 {
-    /** @var int /@retval */
-    protected $_returnCode;
-
     /** @var string /@retdesc */
     protected $_returnDescription;
 
@@ -101,14 +98,6 @@ class WMX11Response extends WMApiResponse
                 }
             }
         }
-    }
-
-    /**
-     * @return int
-     */
-    public function getReturnCode()
-    {
-        return $this->_returnCode;
     }
 
     /**
