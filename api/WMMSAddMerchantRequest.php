@@ -8,7 +8,7 @@
 class WMMSAddMerchantRequest extends WMMSApiRequest
 {
     const BENEFICIARY_TYPE_CONTRACT = 1;
-    const BENEFICIARY_TYPE_WEBMOBEY = 2;
+    const BENEFICIARY_TYPE_WEBMONEY = 2;
 
     const ABOUT_LANGUAGE_RU = 'ru';
     const ABOUT_LANGUAGE_EN = 'en';
@@ -78,7 +78,7 @@ class WMMSAddMerchantRequest extends WMMSApiRequest
             WMApiRequestValidator::TYPE_CONDITIONAL => array(
                 'beneficiaryType' => array(
                     array('value' => self::BENEFICIARY_TYPE_CONTRACT, 'conditional' => array('loginType' => self::LOGIN_TYPE_KEEPER)),
-                    array('value' => self::BENEFICIARY_TYPE_WEBMOBEY, 'conditional' => array('loginType' => self::LOGIN_TYPE_PROCESSING))
+                    array('value' => self::BENEFICIARY_TYPE_WEBMONEY, 'conditional' => array('loginType' => self::LOGIN_TYPE_PROCESSING))
                 ),
             ),
         );
