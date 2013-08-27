@@ -5,7 +5,7 @@
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X11
  */
-class WMX11Request extends WMXmlApiRequest
+class WMX11Request extends WMXApiRequest
 {
     const DICT_SHOW = 1;
     const DICT_NOT_SHOW = 0;

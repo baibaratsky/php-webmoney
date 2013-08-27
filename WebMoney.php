@@ -49,7 +49,7 @@ class WebMoney
     {
         foreach (self::$_directories as $directory) {
             $file = implode(DIRECTORY_SEPARATOR, array(__DIR__, $directory, $className)) . '.php';
-            if (file_exists($file)) {
+            if (is_readable($file)) {
                 require_once($file);
             }
         }
