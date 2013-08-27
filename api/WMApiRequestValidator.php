@@ -6,6 +6,7 @@ class WMApiRequestValidator
     const TYPE_DEPEND_REQUIRED = 2;
     const TYPE_RANGE = 3;
     const TYPE_CONDITIONAL = 4;
+    const TYPE_ARRAY = 5;
 
     /** @var WMApiRequest */
     protected $_request;
@@ -43,6 +44,9 @@ class WMApiRequestValidator
                         break;
                     case self::TYPE_CONDITIONAL:
                         $this->_validateConditional($key, $param);
+                        break;
+                    case self::TYPE_ARRAY:
+                        $this->_validateArray($key, $param);
                         break;
                     default:
                         throw new WMException('Wrong validation type: ' . $type);
@@ -149,7 +153,8 @@ class WMApiRequestValidator
             if ($propertyValue == $item['value']) {
                 $hasErrors = false;
                 foreach ($item['conditional'] as $conditionalParam => $conditionalValue) {
-                    $propertyConditionalValue = call_user_func(array($this->_request, 'get' . ucfirst($conditionalParam)));
+                    $propertyConditionalValue =
+                            call_user_func(array($this->_request, 'get' . ucfirst($conditionalParam)));
                     if (empty($propertyConditionalValue)) {
                         $hasErrors = true;
                         break;
@@ -167,6 +172,23 @@ class WMApiRequestValidator
                     return false;
                 }
             }
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $paramName
+     *
+     * @return bool
+     */
+    protected function _validateArray($paramName)
+    {
+        $paramValue = call_user_func(array($this->_request, 'get' . ucfirst($paramName)));
+        if (!is_array($paramValue)) {
+            $this->_addError(self::TYPE_ARRAY, $paramName);
+
+            return false;
         }
 
         return true;

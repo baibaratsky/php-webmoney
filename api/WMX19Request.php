@@ -5,7 +5,7 @@
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X19
  */
-class WMX19Request extends WMXmlApiRequest
+class WMX19Request extends WMXApiRequest
 {
     const LANG_RU = 'ru';
     const LANG_EN = 'en';
@@ -89,6 +89,7 @@ class WMX19Request extends WMXmlApiRequest
 
     /**
      * @param string $authType
+     *
      * @throws WMException
      */
     public function __construct($authType = self::AUTH_CLASSIC)

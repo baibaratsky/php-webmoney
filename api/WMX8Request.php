@@ -5,7 +5,7 @@
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X8
  */
-class WMX8Request extends WMXmlApiRequest
+class WMX8Request extends WMXApiRequest
 {
     /** @var string wmid */
     protected $_signerWmid;

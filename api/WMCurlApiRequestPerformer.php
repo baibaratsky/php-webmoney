@@ -9,11 +9,11 @@ class WMCurlApiRequestPerformer extends WMApiRequestPerformer
      */
     protected function _request(WMApiRequest $request)
     {
-        if (!is_subclass_of($request, 'WMXmlApiRequest')) {
+        if (!is_subclass_of($request, 'WMXApiRequest')) {
             throw new WMException('This request performer doesn\'t support such type of request.');
         }
 
-        /** @var WMXmlApiRequest $request */
+        /** @var WMXApiRequest $request */
 
         $handler = curl_init($request->getUrl());
 
