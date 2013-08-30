@@ -444,17 +444,33 @@ class WMX11ResponseWmid
         $this->_information = $params['info'];
         $this->_nickname = $params['nickname'];
         $this->_registrationDt = $params['datereg'];
-        $this->_registrationYear = (int)$params['yearreg'];
-        $this->_registrationMonth = (int)$params['monthreg'];
-        $this->_registrationDay = (int)$params['dayreg'];
-        $this->_registrationTime = $params['timereg'];
+        if (isset($params['yearreg'])) {
+            $this->_registrationYear = (int)$params['yearreg'];
+        }
+        if (isset($params['monthreg'])) {
+            $this->_registrationMonth = (int)$params['monthreg'];
+        }
+        if (isset($params['dayreg'])) {
+            $this->_registrationDay = (int)$params['dayreg'];
+        }
+        if (isset($params['timereg'])) {
+            $this->_registrationTime = $params['timereg'];
+        }
         $this->_passportType = (int)$params['ctype'];
         $this->_companyName = $params['companyname'];
         $this->_companyId = (int)$params['companyid'];
-        $this->_phone = $params['phone'];
-        $this->_email = $params['email'];
-        $this->_phoneCheckLock = $params['phone-check-lock'];
-        $this->_emailCheckLock = $params['email-check-lock'];
+        if (isset($params['phone'])) {
+            $this->_phone = $params['phone'];
+        }
+        if (isset($params['email'])) {
+            $this->_email = $params['email'];
+        }
+        if (isset($params['phone-check-lock'])) {
+            $this->_phoneCheckLock = $params['phone-check-lock'];
+        }
+        if (isset($params['phone-check-lock'])) {
+            $this->_emailCheckLock = $params['email-check-lock'];
+        }
     }
 
     /**
@@ -797,7 +813,9 @@ class WMX11ResponseUserInfo
         $this->_additionalInformation = $params['infoopen'];
         $this->_city = $params['city'];
         $this->_region = $params['region'];
-        $this->_cityId = (int)$params['citid'];
+        if (isset($params['citid'])) {
+            $this->_cityId = (int)$params['citid'];
+        }
         $this->_countryId = (int)$params['countryid'];
         $this->_country = $params['country'];
         $this->_zipCode = (int)$params['zipcode'];
@@ -807,22 +825,40 @@ class WMX11ResponseUserInfo
         $this->_middleName = $params['oname'];
         $this->_passportNum = (int)$params['pnomer'];
         $this->_passportDate = $params['pdate'];
-        $this->_passportDay = (int)$params['pday'];
-        $this->_passportMonth = (int)$params['pmonth'];
-        $this->_passportYear = (int)$params['pyear'];
-        $this->_passportFormattedDate = $params['pdateMMDDYYYY'];
+        if (isset($params['pday'])) {
+            $this->_passportDay = (int)$params['pday'];
+        }
+        if (isset($params['pmonth'])) {
+            $this->_passportMonth = (int)$params['pmonth'];
+        }
+        if (isset($params['pyear'])) {
+            $this->_passportYear = (int)$params['pyear'];
+        }
+        if (isset($params['pdateMMDDYYYY'])) {
+            $this->_passportFormattedDate = $params['pdateMMDDYYYY'];
+        }
         $this->_passportCountryId = (int)$params['pcountryid'];
         $this->_passportCountry = $params['pcountry'];
         $this->_passportCity = $params['pcity'];
-        $this->_passportCityId = (int)$params['pcitid'];
+        if (isset($params['pcitid'])) {
+            $this->_passportCityId = (int)$params['pcitid'];
+        }
         $this->_passportPlace = $params['pbywhom'];
-        $this->_nCountryId = (int)$params['ncountryid'];
-        $this->_nCountry = $params['ncountry'];
-        $this->_nType = (int)$params['ntype'];
+        if (isset($params['ncountryid'])) {
+            $this->_nCountryId = (int)$params['ncountryid'];
+        }
+        if (isset($params['ncountry'])) {
+            $this->_nCountry = $params['ncountry'];
+        }
+        if (isset($params['ntype'])) {
+            $this->_nType = (int)$params['ntype'];
+        }
         $this->_residenceCountryId = (int)$params['rcountryid'];
         $this->_residenceCountry = $params['rcountry'];
         $this->_residenceCity = $params['rcity'];
-        $this->_residenceCityId = (int)$params['rcitid'];
+        if (isset($params['rcitid'])) {
+            $this->_residenceCityId = (int)$params['rcitid'];
+        }
         $this->_residenceAddress = $params['radres'];
         $this->_birthPlace = $params['bplace'];
         $this->_birthDay = (int)$params['bday'];
@@ -851,12 +887,20 @@ class WMX11ResponseUserInfo
         $this->_email = $params['email'];
         $this->_url = $params['web'];
         $this->_capitallerFounderWmid = $params['cap_owner'];
-        $this->_passportVerification = (bool)$params['pasdoc'];
-        $this->_tinVerification = (bool)$params['inndoc'];
+        if (isset($params['pasdoc'])) {
+            $this->_passportVerification = (bool)$params['pasdoc'];
+        }
+        if (isset($params['inndoc'])) {
+            $this->_tinVerification = (bool)$params['inndoc'];
+        }
         $this->_jabberId = $params['jabberid'];
         $this->_sex = $params['sex'];
-        $this->_permis = $params['permis'];
-        $this->_regCheck = $params['regcheck'];
+        if (isset($params['permis'])) {
+            $this->_permis = $params['permis'];
+        }
+        if (isset($params['regcheck'])) {
+            $this->_regCheck = $params['regcheck'];
+        }
     }
 
     /**
@@ -1552,7 +1596,9 @@ class WMX11ResponseCheckLock
      */
     public function __construct(array $params)
     {
-        $this->_passportType = $params['ctype'];
+        if (isset($params['ctype'])) {
+            $this->_passportType = $params['ctype'];
+        }
         $this->_legalPositionStatus = $params['jstatus'];
         $this->_basisActs = $params['osnovainfo'];
         $this->_nickName = $params['nickname'];
@@ -1570,8 +1616,12 @@ class WMX11ResponseCheckLock
         $this->_passportIssuePlace = $params['pbywhom'];
         $this->_passportIssueCountry = $params['pcountry'];
         $this->_passportIssueCity = $params['pcity'];
-        $this->_nCountryId = $params['ncountryid'];
-        $this->_nCountry = $params['ncountry'];
+        if (isset($params['ncountryid'])) {
+            $this->_nCountryId = $params['ncountryid'];
+        }
+        if (isset($params['ncountry'])) {
+            $this->_nCountry = $params['ncountry'];
+        }
         $this->_residenceCountry = $params['rcountry'];
         $this->_residenceCity = $params['rcity'];
         $this->_residenceAddress = $params['radres'];
