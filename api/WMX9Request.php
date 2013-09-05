@@ -25,6 +25,8 @@ class WMX9Request extends WMXApiRequest
         } else {
             throw new WMException('This interface doesn\'t support the authentication type given.');
         }
+
+        $this->_authType = $authType;
     }
 
     /**
@@ -33,10 +35,10 @@ class WMX9Request extends WMXApiRequest
     protected function _getValidationRules()
     {
         return array(
+            WMApiRequestValidator::TYPE_REQUIRED => array('requestedWmid'),
             WMApiRequestValidator::TYPE_DEPEND_REQUIRED => array(
                 'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
             ),
-            WMApiRequestValidator::TYPE_REQUIRED => array('purses'),
         );
     }
 
