@@ -69,7 +69,7 @@ class WMX17ContractInfoRequest extends WMXApiRequest
      */
     public function getResponseClassName()
     {
-        return 'WMX17InformationResponse';
+        return 'WMX17ContractInfoResponse';
     }
 
     /**

@@ -80,7 +80,7 @@ class WMX17CreateContractRequest extends WMXApiRequest
      */
     public function getResponseClassName()
     {
-        return 'WMX17CreateResponse';
+        return 'WMX17CreateContractResponse';
     }
 
     /**
