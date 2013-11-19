@@ -91,7 +91,7 @@ class WMX17CreateContractRequest extends WMXApiRequest
     public function sign(WMRequestSigner $requestSigner)
     {
         if ($this->_authType === self::AUTH_CLASSIC) {
-            $this->_sign = $requestSigner->sign($this->_signerWmid . mb_strlen($this->_contractName) . $this->_contractType);
+            $this->_sign = $requestSigner->sign($this->_signerWmid . mb_strlen($this->_contractName, 'UTF-8') . $this->_contractType);
         }
     }
 
