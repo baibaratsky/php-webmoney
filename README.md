@@ -29,3 +29,18 @@ The library requires PHP 5.3 compiled with [cURL extension](http://www.php.net/m
 To use signing with the WM Kepper Classic keys you have to compile PHP with [BCMath](http://www.php.net/manual/en/book.bc.php) and [GMP](http://www.php.net/manual/en/book.gmp.php) support.
 
 To use Capitaller API you have to compile PHP with [SOAP](http://www.php.net/manual/en/book.soap.php) support.
+
+Example
+-------
+```php
+require_once('WebMoney.php');
+
+$webMoney = new WebMoney(new WMCurlApiRequestPerformer);
+
+$x9request = new WMX9Request;
+$x9request->setSignerWmid('your WMID');
+$x9request->setRequestedWmid('requested WMID');
+$x9request->sign(new WMRequestSigner('wmid', 'key', 'password'));
+
+$x9response = $webMoney->request($x9request);
+```

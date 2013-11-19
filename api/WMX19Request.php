@@ -42,9 +42,6 @@ class WMX19Request extends WMXApiRequest
     /** @var string signerwmid */
     protected $_signerWmid;
 
-    /** @var string sign */
-    protected $_sign;
-
     /** @var int operation/type */
     protected $_operationType;
 
@@ -149,7 +146,7 @@ class WMX19Request extends WMXApiRequest
         $xml .= self::_xmlElement('reqn', $this->_requestNumber);
         $xml .= self::_xmlElement('lang', $this->_language);
         $xml .= self::_xmlElement('signerwmid', $this->_signerWmid);
-        $xml .= self::_xmlElement('sign', $this->_sign);
+        $xml .= self::_xmlElement('sign', $this->_signature);
         $xml .= '<operation>';
         $xml .= self::_xmlElement('type', $this->_operationType);
         $xml .= self::_xmlElement('direction', $this->_operationDirection);
@@ -184,10 +181,10 @@ class WMX19Request extends WMXApiRequest
     /**
      * @param WMRequestSigner $requestSigner
      */
-    public function sign(WMRequestSigner $requestSigner)
+    public function sign(WMRequestSigner $requestSigner = null)
     {
         if ($this->_authType === self::AUTH_CLASSIC) {
-            $this->_sign = $requestSigner->sign($this->_requestNumber . $this->_operationType . $this->_userWmid);
+            $this->_signature = $requestSigner->sign($this->_requestNumber . $this->_operationType . $this->_userWmid);
         }
     }
 

@@ -22,9 +22,6 @@ class WMX17CreateContractRequest extends WMXApiRequest
     /** @var string text */
     protected $_contractText;
 
-    /** @var string sign */
-    protected $_sign;
-
     /** @var array accesslist\wmid */
     protected $_accessListWmids;
 
@@ -62,7 +59,7 @@ class WMX17CreateContractRequest extends WMXApiRequest
         $xml .= self::_xmlElement('name', $this->_contractName);
         $xml .= self::_xmlElement('ctype', $this->_contractType);
         $xml .= self::_xmlElement('text', $this->_contractText);
-        $xml .= self::_xmlElement('sign', $this->_sign);
+        $xml .= self::_xmlElement('sign', $this->_signature);
         $xml .= '<accesslist>';
 
         foreach ($this->_accessListWmids as $wmid) {
@@ -88,10 +85,10 @@ class WMX17CreateContractRequest extends WMXApiRequest
      *
      * @return void
      */
-    public function sign(WMRequestSigner $requestSigner)
+    public function sign(WMRequestSigner $requestSigner = null)
     {
         if ($this->_authType === self::AUTH_CLASSIC) {
-            $this->_sign = $requestSigner->sign($this->_signerWmid . mb_strlen($this->_contractName, 'UTF-8') . $this->_contractType);
+            $this->_signature = $requestSigner->sign($this->_signerWmid . mb_strlen($this->_contractName, 'UTF-8') . $this->_contractType);
         }
     }
 

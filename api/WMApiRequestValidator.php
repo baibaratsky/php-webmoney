@@ -23,7 +23,7 @@ class WMApiRequestValidator
     }
 
     /**
-     * @param $rules
+     * @param array[] $rules
      *
      * @return array
      * @throws WMException

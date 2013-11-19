@@ -33,6 +33,10 @@ class WebMoney
      */
     public function request(WMApiRequest $requestObject)
     {
+        if (!$requestObject->validate()) {
+            throw new WMException('Incorrect request data. See getErrors().');
+        }
+
         if ($requestObject instanceof WMXmlApiRequest) {
             return $this->_xmlRequestPerformer->perform($requestObject);
         } elseif ($requestObject instanceof WMCapitallerPaymentRequest) {

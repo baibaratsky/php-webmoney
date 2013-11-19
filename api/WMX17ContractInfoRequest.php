@@ -18,9 +18,6 @@ class WMX17ContractInfoRequest extends WMXApiRequest
     /** @var string mode */
     protected $_type;
 
-    /** @var string sign */
-    protected $_sign;
-
     public function __construct($authType = self::AUTH_CLASSIC)
     {
         if ($authType !== self::AUTH_CLASSIC && $authType !== self::AUTH_LIGHT) {
@@ -58,7 +55,7 @@ class WMX17ContractInfoRequest extends WMXApiRequest
         $xml .= self::_xmlElement('wmid', $this->_signerWmid);
         $xml .= self::_xmlElement('contractid', $this->_contractId);
         $xml .= self::_xmlElement('mode', $this->_type);
-        $xml .= self::_xmlElement('sign', $this->_sign);
+        $xml .= self::_xmlElement('sign', $this->_signature);
         $xml .= '</contract.request>';
 
         return $xml;
@@ -77,10 +74,10 @@ class WMX17ContractInfoRequest extends WMXApiRequest
      *
      * @return void
      */
-    public function sign(WMRequestSigner $requestSigner)
+    public function sign(WMRequestSigner $requestSigner = null)
     {
         if ($this->_authType === self::AUTH_CLASSIC) {
-            $this->_sign = $requestSigner->sign($this->_contractId . $this->_type);
+            $this->_signature = $requestSigner->sign($this->_contractId . $this->_type);
         }
     }
 

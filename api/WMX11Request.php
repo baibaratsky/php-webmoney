@@ -22,9 +22,6 @@ class WMX11Request extends WMXApiRequest
     /** @var string passportwmid */
     protected $_passportWmid;
 
-    /** @var string sign */
-    protected $_sign;
-
     /** @var int params/dict */
     protected $_paramDict;
 
@@ -75,7 +72,7 @@ class WMX11Request extends WMXApiRequest
         $xml = '<request>';
         $xml .= self::_xmlElement('wmid', $this->_signerWmid);
         $xml .= self::_xmlElement('passportwmid', $this->_passportWmid);
-        $xml .= self::_xmlElement('sign', $this->_sign);
+        $xml .= self::_xmlElement('sign', $this->_signature);
         if (!empty($this->_paramDict) || !empty($this->_paramInfo) || !empty($this->_paramMode)) {
             $xml .= '<params>';
             $xml .= self::_xmlElement('dict', $this->_paramDict);
@@ -101,10 +98,10 @@ class WMX11Request extends WMXApiRequest
      *
      * @return void
      */
-    public function sign(WMRequestSigner $requestSigner)
+    public function sign(WMRequestSigner $requestSigner = null)
     {
         if ($this->_authType === self::AUTH_CLASSIC) {
-            $this->_sign = $requestSigner->sign($this->_signerWmid . $this->_passportWmid);
+            $this->_signature = $requestSigner->sign($this->_signerWmid . $this->_passportWmid);
         }
     }
 

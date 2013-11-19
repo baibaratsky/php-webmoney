@@ -8,6 +8,9 @@ abstract class WMApiRequest
     /** @var array */
     protected $_errors = array();
 
+    /** @var string sign|signstr */
+    protected $_signature;
+
     /**
      * @return bool
      */
@@ -32,7 +35,7 @@ abstract class WMApiRequest
      *
      * @return void
      */
-    abstract public function sign(WMRequestSigner $requestSigner);
+    abstract public function sign(WMRequestSigner $requestSigner = null);
 
     /**
      * @return array

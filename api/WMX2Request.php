@@ -10,9 +10,6 @@ class WMX2Request extends WMXApiRequest
     /** @var string wmid */
     protected $_signerWmid;
 
-    /** @var string sign */
-    protected $_sign;
-
     /** @var int trans/tranid */
     protected $_transactionId;
 
@@ -83,7 +80,7 @@ class WMX2Request extends WMXApiRequest
         $xml = '<w3s.request>';
         $xml .= self::_xmlElement('reqn', $this->_requestNumber);
         $xml .= self::_xmlElement('wmid', $this->_signerWmid);
-        $xml .= self::_xmlElement('sign', $this->_sign);
+        $xml .= self::_xmlElement('sign', $this->_signature);
         $xml .= '<trans>';
         $xml .= self::_xmlElement('tranid', $this->_transactionId);
         $xml .= self::_xmlElement('pursesrc', $this->_transactionSenderPurse);
@@ -111,10 +108,10 @@ class WMX2Request extends WMXApiRequest
     /**
      * @param WMRequestSigner $requestSigner
      */
-    public function sign(WMRequestSigner $requestSigner)
+    public function sign(WMRequestSigner $requestSigner = null)
     {
         if ($this->_authType === self::AUTH_CLASSIC) {
-            $this->_sign = $requestSigner->sign($this->_requestNumber . $this->_transactionId .
+            $this->_signature = $requestSigner->sign($this->_requestNumber . $this->_transactionId .
                                                 $this->_transactionSenderPurse . $this->_transactionRecipientPurse .
                                                 $this->_transactionAmount . $this->_transactionProtectionPeriod .
                                                 $this->_transactionProtectionCode . $this->_transactionDescription .

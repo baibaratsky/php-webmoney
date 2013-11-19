@@ -10,9 +10,6 @@ class WMX9Request extends WMXApiRequest
     /** @var string wmid */
     protected $_signerWmid;
 
-    /** @var string sign */
-    protected $_sign;
-
     /** @var array getpurses */
     protected $_requestedWmid;
 
@@ -50,7 +47,7 @@ class WMX9Request extends WMXApiRequest
         $xml = '<w3s.response>';
         $xml .= self::_xmlElement('reqn', $this->_requestNumber);
         $xml .= self::_xmlElement('wmid', $this->_signerWmid);
-        $xml .= self::_xmlElement('sign', $this->_sign);
+        $xml .= self::_xmlElement('sign', $this->_signature);
         $xml .= '<getpurses>';
         $xml .= self::_xmlElement('wmid', $this->_requestedWmid);
         $xml .= '</getpurses>';
@@ -72,10 +69,10 @@ class WMX9Request extends WMXApiRequest
      *
      * @return void
      */
-    public function sign(WMRequestSigner $requestSigner)
+    public function sign(WMRequestSigner $requestSigner = null)
     {
         if ($this->_authType === self::AUTH_CLASSIC) {
-            $this->_sign = $requestSigner->sign($this->_requestedWmid . $this->_requestNumber);
+            $this->_signature = $requestSigner->sign($this->_requestedWmid . $this->_requestNumber);
         }
     }
 

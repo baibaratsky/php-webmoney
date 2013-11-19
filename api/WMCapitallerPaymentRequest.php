@@ -32,9 +32,6 @@ class WMCapitallerPaymentRequest extends WMApiRequest
     /** @var bool onlyauth */
     protected $_askRecipientsPermission = false;
 
-    /** @var string signstr */
-    protected $_sign;
-
     public function __construct()
     {
         $this->_url = 'http://www.capitaller.ru/ws/DoPayment.asmx?WSDL';
@@ -93,9 +90,9 @@ class WMCapitallerPaymentRequest extends WMApiRequest
      *
      * @return void
      */
-    public function sign(WMRequestSigner $requestSigner)
+    public function sign(WMRequestSigner $requestSigner = null)
     {
-        $this->_sign = $requestSigner->sign($this->_transactionNumber . $this->_senderPurse . $this->_recipientPurse
+        $this->_signature = $requestSigner->sign($this->_transactionNumber . $this->_senderPurse . $this->_recipientPurse
             . $this->_amount . $this->_description);
     }
 

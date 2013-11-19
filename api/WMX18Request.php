@@ -15,9 +15,6 @@ class WMX18Request extends WMXApiRequest
     /** @var string wmid */
     protected $_signerWmid;
 
-    /** @var string sign */
-    protected $_sign;
-
     /** @var string lmi_payee_purse */
     protected $_payeePurse;
 
@@ -78,7 +75,7 @@ class WMX18Request extends WMXApiRequest
         $xml .= self::_xmlElement('lmi_payee_purse', $this->_payeePurse);
         $xml .= self::_xmlElement('lmi_payment_no', $this->_paymentNumber);
         $xml .= self::_xmlElement('lmi_payment_no_type', $this->_paymentNumberType);
-        $xml .= self::_xmlElement('sign', $this->_sign);
+        $xml .= self::_xmlElement('sign', $this->_signature);
         $xml .= self::_xmlElement('md5', $this->_md5);
 
         if ($this->_authType === self::AUTH_SECRET_KEY) {
@@ -101,10 +98,10 @@ class WMX18Request extends WMXApiRequest
     /**
      * @param WMRequestSigner $requestSigner
      */
-    public function sign(WMRequestSigner $requestSigner)
+    public function sign(WMRequestSigner $requestSigner = null)
     {
         if ($this->_authType === self::AUTH_CLASSIC) {
-            $this->_sign = $requestSigner->sign($this->_signerWmid . $this->_payeePurse . $this->_paymentNumber);
+            $this->_signature = $requestSigner->sign($this->_signerWmid . $this->_payeePurse . $this->_paymentNumber);
         } elseif ($this->_authType === self::AUTH_MD5) {
             $this->_md5 = md5($this->_signerWmid . $this->_payeePurse . $this->_paymentNumber . $this->_secretKey);
         }

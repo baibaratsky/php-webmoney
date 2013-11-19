@@ -16,9 +16,6 @@ class WMMSCheckMerchantRequest extends WMMSApiRequest
     /** @var int resourceid */
     protected $_resourceId;
 
-    /** @var string sign */
-    protected $_sign;
-
     public function __construct($loginType = self::LOGIN_TYPE_PROCESSING, $salt = null)
     {
         parent::__construct($loginType, $salt);
@@ -46,7 +43,7 @@ class WMMSCheckMerchantRequest extends WMMSApiRequest
         $xml .= self::_xmlElement('int_id', $this->_integratorId);
         $xml .= self::_xmlElement('int_wmid', $this->_integratorWmid);
         $xml .= self::_xmlElement('resourceid', $this->_resourceId);
-        $xml .= self::_xmlElement('sign', $this->_sign);
+        $xml .= self::_xmlElement('sign', $this->_signature);
         $xml .= '</ms.request>';
 
         return $xml;
@@ -72,9 +69,9 @@ class WMMSCheckMerchantRequest extends WMMSApiRequest
             if ($requestSigner === null) {
                 throw new WMException('This type of login requires the request signer.');
             }
-            $this->_sign = $requestSigner->sign($signString);
+            $this->_signature = $requestSigner->sign($signString);
         } else {
-            $this->_sign = base64_encode(sha1($signString . $this->_salt));
+            $this->_signature = base64_encode(sha1($signString . $this->_salt));
         }
     }
 

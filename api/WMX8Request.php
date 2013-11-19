@@ -10,9 +10,6 @@ class WMX8Request extends WMXApiRequest
     /** @var string wmid */
     protected $_signerWmid;
 
-    /** @var string sign */
-    protected $_sign;
-
     /** @var string testwmpurse/wmid */
     protected $_wmid;
 
@@ -57,7 +54,7 @@ class WMX8Request extends WMXApiRequest
         $xml = '<w3s.request>';
         $xml .= self::_xmlElement('reqn', $this->_requestNumber);
         $xml .= self::_xmlElement('wmid', $this->_signerWmid);
-        $xml .= self::_xmlElement('sign', $this->_sign);
+        $xml .= self::_xmlElement('sign', $this->_signature);
         $xml .= '<testwmpurse>';
         $xml .= self::_xmlElement('wmid', $this->_wmid);
         $xml .= self::_xmlElement('purse', $this->_purse);
@@ -78,10 +75,10 @@ class WMX8Request extends WMXApiRequest
     /**
      * @param WMRequestSigner $requestSigner
      */
-    public function sign(WMRequestSigner $requestSigner)
+    public function sign(WMRequestSigner $requestSigner = null)
     {
         if ($this->_authType === self::AUTH_CLASSIC) {
-            $this->_sign = $requestSigner->sign($this->_wmid . $this->_purse);
+            $this->_signature = $requestSigner->sign($this->_wmid . $this->_purse);
         }
     }
 

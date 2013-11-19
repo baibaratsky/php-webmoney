@@ -2,17 +2,6 @@
 
 abstract class WMApiRequestPerformer
 {
-    /** @var  WMRequestSigner */
-    protected $_requestSigner;
-
-    /**
-     * @param WMRequestSigner $requestSigner
-     */
-    public function __construct(WMRequestSigner $requestSigner)
-    {
-        $this->_requestSigner = $requestSigner;
-    }
-
     /**
      * @param WMApiRequest $request
      *
@@ -20,7 +9,6 @@ abstract class WMApiRequestPerformer
      */
     public function perform(WMApiRequest $request)
     {
-        $request->sign($this->_requestSigner);
         $response = $this->_request($request);
         $responseClassName = $request->getResponseClassName();
 
