@@ -21,7 +21,7 @@ class WMX17CreateContractResponse extends WMApiResponse
         $responseObject = new SimpleXMLElement($response);
         $this->_returnCode = (int)$responseObject->retval;
         $this->_returnDescription = (string)$responseObject->retdesc;
-        $this->_contractId = (int)$responseObject->contractId;
+        $this->_contractId = (int)$responseObject->contractid;
     }
 
     /**
