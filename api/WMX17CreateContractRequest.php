@@ -8,7 +8,7 @@
 class WMX17CreateContractRequest extends WMXApiRequest
 {
     const CONTRACT_TYPE_OPEN_ACCESS = 1;
-    const CONTRACT_TYPE_RESTRICTED_ACCESS = 1;
+    const CONTRACT_TYPE_RESTRICTED_ACCESS = 2;
 
     /** @var string sign_wmid */
     protected $_signerWmid;
