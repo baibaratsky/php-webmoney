@@ -22,13 +22,21 @@ class WMX17ContractInfoResponse extends WMApiResponse
         $this->_returnCode = (int)$responseObject->retval;
         $this->_returnDescription = (string)$responseObject->retdesc;
 
-        foreach ($responseObject->contract->row as $contract) {
+        foreach ($responseObject->contractinfo->row as $contract) {
             $this->_acceptances[] = new WMX17ContractInfoResponseAcceptance(
                 $contract['contractid'],
                 $contract['wmid'],
                 $contract['acceptdate']
             );
         }
+    }
+
+    /**
+     * @return WMX17ContractInfoResponseAcceptance[]
+     */
+    public function getAcceptances()
+    {
+        return $this->_acceptances;
     }
 }
 
