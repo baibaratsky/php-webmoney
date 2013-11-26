@@ -33,14 +33,12 @@ To use Capitaller API you have to compile PHP with [SOAP](http://www.php.net/man
 Example
 -------
 ```php
-require_once('WebMoney.php');
+$webMoney = new WebMoney(new CurlApiRequestPerformer);
 
-$webMoney = new WebMoney(new WMCurlApiRequestPerformer);
-
-$x9request = new WMX9Request;
+$x9request = new X9Request;
 $x9request->setSignerWmid('your WMID');
 $x9request->setRequestedWmid('requested WMID');
-$x9request->sign(new WMRequestSigner('wmid', 'key', 'password'));
+$x9request->sign(new RequestSigner('wmid', 'key', 'password'));
 
 $x9response = $webMoney->request($x9request);
 ```
