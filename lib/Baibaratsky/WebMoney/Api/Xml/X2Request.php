@@ -107,7 +107,7 @@ class X2Request extends ApiRequest
      */
     public function getResponseClassName()
     {
-        return 'X2Response';
+        return 'Baibaratsky\WebMoney\Api\Xml\X2Response';
     }
 
     /**

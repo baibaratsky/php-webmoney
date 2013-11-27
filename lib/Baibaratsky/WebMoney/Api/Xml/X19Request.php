@@ -180,7 +180,7 @@ class X19Request extends ApiRequest
      */
     public function getResponseClassName()
     {
-        return 'X19Response';
+        return 'Baibaratsky\WebMoney\Api\Xml\X19Response';
     }
 
     /**

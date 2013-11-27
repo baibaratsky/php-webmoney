@@ -95,7 +95,7 @@ class X11Request extends ApiRequest
      */
     public function getResponseClassName()
     {
-        return 'X11Response';
+        return 'Baibaratsky\WebMoney\Api\Xml\X11Response';
     }
 
     /**

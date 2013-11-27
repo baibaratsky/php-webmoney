@@ -18,7 +18,7 @@ class SoapApiRequestPerformer extends ApiRequestPerformer
      */
     protected function _request(ApiRequest $request)
     {
-        if (!is_subclass_of($request, 'PaymentRequest')) {
+        if (!$request instanceof PaymentRequest) {
             throw new RequestPerformerException('This request performer doesn\'t support such type of request.');
         }
 

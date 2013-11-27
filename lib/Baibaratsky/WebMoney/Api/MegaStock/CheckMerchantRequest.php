@@ -59,7 +59,7 @@ class CheckMerchantRequest extends ApiRequest
      */
     public function getResponseClassName()
     {
-        return 'CheckMerchantResponse';
+        return 'Baibaratsky\WebMoney\Api\MegaStock\CheckMerchantResponse';
     }
 
     /**

@@ -74,7 +74,7 @@ class X8Request extends ApiRequest
      */
     public function getResponseClassName()
     {
-        return 'X8Response';
+        return 'Baibaratsky\WebMoney\Api\Xml\X8Response';
     }
 
     /**

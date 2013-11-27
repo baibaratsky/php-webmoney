@@ -71,7 +71,7 @@ class X17ContractInfoRequest extends ApiRequest
      */
     public function getResponseClassName()
     {
-        return 'X17ContractInfoResponse';
+        return 'Baibaratsky\WebMoney\Api\Xml\X17ContractInfoResponse';
     }
 
     /**

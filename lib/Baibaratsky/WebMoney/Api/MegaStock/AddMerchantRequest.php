@@ -134,7 +134,7 @@ class AddMerchantRequest extends ApiRequest
      */
     public function getResponseClassName()
     {
-        return 'AddMerchantResponse';
+        return 'Baibaratsky\WebMoney\Api\MegaStock\AddMerchantResponse';
     }
 
     /**

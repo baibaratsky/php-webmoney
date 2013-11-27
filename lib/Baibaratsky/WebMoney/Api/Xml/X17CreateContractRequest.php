@@ -82,7 +82,7 @@ class X17CreateContractRequest extends ApiRequest
      */
     public function getResponseClassName()
     {
-        return 'X17CreateContractResponse';
+        return 'Baibaratsky\WebMoney\Api\Xml\X17CreateContractResponse';
     }
 
     /**

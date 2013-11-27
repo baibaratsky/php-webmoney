@@ -66,7 +66,7 @@ class X9Request extends ApiRequest
      */
     public function getResponseClassName()
     {
-        return 'X9Response';
+        return 'Baibaratsky\WebMoney\Api\Xml\X9Response';
     }
 
     /**

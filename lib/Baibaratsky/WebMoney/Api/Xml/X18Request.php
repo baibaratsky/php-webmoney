@@ -97,7 +97,7 @@ class X18Request extends ApiRequest
      */
     public function getResponseClassName()
     {
-        return 'X18Response';
+        return 'Baibaratsky\WebMoney\Api\Xml\X18Response';
     }
 
     /**
