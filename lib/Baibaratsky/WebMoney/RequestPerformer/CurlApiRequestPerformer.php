@@ -15,7 +15,7 @@ class CurlApiRequestPerformer extends ApiRequestPerformer
      */
     protected function _request(ApiRequest $request)
     {
-        if ($request instanceof XmlApiRequest) {
+        if (!$request instanceof XmlApiRequest) {
             throw new RequestPerformerException('This request performer doesn\'t support such type of request.');
         }
 
