@@ -28,7 +28,7 @@ class X9Request extends ApiRequest
             throw new ApiException('This interface doesn\'t support the authentication type given.');
         }
 
-        $this->_authType = $authType;
+        parent::__construct($authType);
     }
 
     /**
