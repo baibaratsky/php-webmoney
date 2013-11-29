@@ -24,6 +24,8 @@ class WMX9Request extends WMXApiRequest
         }
 
         $this->_authType = $authType;
+
+        parent::__construct($authType);
     }
 
     /**
