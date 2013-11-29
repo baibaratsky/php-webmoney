@@ -44,14 +44,14 @@ class WMX9Request extends WMXApiRequest
      */
     public function getXml()
     {
-        $xml = '<w3s.response>';
+        $xml = '<w3s.request>';
         $xml .= self::_xmlElement('reqn', $this->_requestNumber);
         $xml .= self::_xmlElement('wmid', $this->_signerWmid);
         $xml .= self::_xmlElement('sign', $this->_signature);
         $xml .= '<getpurses>';
         $xml .= self::_xmlElement('wmid', $this->_requestedWmid);
         $xml .= '</getpurses>';
-        $xml .= '</w3s.response>';
+        $xml .= '</w3s.request>';
 
         return $xml;
     }
