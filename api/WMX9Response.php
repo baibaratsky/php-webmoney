@@ -22,8 +22,10 @@ class WMX9Response extends WMApiResponse
         $this->_requestNumber = (int)$responseObject->reqn;
         $this->_returnCode = (int)$responseObject->retval;
         $this->_returnDescription = (string)$responseObject->retdesc;
-        foreach ($responseObject->purses->children() as $purse) {
-            $this->_purses[] = new WMX9ResponsePurse($this->_purseToArray($purse));
+        if (isset($responseObject->purses)) {
+            foreach ($responseObject->purses->children() as $purse) {
+                $this->_purses[] = new WMX9ResponsePurse($this->_purseToArray($purse));
+            }
         }
     }
 
