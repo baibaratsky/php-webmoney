@@ -1,7 +1,7 @@
 <?php
 namespace Baibaratsky\WebMoney\Validator;
 
-use Baibaratsky\WebMoney\Api\ApiRequest;
+use Baibaratsky\WebMoney\Api\Request;
 use Baibaratsky\WebMoney\Exception\ValidatorException;
 
 class RequestValidator
@@ -12,16 +12,16 @@ class RequestValidator
     const TYPE_CONDITIONAL = 4;
     const TYPE_ARRAY = 5;
 
-    /** @var ApiRequest */
+    /** @var Request */
     protected $_request;
 
     /** @var array */
     protected $_errors = array();
 
     /**
-     * @param ApiRequest $request
+     * @param Request $request
      */
-    public function __construct(ApiRequest $request)
+    public function __construct(Request $request)
     {
         $this->_request = $request;
     }

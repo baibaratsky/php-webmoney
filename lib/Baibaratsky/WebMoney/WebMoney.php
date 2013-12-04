@@ -1,10 +1,10 @@
 <?php
 namespace Baibaratsky\WebMoney;
 
-use Baibaratsky\WebMoney\Api\ApiRequest;
-use Baibaratsky\WebMoney\Api\ApiResponse;
-use Baibaratsky\WebMoney\Api\XmlApiRequest;
-use Baibaratsky\WebMoney\Api\Capitaller\PaymentRequest;
+use Baibaratsky\WebMoney\Api\Request;
+use Baibaratsky\WebMoney\Api\Response;
+use Baibaratsky\WebMoney\Api\XmlRequest;
+use Baibaratsky\WebMoney\Api\Capitaller\Payment\Request;
 use Baibaratsky\WebMoney\Exception\CoreException;
 use Baibaratsky\WebMoney\RequestPerformer\ApiRequestPerformer;
 use Baibaratsky\WebMoney\RequestPerformer\SoapApiRequestPerformer;
@@ -30,20 +30,20 @@ class WebMoney
     }
 
     /**
-     * @param ApiRequest $requestObject
+     * @param Request $requestObject
      *
-     * @return ApiResponse
+     * @return Response
      * @throws CoreException
      */
-    public function request(ApiRequest $requestObject)
+    public function request(Request $requestObject)
     {
         if (!$requestObject->validate()) {
             throw new CoreException('Incorrect request data. See getErrors().');
         }
 
-        if ($requestObject instanceof XmlApiRequest) {
+        if ($requestObject instanceof XmlRequest) {
             return $this->_xmlRequestPerformer->perform($requestObject);
-        } elseif ($requestObject instanceof PaymentRequest) {
+        } elseif ($requestObject instanceof Request) {
             return $this->_soapRequestPerformer->perform($requestObject);
         }
 

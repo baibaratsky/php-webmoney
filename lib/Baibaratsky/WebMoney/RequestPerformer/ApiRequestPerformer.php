@@ -1,17 +1,17 @@
 <?php
 namespace Baibaratsky\WebMoney\RequestPerformer;
 
-use Baibaratsky\WebMoney\Api\ApiRequest;
-use Baibaratsky\WebMoney\Api\ApiResponse;
+use Baibaratsky\WebMoney\Api\Request;
+use Baibaratsky\WebMoney\Api\Response;
 
 abstract class ApiRequestPerformer
 {
     /**
-     * @param ApiRequest $request
+     * @param Request $request
      *
-     * @return ApiResponse
+     * @return Response
      */
-    public function perform(ApiRequest $request)
+    public function perform(Request $request)
     {
         $response = $this->_request($request);
         $responseClassName = $request->getResponseClassName();
@@ -20,9 +20,9 @@ abstract class ApiRequestPerformer
     }
 
     /**
-     * @param ApiRequest $request
+     * @param Request $request
      *
      * @return mixed
      */
-    abstract protected function _request(ApiRequest $request);
+    abstract protected function _request(Request $request);
 }

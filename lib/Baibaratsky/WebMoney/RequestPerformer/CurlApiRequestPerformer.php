@@ -1,30 +1,30 @@
 <?php
 namespace Baibaratsky\WebMoney\RequestPerformer;
 
-use Baibaratsky\WebMoney\Api\ApiRequest;
-use Baibaratsky\WebMoney\Api\XmlApiRequest;
+use Baibaratsky\WebMoney\Api\Request;
+use Baibaratsky\WebMoney\Api\XmlRequest;
 use Baibaratsky\WebMoney\Exception\RequestPerformerException;
 
 class CurlApiRequestPerformer extends ApiRequestPerformer
 {
     /**
-     * @param ApiRequest $request
+     * @param Request $request
      *
      * @return string
      * @throws RequestPerformerException
      */
-    protected function _request(ApiRequest $request)
+    protected function _request(Request $request)
     {
-        if (!$request instanceof XmlApiRequest) {
+        if (!$request instanceof XmlRequest) {
             throw new RequestPerformerException('This request performer doesn\'t support such type of request.');
         }
 
-        /** @var XmlApiRequest $request */
+        /** @var XmlRequest $request */
 
         $handler = curl_init($request->getUrl());
 
         curl_setopt($handler, CURLOPT_POST, true);
-        curl_setopt($handler, CURLOPT_POSTFIELDS, $request->getXml());
+        curl_setopt($handler, CURLOPT_POSTFIELDS, $request->getData());
 
         curl_setopt($handler, CURLOPT_SSL_VERIFYPEER, 0);
 
