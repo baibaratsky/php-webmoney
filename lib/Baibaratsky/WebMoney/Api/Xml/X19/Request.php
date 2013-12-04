@@ -1,7 +1,7 @@
 <?php
 namespace Baibaratsky\WebMoney\Api\Xml\X19;
 
-use Baibaratsky\WebMoney\Api\Xml\Request as ApiXmlRequest;
+use Baibaratsky\WebMoney\Api\Xml;
 use Baibaratsky\WebMoney\Exception\ApiException;
 use Baibaratsky\WebMoney\Signer\RequestSigner;
 use Baibaratsky\WebMoney\Validator\RequestValidator;
@@ -11,7 +11,7 @@ use Baibaratsky\WebMoney\Validator\RequestValidator;
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X19
  */
-class Request extends ApiXmlRequest
+class Request extends Xml\Request
 {
     const LANG_RU = 'ru';
     const LANG_EN = 'en';

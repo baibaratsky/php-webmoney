@@ -1,11 +1,11 @@
 <?php
 namespace Baibaratsky\WebMoney\Api\Capitaller\Payment;
 
-use Baibaratsky\WebMoney\Api\Request as ApiRequest;
+use Baibaratsky\WebMoney\Api;
 use Baibaratsky\WebMoney\Signer\RequestSigner;
 use Baibaratsky\WebMoney\Validator\RequestValidator;
 
-class Request extends ApiRequest
+class Request extends Api\Request
 {
     /** @var int firm_id */
     protected $_firmId;

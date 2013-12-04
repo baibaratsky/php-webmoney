@@ -1,14 +1,14 @@
 <?php
 namespace Baibaratsky\WebMoney\Api\Xml\X17\CreateContract;
 
-use Baibaratsky\WebMoney\Api\Response as ApiResponse;
+use Baibaratsky\WebMoney\Api;
 
 /**
  * Class Response
  *
  * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X17
  */
-class Response extends ApiResponse
+class Response extends Api\Response
 {
     /** @var string retdesc */
     protected $_returnDescription;

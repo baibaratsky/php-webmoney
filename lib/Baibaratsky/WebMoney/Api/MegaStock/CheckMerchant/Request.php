@@ -1,7 +1,7 @@
 <?php
 namespace Baibaratsky\WebMoney\Api\MegaStock\CheckMerchant;
 
-use Baibaratsky\WebMoney\Api\MegaStock\Request as MegaStockRequest;
+use Baibaratsky\WebMoney\Api\MegaStock;
 use Baibaratsky\WebMoney\Exception\ApiException;
 use Baibaratsky\WebMoney\Signer\RequestSigner;
 use Baibaratsky\WebMoney\Validator\RequestValidator;
@@ -11,7 +11,7 @@ use Baibaratsky\WebMoney\Validator\RequestValidator;
  *
  * @link http://www.megastock.ru/Doc/AddIntMerchant.aspx
  */
-class Request extends MegaStockRequest
+class Request extends MegaStock\Request
 {
     /** @var int int_id */
     protected $_integratorId;

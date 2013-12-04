@@ -1,9 +1,9 @@
 <?php
 namespace Baibaratsky\WebMoney\Api\Capitaller\Payment;
 
-use Baibaratsky\WebMoney\Api\Response as ApiResponse;
+use Baibaratsky\WebMoney\Api;
 
-class Response extends ApiResponse
+class Response extends Api\Response
 {
     /**
      * @var string paymentid

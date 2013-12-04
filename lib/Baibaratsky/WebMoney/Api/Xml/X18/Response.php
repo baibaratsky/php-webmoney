@@ -1,9 +1,9 @@
 <?php
 namespace Baibaratsky\WebMoney\Api\Xml\X18;
 
-use Baibaratsky\WebMoney\Api\Response as ApiResponse;
+use Baibaratsky\WebMoney\Api;
 
-class Response extends ApiResponse
+class Response extends Api\Response
 {
     const PAYMENT_TYPE_USUAL = 0;
     const PAYMENT_TYPE_TELEPAT = 1;

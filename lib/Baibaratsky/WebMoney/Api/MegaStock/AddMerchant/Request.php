@@ -2,7 +2,7 @@
 namespace Baibaratsky\WebMoney\Api\MegaStock\AddMerchant;
 
 use Baibaratsky\WebMoney\Signer\RequestSigner;
-use Baibaratsky\WebMoney\Api\MegaStock\Request as MegaStockRequest;
+use Baibaratsky\WebMoney\Api\MegaStock;
 use Baibaratsky\WebMoney\Exception\ApiException;
 use Baibaratsky\WebMoney\Validator\RequestValidator;
 
@@ -11,7 +11,7 @@ use Baibaratsky\WebMoney\Validator\RequestValidator;
  *
  * @link http://www.megastock.ru/Doc/AddIntMerchant.aspx?lang=en
  */
-class Request extends MegaStockRequest
+class Request extends MegaStock\Request
 {
     const BENEFICIARY_TYPE_CONTRACT = 1;
     const BENEFICIARY_TYPE_WEBMONEY = 2;
