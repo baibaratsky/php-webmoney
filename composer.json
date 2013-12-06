@@ -1,7 +1,8 @@
 {
     "name": "baibaratsky/php-webmoney",
     "description": "WebMoney API PHP Library",
-    "license": "BSD",
+    "keywords": ["webmoney"],
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Andrei Baibaratsky",
