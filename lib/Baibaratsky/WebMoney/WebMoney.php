@@ -4,7 +4,6 @@ namespace Baibaratsky\WebMoney;
 use Baibaratsky\WebMoney\Api\Request;
 use Baibaratsky\WebMoney\Api\Response;
 use Baibaratsky\WebMoney\Api\XmlRequest;
-use Baibaratsky\WebMoney\Api\Capitaller\Payment\Request;
 use Baibaratsky\WebMoney\Exception\CoreException;
 use Baibaratsky\WebMoney\RequestPerformer\ApiRequestPerformer;
 use Baibaratsky\WebMoney\RequestPerformer\SoapApiRequestPerformer;

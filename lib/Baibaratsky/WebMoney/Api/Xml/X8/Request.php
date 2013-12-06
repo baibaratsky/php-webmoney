@@ -89,11 +89,27 @@ class Request extends Xml\Request
     }
 
     /**
-     * @param string $testWmid
+     * @return string
      */
-    public function setWmid($testWmid)
+    public function getSignerWmid()
     {
-        $this->_wmid = $testWmid;
+        return $this->_signerWmid;
+    }
+
+    /**
+     * @param string $signerWmid
+     */
+    public function setSignerWmid($signerWmid)
+    {
+        $this->_signerWmid = $signerWmid;
+    }
+
+    /**
+     * @param string $wmid
+     */
+    public function setWmid($wmid)
+    {
+        $this->_wmid = $wmid;
     }
 
     /**
