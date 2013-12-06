@@ -1,20 +1,20 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\MegaStock\AddMerchant;
+namespace Baibaratsky\WebMoney\Api\X\X17\CreateContract;
 
 use Baibaratsky\WebMoney;
 
 /**
  * Class Response
  *
- * @link http://www.megastock.ru/Doc/AddIntMerchant.aspx?lang=en
+ * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X17
  */
 class Response extends WebMoney\Request\Response
 {
-    /** @var string retdescr */
+    /** @var string retdesc */
     protected $_returnDescription;
 
-    /** @var int resourceid */
-    protected $_resourceId = null;
+    /** @var int contractid */
+    protected $_contractId;
 
     /**
      * @param string $response
@@ -23,10 +23,8 @@ class Response extends WebMoney\Request\Response
     {
         $responseObject = new \SimpleXMLElement($response);
         $this->_returnCode = (int)$responseObject->retval;
-        $this->_returnDescription = (string)$responseObject->retdescr;
-        if ($this->_returnCode == 0) {
-            $this->_resourceId = (int)$responseObject->resourceid;
-        }
+        $this->_returnDescription = (string)$responseObject->retdesc;
+        $this->_contractId = (int)$responseObject->contractid;
     }
 
     /**
@@ -40,8 +38,8 @@ class Response extends WebMoney\Request\Response
     /**
      * @return int
      */
-    public function getResourceId()
+    public function getContractId()
     {
-        return $this->_resourceId;
+        return $this->_contractId;
     }
 }

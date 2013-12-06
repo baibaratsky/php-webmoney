@@ -3,8 +3,8 @@ namespace Baibaratsky\WebMoney\Api\MegaStock\CheckMerchant;
 
 use Baibaratsky\WebMoney\Api\MegaStock;
 use Baibaratsky\WebMoney\Exception\ApiException;
-use Baibaratsky\WebMoney\Signer\RequestSigner;
-use Baibaratsky\WebMoney\Validator\RequestValidator;
+use Baibaratsky\WebMoney\Request\RequestSigner;
+use Baibaratsky\WebMoney\Request\RequestValidator;
 
 /**
  * Class Request

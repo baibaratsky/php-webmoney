@@ -1,26 +1,24 @@
 <?php
 namespace Baibaratsky\WebMoney;
 
-use Baibaratsky\WebMoney\Api\Request;
-use Baibaratsky\WebMoney\Api\Response;
-use Baibaratsky\WebMoney\Api\XmlRequest;
+use Baibaratsky\WebMoney\Request;
+use Baibaratsky\WebMoney\Request\RequestPerformer\AbstractRequestPerformer;
+use Baibaratsky\WebMoney\Request\RequestPerformer\SoapRequestPerformer;
 use Baibaratsky\WebMoney\Exception\CoreException;
-use Baibaratsky\WebMoney\RequestPerformer\ApiRequestPerformer;
-use Baibaratsky\WebMoney\RequestPerformer\SoapApiRequestPerformer;
 
 class WebMoney
 {
-    /** @var ApiRequestPerformer */
+    /** @var AbstractRequestPerformer */
     private $_xmlRequestPerformer;
 
-    /** @var SoapApiRequestPerformer */
+    /** @var SoapRequestPerformer */
     private $_soapRequestPerformer;
 
     /**
-     * @param ApiRequestPerformer $xmlRequestPerformer
-     * @param SoapApiRequestPerformer $soapRequestPerformer
+     * @param AbstractRequestPerformer $xmlRequestPerformer
+     * @param SoapRequestPerformer $soapRequestPerformer
      */
-    public function __construct(ApiRequestPerformer $xmlRequestPerformer, SoapApiRequestPerformer $soapRequestPerformer = null)
+    public function __construct(AbstractRequestPerformer $xmlRequestPerformer, SoapRequestPerformer $soapRequestPerformer = null)
     {
         $this->_xmlRequestPerformer = $xmlRequestPerformer;
         if ($soapRequestPerformer !== null) {
@@ -29,20 +27,20 @@ class WebMoney
     }
 
     /**
-     * @param Request $requestObject
+     * @param Request\AbstractRequest $requestObject
      *
-     * @return Response
+     * @return Request\Response
      * @throws CoreException
      */
-    public function request(Request $requestObject)
+    public function request(Request\AbstractRequest $requestObject)
     {
         if (!$requestObject->validate()) {
             throw new CoreException('Incorrect request data. See getErrors().');
         }
 
-        if ($requestObject instanceof XmlRequest) {
+        if ($requestObject instanceof Request\XmlRequest) {
             return $this->_xmlRequestPerformer->perform($requestObject);
-        } elseif ($requestObject instanceof Request) {
+        } elseif ($requestObject instanceof Request\AbstractRequest) {
             return $this->_soapRequestPerformer->perform($requestObject);
         }
 
