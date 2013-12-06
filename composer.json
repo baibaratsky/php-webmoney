@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Baibaratsky\\WebMoney": "lib/"
+            "Baibaratsky\\WebMoney\\": "lib/"
         }
     }
 }
