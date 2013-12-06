@@ -1,0 +1,23 @@
+{
+    "name": "baibaratsky/php-webmoney",
+    "description": "WebMoney API PHP Library",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Andrei Baibaratsky",
+            "email": "andrei@baibaratsky.com"
+        },
+        {
+            "name": "Constantin Chuprik",
+            "email": "constantinchuprik@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-0": {
+            "Baibaratsky\\WebMoney\\": "lib/"
+        }
+    }
+}
