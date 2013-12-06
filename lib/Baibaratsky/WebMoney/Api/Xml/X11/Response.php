@@ -227,7 +227,11 @@ class Response extends Api\Response
 
         $returnArray = array();
         foreach ($xml->row as $object) {
-            $returnArray[] = current($object);
+            $returnArray[] = reset($object);
+        }
+
+        if (count($returnArray) == 1) {
+            return reset($returnArray);
         }
 
         return $returnArray;
