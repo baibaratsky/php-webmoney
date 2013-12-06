@@ -65,7 +65,8 @@ class Response extends Api\Response
         }
 
         if ($certInfo->attestat !== null) {
-            $this->_passport = new Passport($this->_rowAttributesXmlToArray($certInfo->attestat));
+            $passport = $this->_rowAttributesXmlToArray($certInfo->attestat);
+            $this->_passport = new Passport(reset($passport));
         }
 
         if ($certInfo->wmids !== null) {
@@ -228,10 +229,6 @@ class Response extends Api\Response
         $returnArray = array();
         foreach ($xml->row as $object) {
             $returnArray[] = reset($object);
-        }
-
-        if (count($returnArray) == 1) {
-            return reset($returnArray);
         }
 
         return $returnArray;
