@@ -1,10 +1,10 @@
 <?php
 namespace Baibaratsky\WebMoney\Api\MegaStock\AddMerchant;
 
-use Baibaratsky\WebMoney\Signer\RequestSigner;
 use Baibaratsky\WebMoney\Api\MegaStock;
 use Baibaratsky\WebMoney\Exception\ApiException;
-use Baibaratsky\WebMoney\Validator\RequestValidator;
+use Baibaratsky\WebMoney\Request\RequestSigner;
+use Baibaratsky\WebMoney\Request\RequestValidator;
 
 /**
  * Class Request
@@ -146,7 +146,7 @@ class Request extends MegaStock\Request
     }
 
     /**
-     * @param RequestSigner $requestSigner
+     * @param \Baibaratsky\WebMoney\Request\RequestSigner $requestSigner
      *
      * @throws ApiException
      */

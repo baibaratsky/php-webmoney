@@ -1,14 +1,14 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\MegaStock;
+namespace Baibaratsky\WebMoney\Api\MegaStock\CheckMerchant;
 
-use Baibaratsky\WebMoney\Api;
+use Baibaratsky\WebMoney;
 
 /**
  * Class Response
  *
  * @link http://www.megastock.ru/Doc/AddIntMerchant.aspx
  */
-class Response extends Api\Response
+class Response extends WebMoney\Request\Response
 {
     /** @var string retdescr */
     protected $_returnDescription;

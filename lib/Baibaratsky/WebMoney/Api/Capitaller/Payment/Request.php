@@ -1,11 +1,11 @@
 <?php
 namespace Baibaratsky\WebMoney\Api\Capitaller\Payment;
 
-use Baibaratsky\WebMoney\Api;
-use Baibaratsky\WebMoney\Signer\RequestSigner;
-use Baibaratsky\WebMoney\Validator\RequestValidator;
+use Baibaratsky\WebMoney;
+use Baibaratsky\WebMoney\Request\RequestSigner;
+use Baibaratsky\WebMoney\Request\RequestValidator;
 
-class Request extends Api\Request
+class Request extends WebMoney\Request\AbstractRequest
 {
     /** @var int firm_id */
     protected $_firmId;
@@ -54,7 +54,7 @@ class Request extends Api\Request
     }
 
     /**
-     * SOAP function name for SoapApiRequestPerformer
+     * SOAP function name for SoapRequestPerformer
      * @return string
      */
     public function getFunctionName()
