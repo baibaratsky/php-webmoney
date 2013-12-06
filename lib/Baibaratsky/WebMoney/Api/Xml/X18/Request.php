@@ -114,6 +114,22 @@ class Request extends Xml\Request
     }
 
     /**
+     * @return string
+     */
+    public function getSignerWmid()
+    {
+        return $this->_signerWmid;
+    }
+
+    /**
+     * @param string $signerWmid
+     */
+    public function setSignerWmid($signerWmid)
+    {
+        $this->_signerWmid = $signerWmid;
+    }
+
+    /**
      * @param string $payeePurse
      */
     public function setPayeePurse($payeePurse)
