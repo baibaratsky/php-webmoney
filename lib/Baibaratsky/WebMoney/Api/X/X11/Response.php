@@ -34,16 +34,16 @@ class Response extends WebMoney\Request\Response
     /** @var Wmid[] certinfo/wmids */
     protected $_wmids = array();
 
-    /** @var UserInfo[] certinfo/userinfo/value */
+    /** @var UserInfo certinfo/userinfo/value */
     protected $_userInfo = array();
 
-    /** @var CheckLock[] certinfo/userinfo/check-lock */
+    /** @var CheckLock certinfo/userinfo/check-lock */
     protected $_checkLock = array();
 
-    /** @var WebList[] certinfo/userinfo/weblist */
+    /** @var WebList certinfo/userinfo/weblist */
     protected $_webList = array();
 
-    /** @var ExtendedData[] certinfo/userinfo/extendeddata */
+    /** @var ExtendedData certinfo/userinfo/extendeddata */
     protected $_extendedData = array();
 
     /**
@@ -77,26 +77,26 @@ class Response extends WebMoney\Request\Response
 
         if ($certInfo->userinfo !== null) {
             if ($certInfo->userinfo->value !== null) {
-                foreach ($this->_rowAttributesXmlToArray($certInfo->userinfo->value) as $userInfo) {
-                    $this->_userInfo[] = new UserInfo($userInfo);
-                }
+                $userInfo = $this->_rowAttributesXmlToArray($certInfo->userinfo->value);
+                $this->_userInfo = new UserInfo(reset($userInfo));
             }
 
             if ($certInfo->userinfo->{'check-lock'} !== null) {
-                foreach ($this->_rowAttributesXmlToArray($certInfo->userinfo->{'check-lock'}) as $checkLock) {
-                    $this->_checkLock[] = new CheckLock($checkLock);
-                }
+                $checkLock = $this->_rowAttributesXmlToArray($certInfo->userinfo->{'check-lock'});
+                $this->_checkLock = new CheckLock(reset($checkLock));
             }
 
             if ($certInfo->userinfo->weblist !== null) {
-                foreach ($this->_rowAttributesXmlToArray($certInfo->userinfo->weblist) as $webList) {
-                    $this->_webList[] = new WebList($webList);
+                $webList = $this->_rowAttributesXmlToArray($certInfo->userinfo->weblist);
+                if (!empty($webList)) {
+                    $this->_webList = new WebList(reset($webList));
                 }
             }
 
             if ($certInfo->userinfo->extendeddata !== null) {
-                foreach ($this->_rowAttributesXmlToArray($certInfo->userinfo->extendeddata) as $extendedData) {
-                    $this->_extendedData[] = new ExtendedData($extendedData);
+                $extendedData = $this->_rowAttributesXmlToArray($certInfo->userinfo->extendeddata);
+                if (!empty($extendedData)) {
+                    $this->_extendedData = new ExtendedData(reset($extendedData));
                 }
             }
         }
@@ -151,7 +151,7 @@ class Response extends WebMoney\Request\Response
     }
 
     /**
-     * @return Passport[]
+     * @return Passport
      */
     public function getPassport()
     {
@@ -167,7 +167,7 @@ class Response extends WebMoney\Request\Response
     }
 
     /**
-     * @return UserInfo[]
+     * @return UserInfo
      */
     public function getUserInfo()
     {
@@ -175,7 +175,7 @@ class Response extends WebMoney\Request\Response
     }
 
     /**
-     * @return CheckLock[]
+     * @return CheckLock
      */
     public function getCheckLock()
     {
@@ -183,7 +183,7 @@ class Response extends WebMoney\Request\Response
     }
 
     /**
-     * @return WebList[]
+     * @return WebList
      */
     public function getWebList()
     {
@@ -191,7 +191,7 @@ class Response extends WebMoney\Request\Response
     }
 
     /**
-     * @return ExtendedData[]
+     * @return ExtendedData
      */
     public function getExtendedData()
     {
