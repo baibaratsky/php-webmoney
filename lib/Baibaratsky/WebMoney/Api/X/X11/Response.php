@@ -35,16 +35,16 @@ class Response extends WebMoney\Request\Response
     protected $_wmids = array();
 
     /** @var UserInfo certinfo/userinfo/value */
-    protected $_userInfo = array();
+    protected $_userInfo;
 
     /** @var CheckLock certinfo/userinfo/check-lock */
-    protected $_checkLock = array();
+    protected $_checkLock;
 
     /** @var WebList certinfo/userinfo/weblist */
-    protected $_webList = array();
+    protected $_webList;
 
     /** @var ExtendedData certinfo/userinfo/extendeddata */
-    protected $_extendedData = array();
+    protected $_extendedData;
 
     /**
      * @param string $response
