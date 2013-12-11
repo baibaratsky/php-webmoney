@@ -4,6 +4,7 @@ WebMoney API PHP Library
 XML-interfaces supported
 ------------------------
 - [X2](http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X2): transferring funds from one purse to another
+- [X3](https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X3): receiving transaction history, checking transaction status
 - [X8](http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X8): retrieving information about purse ownership, searching for system user by his/her identifier or purse
 - [X9](https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X9): retrieving information about purse balance
 - [X11](http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X11): retrieving information from client’s passport by WM-identifier
