@@ -28,8 +28,10 @@ class Response extends WebMoney\Request\Response
         $this->_requestNumber = (int)$responseObject->reqn;
         $this->_returnCode = (int)$responseObject->retval;
         $this->_returnDescription = (int)$responseObject->retdesc;
-        foreach ($responseObject->operations->operation as $operation) {
-            $this->_operations[] = new Operation($this->_operationXmlToArray($operation));
+        if (isset($responseObject->operations->operation)) {
+            foreach ($responseObject->operations->operation as $operation) {
+                $this->_operations[] = new Operation($this->_operationXmlToArray($operation));
+            }
         }
     }
 
