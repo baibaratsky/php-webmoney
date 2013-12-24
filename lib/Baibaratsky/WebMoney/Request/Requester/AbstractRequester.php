@@ -1,10 +1,10 @@
 <?php
-namespace Baibaratsky\WebMoney\Request\RequestPerformer;
+namespace Baibaratsky\WebMoney\Request\Requester;
 
 use Baibaratsky\WebMoney\Request\AbstractRequest;
 use Baibaratsky\WebMoney\Request\Response;
 
-abstract class AbstractRequestPerformer
+abstract class AbstractRequester
 {
     /**
      * @param AbstractRequest $request
@@ -13,16 +13,16 @@ abstract class AbstractRequestPerformer
      */
     public function perform(AbstractRequest $request)
     {
-        $response = $this->_request($request);
+        $response = $this->request($request);
         $responseClassName = $request->getResponseClassName();
 
         return new $responseClassName($response);
     }
 
     /**
-     * @param \Baibaratsky\WebMoney\Request\AbstractRequest $request
+     * @param AbstractRequest $request
      *
      * @return mixed
      */
-    abstract protected function _request(AbstractRequest $request);
+    abstract protected function request(AbstractRequest $request);
 }

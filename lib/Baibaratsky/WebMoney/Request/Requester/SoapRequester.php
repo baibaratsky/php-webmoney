@@ -1,25 +1,25 @@
 <?php
-namespace Baibaratsky\WebMoney\Request\RequestPerformer;
+namespace Baibaratsky\WebMoney\Request\Requester;
 
 use Baibaratsky\WebMoney;
 use Baibaratsky\WebMoney\Request\AbstractRequest;
-use Baibaratsky\WebMoney\Exception\RequestPerformerException;
+use Baibaratsky\WebMoney\Exception\RequesterException;
 
 /**
- * Class SoapRequestPerformer
+ * Class SoapRequester
  */
-class SoapRequestPerformer extends AbstractRequestPerformer
+class SoapRequester extends AbstractRequester
 {
     /**
      * @param AbstractRequest $request
      *
      * @return mixed
-     * @throws RequestPerformerException
+     * @throws RequesterException
      */
-    protected function _request(AbstractRequest $request)
+    protected function request(AbstractRequest $request)
     {
         if (!$request instanceof WebMoney\Api\Capitaller\Payment\Request) {
-            throw new RequestPerformerException('This request performer doesn\'t support such type of request.');
+            throw new RequesterException('This requester doesn\'t support such type of request.');
         }
 
         /** @var \Baibaratsky\WebMoney\Api\Capitaller\Payment\Request $request */

@@ -38,7 +38,7 @@ require_once(__DIR__ . '/vendor/autoload.php'); // Require autoload file generat
 
 use Baibaratsky\WebMoney;
 
-$webMoney = new WebMoney\WebMoney(new WebMoney\Request\RequestPerformer\CurlRequestPerformer);
+$webMoney = new WebMoney\WebMoney(new WebMoney\Request\Requester\CurlRequester);
 
 $x9request = new WebMoney\Api\X\X9\Request;
 $x9request->setSignerWmid('your WMID');
