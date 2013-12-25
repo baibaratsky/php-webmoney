@@ -68,7 +68,7 @@ class RequestValidator
     protected function _validateRequired($paramName)
     {
         $paramValue = call_user_func(array($this->_request, 'get' . ucfirst($paramName)));
-        if (empty($paramValue) && !is_numeric($paramName)) {
+        if (empty($paramValue) && !is_numeric($paramValue)) {
             $this->_addError(self::TYPE_REQUIRED, $paramName);
 
             return false;
