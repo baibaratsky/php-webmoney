@@ -68,7 +68,7 @@ class RequestValidator
     protected function _validateRequired($paramName)
     {
         $paramValue = call_user_func(array($this->_request, 'get' . ucfirst($paramName)));
-        if (empty($paramValue)) {
+        if (empty($paramValue) && !is_numeric($paramName)) {
             $this->_addError(self::TYPE_REQUIRED, $paramName);
 
             return false;
@@ -151,7 +151,7 @@ class RequestValidator
                 $hasErrors = false;
                 foreach ($item['conditional'] as $conditionalParam => $conditionalValue) {
                     $propertyConditionalValue =
-                            call_user_func(array($this->_request, 'get' . ucfirst($conditionalParam)));
+                        call_user_func(array($this->_request, 'get' . ucfirst($conditionalParam)));
                     if (empty($propertyConditionalValue)) {
                         $hasErrors = true;
                         break;
