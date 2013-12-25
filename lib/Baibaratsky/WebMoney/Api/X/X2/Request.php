@@ -258,7 +258,7 @@ class Request extends X\Request
     /**
      * @return int
      */
-    public function getTransactionInvoiceNumber()
+    public function getTransactionWmInvoiceNumber()
     {
         return $this->_transactionWmInvoiceNumber;
     }
@@ -266,7 +266,7 @@ class Request extends X\Request
     /**
      * @param int $transactionWmInvoiceNumber
      */
-    public function setTransactionInvoiceNumber($transactionWmInvoiceNumber)
+    public function setTransactionWmInvoiceNumber($transactionWmInvoiceNumber)
     {
         $this->_transactionWmInvoiceNumber = $transactionWmInvoiceNumber;
     }
