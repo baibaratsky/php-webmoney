@@ -1,7 +1,7 @@
 <?php
 namespace Baibaratsky\WebMoney\Exception;
 
-class RequestPerformerException extends Exception
+class RequesterException extends Exception
 {
 
 }

@@ -2,27 +2,27 @@
 namespace Baibaratsky\WebMoney;
 
 use Baibaratsky\WebMoney\Request;
-use Baibaratsky\WebMoney\Request\RequestPerformer\AbstractRequestPerformer;
-use Baibaratsky\WebMoney\Request\RequestPerformer\SoapRequestPerformer;
+use Baibaratsky\WebMoney\Request\Requester\AbstractRequester;
+use Baibaratsky\WebMoney\Request\Requester\SoapRequester;
 use Baibaratsky\WebMoney\Exception\CoreException;
 
 class WebMoney
 {
-    /** @var AbstractRequestPerformer */
-    private $_xmlRequestPerformer;
+    /** @var AbstractRequester */
+    private $xmlRequester;
 
-    /** @var SoapRequestPerformer */
-    private $_soapRequestPerformer;
+    /** @var SoapRequester */
+    private $soapRequester;
 
     /**
-     * @param AbstractRequestPerformer $xmlRequestPerformer
-     * @param SoapRequestPerformer $soapRequestPerformer
+     * @param AbstractRequester $xmlRequester
+     * @param SoapRequester $soapRequester
      */
-    public function __construct(AbstractRequestPerformer $xmlRequestPerformer, SoapRequestPerformer $soapRequestPerformer = null)
+    public function __construct(AbstractRequester $xmlRequester, SoapRequester $soapRequester = null)
     {
-        $this->_xmlRequestPerformer = $xmlRequestPerformer;
-        if ($soapRequestPerformer !== null) {
-            $this->_soapRequestPerformer = $soapRequestPerformer;
+        $this->xmlRequester = $xmlRequester;
+        if ($soapRequester !== null) {
+            $this->soapRequester = $soapRequester;
         }
     }
 
@@ -39,9 +39,9 @@ class WebMoney
         }
 
         if ($requestObject instanceof Request\XmlRequest) {
-            return $this->_xmlRequestPerformer->perform($requestObject);
+            return $this->xmlRequester->perform($requestObject);
         } elseif ($requestObject instanceof Request\AbstractRequest) {
-            return $this->_soapRequestPerformer->perform($requestObject);
+            return $this->soapRequester->perform($requestObject);
         }
 
         throw new CoreException('Wrong class of requestObject.');

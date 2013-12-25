@@ -54,7 +54,7 @@ class Request extends WebMoney\Request\AbstractRequest
     }
 
     /**
-     * SOAP function name for SoapRequestPerformer
+     * SOAP function name for SoapRequester
      * @return string
      */
     public function getFunctionName()

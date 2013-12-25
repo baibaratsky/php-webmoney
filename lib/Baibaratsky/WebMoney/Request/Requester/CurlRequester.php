@@ -1,25 +1,25 @@
 <?php
-namespace Baibaratsky\WebMoney\Request\RequestPerformer;
+namespace Baibaratsky\WebMoney\Request\Requester;
 
 use Baibaratsky\WebMoney\Request\AbstractRequest;
 use Baibaratsky\WebMoney\Request\XmlRequest;
-use Baibaratsky\WebMoney\Exception\RequestPerformerException;
+use Baibaratsky\WebMoney\Exception\RequesterException;
 
-class CurlRequestPerformer extends AbstractRequestPerformer
+class CurlRequester extends AbstractRequester
 {
     /**
      * @param AbstractRequest $request
      *
      * @return string
-     * @throws RequestPerformerException
+     * @throws RequesterException
      */
-    protected function _request(AbstractRequest $request)
+    protected function request(AbstractRequest $request)
     {
         if (!$request instanceof XmlRequest) {
-            throw new RequestPerformerException('This request performer doesn\'t support such type of request.');
+            throw new RequesterException('This requester doesn\'t support such type of request.');
         }
 
-        /** @var \Baibaratsky\WebMoney\Request\XmlRequest $request */
+        /** @var XmlRequest $request */
 
         $handler = curl_init($request->getUrl());
 
@@ -30,14 +30,14 @@ class CurlRequestPerformer extends AbstractRequestPerformer
 
         ob_start();
         if (!curl_exec($handler)) {
-            throw new RequestPerformerException('Error while performing request (' . curl_error($handler) . ')');
+            throw new RequesterException('Error while performing request (' . curl_error($handler) . ')');
         }
         $content = ob_get_contents();
         ob_end_clean();
         curl_close($handler);
 
         if (trim($content) == '') {
-            throw new RequestPerformerException('No response was received from the server');
+            throw new RequesterException('No response was received from the server');
         }
 
         return $content;
