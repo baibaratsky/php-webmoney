@@ -16,6 +16,6 @@ abstract class XmlRequest extends AbstractRequest
      */
     protected static function _xmlElement($name, $value)
     {
-        return !empty($value) ? '<' . $name . '>' . $value . '</' . $name . '>' : '';
+        return !empty($value) || is_numeric($value) ? '<' . $name . '>' . $value . '</' . $name . '>' : '';
     }
 }

@@ -51,4 +51,28 @@ class Response extends WebMoney\Request\Response
             );
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getReturnDescription()
+    {
+        return $this->_returnDescription;
+    }
+
+    /**
+     * @return \Baibaratsky\WebMoney\Api\X\X8\Purse
+     */
+    public function getPurse()
+    {
+        return $this->_purse;
+    }
+
+    /**
+     * @return \Baibaratsky\WebMoney\Api\X\X8\Wmid
+     */
+    public function getWmid()
+    {
+        return $this->_wmid;
+    }
 }
