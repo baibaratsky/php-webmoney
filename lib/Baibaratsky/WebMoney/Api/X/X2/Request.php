@@ -40,7 +40,7 @@ class Request extends X\Request
     /** @var int trans/wminvid */
     protected $_transactionWmInvoiceNumber;
 
-    /** @var boolean trans/onlyauth */
+    /** @var string trans/onlyauth */
     protected $_transactionOnlyAuth;
 
     /**
@@ -69,8 +69,7 @@ class Request extends X\Request
         return array(
             RequestValidator::TYPE_REQUIRED => array(
                 'transactionId', 'transactionSenderPurse', 'transactionRecipientPurse', 'transactionAmount',
-                'transactionProtectionPeriod', 'transactionProtectionCode', 'transactionDescription',
-                'transactionWmInvoiceNumber', 'transactionOnlyAuth', 'transactionOnlyAuth',
+                'transactionDescription', 'transactionWmInvoiceNumber', 'transactionOnlyAuth',
             ),
             RequestValidator::TYPE_DEPEND_REQUIRED => array(
                 'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
