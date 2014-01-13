@@ -7,6 +7,12 @@ class Operation
     const TYPE_PROTECTED_NOT_COMPLETED = 4;
     const TYPE_PROTECTED_REFUNDED = 12;
 
+    /** @var int */
+    protected $_invoiceId;
+
+    /** @var int */
+    protected $_systemInvoiceId;
+
     /** @var string pursesrc */
     protected $_senderPurse;
 
@@ -54,6 +60,8 @@ class Operation
 
     public function __construct(array $data)
     {
+        $this->_invoiceId = $data['invoiceId'];
+        $this->_systemInvoiceId = $data['systemInvoiceId'];
         $this->_senderPurse = $data['senderPurse'];
         $this->_recipientPurse = $data['recipientPurse'];
         $this->_amount = $data['amount'];
@@ -72,6 +80,22 @@ class Operation
         if (isset($data['incomplete'])) {
             $this->_incomplete = $data['incomplete'];
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getInvoiceId()
+    {
+        return $this->_invoiceId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSystemInvoiceId()
+    {
+        return $this->_systemInvoiceId;
     }
 
     /**
