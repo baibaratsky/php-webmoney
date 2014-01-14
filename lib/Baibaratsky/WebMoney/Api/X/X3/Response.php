@@ -62,8 +62,8 @@ class Response extends WebMoney\Request\Response
     protected function _operationXmlToArray($xml)
     {
         $data = array(
-            'invoiceId' => $xml['id'],
-            'systemInvoiceId' => $xml['ts'],
+            'invoiceId' => (int)$xml['id'],
+            'systemInvoiceId' => (int)$xml['ts'],
             'senderPurse' => (string)$xml->pursesrc,
             'recipientPurse' => (string)$xml->pursedest,
             'amount' => (float)$xml->amount,
