@@ -3,6 +3,7 @@
     "description": "WebMoney API PHP Library",
     "keywords": ["webmoney"],
     "license": "BSD-3-Clause",
+    "homepage": "http://github.com/baibaratsky/php-webmoney",
     "authors": [
         {
             "name": "Andrei Baibaratsky",
