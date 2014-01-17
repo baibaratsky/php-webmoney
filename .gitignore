@@ -7,4 +7,5 @@ thumbs.db
 .project
 .settings
 .idea
+composer.lock
 vendor/*
