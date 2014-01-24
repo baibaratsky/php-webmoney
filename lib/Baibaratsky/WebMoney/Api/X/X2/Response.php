@@ -66,18 +66,18 @@ class Response extends WebMoney\Request\Response
 
         if (isset($responseObject->operation)) {
             $operation = $responseObject->operation;
-            $this->_operationId = $operation['id'];
-            $this->_operationInternalId = $operation['ts'];
-            $this->_operationExternalId = $operation->tranid;
-            $this->_operationSenderPurse = $operation->pursesrc;
-            $this->_operationRecipientPurse = $operation->pursedest;
-            $this->_operationAmount = $operation->amount;
-            $this->_operationFee = $operation->comiss;
-            $this->_operationType = $operation->opertype;
-            $this->_operationPeriod = $operation->period;
-            $this->_operationInvoiceId = $operation->wminvid;
-            $this->_operationExternalInvoiceId = $operation->orderid;
-            $this->_operationDescription = $operation->desc;
+            $this->_operationId = (int)$operation['id'];
+            $this->_operationInternalId = (int)$operation['ts'];
+            $this->_operationExternalId = (string)$operation->tranid;
+            $this->_operationSenderPurse = (string)$operation->pursesrc;
+            $this->_operationRecipientPurse = (string)$operation->pursedest;
+            $this->_operationAmount = (float)$operation->amount;
+            $this->_operationFee = (float)$operation->comiss;
+            $this->_operationType = (int)$operation->opertype;
+            $this->_operationPeriod = (int)$operation->period;
+            $this->_operationInvoiceId = (int)$operation->wminvid;
+            $this->_operationExternalInvoiceId = (int)$operation->orderid;
+            $this->_operationDescription = (string)$operation->desc;
             $this->_operationCreateDateTime = self::_createDateTime((string)$operation->datecrt);
             $this->_operationUpdateDateTime = self::_createDateTime((string)$operation->dateupd);
         }
