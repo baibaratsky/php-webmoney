@@ -12,12 +12,6 @@ XML-interfaces supported
 - [X18](http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X18): getting transaction details via merchant.webmoney
 - [X19](http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X19): verifying personal information for the owner of a WM identifier
 
-Capitaller interfaces supported
--------------------------------
-- [SendWM](http://www.capitaller.ru/ws/DoPayment.asmx?op=SendWM): funds transfer
-- [SendWMOA](http://www.capitaller.ru/ws/DoPayment.asmx?op=SendWMOA): funds transfer, сonsidering recipient authorization
-- [SendWMProt](http://www.capitaller.ru/ws/DoPayment.asmx?op=SendWMProt): funds transfer with protection
-
 Megastock interfaces supported
 ------------------------------
 - Interface for [adding Payment Integrator's merchants](http://www.megastock.ru/Doc/AddIntMerchant.aspx?lang=en)
