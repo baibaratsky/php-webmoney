@@ -1,7 +1,7 @@
 {
     "name": "baibaratsky/php-webmoney",
     "description": "WebMoney API PHP Library",
-    "keywords": ["webmoney"],
+    "keywords": ["webmoney", "megastock", "capitaller"],
     "license": "BSD-3-Clause",
     "homepage": "http://github.com/baibaratsky/php-webmoney",
     "authors": [
@@ -18,8 +18,8 @@
         "php": ">=5.3"
     },
     "autoload": {
-        "psr-0": {
-            "Baibaratsky\\WebMoney\\": "lib/"
+        "psr-4": {
+            "Baibaratsky\\WebMoney\\": ""
         }
     }
 }
