@@ -1,7 +1,7 @@
 <?php
-namespace Baibaratsky\WebMoney\Request;
+namespace baibaratsky\WebMoney\Request;
 
-use Baibaratsky\WebMoney\Exception\RequestValidatorException;
+use baibaratsky\WebMoney\Exception\RequestValidatorException;
 
 class RequestValidator
 {
@@ -11,14 +11,14 @@ class RequestValidator
     const TYPE_CONDITIONAL = 4;
     const TYPE_ARRAY = 5;
 
-    /** @var \Baibaratsky\WebMoney\Request\AbstractRequest */
+    /** @var \baibaratsky\WebMoney\Request\AbstractRequest */
     protected $request;
 
     /** @var array */
     protected $errors = array();
 
     /**
-     * @param \Baibaratsky\WebMoney\Request\AbstractRequest $request
+     * @param \baibaratsky\WebMoney\Request\AbstractRequest $request
      */
     public function __construct(AbstractRequest $request)
     {

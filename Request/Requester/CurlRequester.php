@@ -1,9 +1,9 @@
 <?php
-namespace Baibaratsky\WebMoney\Request\Requester;
+namespace baibaratsky\WebMoney\Request\Requester;
 
-use Baibaratsky\WebMoney\Request\AbstractRequest;
-use Baibaratsky\WebMoney\Request\XmlRequest;
-use Baibaratsky\WebMoney\Exception\RequesterException;
+use baibaratsky\WebMoney\Request\AbstractRequest;
+use baibaratsky\WebMoney\Request\XmlRequest;
+use baibaratsky\WebMoney\Exception\RequesterException;
 
 class CurlRequester extends AbstractRequester
 {

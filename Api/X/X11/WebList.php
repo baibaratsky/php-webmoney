@@ -1,5 +1,5 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\X\X11;
+namespace baibaratsky\WebMoney\Api\X\X11;
 
 class WebList
 {

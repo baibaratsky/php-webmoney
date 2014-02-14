@@ -1,10 +1,10 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\X\X3;
+namespace baibaratsky\WebMoney\Api\X\X3;
 
-use Baibaratsky\WebMoney\Api\X;
-use Baibaratsky\WebMoney\Exception\ApiException;
-use Baibaratsky\WebMoney\Request\RequestSigner;
-use Baibaratsky\WebMoney\Request\RequestValidator;
+use baibaratsky\WebMoney\Api\X;
+use baibaratsky\WebMoney\Exception\ApiException;
+use baibaratsky\WebMoney\Request\RequestSigner;
+use baibaratsky\WebMoney\Request\RequestValidator;
 
 /**
  * Class Request
@@ -91,7 +91,7 @@ class Request extends X\Request
      */
     public function getResponseClassName()
     {
-        return 'Baibaratsky\WebMoney\Api\X\X3\Response';
+        return 'baibaratsky\WebMoney\Api\X\X3\Response';
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\X\X18;
+namespace baibaratsky\WebMoney\Api\X\X18;
 
-use Baibaratsky\WebMoney;
+use baibaratsky\WebMoney;
 
 class Response extends WebMoney\Request\Response
 {

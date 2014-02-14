@@ -1,8 +1,8 @@
 <?php
-namespace Baibaratsky\WebMoney\Request\Requester;
+namespace baibaratsky\WebMoney\Request\Requester;
 
-use Baibaratsky\WebMoney\Request\AbstractRequest;
-use Baibaratsky\WebMoney\Request\Response;
+use baibaratsky\WebMoney\Request\AbstractRequest;
+use baibaratsky\WebMoney\Request\Response;
 
 abstract class AbstractRequester
 {

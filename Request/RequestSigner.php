@@ -1,7 +1,7 @@
 <?php
-namespace Baibaratsky\WebMoney\Request;
+namespace baibaratsky\WebMoney\Request;
 
-use Baibaratsky\WebMoney\Exception\RequestSignerException;
+use baibaratsky\WebMoney\Exception\RequestSignerException;
 
 /**
  * Class RequestSigner

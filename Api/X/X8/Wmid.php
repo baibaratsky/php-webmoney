@@ -1,5 +1,5 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\X\X8;
+namespace baibaratsky\WebMoney\Api\X\X8;
 
 class Wmid
 {

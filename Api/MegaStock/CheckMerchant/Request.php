@@ -1,10 +1,10 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\MegaStock\CheckMerchant;
+namespace baibaratsky\WebMoney\Api\MegaStock\CheckMerchant;
 
-use Baibaratsky\WebMoney\Api\MegaStock;
-use Baibaratsky\WebMoney\Exception\ApiException;
-use Baibaratsky\WebMoney\Request\RequestSigner;
-use Baibaratsky\WebMoney\Request\RequestValidator;
+use baibaratsky\WebMoney\Api\MegaStock;
+use baibaratsky\WebMoney\Exception\ApiException;
+use baibaratsky\WebMoney\Request\RequestSigner;
+use baibaratsky\WebMoney\Request\RequestValidator;
 
 /**
  * Class Request
@@ -60,7 +60,7 @@ class Request extends MegaStock\Request
      */
     public function getResponseClassName()
     {
-        return 'Baibaratsky\WebMoney\Api\MegaStock\CheckMerchant\Response';
+        return 'baibaratsky\WebMoney\Api\MegaStock\CheckMerchant\Response';
     }
 
     /**

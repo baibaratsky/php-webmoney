@@ -1,7 +1,7 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\MegaStock\CheckMerchant;
+namespace baibaratsky\WebMoney\Api\MegaStock\CheckMerchant;
 
-use Baibaratsky\WebMoney;
+use baibaratsky\WebMoney;
 
 /**
  * Class Response

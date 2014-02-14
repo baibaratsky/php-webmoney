@@ -1,9 +1,9 @@
 <?php
-namespace Baibaratsky\WebMoney;
+namespace baibaratsky\WebMoney;
 
-use Baibaratsky\WebMoney\Request;
-use Baibaratsky\WebMoney\Request\Requester\AbstractRequester;
-use Baibaratsky\WebMoney\Exception\CoreException;
+use baibaratsky\WebMoney\Request;
+use baibaratsky\WebMoney\Request\Requester\AbstractRequester;
+use baibaratsky\WebMoney\Exception\CoreException;
 
 class WebMoney
 {

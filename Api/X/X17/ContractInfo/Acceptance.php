@@ -1,5 +1,5 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\X\X17\ContractInfo;
+namespace baibaratsky\WebMoney\Api\X\X17\ContractInfo;
 
 class Acceptance
 {

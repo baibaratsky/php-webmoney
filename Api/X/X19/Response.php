@@ -1,7 +1,7 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\X\X19;
+namespace baibaratsky\WebMoney\Api\X\X19;
 
-use Baibaratsky\WebMoney;
+use baibaratsky\WebMoney;
 
 /**
  * Class Response

@@ -1,5 +1,5 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\X\X3;
+namespace baibaratsky\WebMoney\Api\X\X3;
 
 class Operation
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Baibaratsky\WebMoney\Exception;
+namespace baibaratsky\WebMoney\Exception;
 
 class ApiException extends Exception
 {

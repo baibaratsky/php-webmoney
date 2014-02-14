@@ -1,7 +1,7 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\MegaStock\AddMerchant;
+namespace baibaratsky\WebMoney\Api\MegaStock\AddMerchant;
 
-use Baibaratsky\WebMoney;
+use baibaratsky\WebMoney;
 
 /**
  * Class Response

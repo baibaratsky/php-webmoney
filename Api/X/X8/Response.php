@@ -1,7 +1,7 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\X\X8;
+namespace baibaratsky\WebMoney\Api\X\X8;
 
-use Baibaratsky\WebMoney;
+use baibaratsky\WebMoney;
 
 /**
  * Class Response
@@ -61,7 +61,7 @@ class Response extends WebMoney\Request\Response
     }
 
     /**
-     * @return \Baibaratsky\WebMoney\Api\X\X8\Purse
+     * @return \baibaratsky\WebMoney\Api\X\X8\Purse
      */
     public function getPurse()
     {
@@ -69,7 +69,7 @@ class Response extends WebMoney\Request\Response
     }
 
     /**
-     * @return \Baibaratsky\WebMoney\Api\X\X8\Wmid
+     * @return \baibaratsky\WebMoney\Api\X\X8\Wmid
      */
     public function getWmid()
     {

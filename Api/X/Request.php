@@ -1,7 +1,7 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\X;
+namespace baibaratsky\WebMoney\Api\X;
 
-use Baibaratsky\WebMoney\Request\XmlRequest;
+use baibaratsky\WebMoney\Request\XmlRequest;
 
 abstract class Request extends XmlRequest
 {

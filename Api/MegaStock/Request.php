@@ -1,8 +1,8 @@
 <?php
-namespace Baibaratsky\WebMoney\Api\MegaStock;
+namespace baibaratsky\WebMoney\Api\MegaStock;
 
-use Baibaratsky\WebMoney\Request\XmlRequest;
-use Baibaratsky\WebMoney\Exception\ApiException;
+use baibaratsky\WebMoney\Request\XmlRequest;
+use baibaratsky\WebMoney\Exception\ApiException;
 
 abstract class Request extends XmlRequest
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Baibaratsky\WebMoney\Request;
+namespace baibaratsky\WebMoney\Request;
 
 abstract class AbstractRequest
 {
