@@ -52,7 +52,9 @@ class Passport
         $this->recalled = (bool)$params['recalled'];
         $this->issuanceDt = $params['datecrt'];
         $this->issuanceDiff = (int)$params['datediff'];
-        $this->registrantNickname = $params['regnickname'];
+        if (isset($params['regnickname'])) {
+            $this->registrantNickname = $params['regnickname'];
+        }
         $this->registrantWmid = $params['regwmid'];
         $this->status = $params['status'];
         $this->notary = $params['notary'];
