@@ -1,4 +1,5 @@
 <?php
+
 namespace baibaratsky\WebMoney\Api\X\X3;
 
 use baibaratsky\WebMoney\Api\X;

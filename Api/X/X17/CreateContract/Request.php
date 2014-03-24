@@ -1,4 +1,5 @@
 <?php
+
 namespace baibaratsky\WebMoney\Api\X\X17\CreateContract;
 
 use baibaratsky\WebMoney\Api\X;

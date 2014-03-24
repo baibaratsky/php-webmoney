@@ -1,4 +1,5 @@
 <?php
+
 namespace baibaratsky\WebMoney\Api\MegaStock\CheckMerchant;
 
 use baibaratsky\WebMoney\Api\MegaStock;

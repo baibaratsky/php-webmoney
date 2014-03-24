@@ -1,4 +1,5 @@
 <?php
+
 namespace baibaratsky\WebMoney;
 
 use baibaratsky\WebMoney\Request;

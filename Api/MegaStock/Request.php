@@ -1,4 +1,5 @@
 <?php
+
 namespace baibaratsky\WebMoney\Api\MegaStock;
 
 use baibaratsky\WebMoney\Request\XmlRequest;

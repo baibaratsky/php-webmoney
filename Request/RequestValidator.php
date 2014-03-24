@@ -1,4 +1,5 @@
 <?php
+
 namespace baibaratsky\WebMoney\Request;
 
 use baibaratsky\WebMoney\Exception\RequestValidatorException;

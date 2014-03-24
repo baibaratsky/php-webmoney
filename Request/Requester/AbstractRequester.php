@@ -1,4 +1,5 @@
 <?php
+
 namespace baibaratsky\WebMoney\Request\Requester;
 
 use baibaratsky\WebMoney\Request\AbstractRequest;
