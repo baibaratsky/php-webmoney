@@ -16,7 +16,7 @@ class Request extends X\Request
     /** @var string wmid */
     protected $signerWmid;
 
-    /** @var array getpurses */
+    /** @var string getpurses/wmid */
     protected $requestedWmid;
 
     public function __construct($authType = self::AUTH_CLASSIC)
