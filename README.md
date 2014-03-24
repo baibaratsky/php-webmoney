@@ -39,5 +39,9 @@ $x9request->sign(new WebMoney\Request\RequestSigner('wmid', 'key', 'password'));
 
 if ($x9request->validate()) {
     $x9response = $webMoney->request($x9request);
+
+    if ($x9response->getReturnCode() === 0) {
+        echo $x9response->getPurseByName('Z000000000000')->getAmount();
+    }
 }
 ```

@@ -68,4 +68,19 @@ class Response extends WebMoney\Request\Response
     {
         return $this->purses;
     }
+
+    /**
+     * @param $name
+     * @return Purse|bool Returns false if there is no such purse
+     */
+    public function getPurseByName($name)
+    {
+        foreach ($this->purses as $purse) {
+            if ($purse->getName() == $name) {
+                return $purse;
+            }
+        }
+
+        return false;
+    }
 }
