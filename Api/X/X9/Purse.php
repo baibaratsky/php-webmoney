@@ -7,7 +7,7 @@ class Purse
     protected $id;
 
     /** @var string purse\pursename */
-    protected $purseName;
+    protected $name;
 
     /** @var float purse\amount */
     protected $amount;
@@ -27,7 +27,7 @@ class Purse
     public function __construct(array $params)
     {
         $this->id = $params['id'];
-        $this->purseName = $params['pursename'];
+        $this->name = $params['pursename'];
         $this->amount = $params['amount'];
         $this->description = $params['desc'];
         $this->outsideOpen = $params['outsideopen'];
@@ -46,9 +46,19 @@ class Purse
     /**
      * @return string
      */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @deprecated
+     *
+     * @return string
+     */
     public function getPurseName()
     {
-        return $this->purseName;
+        return $this->name;
     }
 
     /**
