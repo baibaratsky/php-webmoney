@@ -2,18 +2,15 @@
 
 namespace baibaratsky\WebMoney\Api\X\X17\CreateContract;
 
-use baibaratsky\WebMoney;
+use baibaratsky\WebMoney\Request\AbstractResponse;
 
 /**
  * Class Response
  *
  * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X17
  */
-class Response extends WebMoney\Request\Response
+class Response extends AbstractResponse
 {
-    /** @var string retdesc */
-    protected $returnDescription;
-
     /** @var int contractid */
     protected $contractId;
 
@@ -26,14 +23,6 @@ class Response extends WebMoney\Request\Response
         $this->returnCode = (int)$responseObject->retval;
         $this->returnDescription = (string)$responseObject->retdesc;
         $this->contractId = (int)$responseObject->contractid;
-    }
-
-    /**
-     * @return string
-     */
-    public function getReturnDescription()
-    {
-        return $this->returnDescription;
     }
 
     /**

@@ -2,18 +2,15 @@
 
 namespace baibaratsky\WebMoney\Api\MegaStock\CheckMerchant;
 
-use baibaratsky\WebMoney;
+use baibaratsky\WebMoney\Request\AbstractResponse;
 
 /**
  * Class Response
  *
  * @link http://www.megastock.ru/Doc/AddIntMerchant.aspx
  */
-class Response extends WebMoney\Request\Response
+class Response extends AbstractResponse
 {
-    /** @var string retdescr */
-    protected $returnDescription;
-
     /** @var int resourceid */
     protected $resourceId = null;
 
@@ -38,14 +35,6 @@ class Response extends WebMoney\Request\Response
                 $this->message = (string)$responseObject->message;
             }
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getReturnDescription()
-    {
-        return $this->returnDescription;
     }
 
     /**

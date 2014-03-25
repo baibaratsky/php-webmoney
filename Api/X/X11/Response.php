@@ -2,18 +2,15 @@
 
 namespace baibaratsky\WebMoney\Api\X\X11;
 
-use baibaratsky\WebMoney;
+use baibaratsky\WebMoney\Request\AbstractResponse;
 
 /**
  * Class Response
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X11
  */
-class Response extends WebMoney\Request\Response
+class Response extends AbstractResponse
 {
-    /** @var string /@retdesc */
-    protected $returnDescription;
-
     /** @var int fullaccess */
     protected $hasFullAccess;
 
@@ -101,14 +98,6 @@ class Response extends WebMoney\Request\Response
                 }
             }
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getReturnDescription()
-    {
-        return $this->returnDescription;
     }
 
     /**

@@ -2,9 +2,9 @@
 
 namespace baibaratsky\WebMoney\Api\X\X18;
 
-use baibaratsky\WebMoney;
+use baibaratsky\WebMoney\Request\AbstractResponse;
 
-class Response extends WebMoney\Request\Response
+class Response extends AbstractResponse
 {
     const PAYMENT_TYPE_USUAL = 0;
     const PAYMENT_TYPE_TELEPAT = 1;
@@ -27,9 +27,6 @@ class Response extends WebMoney\Request\Response
     const SDP_TYPE_VTB24 = 6;
     const SDP_TYPE_SBERBANK_THANK_YOU = 7;
     const SDP_TYPE_UA_TERMINALS_AND_BANKS = 8;
-
-    /** @var string retdesc */
-    protected $returnDescription;
 
     /** @var int */
     protected $paymentType;
@@ -135,14 +132,6 @@ class Response extends WebMoney\Request\Response
                 $this->paymentType = self::PAYMENT_TYPE_USUAL;
             }
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getReturnDescription()
-    {
-        return $this->returnDescription;
     }
 
     /**

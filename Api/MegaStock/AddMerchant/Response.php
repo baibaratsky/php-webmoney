@@ -2,18 +2,15 @@
 
 namespace baibaratsky\WebMoney\Api\MegaStock\AddMerchant;
 
-use baibaratsky\WebMoney;
+use baibaratsky\WebMoney\Request\AbstractResponse;
 
 /**
  * Class Response
  *
  * @link http://www.megastock.ru/Doc/AddIntMerchant.aspx?lang=en
  */
-class Response extends WebMoney\Request\Response
+class Response extends AbstractResponse
 {
-    /** @var string retdescr */
-    protected $returnDescription;
-
     /** @var int resourceid */
     protected $resourceId = null;
 
@@ -28,14 +25,6 @@ class Response extends WebMoney\Request\Response
         if ($this->returnCode == 0) {
             $this->resourceId = (int)$responseObject->resourceid;
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getReturnDescription()
-    {
-        return $this->returnDescription;
     }
 
     /**

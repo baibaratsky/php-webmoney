@@ -2,20 +2,17 @@
 
 namespace baibaratsky\WebMoney\Api\X\X3;
 
-use baibaratsky\WebMoney;
+use baibaratsky\WebMoney\Request\AbstractResponse;
 
 /**
  * Class Response
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X3
  */
-class Response extends WebMoney\Request\Response
+class Response extends AbstractResponse
 {
     /** @var int reqn */
     protected $requestNumber;
-
-    /** @var string retdesc */
-    protected $returnDescription;
 
     /** @var Operation[] operations */
     protected $operations = array();
@@ -42,14 +39,6 @@ class Response extends WebMoney\Request\Response
     public function getRequestNumber()
     {
         return $this->requestNumber;
-    }
-
-    /**
-     * @return string
-     */
-    public function getReturnDescription()
-    {
-        return $this->returnDescription;
     }
 
     /**

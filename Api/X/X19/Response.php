@@ -2,18 +2,15 @@
 
 namespace baibaratsky\WebMoney\Api\X\X19;
 
-use baibaratsky\WebMoney;
+use baibaratsky\WebMoney\Request\AbstractResponse;
 
 /**
  * Class Response
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X19
  */
-class Response extends WebMoney\Request\Response
+class Response extends AbstractResponse
 {
-    /** @var string retdesc */
-    protected $returnDescription;
-
     /** @var string retid */
     protected $returnId;
 
@@ -34,15 +31,6 @@ class Response extends WebMoney\Request\Response
         $this->returnId = (string)$responseObject->retid;
         $this->userFirstName = (string)$responseObject->userinfo->iname;
         $this->userMiddleName = (string)$responseObject->userinfo->oname;
-    }
-
-
-    /**
-     * @return string
-     */
-    public function getReturnDescription()
-    {
-        return $this->returnDescription;
     }
 
     /**

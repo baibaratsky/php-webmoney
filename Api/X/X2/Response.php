@@ -2,18 +2,15 @@
 
 namespace baibaratsky\WebMoney\Api\X\X2;
 
-use baibaratsky\WebMoney;
+use baibaratsky\WebMoney\Request\AbstractResponse;
 
 /**
  * Class Response
  *
  * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X2
  */
-class Response extends WebMoney\Request\Response
+class Response extends AbstractResponse
 {
-    /** @var string retdesc */
-    protected $returnDescription;
-
     /** @var int operation[@id] */
     protected $operationId;
 
@@ -82,14 +79,6 @@ class Response extends WebMoney\Request\Response
             $this->operationCreateDateTime = self::createDateTime((string)$operation->datecrt);
             $this->operationUpdateDateTime = self::createDateTime((string)$operation->dateupd);
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getReturnDescription()
-    {
-        return $this->returnDescription;
     }
 
     /**

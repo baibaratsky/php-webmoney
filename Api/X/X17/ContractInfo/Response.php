@@ -2,18 +2,15 @@
 
 namespace baibaratsky\WebMoney\Api\X\X17\ContractInfo;
 
-use baibaratsky\WebMoney;
+use baibaratsky\WebMoney\Request\AbstractResponse;
 
 /**
  * Class Response
  *
  * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X17
  */
-class Response extends WebMoney\Request\Response
+class Response extends AbstractResponse
 {
-    /** @var string retdesc */
-    protected $returnDescription;
-
     /** @var Acceptance[] contractinfo */
     protected $acceptances = array();
 

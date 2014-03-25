@@ -2,7 +2,8 @@
 
 namespace baibaratsky\WebMoney;
 
-use baibaratsky\WebMoney\Request;
+use baibaratsky\WebMoney\Request\AbstractRequest;
+use baibaratsky\WebMoney\Request\AbstractResponse;
 use baibaratsky\WebMoney\Request\Requester\AbstractRequester;
 use baibaratsky\WebMoney\Exception\CoreException;
 
@@ -20,12 +21,12 @@ class WebMoney
     }
 
     /**
-     * @param Request\AbstractRequest $requestObject
+     * @param AbstractRequest $requestObject
      *
-     * @return Request\Response
+     * @return AbstractResponse
      * @throws CoreException
      */
-    public function request(Request\AbstractRequest $requestObject)
+    public function request(AbstractRequest $requestObject)
     {
         if (!$requestObject->validate()) {
             throw new CoreException('Incorrect request data. See getErrors().');

@@ -2,21 +2,15 @@
 
 namespace baibaratsky\WebMoney\Api\X\X8;
 
-use baibaratsky\WebMoney;
+use baibaratsky\WebMoney\Request\AbstractResponse;
 
 /**
  * Class Response
  *
  * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X8
  */
-class Response extends WebMoney\Request\Response
+class Response extends AbstractResponse
 {
-    /** @var int retval */
-    protected $returnCode;
-
-    /** @var string retdesc */
-    protected $returnDescription;
-
     /** @var Wmid testwmpurse/wmid */
     protected $wmid;
 
@@ -51,14 +45,6 @@ class Response extends WebMoney\Request\Response
                         (bool)$responseObject->testwmpurse->purse['merchant_allow_cashier'] : null
             );
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getReturnDescription()
-    {
-        return $this->returnDescription;
     }
 
     /**

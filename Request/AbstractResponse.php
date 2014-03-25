@@ -2,13 +2,16 @@
 
 namespace baibaratsky\WebMoney\Request;
 
-abstract class Response
+abstract class AbstractResponse
 {
     /** @var \DateTimeZone */
     private static $timeZone;
 
     /** @var int retval */
     protected $returnCode;
+
+    /** @var string retdesc */
+    protected $returnDescription;
 
     /**
      * @param string $response
@@ -51,5 +54,13 @@ abstract class Response
     public function getReturnCode()
     {
         return $this->returnCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReturnDescription()
+    {
+        return $this->returnDescription;
     }
 }

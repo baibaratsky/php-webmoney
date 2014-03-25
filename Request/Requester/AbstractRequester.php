@@ -3,14 +3,14 @@
 namespace baibaratsky\WebMoney\Request\Requester;
 
 use baibaratsky\WebMoney\Request\AbstractRequest;
-use baibaratsky\WebMoney\Request\Response;
+use baibaratsky\WebMoney\Request\AbstractResponse;
 
 abstract class AbstractRequester
 {
     /**
      * @param AbstractRequest $request
      *
-     * @return Response
+     * @return AbstractResponse
      */
     public function perform(AbstractRequest $request)
     {
