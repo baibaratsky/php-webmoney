@@ -12,46 +12,46 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
 class Response extends AbstractResponse
 {
     /** @var int operation[@id] */
-    protected $operationId;
+    protected $transactionId;
 
     /** @var int operation[@ts] */
-    protected $operationInternalId;
+    protected $transactionInternalId;
 
     /** @var int operation/tranid */
-    protected $operationExternalId;
+    protected $transactionExternalId;
 
     /** @var string operation/pursesrc */
-    protected $operationSenderPurse;
+    protected $senderPurse;
 
     /** @var string operation/pursedest */
-    protected $operationRecipientPurse;
+    protected $recipientPurse;
 
     /** @var float operation/pursesrc */
-    protected $operationAmount;
+    protected $amount;
 
     /** @var float operation/comiss */
-    protected $operationFee;
+    protected $fee;
 
     /** @var int operation/opertype */
-    protected $operationType;
+    protected $type;
 
     /** @var int operation/period */
-    protected $operationPeriod;
+    protected $period;
 
     /** @var int operation/wminvid */
-    protected $operationInvoiceId;
+    protected $invoiceId;
 
     /** @var int operation/orderid */
-    protected $operationExternalInvoiceId;
+    protected $invoiceExternalId;
 
     /** @var string operation/desc */
-    protected $operationDescription;
+    protected $description;
 
     /** @var \DateTime operation/datecrt */
-    protected $operationCreateDateTime;
+    protected $createDateTime;
 
     /** @var \DateTime operation/dateupd */
-    protected $operationUpdateDateTime;
+    protected $updateDateTime;
 
     /**
      * @param string $response
@@ -64,132 +64,132 @@ class Response extends AbstractResponse
 
         if (isset($responseObject->operation)) {
             $operation = $responseObject->operation;
-            $this->operationId = (int)$operation['id'];
-            $this->operationInternalId = (int)$operation['ts'];
-            $this->operationExternalId = (string)$operation->tranid;
-            $this->operationSenderPurse = (string)$operation->pursesrc;
-            $this->operationRecipientPurse = (string)$operation->pursedest;
-            $this->operationAmount = (float)$operation->amount;
-            $this->operationFee = (float)$operation->comiss;
-            $this->operationType = (int)$operation->opertype;
-            $this->operationPeriod = (int)$operation->period;
-            $this->operationInvoiceId = (int)$operation->wminvid;
-            $this->operationExternalInvoiceId = (int)$operation->orderid;
-            $this->operationDescription = (string)$operation->desc;
-            $this->operationCreateDateTime = self::createDateTime((string)$operation->datecrt);
-            $this->operationUpdateDateTime = self::createDateTime((string)$operation->dateupd);
+            $this->transactionId = (int)$operation['id'];
+            $this->transactionInternalId = (int)$operation['ts'];
+            $this->transactionExternalId = (string)$operation->tranid;
+            $this->senderPurse = (string)$operation->pursesrc;
+            $this->recipientPurse = (string)$operation->pursedest;
+            $this->amount = (float)$operation->amount;
+            $this->fee = (float)$operation->comiss;
+            $this->type = (int)$operation->opertype;
+            $this->period = (int)$operation->period;
+            $this->invoiceId = (int)$operation->wminvid;
+            $this->invoiceExternalId = (int)$operation->orderid;
+            $this->description = (string)$operation->desc;
+            $this->createDateTime = self::createDateTime((string)$operation->datecrt);
+            $this->updateDateTime = self::createDateTime((string)$operation->dateupd);
         }
     }
 
     /**
      * @return int
      */
-    public function getOperationId()
+    public function getTransactionId()
     {
-        return $this->operationId;
+        return $this->transactionId;
     }
 
     /**
      * @return int
      */
-    public function getOperationInternalId()
+    public function getTransactionInternalId()
     {
-        return $this->operationInternalId;
+        return $this->transactionInternalId;
     }
 
     /**
      * @return int
      */
-    public function getOperationExternalId()
+    public function getTransactionExternalId()
     {
-        return $this->operationExternalId;
+        return $this->transactionExternalId;
     }
 
     /**
      * @return string
      */
-    public function getOperationSenderPurse()
+    public function getSenderPurse()
     {
-        return $this->operationSenderPurse;
+        return $this->senderPurse;
     }
 
     /**
      * @return string
      */
-    public function getOperationRecipientPurse()
+    public function getRecipientPurse()
     {
-        return $this->operationRecipientPurse;
+        return $this->recipientPurse;
     }
 
     /**
      * @return float
      */
-    public function getOperationAmount()
+    public function getAmount()
     {
-        return $this->operationAmount;
+        return $this->amount;
     }
 
     /**
      * @return float
      */
-    public function getOperationFee()
+    public function getFee()
     {
-        return $this->operationFee;
+        return $this->fee;
     }
 
     /**
      * @return int
      */
-    public function getOperationType()
+    public function getType()
     {
-        return $this->operationType;
+        return $this->type;
     }
 
     /**
      * @return int
      */
-    public function getOperationPeriod()
+    public function getPeriod()
     {
-        return $this->operationPeriod;
+        return $this->period;
     }
 
     /**
      * @return int
      */
-    public function getOperationInvoiceId()
+    public function getInvoiceId()
     {
-        return $this->operationInvoiceId;
+        return $this->invoiceId;
     }
 
     /**
      * @return int
      */
-    public function getOperationExternalInvoiceId()
+    public function getInvoiceExternalId()
     {
-        return $this->operationExternalInvoiceId;
+        return $this->invoiceExternalId;
     }
 
     /**
      * @return string
      */
-    public function getOperationDescription()
+    public function getDescription()
     {
-        return $this->operationDescription;
+        return $this->description;
     }
 
     /**
      * @return \DateTime
      */
-    public function getOperationCreateDateTime()
+    public function getCreateDateTime()
     {
-        return $this->operationCreateDateTime;
+        return $this->createDateTime;
     }
 
     /**
      * @return \DateTime
      */
-    public function getOperationUpdateDateTime()
+    public function getUpdateDateTime()
     {
-        return $this->operationUpdateDateTime;
+        return $this->updateDateTime;
     }
 }
