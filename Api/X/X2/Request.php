@@ -69,7 +69,7 @@ class Request extends X\Request
     {
         return array(
             RequestValidator::TYPE_REQUIRED => array(
-                'transactionId', 'senderPurse', 'recipientPurse', 'amount',
+                'transactionExternalId', 'senderPurse', 'recipientPurse', 'amount',
                 'description', 'invoiceId', 'onlyAuth',
             ),
             RequestValidator::TYPE_DEPEND_REQUIRED => array(
