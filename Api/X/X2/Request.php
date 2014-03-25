@@ -18,31 +18,31 @@ class Request extends X\Request
     protected $signerWmid;
 
     /** @var int trans/tranid */
-    protected $transactionId;
+    protected $transactionExternalId;
 
     /** @var string trans/pursesrc */
-    protected $transactionSenderPurse;
+    protected $senderPurse;
 
     /** @var string trans/pursedest */
-    protected $transactionRecipientPurse;
+    protected $recipientPurse;
 
     /** @var float trans/amount */
-    protected $transactionAmount;
+    protected $amount;
 
     /** @var int trans/period */
-    protected $transactionProtectionPeriod;
+    protected $protectionPeriod;
 
     /** @var string trans/pcode */
-    protected $transactionProtectionCode;
+    protected $protectionCode;
 
     /** @var string trans/desc */
-    protected $transactionDescription;
+    protected $description;
 
     /** @var int trans/wminvid */
-    protected $transactionWmInvoiceNumber;
+    protected $invoiceId;
 
     /** @var string trans/onlyauth */
-    protected $transactionOnlyAuth;
+    protected $onlyAuth = 1;
 
     /**
      * @param string $authType
@@ -69,8 +69,8 @@ class Request extends X\Request
     {
         return array(
             RequestValidator::TYPE_REQUIRED => array(
-                'transactionId', 'transactionSenderPurse', 'transactionRecipientPurse', 'transactionAmount',
-                'transactionDescription', 'transactionWmInvoiceNumber', 'transactionOnlyAuth',
+                'transactionId', 'senderPurse', 'recipientPurse', 'amount',
+                'description', 'invoiceId', 'onlyAuth',
             ),
             RequestValidator::TYPE_DEPEND_REQUIRED => array(
                 'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
@@ -88,15 +88,15 @@ class Request extends X\Request
         $xml .= self::xmlElement('wmid', $this->signerWmid);
         $xml .= self::xmlElement('sign', $this->signature);
         $xml .= '<trans>';
-        $xml .= self::xmlElement('tranid', $this->transactionId);
-        $xml .= self::xmlElement('pursesrc', $this->transactionSenderPurse);
-        $xml .= self::xmlElement('pursedest', $this->transactionRecipientPurse);
-        $xml .= self::xmlElement('amount', $this->transactionAmount);
-        $xml .= self::xmlElement('period', $this->transactionProtectionPeriod);
-        $xml .= self::xmlElement('pcode', $this->transactionProtectionCode);
-        $xml .= self::xmlElement('desc', $this->transactionDescription);
-        $xml .= self::xmlElement('wminvid', $this->transactionWmInvoiceNumber);
-        $xml .= self::xmlElement('onlyauth', $this->transactionOnlyAuth);
+        $xml .= self::xmlElement('tranid', $this->transactionExternalId);
+        $xml .= self::xmlElement('pursesrc', $this->senderPurse);
+        $xml .= self::xmlElement('pursedest', $this->recipientPurse);
+        $xml .= self::xmlElement('amount', $this->amount);
+        $xml .= self::xmlElement('period', $this->protectionPeriod);
+        $xml .= self::xmlElement('pcode', $this->protectionCode);
+        $xml .= self::xmlElement('desc', $this->description);
+        $xml .= self::xmlElement('wminvid', $this->invoiceId);
+        $xml .= self::xmlElement('onlyauth', $this->onlyAuth);
         $xml .= '</trans>';
         $xml .= '</w3s.request>';
 
@@ -118,11 +118,11 @@ class Request extends X\Request
     {
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign(
-                $this->requestNumber . $this->transactionId .
-                $this->transactionSenderPurse . $this->transactionRecipientPurse .
-                $this->transactionAmount . $this->transactionProtectionPeriod .
-                $this->transactionProtectionCode . $this->transactionDescription .
-                $this->transactionWmInvoiceNumber
+                $this->requestNumber . $this->transactionExternalId .
+                $this->senderPurse . $this->recipientPurse .
+                $this->amount . $this->protectionPeriod .
+                $this->protectionCode . $this->description .
+                $this->invoiceId
             );
         }
     }
@@ -146,144 +146,144 @@ class Request extends X\Request
     /**
      * @return int
      */
-    public function getTransactionId()
+    public function getTransactionExternalId()
     {
-        return $this->transactionId;
+        return $this->transactionExternalId;
     }
 
     /**
-     * @param int $transactionId
+     * @param int $transactionExternalId
      */
-    public function setTransactionId($transactionId)
+    public function setTransactionExternalId($transactionExternalId)
     {
-        $this->transactionId = $transactionId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTransactionSenderPurse()
-    {
-        return $this->transactionSenderPurse;
-    }
-
-    /**
-     * @param string $transactionSenderPurse
-     */
-    public function setTransactionSenderPurse($transactionSenderPurse)
-    {
-        $this->transactionSenderPurse = $transactionSenderPurse;
+        $this->transactionExternalId = $transactionExternalId;
     }
 
     /**
      * @return string
      */
-    public function getTransactionRecipientPurse()
+    public function getSenderPurse()
     {
-        return $this->transactionRecipientPurse;
+        return $this->senderPurse;
     }
 
     /**
-     * @param string $transactionRecipientPurse
+     * @param string $senderPurse
      */
-    public function setTransactionRecipientPurse($transactionRecipientPurse)
+    public function setSenderPurse($senderPurse)
     {
-        $this->transactionRecipientPurse = $transactionRecipientPurse;
+        $this->senderPurse = $senderPurse;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRecipientPurse()
+    {
+        return $this->recipientPurse;
+    }
+
+    /**
+     * @param string $recipientPurse
+     */
+    public function setRecipientPurse($recipientPurse)
+    {
+        $this->recipientPurse = $recipientPurse;
     }
 
     /**
      * @return float
      */
-    public function getTransactionAmount()
+    public function getAmount()
     {
-        return $this->transactionAmount;
+        return $this->amount;
     }
 
     /**
-     * @param float $transactionAmount
+     * @param float $amount
      */
-    public function setTransactionAmount($transactionAmount)
+    public function setAmount($amount)
     {
-        $this->transactionAmount = $transactionAmount;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTransactionProtectionPeriod()
-    {
-        return $this->transactionProtectionPeriod;
-    }
-
-    /**
-     * @param int $transactionProtectionPeriod
-     */
-    public function setTransactionProtectionPeriod($transactionProtectionPeriod)
-    {
-        $this->transactionProtectionPeriod = $transactionProtectionPeriod;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTransactionProtectionCode()
-    {
-        return $this->transactionProtectionCode;
-    }
-
-    /**
-     * @param string $transactionProtectionCode
-     */
-    public function setTransactionProtectionCode($transactionProtectionCode)
-    {
-        $this->transactionProtectionCode = $transactionProtectionCode;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTransactionDescription()
-    {
-        return $this->transactionDescription;
-    }
-
-    /**
-     * @param string $transactionDescription
-     */
-    public function setTransactionDescription($transactionDescription)
-    {
-        $this->transactionDescription = $transactionDescription;
+        $this->amount = $amount;
     }
 
     /**
      * @return int
      */
-    public function getTransactionWmInvoiceNumber()
+    public function getProtectionPeriod()
     {
-        return $this->transactionWmInvoiceNumber;
+        return $this->protectionPeriod;
     }
 
     /**
-     * @param int $transactionWmInvoiceNumber
+     * @param int $protectionPeriod
      */
-    public function setTransactionWmInvoiceNumber($transactionWmInvoiceNumber)
+    public function setProtectionPeriod($protectionPeriod)
     {
-        $this->transactionWmInvoiceNumber = $transactionWmInvoiceNumber;
+        $this->protectionPeriod = $protectionPeriod;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProtectionCode()
+    {
+        return $this->protectionCode;
+    }
+
+    /**
+     * @param string $protectionCode
+     */
+    public function setProtectionCode($protectionCode)
+    {
+        $this->protectionCode = $protectionCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return int
+     */
+    public function getInvoiceId()
+    {
+        return $this->invoiceId;
+    }
+
+    /**
+     * @param int $invoiceId
+     */
+    public function setInvoiceId($invoiceId)
+    {
+        $this->invoiceId = $invoiceId;
     }
 
     /**
      * @return boolean
      */
-    public function getTransactionOnlyAuth()
+    public function getOnlyAuth()
     {
-        return $this->transactionOnlyAuth;
+        return $this->onlyAuth;
     }
 
     /**
-     * @param boolean $transactionOnlyAuth
+     * @param boolean $onlyAuth
      */
-    public function setTransactionOnlyAuth($transactionOnlyAuth)
+    public function setOnlyAuth($onlyAuth)
     {
-        $this->transactionOnlyAuth = $transactionOnlyAuth;
+        $this->onlyAuth = $onlyAuth;
     }
 }
