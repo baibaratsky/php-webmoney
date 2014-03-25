@@ -97,7 +97,7 @@ class Request extends X\Request
      */
     public function getResponseClassName()
     {
-        return 'baibaratsky\WebMoney\Api\X\X11\Response';
+        return Response::className();
     }
 
     /**

@@ -61,7 +61,7 @@ class Request extends MegaStock\Request
      */
     public function getResponseClassName()
     {
-        return 'baibaratsky\WebMoney\Api\MegaStock\CheckMerchant\Response';
+        return Response::className();
     }
 
     /**

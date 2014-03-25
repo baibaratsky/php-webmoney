@@ -16,6 +16,14 @@ abstract class Response
     abstract public function __construct($response);
 
     /**
+     * @return string Fully qualified name of the class
+     */
+    public static function className()
+   	{
+   		return get_called_class();
+   	}
+
+    /**
      * Creates DateTime object from ISO 8601 string
      * @param string $dateTimeString
      * @return \DateTime
