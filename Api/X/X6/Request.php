@@ -100,4 +100,84 @@ class Request extends X\Request
                 $this->messageText . $this->messageSubject);
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getSignerWmid()
+    {
+        return $this->signerWmid;
+    }
+
+    /**
+     * @param string $signerWmid
+     */
+    public function setSignerWmid($signerWmid)
+    {
+        $this->signerWmid = $signerWmid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessageRecipientWmid()
+    {
+        return $this->messageRecipientWmid;
+    }
+
+    /**
+     * @param string $messageRecipientWmid
+     */
+    public function setMessageRecipientWmid($messageRecipientWmid)
+    {
+        $this->messageRecipientWmid = $messageRecipientWmid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessageSubject()
+    {
+        return $this->messageSubject;
+    }
+
+    /**
+     * @param string $messageSubject
+     */
+    public function setMessageSubject($messageSubject)
+    {
+        $this->messageSubject = $messageSubject;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessageText()
+    {
+        return $this->messageText;
+    }
+
+    /**
+     * @param string $messageText
+     */
+    public function setMessageText($messageText)
+    {
+        $this->messageText = $messageText;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMessageOnlyAuth()
+    {
+        return $this->messageOnlyAuth;
+    }
+
+    /**
+     * @param int $messageOnlyAuth
+     */
+    public function setMessageOnlyAuth($messageOnlyAuth)
+    {
+        $this->messageOnlyAuth = $messageOnlyAuth;
+    }
 }
