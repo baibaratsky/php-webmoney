@@ -18,7 +18,7 @@ class Request extends X\Request
     protected $signerWmid;
 
     /** @var string message\receiverwmid */
-    protected $messageRecepientWmid;
+    protected $messageRecipientWmid;
 
     /** @var string message\msgsubj */
     protected $messageSubject;
@@ -54,7 +54,7 @@ class Request extends X\Request
     {
         return array(
             RequestValidator::TYPE_REQUIRED => array(
-                'messageRecepientWmid', 'messageSubject', 'messageText',
+                'messageRecipientWmid', 'messageSubject', 'messageText',
             ),
             RequestValidator::TYPE_DEPEND_REQUIRED => array(
                 'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
@@ -72,7 +72,7 @@ class Request extends X\Request
         $xml .= self::xmlElement('wmid', $this->signerWmid);
         $xml .= self::xmlElement('sign', $this->signature);
         $xml .= '<message>';
-        $xml .= self::xmlElement('receiverwmid', $this->messageRecepientWmid);
+        $xml .= self::xmlElement('receiverwmid', $this->messageRecipientWmid);
         $xml .= self::xmlElement('msgsubj', $this->messageSubject);
         $xml .= self::xmlElement('msgtext', $this->messageText);
         $xml .= self::xmlElement('onlyauth', $this->messageOnlyAuth);
@@ -96,7 +96,7 @@ class Request extends X\Request
     public function sign(RequestSigner $requestSigner = null)
     {
         if ($this->authType === self::AUTH_CLASSIC) {
-            $this->signature = $requestSigner->sign($this->messageRecepientWmid . $this->requestNumber .
+            $this->signature = $requestSigner->sign($this->messageRecipientWmid . $this->requestNumber .
                 $this->messageText . $this->messageSubject);
         }
     }

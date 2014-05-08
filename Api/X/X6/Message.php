@@ -5,7 +5,7 @@ namespace baibaratsky\WebMoney\Api\X\X6;
 class Message
 {
     /** @var string message\receiverwmid */
-    protected $recepientWmid;
+    protected $recipientWmid;
 
     /** @var string message\msgsubj */
     protected $subject;
@@ -16,9 +16,9 @@ class Message
     /** @var \DateTime message\datecrt */
     protected $createDateTime;
 
-    public function __construct($recepientWmid, $subject, $text, $createDateTime)
+    public function __construct($recipientWmid, $subject, $text, $createDateTime)
     {
-        $this->recepientWmid = $recepientWmid;
+        $this->recipientWmid = $recipientWmid;
         $this->subject = $subject;
         $this->text = $text;
         $this->createDateTime = $createDateTime;
@@ -27,9 +27,9 @@ class Message
     /**
      * @return string
      */
-    public function getRecepientWmid()
+    public function getRecipientWmid()
     {
-        return $this->recepientWmid;
+        return $this->recipientWmid;
     }
 
     /**
