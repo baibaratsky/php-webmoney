@@ -96,8 +96,12 @@ class Request extends X\Request
     public function sign(RequestSigner $requestSigner = null)
     {
         if ($this->authType === self::AUTH_CLASSIC) {
-            $this->signature = $requestSigner->sign($this->messageRecipientWmid . $this->requestNumber .
-                $this->messageText . $this->messageSubject);
+            $this->signature = $requestSigner->sign(
+                $this->messageRecipientWmid .
+                $this->requestNumber .
+                mb_convert_encoding($this->messageText, 'Windows-1251', 'UTF-8') .
+                mb_convert_encoding($this->messageSubject, 'Windows-1251', 'UTF-8')
+            );
         }
     }
 
