@@ -88,7 +88,8 @@ class Request extends X\Request
     public function sign(RequestSigner $requestSigner = null)
     {
         if ($this->authType === self::AUTH_CLASSIC) {
-            $this->signature = $requestSigner->sign($this->requestNumber . $this->transactionId . $this->amount);
+            $this->signature = $requestSigner->sign($this->requestNumber . $this->transactionId
+                                                    . number_format($this->amount, 2));
         }
     }
 
