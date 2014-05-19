@@ -129,7 +129,7 @@ class Request extends X\Request
      */
     public function setAmount($amount)
     {
-        $this->amount = $amount;
+        $this->amount = (float)$amount;
     }
 
     /**
