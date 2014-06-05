@@ -52,6 +52,6 @@ abstract class Request extends XmlRequest
      */
     protected function generateRequestNumber()
     {
-        return str_replace('.', '', microtime(true));
+        return str_pad(str_replace('.', '', microtime(true)), 14, 0);
     }
 }
