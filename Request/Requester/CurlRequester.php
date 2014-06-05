@@ -28,6 +28,7 @@ class CurlRequester extends AbstractRequester
         curl_setopt($handler, CURLOPT_POSTFIELDS, $request->getData());
 
         curl_setopt($handler, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($handler, CURLOPT_SSLVERSION, 3);
 
         ob_start();
         if (!curl_exec($handler)) {
