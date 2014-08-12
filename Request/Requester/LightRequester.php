@@ -24,13 +24,7 @@ class LightRequester extends AbstractRequester
         $this->certFile = $certFile;
     }
 
-    /**
-     * @param AbstractRequest $request
-     *
-     * @return string
-     * @throws \baibaratsky\WebMoney\Exception\RequesterException
-     */
-    protected function request(AbstractRequest $request)
+    public function perform(AbstractRequest $request)
     {
         if (!$request instanceof Request) {
             throw new RequesterException('This requester doesn\'t support such type of request.');
@@ -39,6 +33,17 @@ class LightRequester extends AbstractRequester
             throw new RequesterException('This requester doesn\'t support such auth type.');
         }
 
+        return parent::perform($request);
+    }
+
+    /**
+     * @param AbstractRequest $request
+     *
+     * @return string
+     * @throws \baibaratsky\WebMoney\Exception\RequesterException
+     */
+    protected function request(AbstractRequest $request)
+    {
         /** @var Request $request */
 
         $handler = curl_init($request->getUrl());

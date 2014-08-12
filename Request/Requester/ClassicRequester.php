@@ -3,11 +3,30 @@
 namespace baibaratsky\WebMoney\Request\Requester;
 
 use baibaratsky\WebMoney\Request\AbstractRequest;
+use baibaratsky\WebMoney\Request\RequestSigner;
 use baibaratsky\WebMoney\Request\XmlRequest;
 use baibaratsky\WebMoney\Exception\RequesterException;
 
-class CurlRequester extends AbstractRequester
+class ClassicRequester extends AbstractRequester
 {
+    /** @var RequestSigner */
+    protected $requestSigner;
+
+    public function __construct(RequestSigner $requestSigner = null)
+    {
+        $this->requestSigner = $requestSigner;
+    }
+
+    public function perform(AbstractRequest $request)
+    {
+        if (!$request instanceof XmlRequest) {
+            throw new RequesterException('This requester doesn\'t support such type of request.');
+        }
+        $request->sign($this->requestSigner);
+
+        return parent::perform($request);
+    }
+
     /**
      * @param AbstractRequest $request
      *
@@ -16,10 +35,6 @@ class CurlRequester extends AbstractRequester
      */
     protected function request(AbstractRequest $request)
     {
-        if (!$request instanceof XmlRequest) {
-            throw new RequesterException('This requester doesn\'t support such type of request.');
-        }
-
         /** @var XmlRequest $request */
 
         $handler = curl_init($request->getUrl());
