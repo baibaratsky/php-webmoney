@@ -157,7 +157,7 @@ class Request extends MegaStock\Request
                       $this->merchantNameInComment . $this->categoryId;
         if ($this->loginType == self::LOGIN_TYPE_KEEPER) {
             if ($requestSigner === null) {
-                throw new ApiException('This type of login requires the request signer.');
+                throw new ApiException('This type of login requires the request requestSigner.');
             }
             $this->signature = $requestSigner->sign($signString);
         } else {
