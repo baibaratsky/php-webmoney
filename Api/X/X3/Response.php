@@ -25,7 +25,7 @@ class Response extends AbstractResponse
         $responseObject = new \SimpleXMLElement($response);
         $this->requestNumber = (int)$responseObject->reqn;
         $this->returnCode = (int)$responseObject->retval;
-        $this->returnDescription = (int)$responseObject->retdesc;
+        $this->returnDescription = (string)$responseObject->retdesc;
         if (isset($responseObject->operations->operation)) {
             foreach ($responseObject->operations->operation as $operation) {
                 $this->operations[] = new Operation($this->operationXmlToArray($operation));
