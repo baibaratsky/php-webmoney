@@ -5,6 +5,7 @@ namespace baibaratsky\WebMoney\Request\Requester;
 use baibaratsky\WebMoney\Request\AbstractRequest;
 use baibaratsky\WebMoney\Request\XmlRequest;
 use baibaratsky\WebMoney\Exception\RequesterException;
+use baibaratsky\WebMoney\WebMoney;
 
 class CurlRequester extends AbstractRequester
 {
@@ -29,6 +30,13 @@ class CurlRequester extends AbstractRequester
 
         curl_setopt($handler, CURLOPT_SSL_VERIFYPEER, 0);
         curl_setopt($handler, CURLOPT_SSLVERSION, 3);
+
+        if(method_exists($request, 'getAuthType') && $request->getAuthType() == $request::AUTH_LIGHT) {
+            $keys = WebMoney::getPathsToSertificate();
+            curl_setopt($handler, CURLOPT_SSLKEY, $keys['key']);
+            curl_setopt($handler, CURLOPT_SSLKEYPASSWD, $keys['pass']);
+            curl_setopt($handler, CURLOPT_SSLCERT, $keys['cer']);
+        }
 
         ob_start();
         if (!curl_exec($handler)) {
