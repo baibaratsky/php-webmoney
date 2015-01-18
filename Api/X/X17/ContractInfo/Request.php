@@ -4,7 +4,7 @@ namespace baibaratsky\WebMoney\Api\X\X17\ContractInfo;
 
 use baibaratsky\WebMoney\Api\X;
 use baibaratsky\WebMoney\Exception\ApiException;
-use baibaratsky\WebMoney\Request\RequestSigner;
+use baibaratsky\WebMoney\Signer;
 use baibaratsky\WebMoney\Request\RequestValidator;
 
 /**
@@ -77,11 +77,10 @@ class Request extends X\Request
     }
 
     /**
-     * @param RequestSigner $requestSigner
+     * @param Signer $requestSigner
      *
-     * @return void
      */
-    public function sign(RequestSigner $requestSigner = null)
+    public function sign(Signer $requestSigner = null)
     {
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign($this->contractId . $this->type);

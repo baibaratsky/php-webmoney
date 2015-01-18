@@ -1,7 +1,7 @@
 {
     "name": "baibaratsky/php-webmoney",
     "description": "WebMoney API PHP Library",
-    "keywords": ["webmoney", "megastock", "capitaller"],
+    "keywords": ["webmoney", "megastock", "capitaller", "WMXI", "WMSigner"],
     "license": "BSD-3-Clause",
     "homepage": "http://github.com/baibaratsky/php-webmoney",
     "authors": [
@@ -15,7 +15,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3"
+        "php": ">=5.3",
+        "baibaratsky/php-wmsigner": "1.0.*"
     },
     "autoload": {
         "psr-4": {

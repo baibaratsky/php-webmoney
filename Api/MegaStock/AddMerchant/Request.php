@@ -4,8 +4,8 @@ namespace baibaratsky\WebMoney\Api\MegaStock\AddMerchant;
 
 use baibaratsky\WebMoney\Api\MegaStock;
 use baibaratsky\WebMoney\Exception\ApiException;
-use baibaratsky\WebMoney\Request\RequestSigner;
 use baibaratsky\WebMoney\Request\RequestValidator;
+use baibaratsky\WebMoney\Signer;
 
 /**
  * Class Request
@@ -147,11 +147,11 @@ class Request extends MegaStock\Request
     }
 
     /**
-     * @param \baibaratsky\WebMoney\Request\RequestSigner $requestSigner
+     * @param Signer $requestSigner
      *
      * @throws ApiException
      */
-    public function sign(RequestSigner $requestSigner = null)
+    public function sign(Signer $requestSigner = null)
     {
         $signString = $this->loginType . $this->integratorId . $this->integratorWmid .
                       $this->merchantNameInComment . $this->categoryId;

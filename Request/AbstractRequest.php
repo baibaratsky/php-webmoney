@@ -2,6 +2,8 @@
 
 namespace baibaratsky\WebMoney\Request;
 
+use baibaratsky\WebMoney\Signer;
+
 abstract class AbstractRequest
 {
     /** @var string */
@@ -33,11 +35,10 @@ abstract class AbstractRequest
     }
 
     /**
-     * @param RequestSigner $requestSigner
-     *
-     * @return void
+     * @param Signer $requestSigner
+     * @return
      */
-    abstract public function sign(RequestSigner $requestSigner = null);
+    abstract public function sign(Signer $requestSigner = null);
 
     /**
      * @return array
