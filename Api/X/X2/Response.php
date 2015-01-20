@@ -14,9 +14,6 @@ class Response extends AbstractResponse
     /** @var int operation[@id] */
     protected $transactionId;
 
-    /** @var int operation[@ts] */
-    protected $transactionInternalId;
-
     /** @var int operation/tranid */
     protected $transactionExternalId;
 
@@ -42,7 +39,7 @@ class Response extends AbstractResponse
     protected $invoiceId;
 
     /** @var int operation/orderid */
-    protected $invoiceExternalId;
+    protected $orderId;
 
     /** @var string operation/desc */
     protected $description;
@@ -65,7 +62,6 @@ class Response extends AbstractResponse
         if (isset($responseObject->operation)) {
             $operation = $responseObject->operation;
             $this->transactionId = (int)$operation['id'];
-            $this->transactionInternalId = (int)$operation['ts'];
             $this->transactionExternalId = (string)$operation->tranid;
             $this->senderPurse = (string)$operation->pursesrc;
             $this->recipientPurse = (string)$operation->pursedest;
@@ -74,7 +70,7 @@ class Response extends AbstractResponse
             $this->type = (int)$operation->opertype;
             $this->period = (int)$operation->period;
             $this->invoiceId = (int)$operation->wminvid;
-            $this->invoiceExternalId = (int)$operation->orderid;
+            $this->orderId = (int)$operation->orderid;
             $this->description = (string)$operation->desc;
             $this->createDateTime = self::createDateTime((string)$operation->datecrt);
             $this->updateDateTime = self::createDateTime((string)$operation->dateupd);
@@ -87,14 +83,6 @@ class Response extends AbstractResponse
     public function getTransactionId()
     {
         return $this->transactionId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTransactionInternalId()
-    {
-        return $this->transactionInternalId;
     }
 
     /**
@@ -164,9 +152,9 @@ class Response extends AbstractResponse
     /**
      * @return int
      */
-    public function getInvoiceExternalId()
+    public function getOrderId()
     {
-        return $this->invoiceExternalId;
+        return $this->orderId;
     }
 
     /**

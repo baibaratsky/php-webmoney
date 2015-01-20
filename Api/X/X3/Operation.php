@@ -8,11 +8,8 @@ class Operation
     const TYPE_PROTECTED_NOT_COMPLETED = 4;
     const TYPE_PROTECTED_REFUNDED = 12;
 
-    /** @var int */
-    protected $invoiceId;
-
-    /** @var int */
-    protected $systemInvoiceId;
+    /** @var int @id */
+    protected $transactionId;
 
     /** @var string pursesrc */
     protected $senderPurse;
@@ -30,13 +27,13 @@ class Operation
     protected $operationType;
 
     /** @var int wminvid */
-    protected $wmInvoiceNumber;
+    protected $invoiceId;
 
     /** @var int orderid */
-    protected $externalInvoiceId;
+    protected $orderId;
 
     /** @var int tranid */
-    protected $transactionId;
+    protected $transactionExternalId;
 
     /** @var int period */
     protected $period;
@@ -61,16 +58,15 @@ class Operation
 
     public function __construct(array $data)
     {
-        $this->invoiceId = $data['invoiceId'];
-        $this->systemInvoiceId = $data['systemInvoiceId'];
+        $this->transactionId = $data['transactionId'];
         $this->senderPurse = $data['senderPurse'];
         $this->recipientPurse = $data['recipientPurse'];
         $this->amount = $data['amount'];
         $this->fee = $data['fee'];
         $this->operationType = $data['operationType'];
-        $this->wmInvoiceNumber = $data['wmInvoiceNumber'];
-        $this->externalInvoiceId = $data['externalInvoiceId'];
-        $this->transactionId = $data['transactionId'];
+        $this->invoiceId = $data['invoiceId'];
+        $this->orderId = $data['orderId'];
+        $this->transactionExternalId = $data['transactionExternalId'];
         $this->period = $data['period'];
         $this->description = $data['description'];
         $this->createDateTime = new \DateTime($data['createDateTime']);
@@ -86,17 +82,9 @@ class Operation
     /**
      * @return int
      */
-    public function getInvoiceId()
+    public function getTransactionId()
     {
-        return $this->invoiceId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getSystemInvoiceId()
-    {
-        return $this->systemInvoiceId;
+        return $this->transactionId;
     }
 
     /**
@@ -142,25 +130,25 @@ class Operation
     /**
      * @return int
      */
-    public function getWmInvoiceNumber()
+    public function getInvoiceId()
     {
-        return $this->wmInvoiceNumber;
+        return $this->invoiceId;
     }
 
     /**
      * @return int
      */
-    public function getExternalInvoiceId()
+    public function getOrderId()
     {
-        return $this->externalInvoiceId;
+        return $this->orderId;
     }
 
     /**
      * @return int
      */
-    public function getTransactionId()
+    public function getTransactionExternalId()
     {
-        return $this->transactionId;
+        return $this->transactionExternalId;
     }
 
     /**

@@ -52,16 +52,15 @@ class Response extends AbstractResponse
     protected function operationXmlToArray($xml)
     {
         $data = array(
-            'invoiceId' => (int)$xml['id'],
-            'systemInvoiceId' => (int)$xml['ts'],
+            'transactionId' => (int)$xml['id'],
             'senderPurse' => (string)$xml->pursesrc,
             'recipientPurse' => (string)$xml->pursedest,
             'amount' => (float)$xml->amount,
             'fee' => (float)$xml->comiss,
             'operationType' => (string)$xml->opertype,
-            'wmInvoiceNumber' => (int)$xml->wminvid,
-            'externalInvoiceId' => (int)$xml->orderid,
-            'transactionId' => (int)$xml->tranid,
+            'invoiceId' => (int)$xml->wminvid,
+            'orderId' => (int)$xml->orderid,
+            'transactionExternalId' => (int)$xml->tranid,
             'period' => (int)$xml->period,
             'description' => (string)$xml->desc,
             'createDateTime' => (string)$xml->datecrt,

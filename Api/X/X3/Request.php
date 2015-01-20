@@ -21,13 +21,13 @@ class Request extends X\Request
     protected $parameterPurse;
 
     /** @var int getoperations\wmtranid */
-    protected $parameterWmTransactionId;
-
-    /** @var int getoperations\tranid */
     protected $parameterTransactionId;
 
+    /** @var int getoperations\tranid */
+    protected $parameterTransactionExternalId;
+
     /** @var int getoperations\wminvid */
-    protected $parameterWmInvoiceNumber;
+    protected $parameterInvoiceId;
 
     /** @var int getoperations\orderid */
     protected $parameterExternalInvoiceId;
@@ -75,9 +75,9 @@ class Request extends X\Request
         $xml .= self::xmlElement('sign', $this->signature);
         $xml .= '<getoperations>';
         $xml .= self::xmlElement('purse', $this->parameterPurse);
-        $xml .= self::xmlElement('wmtranid', $this->parameterWmTransactionId);
-        $xml .= self::xmlElement('tranid', $this->parameterTransactionId);
-        $xml .= self::xmlElement('wminvid', $this->parameterWmInvoiceNumber);
+        $xml .= self::xmlElement('wmtranid', $this->parameterTransactionId);
+        $xml .= self::xmlElement('tranid', $this->parameterTransactionExternalId);
+        $xml .= self::xmlElement('wminvid', $this->parameterInvoiceId);
         $xml .= self::xmlElement('orderid', $this->parameterExternalInvoiceId);
         $xml .= self::xmlElement('datestart', $this->parameterStartDate->format('Ymd H:i:s'));
         $xml .= self::xmlElement('datefinish', $this->parameterEndDate->format('Ymd H:i:s'));
@@ -139,22 +139,6 @@ class Request extends X\Request
     }
 
     /**
-     * @param int $parameterWmTransactionId
-     */
-    public function setParameterWmTransactionId($parameterWmTransactionId)
-    {
-        $this->parameterWmTransactionId = $parameterWmTransactionId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getParameterWmTransactionId()
-    {
-        return $this->parameterWmTransactionId;
-    }
-
-    /**
      * @param int $parameterTransactionId
      */
     public function setParameterTransactionId($parameterTransactionId)
@@ -168,6 +152,22 @@ class Request extends X\Request
     public function getParameterTransactionId()
     {
         return $this->parameterTransactionId;
+    }
+
+    /**
+     * @param int $parameterTransactionExternalId
+     */
+    public function setParameterTransactionExternalId($parameterTransactionExternalId)
+    {
+        $this->parameterTransactionExternalId = $parameterTransactionExternalId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getParameterTransactionExternalId()
+    {
+        return $this->parameterTransactionExternalId;
     }
 
     /**
@@ -187,19 +187,19 @@ class Request extends X\Request
     }
 
     /**
-     * @param int $parameterWmInvoiceNumber
+     * @param int $parameterInvoiceId
      */
-    public function setParameterWmInvoiceNumber($parameterWmInvoiceNumber)
+    public function setParameterInvoiceId($parameterInvoiceId)
     {
-        $this->parameterWmInvoiceNumber = $parameterWmInvoiceNumber;
+        $this->parameterInvoiceId = $parameterInvoiceId;
     }
 
     /**
      * @return int
      */
-    public function getParameterWmInvoiceNumber()
+    public function getParameterInvoiceId()
     {
-        return $this->parameterWmInvoiceNumber;
+        return $this->parameterInvoiceId;
     }
 
     /**
