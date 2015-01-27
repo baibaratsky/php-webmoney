@@ -106,7 +106,7 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @deprecated
+     * @deprecated Use getPayeePurse() instead
      * @return string
      */
     public function getRecipientPurse()
@@ -147,7 +147,7 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @deprecated
+     * @deprecated Use getPayerPurse() instead
      * @return string
      */
     public function getSenderPurse()

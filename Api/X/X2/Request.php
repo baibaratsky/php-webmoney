@@ -176,7 +176,7 @@ class Request extends X\Request
     }
 
     /**
-     * @deprecated
+     * @deprecated Use getPayerPurse() instead
      * @return string
      */
     public function getSenderPurse()
@@ -185,7 +185,7 @@ class Request extends X\Request
     }
 
     /**
-     * @deprecated
+     * @deprecated Use setPayerPurse($payerPurse) instead
      * @param string $senderPurse
      */
     public function setSenderPurse($senderPurse)
@@ -210,7 +210,7 @@ class Request extends X\Request
     }
 
     /**
-     * @deprecated
+     * @deprecated Use getPayeePurse() instead
      * @return string
      */
     public function getRecipientPurse()
@@ -219,7 +219,7 @@ class Request extends X\Request
     }
 
     /**
-     * @deprecated
+     * @deprecated Use setPayeePurse($payeePurse) instead
      * @param string $recipientPurse
      */
     public function setRecipientPurse($recipientPurse)
