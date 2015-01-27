@@ -53,8 +53,8 @@ class Response extends AbstractResponse
     {
         $data = array(
             'transactionId' => (int)$xml['id'],
-            'senderPurse' => (string)$xml->pursesrc,
-            'recipientPurse' => (string)$xml->pursedest,
+            'payerPurse' => (string)$xml->pursesrc,
+            'payeePurse' => (string)$xml->pursedest,
             'amount' => (float)$xml->amount,
             'fee' => (float)$xml->comiss,
             'operationType' => (string)$xml->opertype,

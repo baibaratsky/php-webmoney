@@ -24,10 +24,10 @@ class Response extends AbstractResponse
     protected $transactionId;
 
     /** @var string operation/pursesrc */
-    protected $senderPurse;
+    protected $payerPurse;
 
     /** @var string operation/pursedest */
-    protected $recipientPurse;
+    protected $payeePurse;
 
     /** @var float operation\amount */
     protected $amount;
@@ -55,8 +55,8 @@ class Response extends AbstractResponse
             $this->refundTransactionId = (int)$operation['id'];
             $this->refundTransactionInternalId = (int)$operation['ts'];
             $this->transactionId = (int)$operation->inwmtranid;
-            $this->senderPurse = (string)$operation->pursesrc;
-            $this->recipientPurse = (string)$operation->pursdest;
+            $this->payerPurse = (string)$operation->pursesrc;
+            $this->payeePurse = (string)$operation->pursdest;
             $this->amount = (float)$operation->amount;
             $this->fee = (float)$operation->comiss;
             $this->description = (string)$operation->desc;
@@ -100,9 +100,18 @@ class Response extends AbstractResponse
     /**
      * @return string
      */
+    public function getPayeePurse()
+    {
+        return $this->payeePurse;
+    }
+
+    /**
+     * @deprecated
+     * @return string
+     */
     public function getRecipientPurse()
     {
-        return $this->recipientPurse;
+        return $this->getPayeePurse();
     }
 
     /**
@@ -132,9 +141,18 @@ class Response extends AbstractResponse
     /**
      * @return string
      */
+    public function getPayerPurse()
+    {
+        return $this->payerPurse;
+    }
+
+    /**
+     * @deprecated
+     * @return string
+     */
     public function getSenderPurse()
     {
-        return $this->senderPurse;
+        return $this->getPayerPurse();
     }
 
     /**

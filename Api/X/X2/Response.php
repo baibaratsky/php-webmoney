@@ -18,10 +18,10 @@ class Response extends AbstractResponse
     protected $transactionExternalId;
 
     /** @var string operation/pursesrc */
-    protected $senderPurse;
+    protected $payerPurse;
 
     /** @var string operation/pursedest */
-    protected $recipientPurse;
+    protected $payeePurse;
 
     /** @var float operation/pursesrc */
     protected $amount;
@@ -63,8 +63,8 @@ class Response extends AbstractResponse
             $operation = $responseObject->operation;
             $this->transactionId = (int)$operation['id'];
             $this->transactionExternalId = (string)$operation->tranid;
-            $this->senderPurse = (string)$operation->pursesrc;
-            $this->recipientPurse = (string)$operation->pursedest;
+            $this->payerPurse = (string)$operation->pursesrc;
+            $this->payeePurse = (string)$operation->pursedest;
             $this->amount = (float)$operation->amount;
             $this->fee = (float)$operation->comiss;
             $this->type = (int)$operation->opertype;
@@ -96,17 +96,35 @@ class Response extends AbstractResponse
     /**
      * @return string
      */
+    public function getPayerPurse()
+    {
+        return $this->payerPurse;
+    }
+
+    /**
+     * @deprecated
+     * @return string
+     */
     public function getSenderPurse()
     {
-        return $this->senderPurse;
+        return $this->getPayerPurse();
     }
 
     /**
      * @return string
      */
+    public function getPayeePurse()
+    {
+        return $this->payeePurse;
+    }
+
+    /**
+     * @deprecated
+     * @return string
+     */
     public function getRecipientPurse()
     {
-        return $this->recipientPurse;
+        return $this->getPayeePurse();
     }
 
     /**

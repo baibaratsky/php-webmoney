@@ -21,10 +21,10 @@ class Request extends X\Request
     protected $transactionExternalId;
 
     /** @var string trans/pursesrc */
-    protected $senderPurse;
+    protected $payerPurse;
 
     /** @var string trans/pursedest */
-    protected $recipientPurse;
+    protected $payeePurse;
 
     /** @var float trans/amount */
     protected $amount;
@@ -69,7 +69,7 @@ class Request extends X\Request
     {
         return array(
             RequestValidator::TYPE_REQUIRED => array(
-                'transactionExternalId', 'senderPurse', 'recipientPurse', 'amount',
+                'transactionExternalId', 'payerPurse', 'payeePurse', 'amount',
                 'description', 'invoiceId', 'onlyAuth',
             ),
             RequestValidator::TYPE_DEPEND_REQUIRED => array(
@@ -89,8 +89,8 @@ class Request extends X\Request
         $xml .= self::xmlElement('sign', $this->signature);
         $xml .= '<trans>';
         $xml .= self::xmlElement('tranid', $this->transactionExternalId);
-        $xml .= self::xmlElement('pursesrc', $this->senderPurse);
-        $xml .= self::xmlElement('pursedest', $this->recipientPurse);
+        $xml .= self::xmlElement('pursesrc', $this->payerPurse);
+        $xml .= self::xmlElement('pursedest', $this->payeePurse);
         $xml .= self::xmlElement('amount', $this->amount);
         $xml .= self::xmlElement('period', $this->protectionPeriod);
         $xml .= self::xmlElement('pcode', $this->protectionCode);
@@ -119,7 +119,7 @@ class Request extends X\Request
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign(
                 $this->requestNumber . $this->transactionExternalId .
-                $this->senderPurse . $this->recipientPurse .
+                $this->payerPurse . $this->payeePurse .
                 $this->amount . $this->protectionPeriod .
                 $this->protectionCode . $this->description .
                 $this->invoiceId
@@ -162,33 +162,69 @@ class Request extends X\Request
     /**
      * @return string
      */
-    public function getSenderPurse()
+    public function getPayerPurse()
     {
-        return $this->senderPurse;
+        return $this->payerPurse;
     }
 
     /**
+     * @param string $payerPurse
+     */
+    public function setPayerPurse($payerPurse)
+    {
+        $this->payerPurse = $payerPurse;
+    }
+
+    /**
+     * @deprecated
+     * @return string
+     */
+    public function getSenderPurse()
+    {
+        return $this->getPayerPurse();
+    }
+
+    /**
+     * @deprecated
      * @param string $senderPurse
      */
     public function setSenderPurse($senderPurse)
     {
-        $this->senderPurse = $senderPurse;
+        $this->setPayerPurse($senderPurse);
     }
 
     /**
      * @return string
      */
-    public function getRecipientPurse()
+    public function getPayeePurse()
     {
-        return $this->recipientPurse;
+        return $this->payeePurse;
     }
 
     /**
+     * @param string $payeePurse
+     */
+    public function setPayeePurse($payeePurse)
+    {
+        $this->payeePurse = $payeePurse;
+    }
+
+    /**
+     * @deprecated
+     * @return string
+     */
+    public function getRecipientPurse()
+    {
+        return $this->getPayeePurse();
+    }
+
+    /**
+     * @deprecated
      * @param string $recipientPurse
      */
     public function setRecipientPurse($recipientPurse)
     {
-        $this->recipientPurse = $recipientPurse;
+        $this->setPayeePurse($recipientPurse);
     }
 
     /**

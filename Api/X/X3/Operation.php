@@ -12,10 +12,10 @@ class Operation
     protected $transactionId;
 
     /** @var string pursesrc */
-    protected $senderPurse;
+    protected $payerPurse;
 
     /** @var string pursedest */
-    protected $recipientPurse;
+    protected $payeePurse;
 
     /** @var float amount */
     protected $amount;
@@ -59,8 +59,8 @@ class Operation
     public function __construct(array $data)
     {
         $this->transactionId = $data['transactionId'];
-        $this->senderPurse = $data['senderPurse'];
-        $this->recipientPurse = $data['recipientPurse'];
+        $this->payerPurse = $data['payerPurse'];
+        $this->payeePurse = $data['payeePurse'];
         $this->amount = $data['amount'];
         $this->fee = $data['fee'];
         $this->operationType = $data['operationType'];
@@ -90,17 +90,35 @@ class Operation
     /**
      * @return string
      */
+    public function getPayerPurse()
+    {
+        return $this->payerPurse;
+    }
+
+    /**
+     * @deprecated
+     * @return string
+     */
     public function getSenderPurse()
     {
-        return $this->senderPurse;
+        return $this->getPayerPurse();
     }
 
     /**
      * @return string
      */
+    public function getPayeePurse()
+    {
+        return $this->payeePurse;
+    }
+
+    /**
+     * @deprecated
+     * @return string
+     */
     public function getRecipientPurse()
     {
-        return $this->recipientPurse;
+        return $this->getPayeePurse();
     }
 
     /**
