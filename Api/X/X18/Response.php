@@ -44,13 +44,13 @@ class Response extends AbstractResponse
     protected $date;
 
     /** @var string operation/purpose */
-    protected $paymentDescription;
+    protected $description;
 
     /** @var string operation/pursefrom */
-    protected $fromPurse;
+    protected $payerPurse;
 
     /** @var string operation/wmidfrom */
-    protected $fromWmid;
+    protected $payerWmid;
 
     /** @var bool operation/capitallerflag */
     protected $isCapitallerPurseUsed;
@@ -104,9 +104,9 @@ class Response extends AbstractResponse
             $this->invoiceId = (string)$operation['wminvoiceid'];
             $this->amount = (float)$operation->amount;
             $this->date = self::createDateTime((string)$operation->operdate);
-            $this->paymentDescription = (string)$operation->purpose;
-            $this->fromPurse = (string)$operation->pursefrom;
-            $this->fromWmid = (string)$operation->wmidfrom;
+            $this->description = (string)$operation->purpose;
+            $this->payerPurse = (string)$operation->pursefrom;
+            $this->payerWmid = (string)$operation->wmidfrom;
             $this->isCapitallerPurseUsed = (bool)$operation->capitallerflag;
             $this->isAuthorizedViaEnum = (bool)$operation->enumflag;
             $this->ip = (string)$operation->IPAddress;
@@ -177,25 +177,52 @@ class Response extends AbstractResponse
     /**
      * @return string
      */
-    public function getPaymentDescription()
+    public function getDescription()
     {
-        return $this->paymentDescription;
+        return $this->description;
     }
 
     /**
+     * @deprecated Use getDescription() instead
+     * @return string
+     */
+    public function getPaymentDescription()
+    {
+        return $this->getDescription();
+    }
+
+    /**
+     * @return string
+     */
+    public function getPayerPurse()
+    {
+        return $this->payerPurse;
+    }
+
+    /**
+     * @deprecated Use getPayerPurse() instead
      * @return string
      */
     public function getFromPurse()
     {
-        return $this->fromPurse;
+        return $this->getPayerPurse();
     }
 
     /**
      * @return string
      */
+    public function getPayerWmid()
+    {
+        return $this->payerWmid;
+    }
+
+    /**
+     * @deprecated Use getPayerWmid() instead
+     * @return string
+     */
     public function getFromWmid()
     {
-        return $this->fromWmid;
+        return $this->getPayerWmid();
     }
 
     /**
