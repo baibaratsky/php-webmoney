@@ -29,7 +29,7 @@ class Request extends X\Request
     protected $paymentNumber;
 
     /** @var int lmi_payment_no_type */
-    protected $paymentNumberType;
+    protected $paymentNumberType = self::PAYMENT_NUMBER_TYPE_DEFAULT;
 
     /** @var string md5 */
     protected $md5;
