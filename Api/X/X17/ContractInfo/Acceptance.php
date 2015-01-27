@@ -10,14 +10,19 @@ class Acceptance
     /** @var string @wmid */
     protected $wmid;
 
-    /** @var string @acceptdate */
-    protected $acceptDate;
+    /** @var \DateTime|null @acceptdate */
+    protected $acceptDateTime;
 
-    public function __construct($contractId, $wmid, $acceptDate)
+    /**
+     * @param int $contractId
+     * @param string $wmid
+     * @param \DateTime $acceptDate
+     */
+    public function __construct($contractId, $wmid, \DateTime $acceptDate)
     {
-        $this->contractId = (int)$contractId;
-        $this->wmid = (string)$wmid;
-        $this->acceptDate = (string)$acceptDate;
+        $this->contractId = $contractId;
+        $this->wmid = $wmid;
+        $this->acceptDateTime = $acceptDate;
     }
 
     /**
@@ -37,10 +42,23 @@ class Acceptance
     }
 
     /**
+     * @return \DateTime|null
+     */
+    public function getAcceptDateTime()
+    {
+        return $this->acceptDateTime;
+    }
+
+    /**
+     * @deprecated Use getAcceptDateTime() instead
      * @return string
      */
     public function getAcceptDate()
     {
-        return $this->acceptDate;
+        if ($this->acceptDateTime === null) {
+            return null;
+        }
+
+        return $this->acceptDateTime->format('Y-m-d\TH:i:s.u');
     }
 }

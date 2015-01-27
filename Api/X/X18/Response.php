@@ -41,7 +41,7 @@ class Response extends AbstractResponse
     protected $amount;
 
     /** @var \DateTime operation/operdate */
-    protected $date;
+    protected $dateTime;
 
     /** @var string operation/purpose */
     protected $description;
@@ -80,7 +80,7 @@ class Response extends AbstractResponse
     protected $cashierNumber;
 
     /** @var string operation/cashier_date */
-    protected $cashierDate;
+    protected $cashierDateTime;
 
     /** @var float operation/cashier_amount */
     protected $cashierAmount;
@@ -103,7 +103,7 @@ class Response extends AbstractResponse
             $this->transactionId = (string)$operation['wmtransid'];
             $this->invoiceId = (string)$operation['wminvoiceid'];
             $this->amount = (float)$operation->amount;
-            $this->date = self::createDateTime((string)$operation->operdate);
+            $this->dateTime = self::createDateTime((string)$operation->operdate);
             $this->description = (string)$operation->purpose;
             $this->payerPurse = (string)$operation->pursefrom;
             $this->payerWmid = (string)$operation->wmidfrom;
@@ -123,7 +123,7 @@ class Response extends AbstractResponse
             } elseif (!empty($operation->cashier_number)) {
                 $this->paymentType = self::PAYMENT_TYPE_CASHIER;
                 $this->cashierNumber = (string)$operation->cashier_number;
-                $this->cashierDate = self::createDateTime((string)$operation->cashier_date);
+                $this->cashierDateTime = self::createDateTime((string)$operation->cashier_date);
                 $this->cashierAmount = (float)$operation->cashier_amount;
             } elseif (isset($operation->sdp_type)) {
                 $this->paymentType = self::PAYMENT_TYPE_SDP;
@@ -169,9 +169,18 @@ class Response extends AbstractResponse
     /**
      * @return \DateTime
      */
+    public function getDateTime()
+    {
+        return $this->dateTime;
+    }
+
+    /**
+     * @deprecated Use getDateTime() instead
+     * @return \DateTime
+     */
     public function getDate()
     {
-        return $this->date;
+        return $this->getDateTime();
     }
 
     /**
@@ -300,9 +309,18 @@ class Response extends AbstractResponse
     /**
      * @return string
      */
+    public function getCashierDateTime()
+    {
+        return $this->cashierDateTime;
+    }
+
+    /**
+     * @deprecated Use getCashierDateTime() instead
+     * @return string
+     */
     public function getCashierDate()
     {
-        return $this->cashierDate;
+        return $this->getCashierDateTime();
     }
 
     /**

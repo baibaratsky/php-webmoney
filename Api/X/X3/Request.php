@@ -18,25 +18,25 @@ class Request extends X\Request
     protected $signerWmid;
 
     /** @var string getoperations\purse */
-    protected $parameterPurse;
+    protected $purse;
 
     /** @var int getoperations\wmtranid */
-    protected $parameterTransactionId;
+    protected $transactionId;
 
     /** @var int getoperations\tranid */
-    protected $parameterTransactionExternalId;
+    protected $transactionExternalId;
 
     /** @var int getoperations\wminvid */
-    protected $parameterInvoiceId;
+    protected $invoiceId;
 
     /** @var int getoperations\orderid */
-    protected $parameterExternalInvoiceId;
+    protected $externalInvoiceId;
 
     /** @var \DateTime getoperations\datestart */
-    protected $parameterStartDate;
+    protected $startDateTime;
 
     /** @var \DateTime getoperations\datefinish */
-    protected $parameterEndDate;
+    protected $endDateTime;
 
     public function __construct($authType = self::AUTH_CLASSIC)
     {
@@ -57,7 +57,7 @@ class Request extends X\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array('parameterPurse', 'parameterStartDate', 'parameterEndDate'),
+            RequestValidator::TYPE_REQUIRED => array('purse', 'startDateTime', 'endDateTime'),
             RequestValidator::TYPE_DEPEND_REQUIRED => array(
                 'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
             ),
@@ -74,13 +74,13 @@ class Request extends X\Request
         $xml .= self::xmlElement('wmid', $this->signerWmid);
         $xml .= self::xmlElement('sign', $this->signature);
         $xml .= '<getoperations>';
-        $xml .= self::xmlElement('purse', $this->parameterPurse);
-        $xml .= self::xmlElement('wmtranid', $this->parameterTransactionId);
-        $xml .= self::xmlElement('tranid', $this->parameterTransactionExternalId);
-        $xml .= self::xmlElement('wminvid', $this->parameterInvoiceId);
-        $xml .= self::xmlElement('orderid', $this->parameterExternalInvoiceId);
-        $xml .= self::xmlElement('datestart', $this->parameterStartDate->format('Ymd H:i:s'));
-        $xml .= self::xmlElement('datefinish', $this->parameterEndDate->format('Ymd H:i:s'));
+        $xml .= self::xmlElement('purse', $this->purse);
+        $xml .= self::xmlElement('wmtranid', $this->transactionId);
+        $xml .= self::xmlElement('tranid', $this->transactionExternalId);
+        $xml .= self::xmlElement('wminvid', $this->invoiceId);
+        $xml .= self::xmlElement('orderid', $this->externalInvoiceId);
+        $xml .= self::xmlElement('datestart', $this->startDateTime->format('Ymd H:i:s'));
+        $xml .= self::xmlElement('datefinish', $this->endDateTime->format('Ymd H:i:s'));
         $xml .= '</getoperations>';
         $xml .= '</w3s.request>';
 
@@ -102,7 +102,7 @@ class Request extends X\Request
     public function sign(Signer $requestSigner = null)
     {
         if ($this->authType === self::AUTH_CLASSIC) {
-            $this->signature = $requestSigner->sign($this->parameterPurse . $this->requestNumber);
+            $this->signature = $requestSigner->sign($this->purse . $this->requestNumber);
         }
     }
 
@@ -123,114 +123,240 @@ class Request extends X\Request
     }
 
     /**
-     * @param string $parameterPurse
+     * @param string $purse
      */
-    public function setParameterPurse($parameterPurse)
+    public function setPurse($purse)
     {
-        $this->parameterPurse = $parameterPurse;
+        $this->purse = $purse;
     }
 
     /**
      * @return string
      */
-    public function getParameterPurse()
+    public function getPurse()
     {
-        return $this->parameterPurse;
+        return $this->purse;
     }
 
     /**
+     * @param int $transactionId
+     */
+    public function setTransactionId($transactionId)
+    {
+        $this->transactionId = $transactionId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTransactionId()
+    {
+        return $this->transactionId;
+    }
+
+    /**
+     * @param int $transactionExternalId
+     */
+    public function setTransactionExternalId($transactionExternalId)
+    {
+        $this->transactionExternalId = $transactionExternalId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTransactionExternalId()
+    {
+        return $this->transactionExternalId;
+    }
+
+    /**
+     * @param int $externalInvoiceId
+     */
+    public function setExternalInvoiceId($externalInvoiceId)
+    {
+        $this->externalInvoiceId = $externalInvoiceId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getExternalInvoiceId()
+    {
+        return $this->externalInvoiceId;
+    }
+
+    /**
+     * @param int $invoiceId
+     */
+    public function setInvoiceId($invoiceId)
+    {
+        $this->invoiceId = $invoiceId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getInvoiceId()
+    {
+        return $this->invoiceId;
+    }
+
+    /**
+     * @param \DateTime $startDateTime
+     */
+    public function setStartDateTime($startDateTime)
+    {
+        $this->startDateTime = $startDateTime;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getStartDateTime()
+    {
+        return $this->startDateTime;
+    }
+
+    /**
+     * @param \DateTime $endDateTime
+     */
+    public function setEndDateTime($endDateTime)
+    {
+        $this->endDateTime = $endDateTime;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndDateTime()
+    {
+        return $this->endDateTime;
+    }
+
+    /**
+     * @deprecated Use setPurse($purse) instead
+     * @param string $parameterPurse
+     */
+    public function setParameterPurse($parameterPurse)
+    {
+        $this->setPurse($parameterPurse);
+    }
+
+    /**
+     * @deprecated Use getPurse() instead
+     * @return string
+     */
+    public function getParameterPurse()
+    {
+        return $this->getPurse();
+    }
+
+    /**
+     * @deprecated Use setTransactionId($transactionId) instead
      * @param int $parameterTransactionId
      */
     public function setParameterTransactionId($parameterTransactionId)
     {
-        $this->parameterTransactionId = $parameterTransactionId;
+        $this->setTransactionId($parameterTransactionId);
     }
 
     /**
+     * @deprecated Use getTransactionId() instead
      * @return int
      */
     public function getParameterTransactionId()
     {
-        return $this->parameterTransactionId;
+        return $this->getTransactionId();
     }
 
     /**
+     * @deprecated Use setTransactionExternalId($transactionExternalId) instead
      * @param int $parameterTransactionExternalId
      */
     public function setParameterTransactionExternalId($parameterTransactionExternalId)
     {
-        $this->parameterTransactionExternalId = $parameterTransactionExternalId;
+        $this->setTransactionExternalId($parameterTransactionExternalId);
     }
 
     /**
+     * @deprecated Use getTransactionExternalId() instead
      * @return int
      */
     public function getParameterTransactionExternalId()
     {
-        return $this->parameterTransactionExternalId;
+        return $this->getTransactionExternalId();
     }
 
     /**
+     * @deprecated Use setExternalInvoiceId($externalInvoiceId) instead
      * @param int $parameterExternalInvoiceId
      */
     public function setParameterExternalInvoiceId($parameterExternalInvoiceId)
     {
-        $this->parameterExternalInvoiceId = $parameterExternalInvoiceId;
+        $this->setExternalInvoiceId($parameterExternalInvoiceId);
     }
 
     /**
+     * @deprecated Use getExternalInvoiceId() instead
      * @return int
      */
     public function getParameterExternalInvoiceId()
     {
-        return $this->parameterExternalInvoiceId;
+        return $this->getExternalInvoiceId();
     }
 
     /**
+     * @deprecated Use setInvoiceId($invoiceId) instead
      * @param int $parameterInvoiceId
      */
     public function setParameterInvoiceId($parameterInvoiceId)
     {
-        $this->parameterInvoiceId = $parameterInvoiceId;
+        $this->setInvoiceId($parameterInvoiceId);
     }
 
     /**
+     * @deprecated Use getInvoiceId() instead
      * @return int
      */
     public function getParameterInvoiceId()
     {
-        return $this->parameterInvoiceId;
+        return $this->getInvoiceId();
     }
 
     /**
+     * @deprecated Use setStartDateTime($startDateTime) instead
      * @param \DateTime $parameterStartDate
      */
     public function setParameterStartDate($parameterStartDate)
     {
-        $this->parameterStartDate = $parameterStartDate;
+        $this->setStartDateTime($parameterStartDate);
     }
 
     /**
+     * @deprecated Use getStartDateTime() instead
      * @return \DateTime
      */
     public function getParameterStartDate()
     {
-        return $this->parameterStartDate;
+        return $this->getStartDateTime();
     }
 
     /**
+     * @deprecated Use setEndDateTime($endDateTime) instead
      * @param \DateTime $parameterEndDate
      */
     public function setParameterEndDate($parameterEndDate)
     {
-        $this->parameterEndDate = $parameterEndDate;
+        $this->setEndDateTime($parameterEndDate);
     }
 
     /**
+     * @deprecated Use getEndDateTime() instead
      * @return \DateTime
      */
     public function getParameterEndDate()
     {
-        return $this->parameterEndDate;
+        return $this->getEndDateTime();
     }
 }
