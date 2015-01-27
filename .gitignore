@@ -9,3 +9,4 @@ thumbs.db
 .idea
 composer.lock
 vendor/*
+examples
