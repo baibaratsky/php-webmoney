@@ -61,6 +61,9 @@ class Request extends X\Request
     /** @var float operation/amount */
     protected $operationAmount;
 
+    /** @var int operation/id */
+    protected $orderId;
+
     /** @var string userinfo/wmid */
     protected $userWmid;
 
@@ -159,6 +162,7 @@ class Request extends X\Request
         $xml .= self::xmlElement('direction', $this->operationDirection);
         $xml .= self::xmlElement('pursetype', $this->operationPurseType);
         $xml .= self::xmlElement('amount', $this->operationAmount);
+        $xml .= self::xmlElement('id', $this->orderId);
         $xml .= '</operation>';
         $xml .= '<userinfo>';
         $xml .= self::xmlElement('wmid', $this->userWmid);
@@ -289,6 +293,22 @@ class Request extends X\Request
     public function setOperationAmount($operationAmount)
     {
         $this->operationAmount = $operationAmount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrderId()
+    {
+        return $this->orderId;
+    }
+
+    /**
+     * @param int $orderId
+     */
+    public function setOrderId($orderId)
+    {
+        $this->orderId = $orderId;
     }
 
     /**
