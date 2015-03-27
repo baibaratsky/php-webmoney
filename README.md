@@ -37,7 +37,7 @@ Installation
 0. Add the php-webmoney dependency:
 
     ```
-    php composer.phar require baibaratsky/php-webmoney:0.9.*
+    php composer.phar require baibaratsky/php-webmoney:0.10.*
     ```
 
 Usage

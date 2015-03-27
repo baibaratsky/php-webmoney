@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": ">=5.3",
-        "baibaratsky/php-wmsigner": "1.0.*"
+        "baibaratsky/php-wmsigner": "1.1.*"
     },
     "autoload": {
         "psr-4": {
