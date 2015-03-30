@@ -152,7 +152,11 @@ class Request extends X\Request
     }
 
     /**
-     * @param int $transactionExternalId
+     * Set ID of the transaction in your system
+     *
+     * @param int $transactionExternalId should be a positive integer, unique for the WMID that signs the request
+     * It’s not allowed to perform two transactions with the same ID.
+     * The uniqueness of ID is verified at least for one year.
      */
     public function setTransactionExternalId($transactionExternalId)
     {

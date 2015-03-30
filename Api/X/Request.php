@@ -40,7 +40,7 @@ abstract class Request extends XmlRequest
     }
 
     /**
-     * @param int $requestNumber
+     * @param int $requestNumber must be greater than a previous request number
      */
     public function setRequestNumber($requestNumber)
     {
