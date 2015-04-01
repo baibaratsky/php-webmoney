@@ -30,7 +30,7 @@ class Request extends X\Request
     protected $amount;
 
     /** @var int trans/period */
-    protected $protectionPeriod;
+    protected $protectionPeriod = 0;
 
     /** @var string trans/pcode */
     protected $protectionCode;
