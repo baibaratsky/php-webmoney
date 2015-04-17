@@ -1,6 +1,6 @@
 WebMoney API PHP Library
 ========================
-[![GitHub release](https://img.shields.io/github/release/baibaratsky/php-webmoney.svg)](https://github.com/baibaratsky/php-webmoney/releases)
+[![Packagist](https://img.shields.io/packagist/l/baibaratsky/php-webmoney.svg)](https://github.com/baibaratsky/php-webmoney/blob/master/LICENSE.md)
 [![Dependency Status](https://www.versioneye.com/user/projects/5531680a10e714f9e50010ad/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5531680a10e714f9e50010ad)
 [![Packagist](https://img.shields.io/packagist/v/baibaratsky/php-webmoney.svg)](https://packagist.org/packages/baibaratsky/php-webmoney)
 [![Packagist](https://img.shields.io/packagist/dt/baibaratsky/php-webmoney.svg)](https://packagist.org/packages/baibaratsky/php-webmoney)
