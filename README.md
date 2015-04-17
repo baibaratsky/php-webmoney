@@ -1,5 +1,10 @@
 WebMoney API PHP Library
 ========================
+[![GitHub release](https://img.shields.io/github/release/baibaratsky/php-webmoney.svg)](https://github.com/baibaratsky/php-webmoney/releases)
+[![Dependency Status](https://www.versioneye.com/user/projects/5531680a10e714f9e50010ad/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5531680a10e714f9e50010ad)
+[![Packagist](https://img.shields.io/packagist/v/baibaratsky/php-webmoney.svg)](https://packagist.org/packages/baibaratsky/php-webmoney)
+[![Packagist](https://img.shields.io/packagist/dt/baibaratsky/php-webmoney.svg)](https://packagist.org/packages/baibaratsky/php-webmoney)
+
 Get transparent object-oriented interaction with WebMoney API.
 
 If you just need to sign your requests to the API, use [WebMoney Signer](https://github.com/baibaratsky/php-wmsigner), a native PHP implementation of the WMSigner authentication module. 
