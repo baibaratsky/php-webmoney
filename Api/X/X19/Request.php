@@ -136,7 +136,7 @@ class Request extends X\Request
                 'operationType' => array(self::TYPE_CASH, self::TYPE_SDP, self::TYPE_BANK, self::TYPE_CARD, self::TYPE_EMONEY, self::TYPE_SMS, self::TYPE_MOBILE),
                 'operationDirection' => array(self::DIRECTION_OUTPUT, self::DIRECTION_INPUT),
                 'operationPurseType' => array(self::PURSE_WMZ, self::PURSE_WMR, self::PURSE_WME, self::PURSE_WMU, self::PURSE_WMB, self::PURSE_WMY, self::PURSE_WMG),
-                'userEMoneyId' => array(self::EMONEY_RBKM, self::EMONEY_PP, self::EMONEY_SK, self::EMONEY_QW, self::EMONEY_YAM, self::EMONEY_ESP),
+                'userEMoneyName' => array(self::EMONEY_RBKM, self::EMONEY_PP, self::EMONEY_SK, self::EMONEY_QW, self::EMONEY_YAM, self::EMONEY_ESP),
             ),
             RequestValidator::TYPE_CONDITIONAL => array(
                 'operationType' => array(
