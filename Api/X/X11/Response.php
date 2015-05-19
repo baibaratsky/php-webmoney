@@ -56,42 +56,42 @@ class Response extends AbstractResponse
         $certInfo = $responseObject->certinfo;
         $this->wmid = (string)$certInfo['wmid'];
 
-        if ($certInfo->directory !== null) {
+        if ((array)$certInfo->directory) {
             static::$legalStatuses = $this->dirtyXmlToArray($certInfo->directory->ctype);
             static::$legalPositionStatuses = $this->dirtyXmlToArray($certInfo->directory->jstatus);
             static::$passportTypes = $this->dirtyXmlToArray($certInfo->directory->tid);
         }
 
-        if ($certInfo->attestat !== null) {
+        if ((array)$certInfo->attestat) {
             $passport = $this->rowAttributesXmlToArray($certInfo->attestat);
             $this->passport = new Passport(reset($passport));
         }
 
-        if ($certInfo->wmids !== null) {
+        if ((array)$certInfo->wmids) {
             foreach ($this->rowAttributesXmlToArray($certInfo->wmids) as $wmid) {
                 $this->wmids[] = new Wmid($wmid);
             }
         }
 
-        if ($certInfo->userinfo !== null) {
+        if ((array)$certInfo->userinfo) {
             if ($certInfo->userinfo->value !== null) {
                 $userInfo = $this->rowAttributesXmlToArray($certInfo->userinfo->value);
                 $this->userInfo = new UserInfo(reset($userInfo));
             }
 
-            if ($certInfo->userinfo->{'check-lock'} !== null) {
+            if ((array)$certInfo->userinfo->{'check-lock'}) {
                 $checkLock = $this->rowAttributesXmlToArray($certInfo->userinfo->{'check-lock'});
                 $this->checkLock = new CheckLock(reset($checkLock));
             }
 
-            if ($certInfo->userinfo->weblist !== null) {
+            if ((array)$certInfo->userinfo->weblist) {
                 $webList = $this->rowAttributesXmlToArray($certInfo->userinfo->weblist);
                 if (!empty($webList)) {
                     $this->webList = new WebList(reset($webList));
                 }
             }
 
-            if ($certInfo->userinfo->extendeddata !== null) {
+            if ((array)$certInfo->userinfo->extendeddata) {
                 $extendedData = $this->rowAttributesXmlToArray($certInfo->userinfo->extendeddata);
                 if (!empty($extendedData)) {
                     $this->extendedData = new ExtendedData(reset($extendedData));
