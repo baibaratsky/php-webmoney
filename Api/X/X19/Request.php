@@ -167,8 +167,8 @@ class Request extends X\Request
         $xml .= '<userinfo>';
         $xml .= self::xmlElement('wmid', $this->userWmid);
         $xml .= self::xmlElement('pnomer', $this->userPassportNum);
-        $xml .= self::xmlElement('fname', $this->userLastName);
-        $xml .= self::xmlElement('iname', $this->userFirstName);
+        $xml .= self::xmlElement('iname', $this->userLastName);
+        $xml .= self::xmlElement('fname', $this->userFirstName);
         $xml .= self::xmlElement('bank_name', $this->userBankName);
         $xml .= self::xmlElement('bank_account', $this->userBankAccount);
         $xml .= self::xmlElement('card_number', $this->userCardNumber);
