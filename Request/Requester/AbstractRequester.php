@@ -7,6 +7,16 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
 
 abstract class AbstractRequester
 {
+    protected $verifyCertificate;
+
+    /**
+     * @param bool $verifyCertificate Use the WM root certificate to protect against DNS spoofing
+     */
+    public function __construct($verifyCertificate = true)
+    {
+        $this->verifyCertificate = $verifyCertificate;
+    }
+
     /**
      * @param AbstractRequest $request
      *

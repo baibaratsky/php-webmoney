@@ -54,6 +54,7 @@ require_once(__DIR__ . '/vendor/autoload.php'); // Require autoload file generat
 use baibaratsky\WebMoney;
 use baibaratsky\WebMoney\Signer;
 
+// If you don’t want to use the WM root certificate to protect against DNS spoofing, pass false to the CurlRequester constructor
 $webMoney = new WebMoney\WebMoney(new WebMoney\Request\Requester\CurlRequester);
 
 $request = new WebMoney\Api\X\X9\Request;
@@ -68,6 +69,8 @@ if ($request->validate()) {
 
     if ($response->getReturnCode() === 0) {
         echo $response->getPurseByName('Z000000000000')->getAmount();
+    } else {
+        echo 'Error: ' . $response->getReturnDescription();
     }
 }
 ```
