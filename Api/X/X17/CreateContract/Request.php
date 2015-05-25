@@ -94,7 +94,11 @@ class Request extends X\Request
     public function sign(Signer $requestSigner = null)
     {
         if ($this->authType === self::AUTH_CLASSIC) {
-            $this->signature = $requestSigner->sign($this->signerWmid . mb_strlen($this->contractName, 'UTF-8') . $this->contractType);
+            $this->signature = $requestSigner->sign(
+                    $this->signerWmid
+                    . mb_strlen($this->contractName, 'UTF-8')
+                    . $this->contractType
+            );
         }
     }
 

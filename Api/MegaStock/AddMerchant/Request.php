@@ -153,8 +153,8 @@ class Request extends MegaStock\Request
      */
     public function sign(Signer $requestSigner = null)
     {
-        $signString = $this->loginType . $this->integratorId . $this->integratorWmid .
-                      $this->merchantNameInComment . $this->categoryId;
+        $signString = $this->loginType . $this->integratorId . $this->integratorWmid
+                . mb_convert_encoding($this->merchantNameInComment, 'Windows-1251', 'UTF-8') . $this->categoryId;
         if ($this->loginType == self::LOGIN_TYPE_KEEPER) {
             if ($requestSigner === null) {
                 throw new ApiException('This type of login requires the request signer.');

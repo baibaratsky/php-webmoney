@@ -121,7 +121,8 @@ class Request extends X\Request
                 $this->requestNumber . $this->transactionExternalId .
                 $this->payerPurse . $this->payeePurse .
                 $this->amount . $this->protectionPeriod .
-                $this->protectionCode . $this->description .
+                $this->protectionCode .
+                mb_convert_encoding($this->description, 'Windows-1251', 'UTF-8') .
                 $this->invoiceId
             );
         }
