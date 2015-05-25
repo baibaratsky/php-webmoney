@@ -63,9 +63,13 @@ $request->setRequestedWmid('REQUESTED WMID');
 
 $request->sign(new Signer('YOUR WMID', 'FULL PATH TO KEY FILE', 'KEY FILE PASSWORD'));
 
+// You can access the request XML: $request->getData()
+
 if ($request->validate()) {
     /** @var WebMoney\Api\X\X9\Response $response */
     $response = $webMoney->request($request);
+
+    // The response from WebMoney is here: $response->getRawData()
 
     if ($response->getReturnCode() === 0) {
         echo $response->getPurseByName('Z000000000000')->getAmount();

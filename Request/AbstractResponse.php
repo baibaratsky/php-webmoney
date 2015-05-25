@@ -4,8 +4,8 @@ namespace baibaratsky\WebMoney\Request;
 
 abstract class AbstractResponse
 {
-    /** @var \DateTimeZone */
-    private static $timeZone;
+    /** @var string Raw response data from WM */
+    protected $rawData;
 
     /** @var int retval */
     protected $returnCode;
@@ -13,10 +13,16 @@ abstract class AbstractResponse
     /** @var string retdesc */
     protected $returnDescription;
 
+    /** @var \DateTimeZone */
+    private static $timeZone;
+
     /**
      * @param string $response
      */
-    abstract public function __construct($response);
+    public function __construct($response)
+    {
+        $this->rawData = $response;
+    }
 
     /**
      * @return string Fully qualified name of the class
@@ -62,5 +68,13 @@ abstract class AbstractResponse
     public function getReturnDescription()
     {
         return $this->returnDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRawData()
+    {
+        return $this->rawData;
     }
 }
