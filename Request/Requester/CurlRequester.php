@@ -31,7 +31,7 @@ class CurlRequester extends AbstractRequester
             curl_setopt($handler, CURLOPT_CAINFO, dirname(dirname(__DIR__)) . '/WMUsedRootCAs.cer');
         }
         curl_setopt($handler, CURLOPT_SSL_VERIFYPEER, $this->verifyCertificate);
-        curl_setopt($handler, CURLOPT_SSLVERSION, 3);
+        curl_setopt($handler, CURLOPT_SSLVERSION, 1);
 
         ob_start();
         if (!curl_exec($handler)) {
