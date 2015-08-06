@@ -16,9 +16,9 @@ class Acceptance
     /**
      * @param int $contractId
      * @param string $wmid
-     * @param \DateTime $acceptDate
+     * @param \DateTime|null $acceptDate
      */
-    public function __construct($contractId, $wmid, \DateTime $acceptDate)
+    public function __construct($contractId, $wmid, \DateTime $acceptDate = null)
     {
         $this->contractId = $contractId;
         $this->wmid = $wmid;
