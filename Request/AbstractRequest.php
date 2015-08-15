@@ -41,7 +41,7 @@ abstract class AbstractRequest
     abstract public function sign(Signer $requestSigner = null);
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getErrors()
     {

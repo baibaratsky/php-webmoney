@@ -30,7 +30,13 @@ class Wmid
         $this->passportType = $passportType;
     }
 
+    public function __toString()
+    {
+        return $this->wmid;
+    }
+
     /**
+     * @deprecated Use (string)$wmidObject instead
      * @return string
      */
     public function getWmid()
