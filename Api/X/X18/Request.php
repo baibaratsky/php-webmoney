@@ -31,6 +31,9 @@ class Request extends X\Request
     /** @var int lmi_payment_no_type */
     protected $paymentNumberType = self::PAYMENT_NUMBER_TYPE_DEFAULT;
 
+    /** @var string sha256 */
+    protected $sha256;
+
     /** @var string md5 */
     protected $md5;
 
@@ -44,7 +47,7 @@ class Request extends X\Request
      */
     public function __construct($authType = self::AUTH_CLASSIC, $secretKey = null)
     {
-        if ($secretKey === null && ($authType === self::AUTH_MD5 || $authType === self::AUTH_SECRET_KEY)) {
+        if ($secretKey === null && in_array($authType, [self::AUTH_SHA256, self::AUTH_MD5, self::AUTH_SECRET_KEY])) {
             throw new ApiException('Secret key is required for this authentication type.');
         }
 
@@ -83,6 +86,7 @@ class Request extends X\Request
         $xml .= self::xmlElement('lmi_payment_no', $this->paymentNumber);
         $xml .= self::xmlElement('lmi_payment_no_type', $this->paymentNumberType);
         $xml .= self::xmlElement('sign', $this->signature);
+        $xml .= self::xmlElement('sha256', $this->sha256);
         $xml .= self::xmlElement('md5', $this->md5);
 
         if ($this->authType === self::AUTH_SECRET_KEY) {
@@ -109,6 +113,11 @@ class Request extends X\Request
     {
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign($this->signerWmid . $this->payeePurse . $this->paymentNumber);
+        } elseif ($this->authType === self::AUTH_SHA256) {
+            $this->sha256 = hash(
+                    'sha256',
+                    $this->signerWmid . $this->payeePurse . $this->paymentNumber . $this->secretKey
+            );
         } elseif ($this->authType === self::AUTH_MD5) {
             $this->md5 = md5($this->signerWmid . $this->payeePurse . $this->paymentNumber . $this->secretKey);
         }

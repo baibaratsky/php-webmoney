@@ -42,7 +42,7 @@ Installation
 0. Add the php-webmoney dependency:
 
     ```
-    php composer.phar require baibaratsky/php-webmoney:0.10.*
+    php composer.phar require baibaratsky/php-webmoney:0.11.*
     ```
 
 Usage

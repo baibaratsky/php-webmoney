@@ -8,6 +8,7 @@ abstract class Request extends XmlRequest
 {
     const AUTH_CLASSIC = 'classic';
     const AUTH_LIGHT = 'light';
+    const AUTH_SHA256 = 'sha256';
     const AUTH_MD5 = 'md5';
     const AUTH_SECRET_KEY = 'secret_key';
 
