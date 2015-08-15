@@ -104,29 +104,11 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @deprecated Use getPayerPurse() instead
-     * @return string
-     */
-    public function getSenderPurse()
-    {
-        return $this->getPayerPurse();
-    }
-
-    /**
      * @return string
      */
     public function getPayeePurse()
     {
         return $this->payeePurse;
-    }
-
-    /**
-     * @deprecated Use getPayeePurse() instead
-     * @return string
-     */
-    public function getRecipientPurse()
-    {
-        return $this->getPayeePurse();
     }
 
     /**

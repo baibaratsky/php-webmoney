@@ -48,17 +48,4 @@ class Acceptance
     {
         return $this->acceptDateTime;
     }
-
-    /**
-     * @deprecated Use getAcceptDateTime() instead
-     * @return string
-     */
-    public function getAcceptDate()
-    {
-        if ($this->acceptDateTime === null) {
-            return null;
-        }
-
-        return $this->acceptDateTime->format('Y-m-d\TH:i:s.u');
-    }
 }

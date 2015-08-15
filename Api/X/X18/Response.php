@@ -177,29 +177,11 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @deprecated Use getDateTime() instead
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->getDateTime();
-    }
-
-    /**
      * @return string
      */
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * @deprecated Use getDescription() instead
-     * @return string
-     */
-    public function getPaymentDescription()
-    {
-        return $this->getDescription();
     }
 
     /**
@@ -211,29 +193,11 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @deprecated Use getPayerPurse() instead
-     * @return string
-     */
-    public function getFromPurse()
-    {
-        return $this->getPayerPurse();
-    }
-
-    /**
      * @return string
      */
     public function getPayerWmid()
     {
         return $this->payerWmid;
-    }
-
-    /**
-     * @deprecated Use getPayerWmid() instead
-     * @return string
-     */
-    public function getFromWmid()
-    {
-        return $this->getPayerWmid();
     }
 
     /**
@@ -314,15 +278,6 @@ class Response extends AbstractResponse
     public function getCashierDateTime()
     {
         return $this->cashierDateTime;
-    }
-
-    /**
-     * @deprecated Use getCashierDateTime() instead
-     * @return string
-     */
-    public function getCashierDate()
-    {
-        return $this->getCashierDateTime();
     }
 
     /**

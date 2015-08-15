@@ -181,24 +181,6 @@ class Request extends X\Request
     }
 
     /**
-     * @deprecated Use getPayerPurse() instead
-     * @return string
-     */
-    public function getSenderPurse()
-    {
-        return $this->getPayerPurse();
-    }
-
-    /**
-     * @deprecated Use setPayerPurse($payerPurse) instead
-     * @param string $senderPurse
-     */
-    public function setSenderPurse($senderPurse)
-    {
-        $this->setPayerPurse($senderPurse);
-    }
-
-    /**
      * @return string
      */
     public function getPayeePurse()
@@ -212,24 +194,6 @@ class Request extends X\Request
     public function setPayeePurse($payeePurse)
     {
         $this->payeePurse = $payeePurse;
-    }
-
-    /**
-     * @deprecated Use getPayeePurse() instead
-     * @return string
-     */
-    public function getRecipientPurse()
-    {
-        return $this->getPayeePurse();
-    }
-
-    /**
-     * @deprecated Use setPayeePurse($payeePurse) instead
-     * @param string $recipientPurse
-     */
-    public function setRecipientPurse($recipientPurse)
-    {
-        $this->setPayeePurse($recipientPurse);
     }
 
     /**

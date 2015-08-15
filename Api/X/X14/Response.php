@@ -108,15 +108,6 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @deprecated Use getPayeePurse() instead
-     * @return string
-     */
-    public function getRecipientPurse()
-    {
-        return $this->getPayeePurse();
-    }
-
-    /**
      * @return int
      */
     public function getRefundTransactionId()
@@ -146,15 +137,6 @@ class Response extends AbstractResponse
     public function getPayerPurse()
     {
         return $this->payerPurse;
-    }
-
-    /**
-     * @deprecated Use getPayerPurse() instead
-     * @return string
-     */
-    public function getSenderPurse()
-    {
-        return $this->getPayerPurse();
     }
 
     /**

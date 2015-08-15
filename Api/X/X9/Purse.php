@@ -53,16 +53,6 @@ class Purse
     }
 
     /**
-     * @deprecated
-     *
-     * @return string
-     */
-    public function getPurseName()
-    {
-        return $this->name;
-    }
-
-    /**
      * @return float
      */
     public function getAmount()
