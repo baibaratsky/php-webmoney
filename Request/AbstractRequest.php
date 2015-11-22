@@ -6,14 +6,29 @@ use baibaratsky\WebMoney\Signer;
 
 abstract class AbstractRequest
 {
+    const AUTH_CLASSIC = 'classic';
+    const AUTH_LIGHT = 'light';
+    const AUTH_SHA256 = 'sha256';
+    const AUTH_MD5 = 'md5';
+    const AUTH_SECRET_KEY = 'secret_key';
+
     /** @var string */
     protected $url;
+
+    /** @var string */
+    protected $authType;
 
     /** @var array */
     protected $errors = array();
 
     /** @var string sign|signstr */
     protected $signature;
+
+    /** @var string Light auth cert file name (PEM) */
+    protected $cert;
+
+    /** @var string Light auth key file name (PEM) */
+    protected $certKey;
 
     /**
      * @return bool
@@ -32,6 +47,14 @@ abstract class AbstractRequest
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthType()
+    {
+        return $this->authType;
     }
 
     /**
@@ -57,4 +80,20 @@ abstract class AbstractRequest
      * @return string
      */
     abstract public function getResponseClassName();
+
+    /**
+     * @return string
+     */
+    public function getCert()
+    {
+        return $this->cert;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCertKey()
+    {
+        return $this->certKey;
+    }
 }

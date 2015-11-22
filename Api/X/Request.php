@@ -6,15 +6,6 @@ use baibaratsky\WebMoney\Request\XmlRequest;
 
 abstract class Request extends XmlRequest
 {
-    const AUTH_CLASSIC = 'classic';
-    const AUTH_LIGHT = 'light';
-    const AUTH_SHA256 = 'sha256';
-    const AUTH_MD5 = 'md5';
-    const AUTH_SECRET_KEY = 'secret_key';
-
-    /** @var string */
-    protected $authType;
-
     /** @var string reqn */
     protected $requestNumber;
 
@@ -22,14 +13,6 @@ abstract class Request extends XmlRequest
     {
         $this->authType = $authType;
         $this->requestNumber = $this->generateRequestNumber();
-    }
-
-    /**
-     * @return string
-     */
-    public function getAuthType()
-    {
-        return $this->authType;
     }
 
     /**
@@ -55,5 +38,15 @@ abstract class Request extends XmlRequest
     {
         list($msec, $sec) = explode(' ', substr(microtime(), 2));
         return $sec . substr($msec, 0, 5);
+    }
+
+    /**
+     * @param string $cert Light auth cert file name (PEM)
+     * @param string $certKey Light auth key file name (PEM)
+     */
+    public function cert($cert, $certKey)
+    {
+        $this->cert = $cert;
+        $this->certKey = $certKey;
     }
 }
