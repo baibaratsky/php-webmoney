@@ -4,6 +4,11 @@ namespace baibaratsky\WebMoney\Api\X\X1;
 
 use baibaratsky\WebMoney\Request\AbstractResponse;
 
+/**
+ * Class Response
+ *
+ * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X1
+ */
 class Response extends AbstractResponse
 {
     /** @var Invoice */

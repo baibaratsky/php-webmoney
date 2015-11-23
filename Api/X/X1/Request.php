@@ -16,26 +16,37 @@ class Request extends X\Request
 {
     /** @var string wmid */
     protected $signerWmid;
+
     /** @var string getpurses/wmid */
     protected $requestedWmid;
+
     /** @var int invoice/orderid */
     protected $orderid;
+
     /** @var int invoice/customerwmid */
     protected $customerwmid;
+
     /** @var string invoice/storepurse */
     protected $storepurse;
+
     /** @var float invoice/amount */
     protected $amount;
+
     /** @var string invoice/desc */
     protected $desc;
+
     /** @var string invoice/address */
     protected $address;
+
     /** @var int invoice/period */
     protected $period;
+
     /** @var int invoice/expiration */
     protected $expiration;
+
     /** @var int invoice/onlyauth */
     protected $onlyauth;
+
     /** @var int invoice/lmi_shop_id */
     protected $lmiShopId;
 

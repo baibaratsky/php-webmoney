@@ -6,28 +6,40 @@ class Invoice
 {
     /** @var int @id */
     protected $invoiceid;
+
     /** @var int @ts */
     protected $invoicets;
+
     /** @var int invoice/orderid */
     protected $orderid;
+
     /** @var int invoice/customerwmid */
     protected $customerwmid;
+
     /** @var string invoice/storepurse */
     protected $storepurse;
+
     /** @var float invoice/amount */
     protected $amount;
+
     /** @var string invoice/desc */
     protected $desc;
+
     /** @var string invoice/address */
     protected $address;
+
     /** @var int invoice/period */
     protected $period;
+
     /** @var int invoice/expiration */
     protected $expiration;
+
     /** @var int invoice/state */
     protected $state;
+
     /** @var \DateTime invoice/datecrt */
     protected $datecrt;
+
     /** @var \DateTime invoice/dateupd */
     protected $dateupd;
 
@@ -46,8 +58,8 @@ class Invoice
         $this->state        = $data['state'];
         $this->datecrt      = $data['datecrt']; //wm format Ymd H:i:s
         $this->dateupd      = $data['dateupd']; //wm format Ymd H:i:s
-
     }
+    
     /**
      * @return int
      */
