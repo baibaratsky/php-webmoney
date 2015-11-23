@@ -52,11 +52,14 @@ class UserInfo
     /** @var string oname */
     private $middleName;
 
-    /** @var int pnomer */
+    /** @var string pnomer */
     private $passportNum;
 
     /** @var string pdate */
     private $passportDate;
+
+    /** @var string pdateend */
+    private $passportDateEnd;
 
     /** @var int pday */
     private $passportDay;
@@ -193,6 +196,9 @@ class UserInfo
     /** @var bool pasdoc */
     private $passportVerification;
 
+    /** @var bool regdoc */
+    private $regVerification;
+
     /** @var bool inndoc */
     private $tinVerification;
 
@@ -207,6 +213,9 @@ class UserInfo
 
     /** @var string regcheck */
     private $regCheck;
+
+    /** @var bool photoid */
+    private $photoId;
 
     /**
      * @param array $params
@@ -231,8 +240,11 @@ class UserInfo
         $this->lastName = $params['fname'];
         $this->firstName = $params['iname'];
         $this->middleName = $params['oname'];
-        $this->passportNum = (int)$params['pnomer'];
+        $this->passportNum = $params['pnomer'];
         $this->passportDate = $params['pdate'];
+        if (isset($params['pdateend'])) {
+            $this->passportDateEnd = $params['pdateend'];
+        }
         if (isset($params['pday'])) {
             $this->passportDay = (int)$params['pday'];
         }
@@ -298,6 +310,9 @@ class UserInfo
         if (isset($params['pasdoc'])) {
             $this->passportVerification = (bool)$params['pasdoc'];
         }
+        if (isset($params['regdoc'])) {
+            $this->regVerification = (bool)$params['regdoc'];
+        }
         if (isset($params['inndoc'])) {
             $this->tinVerification = (bool)$params['inndoc'];
         }
@@ -308,6 +323,9 @@ class UserInfo
         }
         if (isset($params['regcheck'])) {
             $this->regCheck = $params['regcheck'];
+        }
+        if (isset($params['photoid'])) {
+            $this->photoId = (bool)$params['photoid'];
         }
     }
 
@@ -440,7 +458,7 @@ class UserInfo
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getPassportNum()
     {
@@ -453,6 +471,14 @@ class UserInfo
     public function getPassportDate()
     {
         return $this->passportDate;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassportDateEnd()
+    {
+        return $this->passportDateEnd;
     }
 
     /**
@@ -818,6 +844,14 @@ class UserInfo
     /**
      * @return bool
      */
+    public function getRegVerification()
+    {
+        return $this->regVerification;
+    }
+
+    /**
+     * @return bool
+     */
     public function getTinVerification()
     {
         return $this->tinVerification;
@@ -854,4 +888,12 @@ class UserInfo
     {
         return $this->regCheck;
     }
+
+	/**
+	 * @return bool
+	 */
+	public function getPhotoId()
+	{
+		return $this->photoId;
+	}
 }
