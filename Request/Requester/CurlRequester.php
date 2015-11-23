@@ -32,6 +32,10 @@ class CurlRequester extends AbstractRequester
         }
         curl_setopt($handler, CURLOPT_SSL_VERIFYPEER, $this->verifyCertificate);
         curl_setopt($handler, CURLOPT_SSLVERSION, 1);
+        if ($request->getAuthType() == AbstractRequest::AUTH_LIGHT) {
+            curl_setopt($handler, CURLOPT_SSLCERT, $request->getCert());
+            curl_setopt($handler, CURLOPT_SSLKEY, $request->getCertKey());
+        }
 
         ob_start();
         if (!curl_exec($handler)) {
