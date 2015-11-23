@@ -11,53 +11,171 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
-    /** @var Invoice */
-    protected $invoice;
+    /** @var int @id */
+    protected $invoiceid;
+
+    /** @var int @ts */
+    protected $invoicets;
+
+    /** @var int invoice/orderid */
+    protected $orderid;
+
+    /** @var int invoice/customerwmid */
+    protected $customerwmid;
+
+    /** @var string invoice/storepurse */
+    protected $storepurse;
+
+    /** @var float invoice/amount */
+    protected $amount;
+
+    /** @var string invoice/desc */
+    protected $desc;
+
+    /** @var string invoice/address */
+    protected $address;
+
+    /** @var int invoice/period */
+    protected $period;
+
+    /** @var int invoice/expiration */
+    protected $expiration;
+
+    /** @var int invoice/state */
+    protected $state;
+
+    /** @var \DateTime invoice/datecrt */
+    protected $datecrt;
+
+    /** @var \DateTime invoice/dateupd */
+    protected $dateupd;
 
     public function __construct($response)
     {
-        $responseObject          = new \SimpleXMLElement($response);
-        $this->requestNumber     = (int)$responseObject->reqn;
-        $this->returnCode        = (int)$responseObject->retval;
+        $responseObject = new \SimpleXMLElement($response);
+        $this->requestNumber = (int)$responseObject->reqn;
+        $this->returnCode = (int)$responseObject->retval;
         $this->returnDescription = (string)$responseObject->retdesc;
 
         if (isset($responseObject->invoice)) {
-            $this->invoice = new Invoice($this->invoiceToArray($responseObject->invoice));
+            $invoice = $responseObject->invoice;
+            $this->invoiceid = (int)$invoice['id'];
+            $this->invoicets = (int)$invoice['ts'];
+            $this->orderid = (string)$invoice->orderid;
+            $this->customerwmid = (string)$invoice->customerwmid;
+            $this->storepurse = (string)$invoice->storepurse;
+            $this->amount = (float)$invoice->amount;
+            $this->desc = (string)$invoice->desc;
+            $this->address = (string)$invoice->address;
+            $this->period = (int)$invoice->period;
+            $this->expiration = (int)$invoice->expiration;
+            $this->state = (int)$invoice->state;
+            $this->datecrt = (string)$invoice->datecrt; //wm format Ymd H:i:s
+            $this->dateupd = (string)$invoice->dateupd; //wm format Ymd H:i:s
         }
-    }
-
-    protected function invoiceToArray(\SimpleXMLElement $invoice)
-    {
-        return array(
-            'invoiceid'    => (int)$invoice['id'],
-            'invoicets'    => (int)$invoice['ts'],
-            'orderid'      => (string)$invoice->orderid,
-            'customerwmid' => (string)$invoice->customerwmid,
-            'storepurse'   => (string)$invoice->storepurse,
-            'amount'       => (float)$invoice->amount,
-            'desc'         => (string)$invoice->desc,
-            'address'      => (string)$invoice->address,
-            'period'       => (int)$invoice->period,
-            'expiration'   => (int)$invoice->expiration,
-            'state'        => (int)$invoice->state,
-            'datecrt'      => (string)$invoice->datecrt,
-            'dateupd'      => (string)$invoice->dateupd,
-        );
-    }
-
-    /**
-     * @return Invoice
-     */
-    public function getInvoice()
-    {
-        return $this->invoice;
     }
 
     /**
      * @return int
      */
-    public function getReturnCode()
+    public function getInvoiceid()
     {
-        return $this->returnCode;
+        return $this->invoiceid;
+    }
+
+    /**
+     * @return int
+     */
+    public function getInvoicets()
+    {
+        return $this->invoicets;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrderid()
+    {
+        return $this->orderid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomerwmid()
+    {
+        return $this->customerwmid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStorepurse()
+    {
+        return $this->storepurse;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * @return float
+     */
+    public function getDesc()
+    {
+        return $this->desc;
+    }
+
+    /**
+     * @return float
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
+    /**
+     * @return int
+     */
+    public function getExpiration()
+    {
+        return $this->expiration;
+    }
+
+    /**
+     * @return int
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDatecrt()
+    {
+        return $this->datecrt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateupd()
+    {
+        return $this->dateupd;
     }
 }
