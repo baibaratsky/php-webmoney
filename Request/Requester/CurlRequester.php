@@ -21,8 +21,6 @@ class CurlRequester extends AbstractRequester
             throw new RequesterException('This requester doesn\'t support such type of request.');
         }
 
-        /** @var XmlRequest $request */
-
         $handler = curl_init($request->getUrl());
 
         curl_setopt($handler, CURLOPT_POST, true);
@@ -33,8 +31,9 @@ class CurlRequester extends AbstractRequester
         }
         curl_setopt($handler, CURLOPT_SSL_VERIFYPEER, $this->verifyCertificate);
         curl_setopt($handler, CURLOPT_SSLVERSION, 1);
+
         if ($request instanceof Request && $request->getAuthType() === Request::AUTH_LIGHT) {
-            curl_setopt($handler, CURLOPT_SSLCERT, $request->getLightCert());
+            curl_setopt($handler, CURLOPT_SSLCERT, $request->getLightCertificate());
             curl_setopt($handler, CURLOPT_SSLKEY, $request->getLightKey());
         }
 

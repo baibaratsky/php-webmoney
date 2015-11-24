@@ -19,7 +19,7 @@ abstract class Request extends XmlRequest
     protected $requestNumber;
 
     /** @var string Light auth cert file name (PEM) */
-    protected $lightCert;
+    protected $lightCertificate;
 
     /** @var string Light auth key file name (PEM) */
     protected $lightKey;
@@ -31,12 +31,12 @@ abstract class Request extends XmlRequest
     }
 
     /**
-     * @param string $lightCert Light auth cert file name (PEM)
+     * @param string $lightCertificate Light auth certificate file name (PEM)
      * @param string $lightKey Light auth key file name (PEM)
      */
-    public function cert($lightCert, $lightKey)
+    public function cert($lightCertificate, $lightKey)
     {
-        $this->lightCert = $lightCert;
+        $this->lightCertificate = $lightCertificate;
         $this->lightKey = $lightKey;
     }
 
@@ -51,9 +51,9 @@ abstract class Request extends XmlRequest
     /**
      * @return string
      */
-    public function getLightCert()
+    public function getLightCertificate()
     {
-        return $this->lightCert;
+        return $this->lightCertificate;
     }
 
     /**
