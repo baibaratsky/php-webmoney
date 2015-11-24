@@ -11,6 +11,9 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
+    /** @var int reqn */
+    protected $requestNumber;
+
     /** @var int operation[@id] */
     protected $transactionId;
 
@@ -58,6 +61,7 @@ class Response extends AbstractResponse
         parent::__construct($response);
 
         $responseObject = new \SimpleXMLElement($response);
+        $this->requestNumber = (int)$responseObject->reqn;
         $this->returnCode = (int)$responseObject->retval;
         $this->returnDescription = (string)$responseObject->retdesc;
 
@@ -77,6 +81,14 @@ class Response extends AbstractResponse
             $this->createDateTime = self::createDateTime((string)$operation->datecrt);
             $this->updateDateTime = self::createDateTime((string)$operation->dateupd);
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getRequestNumber()
+    {
+        return $this->requestNumber;
     }
 
     /**

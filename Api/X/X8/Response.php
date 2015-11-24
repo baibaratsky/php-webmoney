@@ -11,6 +11,9 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
+    /** @var int reqn */
+    protected $requestNumber;
+
     /** @var Wmid testwmpurse/wmid */
     protected $wmid;
 
@@ -25,6 +28,7 @@ class Response extends AbstractResponse
         parent::__construct($response);
 
         $responseObject = new \SimpleXMLElement($response);
+        $this->requestNumber = (int)$responseObject->reqn;
         $this->returnCode = (int)$responseObject->retval;
         $this->returnDescription = (string)$responseObject->retdesc;
         if (!empty($responseObject->testwmpurse->wmid)) {
@@ -47,6 +51,14 @@ class Response extends AbstractResponse
                             (bool)$responseObject->testwmpurse->purse['merchant_allow_cashier'] : null
             );
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getRequestNumber()
+    {
+        return $this->requestNumber;
     }
 
     /**

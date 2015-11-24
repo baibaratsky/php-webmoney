@@ -59,6 +59,14 @@ class Response extends AbstractResponse
     /**
      * @return int
      */
+    public function getRequestNumber()
+    {
+        return $this->requestNumber;
+    }
+
+    /**
+     * @return int
+     */
     public function getReturnCode()
     {
         return $this->returnCode;
