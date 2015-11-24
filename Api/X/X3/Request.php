@@ -30,7 +30,7 @@ class Request extends X\Request
     protected $invoiceId;
 
     /** @var int getoperations\orderid */
-    protected $externalInvoiceId;
+    protected $orderId;
 
     /** @var \DateTime getoperations\datestart */
     protected $startDateTime;
@@ -78,7 +78,7 @@ class Request extends X\Request
         $xml .= self::xmlElement('wmtranid', $this->transactionId);
         $xml .= self::xmlElement('tranid', $this->transactionExternalId);
         $xml .= self::xmlElement('wminvid', $this->invoiceId);
-        $xml .= self::xmlElement('orderid', $this->externalInvoiceId);
+        $xml .= self::xmlElement('orderid', $this->orderId);
         $xml .= self::xmlElement('datestart', $this->startDateTime->format('Ymd H:i:s'));
         $xml .= self::xmlElement('datefinish', $this->endDateTime->format('Ymd H:i:s'));
         $xml .= '</getoperations>';
@@ -171,19 +171,37 @@ class Request extends X\Request
     }
 
     /**
-     * @param int $externalInvoiceId
+     * @param int $orderId
      */
-    public function setExternalInvoiceId($externalInvoiceId)
+    public function setOrderId($orderId)
     {
-        $this->externalInvoiceId = $externalInvoiceId;
+        $this->orderId = $orderId;
     }
 
     /**
      * @return int
      */
+    public function getOrderId()
+    {
+        return $this->orderId;
+    }
+
+    /**
+     * @deprecated Use setOrderId() instead
+     * @param int $externalInvoiceId
+     */
+    public function setExternalInvoiceId($externalInvoiceId)
+    {
+        $this->setOrderId($externalInvoiceId);
+    }
+
+    /**
+     * @deprecated Use getOrderId() instead
+     * @return int
+     */
     public function getExternalInvoiceId()
     {
-        return $this->externalInvoiceId;
+        return $this->getOrderId();
     }
 
     /**

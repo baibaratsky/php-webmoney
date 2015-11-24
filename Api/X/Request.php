@@ -18,10 +18,26 @@ abstract class Request extends XmlRequest
     /** @var string reqn */
     protected $requestNumber;
 
+    /** @var string Light auth cert file name (PEM) */
+    protected $lightCert;
+
+    /** @var string Light auth key file name (PEM) */
+    protected $lightKey;
+
     public function __construct($authType = self::AUTH_CLASSIC)
     {
         $this->authType = $authType;
         $this->requestNumber = $this->generateRequestNumber();
+    }
+
+    /**
+     * @param string $lightCert Light auth cert file name (PEM)
+     * @param string $lightKey Light auth key file name (PEM)
+     */
+    public function cert($lightCert, $lightKey)
+    {
+        $this->lightCert = $lightCert;
+        $this->lightKey = $lightKey;
     }
 
     /**
@@ -30,6 +46,22 @@ abstract class Request extends XmlRequest
     public function getAuthType()
     {
         return $this->authType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLightCert()
+    {
+        return $this->lightCert;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLightKey()
+    {
+        return $this->lightKey;
     }
 
     /**
