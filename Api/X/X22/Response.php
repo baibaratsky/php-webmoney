@@ -53,18 +53,17 @@ class Response extends AbstractResponse
     const URL_LANG_EN = 'en';
 
     /**
-     * @param string $token
      * @param string $lang
      * @throws ApiException
      * @return string URL
      */
-    public static function getUrl($token, $lang = self::URL_LANG_EN)
+    public function getUrl($lang = self::URL_LANG_EN)
     {
         switch ($lang) {
             case self::URL_LANG_RU:
-                return 'https://merchant.webmoney.ru/lmi/payment.asp?gid=' . $token;
+                return 'https://merchant.webmoney.ru/lmi/payment.asp?gid=' . $this->transToken;
             case self::URL_LANG_EN:
-                return 'https://merchant.wmtransfer.com/lmi/payment.asp?gid=' . $token;
+                return 'https://merchant.wmtransfer.com/lmi/payment.asp?gid=' . $this->transToken;
             default:
                 throw new ApiException('Unknown lang value: ' . $lang);
         }
