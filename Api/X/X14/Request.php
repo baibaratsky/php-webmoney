@@ -28,12 +28,17 @@ class Request extends X\Request
 
     public function __construct($authType = self::AUTH_CLASSIC)
     {
-        if ($authType === self::AUTH_CLASSIC) {
-            $this->url = 'https://w3s.webmoney.ru/asp/XMLTransMoneyback.asp';
-        } elseif ($authType === self::AUTH_LIGHT) {
-            $this->url = 'https://w3s.wmtransfer.com/asp/XMLTransMoneybackCert.asp';
-        } else {
-            throw new ApiException('This interface doesn\'t support the authentication type given.');
+        switch ($authType) {
+            case self::AUTH_CLASSIC:
+                $this->url = 'https://w3s.webmoney.ru/asp/XMLTransMoneyback.asp';
+                break;
+
+            case self::AUTH_LIGHT:
+                $this->url = 'https://w3s.wmtransfer.com/asp/XMLTransMoneybackCert.asp';
+                break;
+
+            default:
+                throw new ApiException('This interface doesn\'t support the authentication type given.');
         }
 
         parent::__construct($authType);

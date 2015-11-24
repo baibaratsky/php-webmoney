@@ -98,12 +98,17 @@ class Request extends X\Request
      */
     public function __construct($authType = self::AUTH_CLASSIC)
     {
-        if ($authType === self::AUTH_CLASSIC) {
-            $this->url = 'https://apipassport.webmoney.ru/XMLCheckUser.aspx';
-        } elseif ($authType === self::AUTH_LIGHT) {
-            $this->url = 'https://apipassport.webmoney.ru/XMLCheckUserCert.aspx';
-        } else {
-            throw new ApiException('This interface doesn\'t support the authentication type given.');
+        switch ($authType) {
+            case self::AUTH_CLASSIC:
+                $this->url = 'https://apipassport.webmoney.ru/XMLCheckUser.aspx';
+                break;
+
+            case self::AUTH_LIGHT:
+                $this->url = 'https://apipassport.webmoney.ru/XMLCheckUserCert.aspx';
+                break;
+
+            default:
+                throw new ApiException('This interface doesn\'t support the authentication type given.');
         }
 
         parent::__construct($authType);
