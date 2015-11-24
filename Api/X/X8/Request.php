@@ -46,10 +46,10 @@ class Request extends X\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array('requestNumber'),
-            RequestValidator::TYPE_DEPEND_REQUIRED => array(
-                'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
-            ),
+                RequestValidator::TYPE_REQUIRED => array('requestNumber'),
+                RequestValidator::TYPE_DEPEND_REQUIRED => array(
+                        'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
+                ),
         );
     }
 

@@ -27,7 +27,7 @@ class Request extends X\Request
 
     public function __construct($authType = self::AUTH_CLASSIC)
     {
-        if ($authType !== self::AUTH_CLASSIC && $authType !== self::AUTH_LIGHT) {
+        if (!in_array($authType, array(self::AUTH_CLASSIC, self::AUTH_LIGHT))) {
             throw new ApiException('This interface doesn\'t support the authentication type given.');
         }
 
@@ -43,13 +43,13 @@ class Request extends X\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array('contractId'),
-            RequestValidator::TYPE_DEPEND_REQUIRED => array(
-                'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
-            ),
-            RequestValidator::TYPE_RANGE => array(
-                'type' => array(self::TYPE_ACCEPT_DATE),
-            ),
+                RequestValidator::TYPE_REQUIRED => array('contractId'),
+                RequestValidator::TYPE_DEPEND_REQUIRED => array(
+                        'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
+                ),
+                RequestValidator::TYPE_RANGE => array(
+                        'type' => array(self::TYPE_ACCEPT_DATE),
+                ),
         );
     }
 

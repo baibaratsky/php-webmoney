@@ -49,7 +49,7 @@ class Request extends X\Request
     public function sign(Signer $requestSigner = null)
     {
         if ($this->authType === self::AUTH_CLASSIC) {
-            $this->signature = $requestSigner->sign($this->wmtranid . $this->pcode . $this->requestNumber);
+            $this->signature = $requestSigner->sign($this->transactionId . $this->protectionCode . $this->requestNumber);
         }
     }
 
@@ -59,10 +59,10 @@ class Request extends X\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array('wmtranid', 'pcode'),
-            RequestValidator::TYPE_DEPEND_REQUIRED => array(
-                'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
-            ),
+                RequestValidator::TYPE_REQUIRED => array('transactionId', 'protectionCode'),
+                RequestValidator::TYPE_DEPEND_REQUIRED => array(
+                        'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
+                ),
         );
     }
 

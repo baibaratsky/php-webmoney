@@ -36,12 +36,12 @@ class Request extends X\Request
     protected $address;
 
     /** @var int invoice/period */
-    protected $protectionPeriod;
+    protected $protectionPeriod = 0;
 
     /** @var int invoice/expiration */
-    protected $expiration;
+    protected $expiration = 0;
 
-    /** @var int invoice/onlyauth */
+    /** @var bool invoice/onlyauth */
     protected $onlyAuth;
 
     /** @var int invoice/lmi_shop_id */
@@ -74,15 +74,15 @@ class Request extends X\Request
     {
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign(
-                $this->orderId .
-                $this->customerWmid .
-                $this->purse .
-                $this->amount .
-                mb_convert_encoding($this->description, 'Windows-1251', 'UTF-8') .
-                $this->address .
-                $this->protectionPeriod .
-                $this->expiration .
-                $this->requestNumber);
+                    $this->orderId .
+                    $this->customerWmid .
+                    $this->purse .
+                    $this->amount .
+                    mb_convert_encoding($this->description, 'Windows-1251', 'UTF-8') .
+                    $this->address .
+                    $this->protectionPeriod .
+                    $this->expiration .
+                    $this->requestNumber);
         }
     }
 
@@ -92,9 +92,11 @@ class Request extends X\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_DEPEND_REQUIRED => array(
-                'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
-            ),
+                RequestValidator::TYPE_REQUIRED => array('customerWmid', 'purse', 'amount', 'protectionPeriod',
+                                                         'expiration'),
+                RequestValidator::TYPE_DEPEND_REQUIRED => array(
+                        'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
+                ),
         );
     }
 
@@ -116,7 +118,7 @@ class Request extends X\Request
         $xml .= self::xmlElement('address', $this->address);
         $xml .= self::xmlElement('period', $this->protectionPeriod);
         $xml .= self::xmlElement('expiration', $this->expiration);
-        $xml .= self::xmlElement('onlyauth', $this->onlyAuth);
+        $xml .= self::xmlElement('onlyauth', (int)$this->onlyAuth);
         $xml .= self::xmlElement('lmi_shop_id', $this->shopId);
         $xml .= '</invoice>';
         $xml .= '</w3s.request>';
@@ -217,7 +219,7 @@ class Request extends X\Request
      */
     public function getDescription()
     {
-        return $this->desc;
+        return $this->description;
     }
 
     /**
@@ -253,7 +255,7 @@ class Request extends X\Request
      */
     public function getProtectionPeriod()
     {
-        return $this->period;
+        return $this->protectionPeriod;
     }
 
     /**
@@ -285,7 +287,7 @@ class Request extends X\Request
     }
 
     /**
-     * @return int
+     * @return bool
      */
     public function getOnlyAuth()
     {
@@ -293,9 +295,9 @@ class Request extends X\Request
     }
 
     /**
-     * @param $onlyAuth
+     * @param bool $onlyAuth
      *
-     * @return int
+     * @return bool
      */
     public function setOnlyAuth($onlyAuth)
     {

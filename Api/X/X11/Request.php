@@ -59,15 +59,15 @@ class Request extends X\Request
     public function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array('passportWmid', 'paramDict', 'paramInfo', 'paramMode'),
-            RequestValidator::TYPE_DEPEND_REQUIRED => array(
-                'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
-            ),
-            RequestValidator::TYPE_RANGE => array(
-                'paramDict' => array(self::DICT_SHOW, self::DICT_NOT_SHOW),
-                'paramInfo' => array(self::INFO_SHOW, self::INFO_NOT_SHOW),
-                'paramMode' => array(self::MODE_CHECK, self::MODE_NOT_CHECK),
-            ),
+                RequestValidator::TYPE_REQUIRED => array('passportWmid', 'paramDict', 'paramInfo', 'paramMode'),
+                RequestValidator::TYPE_DEPEND_REQUIRED => array(
+                        'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
+                ),
+                RequestValidator::TYPE_RANGE => array(
+                        'paramDict' => array(self::DICT_SHOW, self::DICT_NOT_SHOW),
+                        'paramInfo' => array(self::INFO_SHOW, self::INFO_NOT_SHOW),
+                        'paramMode' => array(self::MODE_CHECK, self::MODE_NOT_CHECK),
+                ),
         );
     }
 

@@ -48,7 +48,7 @@ class Request extends X\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array('transactionId', 'amount'),
+                RequestValidator::TYPE_REQUIRED => array('transactionId', 'amount'),
         );
     }
 

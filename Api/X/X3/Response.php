@@ -54,21 +54,21 @@ class Response extends AbstractResponse
     protected function operationXmlToArray($xml)
     {
         $data = array(
-            'transactionId' => (int)$xml['id'],
-            'payerPurse' => (string)$xml->pursesrc,
-            'payeePurse' => (string)$xml->pursedest,
-            'amount' => (float)$xml->amount,
-            'fee' => (float)$xml->comiss,
-            'operationType' => (string)$xml->opertype,
-            'invoiceId' => (int)$xml->wminvid,
-            'orderId' => (int)$xml->orderid,
-            'transactionExternalId' => (int)$xml->tranid,
-            'period' => (int)$xml->period,
-            'description' => (string)$xml->desc,
-            'createDateTime' => (string)$xml->datecrt,
-            'updateDateTime' => (string)$xml->dateupd,
-            'correspondentWmid' => (string)$xml->corrwm,
-            'balance' => (float)$xml->rest,
+                'transactionId' => (int)$xml['id'],
+                'payerPurse' => (string)$xml->pursesrc,
+                'payeePurse' => (string)$xml->pursedest,
+                'amount' => (float)$xml->amount,
+                'fee' => (float)$xml->comiss,
+                'operationType' => (string)$xml->opertype,
+                'invoiceId' => (int)$xml->wminvid,
+                'orderId' => (int)$xml->orderid,
+                'transactionExternalId' => (int)$xml->tranid,
+                'period' => (int)$xml->period,
+                'description' => (string)$xml->desc,
+                'createDateTime' => (string)$xml->datecrt,
+                'updateDateTime' => (string)$xml->dateupd,
+                'correspondentWmid' => (string)$xml->corrwm,
+                'balance' => (float)$xml->rest,
         );
 
         if ($data['operationType'] != Operation::TYPE_SIMPLE) {

@@ -78,22 +78,23 @@ class Request extends MegaStock\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array(
-                'integratorId', 'integratorWmid', 'url', 'categoryId', 'aboutLanguage', 'aboutName', 'aboutDescription',
-                'merchantNameInComment', 'geoBindings',
-            ),
-            RequestValidator::TYPE_ARRAY => array('about', 'geoBindings'),
-            RequestValidator::TYPE_DEPEND_REQUIRED => array(
-                'beneficiaryLegalName' => array('loginType' => array(self::LOGIN_TYPE_KEEPER)),
-                'beneficiaryLegalOgrn' => array('loginType' => array(self::LOGIN_TYPE_KEEPER)),
-                'beneficiaryWmid' => array('loginType' => array(self::LOGIN_TYPE_PROCESSING)),
-            ),
-            RequestValidator::TYPE_CONDITIONAL => array(
-                'beneficiaryType' => array(
-                    array('value' => self::BENEFICIARY_TYPE_CONTRACT, 'conditional' => array('loginType' => self::LOGIN_TYPE_KEEPER)),
-                    array('value' => self::BENEFICIARY_TYPE_WEBMONEY, 'conditional' => array('loginType' => self::LOGIN_TYPE_PROCESSING))
+                RequestValidator::TYPE_REQUIRED => array('integratorId', 'integratorWmid', 'url', 'categoryId',
+                                                         'aboutLanguage', 'aboutName', 'aboutDescription',
+                                                         'merchantNameInComment', 'geoBindings'),
+                RequestValidator::TYPE_ARRAY => array('about', 'geoBindings'),
+                RequestValidator::TYPE_DEPEND_REQUIRED => array(
+                        'beneficiaryLegalName' => array('loginType' => array(self::LOGIN_TYPE_KEEPER)),
+                        'beneficiaryLegalOgrn' => array('loginType' => array(self::LOGIN_TYPE_KEEPER)),
+                        'beneficiaryWmid' => array('loginType' => array(self::LOGIN_TYPE_PROCESSING)),
                 ),
-            ),
+                RequestValidator::TYPE_CONDITIONAL => array(
+                        'beneficiaryType' => array(
+                                array('value' => self::BENEFICIARY_TYPE_CONTRACT,
+                                      'conditional' => array('loginType' => self::LOGIN_TYPE_KEEPER)),
+                                array('value' => self::BENEFICIARY_TYPE_WEBMONEY,
+                                      'conditional' => array('loginType' => self::LOGIN_TYPE_PROCESSING))
+                        ),
+                ),
         );
     }
 

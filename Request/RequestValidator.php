@@ -50,7 +50,7 @@ class RequestValidator
                         $this->validateConditional($key, $param);
                         break;
                     case self::TYPE_ARRAY:
-                        $this->validateArray($key, $param);
+                        $this->validateArray($key);
                         break;
                     default:
                         throw new RequestValidatorException('Wrong validation type: ' . $type);
@@ -152,7 +152,7 @@ class RequestValidator
                 $hasErrors = false;
                 foreach ($item['conditional'] as $conditionalParam => $conditionalValue) {
                     $propertyConditionalValue =
-                        call_user_func(array($this->request, 'get' . ucfirst($conditionalParam)));
+                            call_user_func(array($this->request, 'get' . ucfirst($conditionalParam)));
                     if (empty($propertyConditionalValue)) {
                         $hasErrors = true;
                         break;

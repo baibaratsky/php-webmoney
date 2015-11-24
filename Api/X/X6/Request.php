@@ -53,12 +53,10 @@ class Request extends X\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array(
-                'messageRecipientWmid', 'messageSubject', 'messageText',
-            ),
-            RequestValidator::TYPE_DEPEND_REQUIRED => array(
-                'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
-            ),
+                RequestValidator::TYPE_REQUIRED => array('messageRecipientWmid', 'messageSubject', 'messageText'),
+                RequestValidator::TYPE_DEPEND_REQUIRED => array(
+                        'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
+                ),
         );
     }
 
@@ -97,10 +95,10 @@ class Request extends X\Request
     {
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign(
-                $this->messageRecipientWmid .
-                $this->requestNumber .
-                mb_convert_encoding($this->messageText, 'Windows-1251', 'UTF-8') .
-                mb_convert_encoding($this->messageSubject, 'Windows-1251', 'UTF-8')
+                    $this->messageRecipientWmid .
+                    $this->requestNumber .
+                    mb_convert_encoding($this->messageText, 'Windows-1251', 'UTF-8') .
+                    mb_convert_encoding($this->messageSubject, 'Windows-1251', 'UTF-8')
             );
         }
     }

@@ -25,10 +25,10 @@ class Response extends AbstractResponse
         $this->returnCode = (int)$responseObject->retval;
         $this->returnDescription = (string)$responseObject->retdesc;
         $this->message = new Message(
-            (string)$responseObject->message->receiverwmid,
-            (string)$responseObject->message->msgsubj,
-            (string)$responseObject->message->msgtext,
-            self::createDateTime((string)$responseObject->message->datecrt)
+                (string)$responseObject->message->receiverwmid,
+                (string)$responseObject->message->msgsubj,
+                (string)$responseObject->message->msgtext,
+                self::createDateTime((string)$responseObject->message->datecrt)
         );
     }
 

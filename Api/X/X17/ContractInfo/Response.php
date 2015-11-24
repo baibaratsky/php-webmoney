@@ -27,9 +27,9 @@ class Response extends AbstractResponse
 
         foreach ($responseObject->contractinfo->row as $contract) {
             $this->acceptances[] = new Acceptance(
-                (int)$contract['contractid'],
-                (string)$contract['wmid'],
-                empty($contract['acceptdate']) ? null : self::createDateTime($contract['acceptdate'])
+                    (int)$contract['contractid'],
+                    (string)$contract['wmid'],
+                    empty($contract['acceptdate']) ? null : self::createDateTime($contract['acceptdate'])
             );
         }
     }

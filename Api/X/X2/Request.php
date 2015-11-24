@@ -68,13 +68,13 @@ class Request extends X\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array(
-                'transactionExternalId', 'payerPurse', 'payeePurse', 'amount',
-                'description', 'invoiceId', 'onlyAuth',
-            ),
-            RequestValidator::TYPE_DEPEND_REQUIRED => array(
-                'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
-            ),
+                RequestValidator::TYPE_REQUIRED => array(
+                        'transactionExternalId', 'payerPurse', 'payeePurse', 'amount',
+                        'description', 'invoiceId', 'onlyAuth',
+                ),
+                RequestValidator::TYPE_DEPEND_REQUIRED => array(
+                        'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
+                ),
         );
     }
 
@@ -118,12 +118,12 @@ class Request extends X\Request
     {
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign(
-                $this->requestNumber . $this->transactionExternalId .
-                $this->payerPurse . $this->payeePurse .
-                $this->amount . $this->protectionPeriod .
-                $this->protectionCode .
-                mb_convert_encoding($this->description, 'Windows-1251', 'UTF-8') .
-                $this->invoiceId
+                    $this->requestNumber . $this->transactionExternalId .
+                    $this->payerPurse . $this->payeePurse .
+                    $this->amount . $this->protectionPeriod .
+                    $this->protectionCode .
+                    mb_convert_encoding($this->description, 'Windows-1251', 'UTF-8') .
+                    $this->invoiceId
             );
         }
     }

@@ -118,32 +118,41 @@ class Request extends X\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array('requestNumber', 'operationAmount', 'userWmid', 'operationType', 'operationDirection', 'operationPurseType'),
-            RequestValidator::TYPE_DEPEND_REQUIRED => array(
-                'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
-                'userPassportNum' => array('operationType' => array(self::TYPE_CASH)),
-                'userFirstName' => array('operationType' => array(self::TYPE_CASH, self::TYPE_SDP, self::TYPE_BANK, self::TYPE_CARD)),
-                'userLastName' => array('operationType' => array(self::TYPE_CASH, self::TYPE_SDP, self::TYPE_BANK, self::TYPE_CARD)),
-                'userBankName' => array('operationType' => array(self::TYPE_BANK, self::TYPE_CARD)),
-                'userBankAccount' => array('operationType' => array(self::TYPE_BANK)),
-                'userCardNumber' => array('operationType' => array(self::TYPE_CARD)),
-                'userEMoneyName' => array('operationType' => array(self::TYPE_EMONEY)),
-                'userEMoneyId' => array('operationType' => array(self::TYPE_EMONEY)),
-                'userPhone' => array('operationType' => array(self::TYPE_SMS, self::TYPE_MOBILE)),
-            ),
-            RequestValidator::TYPE_RANGE => array(
-                'language' => array(self::LANG_RU, self::LANG_EN),
-                'operationType' => array(self::TYPE_CASH, self::TYPE_SDP, self::TYPE_BANK, self::TYPE_CARD, self::TYPE_EMONEY, self::TYPE_SMS, self::TYPE_MOBILE),
-                'operationDirection' => array(self::DIRECTION_OUTPUT, self::DIRECTION_INPUT),
-                'operationPurseType' => array(self::PURSE_WMZ, self::PURSE_WMR, self::PURSE_WME, self::PURSE_WMU, self::PURSE_WMB, self::PURSE_WMY, self::PURSE_WMG),
-                'userEMoneyName' => array(self::EMONEY_RBKM, self::EMONEY_PP, self::EMONEY_SK, self::EMONEY_QW, self::EMONEY_YAM, self::EMONEY_ESP),
-            ),
-            RequestValidator::TYPE_CONDITIONAL => array(
-                'operationType' => array(
-                    array('value' => self::TYPE_SMS, 'conditional' => array('operationDirection' => self::DIRECTION_INPUT)),
-                    array('value' => self::TYPE_MOBILE, 'conditional' => array('operationDirection' => self::DIRECTION_OUTPUT))
+                RequestValidator::TYPE_REQUIRED => array('requestNumber', 'operationAmount', 'userWmid',
+                                                         'operationType', 'operationDirection', 'operationPurseType'),
+                RequestValidator::TYPE_DEPEND_REQUIRED => array(
+                        'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
+                        'userPassportNum' => array('operationType' => array(self::TYPE_CASH)),
+                        'userFirstName' => array('operationType' => array(self::TYPE_CASH, self::TYPE_SDP,
+                                                                          self::TYPE_BANK, self::TYPE_CARD)),
+                        'userLastName' => array('operationType' => array(self::TYPE_CASH, self::TYPE_SDP,
+                                                                         self::TYPE_BANK, self::TYPE_CARD)),
+                        'userBankName' => array('operationType' => array(self::TYPE_BANK, self::TYPE_CARD)),
+                        'userBankAccount' => array('operationType' => array(self::TYPE_BANK)),
+                        'userCardNumber' => array('operationType' => array(self::TYPE_CARD)),
+                        'userEMoneyName' => array('operationType' => array(self::TYPE_EMONEY)),
+                        'userEMoneyId' => array('operationType' => array(self::TYPE_EMONEY)),
+                        'userPhone' => array('operationType' => array(self::TYPE_SMS, self::TYPE_MOBILE)),
                 ),
-            ),
+                RequestValidator::TYPE_RANGE => array(
+                        'language' => array(self::LANG_RU, self::LANG_EN),
+                        'operationType' => array(self::TYPE_CASH, self::TYPE_SDP, self::TYPE_BANK, self::TYPE_CARD,
+                                                 self::TYPE_EMONEY, self::TYPE_SMS, self::TYPE_MOBILE),
+                        'operationDirection' => array(self::DIRECTION_OUTPUT, self::DIRECTION_INPUT),
+                        'operationPurseType' => array(self::PURSE_WMZ, self::PURSE_WMR, self::PURSE_WME,
+                                                      self::PURSE_WMU, self::PURSE_WMB, self::PURSE_WMY,
+                                                      self::PURSE_WMG),
+                        'userEMoneyName' => array(self::EMONEY_RBKM, self::EMONEY_PP, self::EMONEY_SK, self::EMONEY_QW,
+                                                  self::EMONEY_YAM, self::EMONEY_ESP),
+                ),
+                RequestValidator::TYPE_CONDITIONAL => array(
+                        'operationType' => array(
+                                array('value' => self::TYPE_SMS,
+                                      'conditional' => array('operationDirection' => self::DIRECTION_INPUT)),
+                                array('value' => self::TYPE_MOBILE,
+                                      'conditional' => array('operationDirection' => self::DIRECTION_OUTPUT))
+                        ),
+                ),
         );
     }
 

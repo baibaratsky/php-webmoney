@@ -1,6 +1,6 @@
 <?php
 
-namespace baibaratsky\WebMoney\Api\X\X13;
+namespace baibaratsky\WebMoney\Api\X\X15\Get;
 
 use baibaratsky\WebMoney\Api\X;
 use baibaratsky\WebMoney\Signer;
@@ -10,25 +10,42 @@ use baibaratsky\WebMoney\Exception\ApiException;
 /**
  * Class Request
  *
- * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X13
+ * @link https://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_X15
  */
 class Request extends X\Request
 {
     /** @var string wmid */
     protected $signerWmid;
 
-    /** @var string finishprotect\wmtranid */
-    protected $transactionId;
+    /** @var string gettrustlist/wmid */
+    protected $requestedWmid;
 
     public function __construct($authType = self::AUTH_CLASSIC)
     {
-        if ($authType === self::AUTH_CLASSIC) {
-            $this->url = 'https://w3s.webmoney.ru/asp/XMLRejectProtect.asp';
-        } else {
+        if (!in_array($authType, array(self::AUTH_CLASSIC, self::AUTH_LIGHT))) {
             throw new ApiException('This interface doesn\'t support the authentication type given.');
         }
 
         parent::__construct($authType);
+    }
+
+    public function getUrl()
+    {
+        if ($this->authType === self::AUTH_CLASSIC) {
+            if ($this->signerWmid === $this->requestedWmid) {
+                $this->url = 'https://w3s.webmoney.ru/asp/XMLTrustList.asp';
+            } else {
+                $this->url = 'https://w3s.webmoney.ru/asp/XMLTrustList2.asp';
+            }
+        } elseif ($this->authType === self::AUTH_LIGHT) {
+            if ($this->signerWmid === $this->requestedWmid) {
+                $this->url = 'https://w3s.webmoney.ru/asp/XMLTrustListCert.asp';
+            } else {
+                $this->url = 'https://w3s.webmoney.ru/asp/XMLTrustList2Cert.asp';
+            }
+        }
+
+        return parent::getUrl();
     }
 
     /**
@@ -46,7 +63,7 @@ class Request extends X\Request
     public function sign(Signer $requestSigner = null)
     {
         if ($this->authType === self::AUTH_CLASSIC) {
-            $this->signature = $requestSigner->sign($this->transactionId . $this->requestNumber);
+            $this->signature = $requestSigner->sign($this->requestedWmid . $this->requestNumber);
         }
     }
 
@@ -56,7 +73,7 @@ class Request extends X\Request
     protected function getValidationRules()
     {
         return array(
-                RequestValidator::TYPE_REQUIRED => array('transactionId'),
+                RequestValidator::TYPE_REQUIRED => array('requestedWmid'),
                 RequestValidator::TYPE_DEPEND_REQUIRED => array(
                         'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
                 ),
@@ -72,9 +89,9 @@ class Request extends X\Request
         $xml .= self::xmlElement('reqn', $this->requestNumber);
         $xml .= self::xmlElement('wmid', $this->signerWmid);
         $xml .= self::xmlElement('sign', $this->signature);
-        $xml .= '<rejectprotect>';
-        $xml .= self::xmlElement('wmtranid', $this->transactionId);
-        $xml .= '</rejectprotect>';
+        $xml .= '<gettrustlist>';
+        $xml .= self::xmlElement('wmid', $this->requestedWmid);
+        $xml .= '</gettrustlist>';
         $xml .= '</w3s.request>';
 
         return $xml;
@@ -99,16 +116,16 @@ class Request extends X\Request
     /**
      * @return string
      */
-    public function getTransactionId()
+    public function getRequestedWmid()
     {
-        return $this->transactionId;
+        return $this->requestedWmid;
     }
 
     /**
-     * @param string $transactionId
+     * @param string $requestedWmid
      */
-    public function setTransactionId($transactionId)
+    public function setRequestedWmid($requestedWmid)
     {
-        $this->transactionId = $transactionId;
+        $this->requestedWmid = $requestedWmid;
     }
 }

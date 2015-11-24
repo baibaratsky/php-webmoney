@@ -36,7 +36,7 @@ class Request extends MegaStock\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array('integratorId', 'integratorWmid', 'resourceId'),
+                RequestValidator::TYPE_REQUIRED => array('integratorId', 'integratorWmid', 'resourceId'),
         );
     }
 

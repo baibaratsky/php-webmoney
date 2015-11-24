@@ -11,6 +11,9 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
+    const STATUS_NORMAL = 0;
+    const STATUS_REFUNDED = 12;
+
     /** @var int reqn */
     protected $requestNumber;
 
@@ -25,6 +28,8 @@ class Response extends AbstractResponse
 
     public function __construct($response)
     {
+        parent::__construct($response);
+
         $responseObject = new \SimpleXMLElement($response);
         $this->requestNumber = (int)$responseObject->reqn;
         $this->returnCode = (int)$responseObject->retval;

@@ -11,6 +11,11 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
+    const STATUS_NOT_PAID = 0;
+    const STATUS_PAID_WITH_PROTECTION = 1;
+    const STATUS_PAID = 2;
+    const STATUS_DECLINED = 3;
+
     /** @var int reqn */
     protected $requestNumber;
 
@@ -42,7 +47,7 @@ class Response extends AbstractResponse
     protected $expiration;
 
     /** @var int invoice/state */
-    protected $state;
+    protected $status;
 
     /** @var \DateTime invoice/datecrt */
     protected $createDateTime;
@@ -52,6 +57,8 @@ class Response extends AbstractResponse
 
     public function __construct($response)
     {
+        parent::__construct($response);
+
         $responseObject = new \SimpleXMLElement($response);
         $this->requestNumber = (int)$responseObject->reqn;
         $this->returnCode = (int)$responseObject->retval;
@@ -68,7 +75,7 @@ class Response extends AbstractResponse
             $this->address = (string)$invoice->address;
             $this->protectionPeriod = (int)$invoice->period;
             $this->expiration = (int)$invoice->expiration;
-            $this->state = (int)$invoice->state;
+            $this->status = (int)$invoice->state;
             $this->createDateTime = self::createDateTime((string)$invoice->datecrt); //wm format Ymd H:i:s
             $this->updateDateTime = self::createDateTime((string)$invoice->dateupd); //wm format Ymd H:i:s
         }
@@ -81,7 +88,7 @@ class Response extends AbstractResponse
     {
         return $this->requestNumber;
     }
-    
+
     /**
      * @return int
      */
@@ -157,9 +164,9 @@ class Response extends AbstractResponse
     /**
      * @return int
      */
-    public function getState()
+    public function getStatus()
     {
-        return $this->state;
+        return $this->status;
     }
 
     /**

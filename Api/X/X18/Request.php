@@ -47,7 +47,10 @@ class Request extends X\Request
      */
     public function __construct($authType = self::AUTH_CLASSIC, $secretKey = null)
     {
-        if ($secretKey === null && in_array($authType, [self::AUTH_SHA256, self::AUTH_MD5, self::AUTH_SECRET_KEY])) {
+        if (
+                $secretKey === null
+                && in_array($authType, array(self::AUTH_SHA256, self::AUTH_MD5, self::AUTH_SECRET_KEY))
+        ) {
             throw new ApiException('Secret key is required for this authentication type.');
         }
 
@@ -63,15 +66,15 @@ class Request extends X\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array('signerWmid', 'payeePurse', 'paymentNumber'),
-            RequestValidator::TYPE_RANGE => array(
-                'paymentNumberType' => array(
-                    self::PAYMENT_NUMBER_TYPE_DEFAULT,
-                    self::PAYMENT_NUMBER_TYPE_ORDER,
-                    self::PAYMENT_NUMBER_TYPE_INVOICE,
-                    self::PAYMENT_NUMBER_TYPE_TRANSACTION,
+                RequestValidator::TYPE_REQUIRED => array('signerWmid', 'payeePurse', 'paymentNumber'),
+                RequestValidator::TYPE_RANGE => array(
+                        'paymentNumberType' => array(
+                                self::PAYMENT_NUMBER_TYPE_DEFAULT,
+                                self::PAYMENT_NUMBER_TYPE_ORDER,
+                                self::PAYMENT_NUMBER_TYPE_INVOICE,
+                                self::PAYMENT_NUMBER_TYPE_TRANSACTION,
+                        ),
                 ),
-            ),
         );
     }
 

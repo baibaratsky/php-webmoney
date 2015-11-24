@@ -28,9 +28,9 @@ abstract class AbstractResponse
      * @return string Fully qualified name of the class
      */
     public static function className()
-   	{
-   		return get_called_class();
-   	}
+    {
+        return get_called_class();
+    }
 
     /**
      * Creates DateTime object from ISO 8601 string

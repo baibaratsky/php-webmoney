@@ -56,7 +56,7 @@ class UserInfo
     private $passportNum;
 
     /** @var string pdate */
-    private $passportDate;
+    private $passportIssueDate;
 
     /** @var string pdateend */
     private $passportExpirationDate;
@@ -241,7 +241,7 @@ class UserInfo
         $this->firstName = $params['iname'];
         $this->middleName = $params['oname'];
         $this->passportNum = $params['pnomer'];
-        $this->passportDate = $params['pdate'];
+        $this->passportIssueDate = $params['pdate'];
         if (isset($params['pdateend'])) {
             $this->passportExpirationDate = $params['pdateend'];
         }
@@ -468,9 +468,18 @@ class UserInfo
     /**
      * @return string
      */
+    public function getPassportIssueDate()
+    {
+        return $this->passportIssueDate;
+    }
+
+    /**
+     * @deprecated Use getPassportIssueDate() instead
+     * @return string
+     */
     public function getPassportDate()
     {
-        return $this->passportDate;
+        return $this->getPassportIssueDate();
     }
 
     /**
@@ -889,11 +898,11 @@ class UserInfo
         return $this->regCheck;
     }
 
-	/**
-	 * @return bool
-	 */
-	public function getPhotoId()
-	{
-		return $this->photoId;
-	}
+    /**
+     * @return bool
+     */
+    public function getPhotoId()
+    {
+        return $this->photoId;
+    }
 }

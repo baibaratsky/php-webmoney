@@ -29,22 +29,22 @@ class Response extends AbstractResponse
         $this->returnDescription = (string)$responseObject->retdesc;
         if (!empty($responseObject->testwmpurse->wmid)) {
             $this->wmid = new Wmid(
-                (string)$responseObject->testwmpurse->wmid,
-                (int)$responseObject->testwmpurse->wmid['available'] > 0 ?
-                        (bool)$responseObject->testwmpurse->wmid['available'] : null,
-                (int)$responseObject->testwmpurse->wmid['themselfcorrstate'] > 0 ?
-                        (int)$responseObject->testwmpurse->wmid['themselfcorrstate'] >= 8 : null,
-                (int)$responseObject->testwmpurse->wmid['newattst'] > 0 ?
-                        (int)$responseObject->testwmpurse->wmid['newattst'] : null
+                    (string)$responseObject->testwmpurse->wmid,
+                    (int)$responseObject->testwmpurse->wmid['available'] > 0 ?
+                            (bool)$responseObject->testwmpurse->wmid['available'] : null,
+                    (int)$responseObject->testwmpurse->wmid['themselfcorrstate'] > 0 ?
+                            (int)$responseObject->testwmpurse->wmid['themselfcorrstate'] >= 8 : null,
+                    (int)$responseObject->testwmpurse->wmid['newattst'] > 0 ?
+                            (int)$responseObject->testwmpurse->wmid['newattst'] : null
             );
         }
         if (!empty($responseObject->testwmpurse->purse)) {
             $this->purse = new Purse(
-                (string)$responseObject->testwmpurse->purse,
-                (int)$responseObject->testwmpurse->purse['merchant_active_mode'] > 0 ?
-                        (bool)$responseObject->testwmpurse->purse['merchant_active_mode'] : null,
-                (int)$responseObject->testwmpurse->purse['merchant_allow_cashier'] > 0 ?
-                        (bool)$responseObject->testwmpurse->purse['merchant_allow_cashier'] : null
+                    (string)$responseObject->testwmpurse->purse,
+                    (int)$responseObject->testwmpurse->purse['merchant_active_mode'] > 0 ?
+                            (bool)$responseObject->testwmpurse->purse['merchant_active_mode'] : null,
+                    (int)$responseObject->testwmpurse->purse['merchant_allow_cashier'] > 0 ?
+                            (bool)$responseObject->testwmpurse->purse['merchant_allow_cashier'] : null
             );
         }
     }
