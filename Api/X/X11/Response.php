@@ -52,7 +52,6 @@ class Response extends AbstractResponse
         parent::__construct($response);
 
         $responseObject = new \SimpleXMLElement($response);
-        $this->requestNumber = (int)$responseObject->reqn;
         $this->returnCode = (int)$responseObject['retval'];
         $this->returnDescription = (string)$responseObject['retdesc'];
         $this->hasFullAccess = (int)$responseObject->fullaccess;
