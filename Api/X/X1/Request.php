@@ -17,38 +17,35 @@ class Request extends X\Request
     /** @var string wmid */
     protected $signerWmid;
 
-    /** @var string getpurses/wmid */
-    protected $requestedWmid;
-
     /** @var int invoice/orderid */
-    protected $orderid;
+    protected $orderId;
 
     /** @var int invoice/customerwmid */
-    protected $customerwmid;
+    protected $customerWmid;
 
     /** @var string invoice/storepurse */
-    protected $storepurse;
+    protected $purse;
 
     /** @var float invoice/amount */
     protected $amount;
 
     /** @var string invoice/desc */
-    protected $desc;
+    protected $description;
 
     /** @var string invoice/address */
     protected $address;
 
     /** @var int invoice/period */
-    protected $period;
+    protected $protectionPeriod;
 
     /** @var int invoice/expiration */
     protected $expiration;
 
     /** @var int invoice/onlyauth */
-    protected $onlyauth;
+    protected $onlyAuth;
 
     /** @var int invoice/lmi_shop_id */
-    protected $lmiShopId;
+    protected $shopId;
 
     public function __construct($authType = self::AUTH_CLASSIC)
     {
@@ -77,13 +74,13 @@ class Request extends X\Request
     {
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign(
-                $this->orderid .
-                $this->customerwmid .
-                $this->storepurse .
+                $this->orderId .
+                $this->customerWmid .
+                $this->purse .
                 $this->amount .
-                mb_convert_encoding($this->desc, 'Windows-1251', 'UTF-8') .
+                mb_convert_encoding($this->description, 'Windows-1251', 'UTF-8') .
                 $this->address .
-                $this->period .
+                $this->protectionPeriod .
                 $this->expiration .
                 $this->requestNumber);
         }
@@ -111,16 +108,16 @@ class Request extends X\Request
         $xml .= self::xmlElement('wmid', $this->signerWmid);
         $xml .= self::xmlElement('sign', $this->signature);
         $xml .= '<invoice>';
-        $xml .= self::xmlElement('orderid', $this->orderid);
-        $xml .= self::xmlElement('customerwmid', $this->customerwmid);
-        $xml .= self::xmlElement('storepurse', $this->storepurse);
+        $xml .= self::xmlElement('orderid', $this->orderId);
+        $xml .= self::xmlElement('customerwmid', $this->customerWmid);
+        $xml .= self::xmlElement('storepurse', $this->purse);
         $xml .= self::xmlElement('amount', $this->amount);
-        $xml .= self::xmlElement('desc', $this->desc);
+        $xml .= self::xmlElement('desc', $this->description);
         $xml .= self::xmlElement('address', $this->address);
-        $xml .= self::xmlElement('period', $this->period);
+        $xml .= self::xmlElement('period', $this->protectionPeriod);
         $xml .= self::xmlElement('expiration', $this->expiration);
-        $xml .= self::xmlElement('onlyauth', $this->onlyauth);
-        $xml .= self::xmlElement('lmi_shop_id', $this->lmiShopId);
+        $xml .= self::xmlElement('onlyauth', $this->onlyAuth);
+        $xml .= self::xmlElement('lmi_shop_id', $this->shopId);
         $xml .= '</invoice>';
         $xml .= '</w3s.request>';
 
@@ -146,71 +143,55 @@ class Request extends X\Request
     /**
      * @return string
      */
-    public function getRequestedWmid()
+    public function getOrderId()
     {
-        return $this->requestedWmid;
+        return $this->orderId;
     }
 
     /**
-     * @param string $requestedWmid
-     */
-    public function setRequestedWmid($requestedWmid)
-    {
-        $this->requestedWmid = $requestedWmid;
-    }
-
-    /**
-     * @return string
-     */
-    public function getOrderid()
-    {
-        return $this->orderid;
-    }
-
-    /**
-     * @param $orderid
+     * @param $orderId
      *
      * @return string
      */
-    public function setOrderid($orderid)
+    public function setOrderId($orderId)
     {
-        $this->orderid = $orderid;
+        $this->orderId = $orderId;
     }
 
     /**
      * @return string
      */
-    public function getCustomerwmid()
+    public function getCustomerWmid()
     {
-        return $this->customerwmid;
+        return $this->customerWmid;
     }
 
     /**
-     * @param $customerwwmid
+     * @param $customerWmid
      *
      * @return string
      */
-    public function setCustomerwmid($customerwwmid)
+    public function setCustomerWmid($customerWmid)
     {
-        $this->customerwmid = $customerwwmid;
+        $this->customerWmid = $customerWmid;
     }
 
     /**
      * @return string
      */
-    public function getStorepurse()
+    public function getPurse()
     {
-        return $this->storepurse;
+        return $this->purse;
     }
 
     /**
-     * @param $storepurse
+     * @param $purse
      *
      * @return string
      */
-    public function setStorepurse($storepurse)
+    public function setPurse($purse)
     {
-        $this->storepurse = $storepurse;
+        $this->purse = $purse;
     }
 
     /**
@@ -234,19 +215,19 @@ class Request extends X\Request
     /**
      * @return float
      */
-    public function getDesc()
+    public function getDescription()
     {
         return $this->desc;
     }
 
     /**
-     * @param $desc
+     * @param $description
      *
      * @return float
      */
-    public function setDesc($desc)
+    public function setDescription($description)
     {
-        $this->desc = $desc;
+        $this->description = $description;
     }
 
     /**
@@ -270,19 +251,19 @@ class Request extends X\Request
     /**
      * @return string
      */
-    public function getPeriod()
+    public function getProtectionPeriod()
     {
         return $this->period;
     }
 
     /**
-     * @param $period
+     * @param $protectionPeriod
      *
      * @return string
      */
-    public function setPeriod($period)
+    public function setProtectionPeriod($protectionPeriod)
     {
-        $this->period = $period;
+        $this->protectionPeriod = $protectionPeriod;
     }
 
     /**
@@ -306,36 +287,36 @@ class Request extends X\Request
     /**
      * @return int
      */
-    public function getOnlyauth()
+    public function getOnlyAuth()
     {
-        return $this->onlyauth;
+        return $this->onlyAuth;
     }
 
     /**
-     * @param $onlyauth
+     * @param $onlyAuth
      *
      * @return int
      */
-    public function setOnlyauth($onlyauth)
+    public function setOnlyAuth($onlyAuth)
     {
-        $this->onlyauth = $onlyauth;
+        $this->onlyAuth = $onlyAuth;
     }
 
     /**
      * @return int
      */
-    public function getLmiShopId()
+    public function getShopId()
     {
-        return $this->lmiShopId;
+        return $this->shopId;
     }
 
     /**
-     * @param $lmiShopId
+     * @param $shopId
      *
      * @return int
      */
-    public function setLmiShopId($lmiShopId)
+    public function setShopId($shopId)
     {
-        $this->lmiShopId = $lmiShopId;
+        $this->shopId = $shopId;
     }
 }

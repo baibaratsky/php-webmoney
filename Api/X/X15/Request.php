@@ -1,6 +1,6 @@
 <?php
 
-namespace baibaratsky\WebMoney\Api\X\X15;
+namespace baibaratsky\WebMoney\Api\X\X15\Get;
 
 use baibaratsky\WebMoney\Api\X;
 use baibaratsky\WebMoney\Signer;
@@ -17,7 +17,7 @@ class Request extends X\Request
 	/** @var string wmid */
 	protected $signerWmid;
 
-	/** @var string getpurses/wmid */
+	/** @var string gettrustlist/wmid */
 	protected $requestedWmid;
 
 	public function __construct($authType = self::AUTH_CLASSIC)

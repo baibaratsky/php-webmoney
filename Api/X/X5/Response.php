@@ -14,8 +14,14 @@ class Response extends AbstractResponse
     /** @var int reqn */
     protected $requestNumber;
 
-    /** @var Finishprotect */
-    protected $operation;
+    /** @var int @id */
+    protected $transactionId;
+
+    /** @var int operation\opertype */
+    protected $status;
+
+    /** @var \DateTime operation\dateupd */
+    protected $updateDateTime;
 
     public function __construct($response)
     {
@@ -25,33 +31,42 @@ class Response extends AbstractResponse
         $this->returnDescription = (string)$responseObject->retdesc;
 
         if (isset($responseObject->operation)) {
-            $this->operation = new Finishprotect($this->operationToArray($responseObject->operation));
+            $operation = $responseObject->operation;
+            $this->transactionId = (int)$operation['id'];
+            $this->status = (int)$operation->opertype;
+            $this->updateDateTime = self::createDateTime((string)$operation->dateupd);
         }
     }
 
-    protected function operationToArray(\SimpleXMLElement $operation)
-    {
-        return array(
-            'operationid' => (int)$operation['id'],
-            'operationts' => (int)$operation['ts'],
-            'opertype' => (string)$operation->opertype,
-            'dateupd' => (string)$operation->dateupd,
-
-        );
-    }
-
-    /**
-     * @return Finishprotect
-     */
-    public function getOperation()
-    {
-        return $this->operation;
-    }
     /**
      * @return int
      */
-    public function getReturnCode()
+    public function getRequestNumber()
     {
-        return $this->returnCode;
+        return $this->requestNumber;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTransactionId()
+    {
+        return $this->transactionId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdateDateTime()
+    {
+        return $this->updateDateTime;
     }
 }

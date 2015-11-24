@@ -59,7 +59,7 @@ class UserInfo
     private $passportDate;
 
     /** @var string pdateend */
-    private $passportDateEnd;
+    private $passportExpirationDate;
 
     /** @var int pday */
     private $passportDay;
@@ -197,7 +197,7 @@ class UserInfo
     private $passportVerification;
 
     /** @var bool regdoc */
-    private $regVerification;
+    private $addressVerification;
 
     /** @var bool inndoc */
     private $tinVerification;
@@ -243,7 +243,7 @@ class UserInfo
         $this->passportNum = $params['pnomer'];
         $this->passportDate = $params['pdate'];
         if (isset($params['pdateend'])) {
-            $this->passportDateEnd = $params['pdateend'];
+            $this->passportExpirationDate = $params['pdateend'];
         }
         if (isset($params['pday'])) {
             $this->passportDay = (int)$params['pday'];
@@ -311,7 +311,7 @@ class UserInfo
             $this->passportVerification = (bool)$params['pasdoc'];
         }
         if (isset($params['regdoc'])) {
-            $this->regVerification = (bool)$params['regdoc'];
+            $this->addressVerification = (bool)$params['regdoc'];
         }
         if (isset($params['inndoc'])) {
             $this->tinVerification = (bool)$params['inndoc'];
@@ -476,9 +476,9 @@ class UserInfo
     /**
      * @return string
      */
-    public function getPassportDateEnd()
+    public function getPassportExpirationDate()
     {
-        return $this->passportDateEnd;
+        return $this->passportExpirationDate;
     }
 
     /**
@@ -844,9 +844,9 @@ class UserInfo
     /**
      * @return bool
      */
-    public function getRegVerification()
+    public function getAddressVerification()
     {
-        return $this->regVerification;
+        return $this->addressVerification;
     }
 
     /**

@@ -49,8 +49,8 @@ class CheckLock
     /** @var string pdate */
     private $passportDate;
 
-    /** @var string pdate */
-    private $passportDateEnd;
+    /** @var string pdateend */
+    private $passportExpirationDate;
 
     /** @var string pbywhom */
     private $passportIssuePlace;
@@ -170,7 +170,7 @@ class CheckLock
         $this->middleName = $params['oname'];
         $this->passportNum = $params['pnomer'];
         $this->passportDate = $params['pdate'];
-        $this->passportDateEnd = $params['pdateend'];
+        $this->passportExpirationDate = $params['pdateend'];
         $this->passportIssuePlace = $params['pbywhom'];
         $this->passportIssueCountry = $params['pcountry'];
         $this->passportIssueCity = $params['pcity'];
@@ -332,9 +332,9 @@ class CheckLock
     /**
      * @return string
      */
-    public function getPassportDateEnd()
+    public function getPassportExpirationDate()
     {
-        return $this->passportDateEnd;
+        return $this->passportExpirationDate;
     }
 
     /**

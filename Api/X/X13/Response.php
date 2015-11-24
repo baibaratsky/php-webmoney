@@ -14,44 +14,59 @@ class Response extends AbstractResponse
     /** @var int reqn */
     protected $requestNumber;
 
-    /** @var RejectProtect */
-    protected $operation;
+    /** @var int @id */
+    protected $transactionId;
+
+    /** @var int operation\opertype */
+    protected $status;
+
+    /** @var \DateTime operation\dateupd */
+    protected $updateDateTime;
 
     public function __construct($response)
     {
-        $responseObject          = new \SimpleXMLElement($response);
-        $this->requestNumber     = (int)$responseObject->reqn;
-        $this->returnCode        = (int)$responseObject->retval;
+        $responseObject = new \SimpleXMLElement($response);
+        $this->requestNumber = (int)$responseObject->reqn;
+        $this->returnCode = (int)$responseObject->retval;
         $this->returnDescription = (string)$responseObject->retdesc;
 
         if (isset($responseObject->operation)) {
-            $this->operation = new RejectProtect($this->rejectProtectToArray($responseObject->operation));
+            $operation = $responseObject->operation;
+            $this->transactionId = (int)$operation['id'];
+            $this->status = (int)$operation->opertype;
+            $this->updateDateTime = self::createDateTime((string)$operation->dateupd);
         }
-    }
-
-    protected function rejectProtectToArray(\SimpleXMLElement $operation)
-    {
-        return array(
-            'operationid'    => (int)$operation['id'],
-            'operationts'    => (int)$operation['ts'],
-            'opertype'      => (string)$operation->opertype,
-            'dateupd' => (string)$operation->dateupd,
-        );
-    }
-
-    /**
-     * @return RejectProtect
-     */
-    public function getOperation()
-    {
-        return $this->operation;
     }
 
     /**
      * @return int
      */
-    public function getReturnCode()
+    public function getRequestNumber()
     {
-        return $this->returnCode;
+        return $this->requestNumber;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTransactionId()
+    {
+        return $this->transactionId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdateDateTime()
+    {
+        return $this->updateDateTime;
     }
 }

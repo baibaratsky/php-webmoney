@@ -1,6 +1,6 @@
 <?php
 
-namespace baibaratsky\WebMoney\Api\X\X15;
+namespace baibaratsky\WebMoney\Api\X\X15\Get;
 
 class Trust
 {
@@ -8,13 +8,13 @@ class Trust
 	protected $id;
 
 	/** @var boolean trust/@inv */
-	protected $canInvoice;
+	protected $canIssueInvoice;
 
 	/** @var boolean trust/@trans */
-	protected $canTransfer;
+	protected $canMakeTransfer;
 
 	/** @var boolean trust/@purse */
-	protected $canViewBalance;
+	protected $canCheckBalance;
 
 	/** @var boolean trust/@transhist */
 	protected $canViewHistory;
@@ -23,49 +23,49 @@ class Trust
 	protected $purse;
 
 	/** @var string trust/daylimit */
-	protected $daylimit;
+	protected $limit24h;
 
 	/** @var string trust/dlimit */
-	protected $dlimit;
+	protected $limitDay;
 
 	/** @var string trust/wlimit */
-	protected $wlimit;
+	protected $limitWeek;
 
 	/** @var string trust/mlimit */
-	protected $mlimit;
+	protected $limitMonth;
 
 	/** @var string trust/dsum */
-	protected $dsum;
+	protected $sumDay;
 
 	/** @var string trust/wsum */
-	protected $wsum;
+	protected $sumWeek;
 
 	/** @var string trust/msum */
-	protected $msum;
+	protected $sumMonth;
 
 	/** @var string trust/lastsumdate */
-	protected $lastsumdate;
+	protected $lastOperationDateTime;
 
 	/** @var string trust/storeswmid */
-	protected $storeswmid;
+	protected $payeeWmid;
 
 	public function __construct(array $params)
 	{
 		$this->id = $params['id'];
-		$this->canInvoice = $params['canInvoice'];
-		$this->canTransfer = $params['canTransfer'];
-		$this->canViewBalance = $params['canViewBalance'];
+		$this->canIssueInvoice = $params['canIssueInvoice'];
+		$this->canMakeTransfer = $params['canMakeTransfer'];
+		$this->canCheckBalance = $params['canCheckBalance'];
 		$this->canViewHistory = $params['canViewHistory'];
 		$this->purse = $params['purse'];
-		$this->daylimit = $params['daylimit'];
-		$this->dlimit = $params['dlimit'];
-		$this->wlimit = $params['wlimit'];
-		$this->mlimit = $params['mlimit'];
-		$this->dsum = $params['dsum'];
-		$this->wsum = $params['wsum'];
-		$this->msum = $params['msum'];
-		$this->lastsumdate = $params['lastsumdate'];
-		$this->storeswmid = $params['storeswmid'];
+		$this->limit24h = $params['limit24h'];
+		$this->limitDay = $params['limitDay'];
+		$this->limitWeek = $params['limitWeek'];
+		$this->limitMonth = $params['limitMonth'];
+		$this->sumDay = $params['sumDay'];
+		$this->sumWeek = $params['sumWeek'];
+		$this->sumMonth = $params['sumMonth'];
+		$this->lastOperationDateTime = $params['lastOperationDateTime'];
+		$this->payeeWmid = $params['payeeWmid'];
 	}
 
 	public function getId()
@@ -73,14 +73,19 @@ class Trust
 		return $this->id;
 	}
 
-	public function getCanInvoice()
+	public function getCanIssueInvoice()
 	{
-		return $this->canInvoice;
+		return $this->canIssueInvoice;
 	}
 
-	public function getCanTransfer()
+	public function getCanMakeTransfer()
 	{
-		return $this->canTransfer;
+		return $this->canMakeTransfer;
+	}
+
+	public function getCanCheckBalance()
+	{
+		return $this->canCheckBalance;
 	}
 
 	public function getCanViewHistory()
@@ -88,58 +93,53 @@ class Trust
 		return $this->canViewHistory;
 	}
 
-	public function getCanViewBalance()
-	{
-		return $this->canViewBalance;
-	}
-
 	public function getPurse()
 	{
 		return $this->purse;
 	}
 
-	public function getDayLimit()
+	public function getLimit24h()
 	{
-		return $this->daylimit;
+		return $this->limit24h;
 	}
 
-	public function getDlimit()
+	public function getLimitDay()
 	{
-		return $this->dlimit;
+		return $this->limitDay;
 	}
 
-	public function getWeekLimit()
+	public function getLimitWeek()
 	{
-		return $this->wlimit;
+		return $this->limitWeek;
 	}
 
-	public function getMonthLimit()
+	public function getLimitMonth()
 	{
-		return $this->mlimit;
+		return $this->limitMonth;
 	}
 
-	public function getDaySum()
+	public function getSumDay()
 	{
-		return $this->dsum;
+		return $this->sumDay;
 	}
 
-	public function getWeekSum()
+	public function getSumWeek()
 	{
-		return $this->wsum;
+		return $this->sumWeek;
 	}
 
-	public function getMonthSum()
+	public function getSumMonth()
 	{
-		return $this->msum;
+		return $this->sumMonth;
 	}
 
-	public function getLastSumDate()
+	public function getLastOperationDateTime()
 	{
-		return $this->lastsumdate;
+		return $this->lastOperationDateTime;
 	}
 
-    public function getStoresWmid()
+    public function getPayeeWmid()
     {
-        return $this->storeswmid;
+        return $this->payeeWmid;
     }
 }

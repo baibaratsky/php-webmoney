@@ -18,10 +18,10 @@ class Request extends X\Request
     protected $signerWmid;
 
     /** @var string finishprotect\wmtranid */
-    protected $wmtranid;
+    protected $transactionId;
 
     /** @var  string finishprotect\pcode */
-    protected $pcode;
+    protected $protectionCode;
 
     public function __construct($authType = self::AUTH_CLASSIC)
     {
@@ -76,8 +76,8 @@ class Request extends X\Request
         $xml .= self::xmlElement('wmid', $this->signerWmid);
         $xml .= self::xmlElement('sign', $this->signature);
         $xml .= '<finishprotect>';
-        $xml .= self::xmlElement('wmtranid', $this->wmtranid);
-        $xml .= self::xmlElement('pcode', $this->pcode);
+        $xml .= self::xmlElement('wmtranid', $this->transactionId);
+        $xml .= self::xmlElement('pcode', $this->protectionCode);
         $xml .= '</finishprotect>';
         $xml .= '</w3s.request>';
 
@@ -103,32 +103,32 @@ class Request extends X\Request
     /**
      * @return string
      */
-    public function getWmtranid()
+    public function getTransactionId()
     {
-        return $this->wmtranid;
+        return $this->transactionId;
     }
 
     /**
-     * @param string $wmtranid
+     * @param string $transactionId
      */
-    public function setWmtranid($wmtranid)
+    public function setTransactionId($transactionId)
     {
-        $this->wmtranid = $wmtranid;
+        $this->transactionId = $transactionId;
     }
 
     /**
      * @return string
      */
-    public function getPcode()
+    public function getProtectionCode()
     {
-        return $this->pcode;
+        return $this->protectionCode;
     }
 
     /**
-     * @param string $pcode
+     * @param string $protectionCode
      */
-    public function setPcode($pcode)
+    public function setProtectionCode($protectionCode)
     {
-        $this->pcode = $pcode;
+        $this->protectionCode = $protectionCode;
     }
 }

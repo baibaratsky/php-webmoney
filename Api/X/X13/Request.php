@@ -18,7 +18,7 @@ class Request extends X\Request
     protected $signerWmid;
 
     /** @var string finishprotect\wmtranid */
-    protected $wmtranid;
+    protected $transactionId;
 
     public function __construct($authType = self::AUTH_CLASSIC)
     {
@@ -73,7 +73,7 @@ class Request extends X\Request
         $xml .= self::xmlElement('wmid', $this->signerWmid);
         $xml .= self::xmlElement('sign', $this->signature);
         $xml .= '<rejectprotect>';
-        $xml .= self::xmlElement('wmtranid', $this->wmtranid);
+        $xml .= self::xmlElement('wmtranid', $this->transactionId);
         $xml .= '</rejectprotect>';
         $xml .= '</w3s.request>';
 
@@ -99,16 +99,16 @@ class Request extends X\Request
     /**
      * @return string
      */
-    public function getWmtranid()
+    public function getTransactionId()
     {
-        return $this->wmtranid;
+        return $this->transactionId;
     }
 
     /**
-     * @param string $wmtranid
+     * @param string $transactionId
      */
-    public function setWmtranid($wmtranid)
+    public function setTransactionId($transactionId)
     {
-        $this->wmtranid = $wmtranid;
+        $this->transactionId = $transactionId;
     }
 }

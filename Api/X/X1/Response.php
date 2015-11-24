@@ -11,32 +11,32 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
-    /** @var int @id */
-    protected $invoiceid;
+    /** @var int reqn */
+    protected $requestNumber;
 
-    /** @var int @ts */
-    protected $invoicets;
+    /** @var int @id */
+    protected $invoiceId;
 
     /** @var int invoice/orderid */
-    protected $orderid;
+    protected $orderId;
 
     /** @var int invoice/customerwmid */
-    protected $customerwmid;
+    protected $customerWmid;
 
     /** @var string invoice/storepurse */
-    protected $storepurse;
+    protected $purse;
 
     /** @var float invoice/amount */
     protected $amount;
 
     /** @var string invoice/desc */
-    protected $desc;
+    protected $description;
 
     /** @var string invoice/address */
     protected $address;
 
     /** @var int invoice/period */
-    protected $period;
+    protected $protectionPeriod;
 
     /** @var int invoice/expiration */
     protected $expiration;
@@ -45,10 +45,10 @@ class Response extends AbstractResponse
     protected $state;
 
     /** @var \DateTime invoice/datecrt */
-    protected $datecrt;
+    protected $createDateTime;
 
     /** @var \DateTime invoice/dateupd */
-    protected $dateupd;
+    protected $updateDateTime;
 
     public function __construct($response)
     {
@@ -59,60 +59,59 @@ class Response extends AbstractResponse
 
         if (isset($responseObject->invoice)) {
             $invoice = $responseObject->invoice;
-            $this->invoiceid = (int)$invoice['id'];
-            $this->invoicets = (int)$invoice['ts'];
-            $this->orderid = (string)$invoice->orderid;
-            $this->customerwmid = (string)$invoice->customerwmid;
-            $this->storepurse = (string)$invoice->storepurse;
+            $this->invoiceId = (int)$invoice['id'];
+            $this->orderId = (string)$invoice->orderid;
+            $this->customerWmid = (string)$invoice->customerwmid;
+            $this->purse = (string)$invoice->storepurse;
             $this->amount = (float)$invoice->amount;
-            $this->desc = (string)$invoice->desc;
+            $this->description = (string)$invoice->desc;
             $this->address = (string)$invoice->address;
-            $this->period = (int)$invoice->period;
+            $this->protectionPeriod = (int)$invoice->period;
             $this->expiration = (int)$invoice->expiration;
             $this->state = (int)$invoice->state;
-            $this->datecrt = (string)$invoice->datecrt; //wm format Ymd H:i:s
-            $this->dateupd = (string)$invoice->dateupd; //wm format Ymd H:i:s
+            $this->createDateTime = self::createDateTime((string)$invoice->datecrt); //wm format Ymd H:i:s
+            $this->updateDateTime = self::createDateTime((string)$invoice->dateupd); //wm format Ymd H:i:s
         }
     }
 
     /**
      * @return int
      */
-    public function getInvoiceid()
+    public function getRequestNumber()
     {
-        return $this->invoiceid;
+        return $this->requestNumber;
     }
-
+    
     /**
      * @return int
      */
-    public function getInvoicets()
+    public function getInvoiceId()
     {
-        return $this->invoicets;
+        return $this->invoiceId;
     }
 
     /**
      * @return string
      */
-    public function getOrderid()
+    public function getOrderId()
     {
-        return $this->orderid;
+        return $this->orderId;
     }
 
     /**
      * @return string
      */
-    public function getCustomerwmid()
+    public function getCustomerWmid()
     {
-        return $this->customerwmid;
+        return $this->customerWmid;
     }
 
     /**
      * @return string
      */
-    public function getStorepurse()
+    public function getPurse()
     {
-        return $this->storepurse;
+        return $this->purse;
     }
 
     /**
@@ -126,9 +125,9 @@ class Response extends AbstractResponse
     /**
      * @return float
      */
-    public function getDesc()
+    public function getDescription()
     {
-        return $this->desc;
+        return $this->description;
     }
 
     /**
@@ -142,9 +141,9 @@ class Response extends AbstractResponse
     /**
      * @return string
      */
-    public function getPeriod()
+    public function getProtectionPeriod()
     {
-        return $this->period;
+        return $this->protectionPeriod;
     }
 
     /**
@@ -166,16 +165,16 @@ class Response extends AbstractResponse
     /**
      * @return \DateTime
      */
-    public function getDatecrt()
+    public function getCreateDateTime()
     {
-        return $this->datecrt;
+        return $this->createDateTime;
     }
 
     /**
      * @return \DateTime
      */
-    public function getDateupd()
+    public function getUpdateDateTime()
     {
-        return $this->dateupd;
+        return $this->updateDateTime;
     }
 }

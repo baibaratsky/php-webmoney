@@ -1,6 +1,6 @@
 <?php
 
-namespace baibaratsky\WebMoney\Api\X\X15;
+namespace baibaratsky\WebMoney\Api\X\X15\Get;
 
 use baibaratsky\WebMoney\Request\AbstractResponse;
 
@@ -15,7 +15,7 @@ class Response extends AbstractResponse
 	protected $requestNumber;
 
 	/** @var Trust[] trustlist */
-	protected $trustlist = [];
+	protected $trusts = [];
 
 	public function __construct($response)
 	{
@@ -26,7 +26,7 @@ class Response extends AbstractResponse
 
 		if (isset($responseObject->trustlist)) {
 			foreach ($responseObject->trustlist->children() as $trust) {
-				$this->trustlist[] = new Trust($this->trustToArray($trust));
+				$this->trusts[] = new Trust($this->trustToArray($trust));
 			}
 		}
 	}
@@ -35,28 +35,36 @@ class Response extends AbstractResponse
 	{
 		return array(
 			'id' => (int)$trust['id'],
-			'canInvoice' => (int)$trust['inv'],
-			'canTransfer' => (int)$trust['trans'],
-			'canViewBalance' => (int)$trust['purse'],
+			'canIssueInvoice' => (int)$trust['inv'],
+			'canMakeTransfer' => (int)$trust['trans'],
+			'canCheckBalance' => (int)$trust['purse'],
 			'canViewHistory' => (int)$trust['transhist'],
 			'purse' => (string)$trust->purse,
-            'daylimit' => $trust->daylimit,
-            'dlimit' => $trust->dlimit,
-            'wlimit' => $trust->wlimit,
-            'mlimit' => $trust->mlimit,
-            'dsum' => $trust->dsum,
-            'wsum' => $trust->wsum,
-            'msum' => $trust->msum,
-            'lastsumdate' => $trust->lastsumdate,
-            'storeswmid' => $trust->storeswmid
+			'limit24h' => $trust->limit24h,
+			'limitDay' => $trust->limitDay,
+			'limitWeek' => $trust->limitWeek,
+            'limitMonth' => $trust->limitMonth,
+            'sumDay' => $trust->sumDay,
+            'sumWeek' => $trust->sumWeek,
+            'sumMonth' => $trust->sumMonth,
+            'lastOperationDateTime' => $trust->lastOperationDateTime,
+            'payeeWmid' => $trust->payeeWmid,
 		);
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getReturnCode()
+	{
+		return $this->returnCode;
 	}
 
 	/**
 	 * @return Trust[]
 	 */
-	public function getTrustlist()
+	public function getTrusts()
 	{
-		return $this->trustlist;
+		return $this->trusts;
 	}
 }
