@@ -11,9 +11,6 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
-    /** @var int reqn */
-    protected $requestNumber;
-
     /** @var int @id */
     protected $invoiceId;
 
@@ -74,14 +71,6 @@ class Response extends AbstractResponse
         }
     }
 
-    /**
-     * @return int
-     */
-    public function getRequestNumber()
-    {
-        return $this->requestNumber;
-    }
-    
     /**
      * @return int
      */

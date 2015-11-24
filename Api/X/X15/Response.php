@@ -11,9 +11,6 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
-	/** @var int reqn */
-	protected $requestNumber;
-
 	/** @var Trust[] trustlist */
 	protected $trusts = [];
 
@@ -50,14 +47,6 @@ class Response extends AbstractResponse
             'lastOperationDateTime' => $trust->lastOperationDateTime,
             'payeeWmid' => $trust->payeeWmid,
 		);
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getReturnCode()
-	{
-		return $this->returnCode;
 	}
 
 	/**

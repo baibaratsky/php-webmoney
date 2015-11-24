@@ -7,6 +7,9 @@ abstract class AbstractResponse
     /** @var string Raw response data from WM */
     protected $rawData;
 
+    /** @var int reqn */
+    protected $requestNumber;
+    
     /** @var int retval */
     protected $returnCode;
 
@@ -52,6 +55,14 @@ abstract class AbstractResponse
             self::$timeZone = new \DateTimeZone('Europe/Moscow');
         }
         return self::$timeZone;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRequestNumber()
+    {
+        return $this->requestNumber;
     }
 
     /**

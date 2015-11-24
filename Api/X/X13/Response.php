@@ -11,9 +11,6 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
-    /** @var int reqn */
-    protected $requestNumber;
-
     /** @var int @id */
     protected $transactionId;
 
@@ -36,14 +33,6 @@ class Response extends AbstractResponse
             $this->status = (int)$operation->opertype;
             $this->updateDateTime = self::createDateTime((string)$operation->dateupd);
         }
-    }
-
-    /**
-     * @return int
-     */
-    public function getRequestNumber()
-    {
-        return $this->requestNumber;
     }
 
     /**

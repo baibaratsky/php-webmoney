@@ -11,9 +11,6 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
-    /** @var int reqn */
-    protected $requestNumber;
-
     /** @var Purse[] purses */
     protected $purses;
 
@@ -43,14 +40,6 @@ class Response extends AbstractResponse
             'lastintr' => (string)$purse->lastintr,
             'lastouttr' => (string)$purse->lastouttr,
         );
-    }
-
-    /**
-     * @return int
-     */
-    public function getRequestNumber()
-    {
-        return $this->requestNumber;
     }
 
     /**

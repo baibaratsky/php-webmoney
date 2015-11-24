@@ -11,9 +11,6 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
-    /** @var int reqn */
-    protected $requestNumber;
-
     /** @var int operation\@id */
     protected $refundTransactionId;
 
@@ -121,14 +118,6 @@ class Response extends AbstractResponse
     public function getRefundTransactionInternalId()
     {
         return $this->refundTransactionInternalId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRequestNumber()
-    {
-        return $this->requestNumber;
     }
 
     /**
