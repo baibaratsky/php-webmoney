@@ -14,9 +14,6 @@ use baibaratsky\WebMoney\Signer;
  */
 class Request extends X\Request
 {
-    /** @var string wmid */
-    protected $signerWmid;
-
     /** @var string gettrustlist/wmid */
     protected $requestedWmid;
 
@@ -95,22 +92,6 @@ class Request extends X\Request
         $xml .= '</w3s.request>';
 
         return $xml;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSignerWmid()
-    {
-        return $this->signerWmid;
-    }
-
-    /**
-     * @param string $signerWmid
-     */
-    public function setSignerWmid($signerWmid)
-    {
-        $this->signerWmid = $signerWmid;
     }
 
     /**

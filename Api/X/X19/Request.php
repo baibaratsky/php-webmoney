@@ -46,9 +46,6 @@ class Request extends X\Request
     /** @var string lang */
     protected $language;
 
-    /** @var string signerwmid */
-    protected $signerWmid;
-
     /** @var int operation/type */
     protected $operationType;
 
@@ -226,22 +223,6 @@ class Request extends X\Request
 
     /**
      * @return string
-     */
-    public function getSignerWmid()
-    {
-        return $this->signerWmid;
-    }
-
-    /**
-     * @param string $signerWmid
-     */
-    public function setSignerWmid($signerWmid)
-    {
-        $this->signerWmid = $signerWmid;
-    }
-
-    /**
-     * @return int
      */
     public function getOperationType()
     {

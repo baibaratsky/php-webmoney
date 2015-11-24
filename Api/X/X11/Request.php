@@ -23,9 +23,6 @@ class Request extends X\Request
     const MODE_CHECK = 1;
     const MODE_NOT_CHECK = 0;
 
-    /** @var string wmid */
-    protected $signerWmid;
-
     /** @var string passportwmid */
     protected $passportWmid;
 
@@ -109,22 +106,6 @@ class Request extends X\Request
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign($this->signerWmid . $this->passportWmid);
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getSignerWmid()
-    {
-        return $this->signerWmid;
-    }
-
-    /**
-     * @param string $signerWmid
-     */
-    public function setSignerWmid($signerWmid)
-    {
-        $this->signerWmid = $signerWmid;
     }
 
     /**

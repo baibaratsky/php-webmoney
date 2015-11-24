@@ -17,9 +17,6 @@ class Request extends X\Request
     const CONTRACT_TYPE_OPEN_ACCESS = 1;
     const CONTRACT_TYPE_RESTRICTED_ACCESS = 2;
 
-    /** @var string sign_wmid */
-    protected $signerWmid;
-
     /** @var string name */
     protected $contractName;
 
@@ -101,22 +98,6 @@ class Request extends X\Request
                     . $this->contractType
             );
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getSignerWmid()
-    {
-        return $this->signerWmid;
-    }
-
-    /**
-     * @param string $signerWmid
-     */
-    public function setSignerWmid($signerWmid)
-    {
-        $this->signerWmid = $signerWmid;
     }
 
     /**

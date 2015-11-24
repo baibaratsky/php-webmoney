@@ -19,9 +19,6 @@ class Request extends X\Request
     const PAYMENT_NUMBER_TYPE_INVOICE = 2;
     const PAYMENT_NUMBER_TYPE_TRANSACTION = 3;
 
-    /** @var string wmid */
-    protected $signerWmid;
-
     /** @var string lmi_payee_purse */
     protected $payeePurse;
 
@@ -124,22 +121,6 @@ class Request extends X\Request
         } elseif ($this->authType === self::AUTH_MD5) {
             $this->md5 = md5($this->signerWmid . $this->payeePurse . $this->paymentNumber . $this->secretKey);
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getSignerWmid()
-    {
-        return $this->signerWmid;
-    }
-
-    /**
-     * @param string $signerWmid
-     */
-    public function setSignerWmid($signerWmid)
-    {
-        $this->signerWmid = $signerWmid;
     }
 
     /**

@@ -18,6 +18,9 @@ abstract class Request extends XmlRequest
     /** @var string reqn */
     protected $requestNumber;
 
+    /** @var string wmid */
+    protected $signerWmid;
+
     /** @var string Light auth cert file name (PEM) */
     protected $lightCertificate;
 
@@ -78,6 +81,22 @@ abstract class Request extends XmlRequest
     public function setRequestNumber($requestNumber)
     {
         $this->requestNumber = $requestNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSignerWmid()
+    {
+        return $this->signerWmid;
+    }
+
+    /**
+     * @param string $signerWmid
+     */
+    public function setSignerWmid($signerWmid)
+    {
+        $this->signerWmid = $signerWmid;
     }
 
     /**

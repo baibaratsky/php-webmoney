@@ -14,9 +14,6 @@ use baibaratsky\WebMoney\Signer;
  */
 class Request extends X\Request
 {
-    /** @var string wmid */
-    protected $signerWmid;
-
     /** @var string getpurses/wmid */
     protected $requestedWmid;
 
@@ -80,22 +77,6 @@ class Request extends X\Request
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign($this->requestedWmid . $this->requestNumber);
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getSignerWmid()
-    {
-        return $this->signerWmid;
-    }
-
-    /**
-     * @param string $signerWmid
-     */
-    public function setSignerWmid($signerWmid)
-    {
-        $this->signerWmid = $signerWmid;
     }
 
     /**

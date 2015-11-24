@@ -14,9 +14,6 @@ use baibaratsky\WebMoney\Signer;
  */
 class Request extends X\Request
 {
-    /** @var string wmid */
-    protected $signerWmid;
-
     /** @var string message\receiverwmid */
     protected $messageRecipientWmid;
 
@@ -101,22 +98,6 @@ class Request extends X\Request
                     mb_convert_encoding($this->messageSubject, 'Windows-1251', 'UTF-8')
             );
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getSignerWmid()
-    {
-        return $this->signerWmid;
-    }
-
-    /**
-     * @param string $signerWmid
-     */
-    public function setSignerWmid($signerWmid)
-    {
-        $this->signerWmid = $signerWmid;
     }
 
     /**

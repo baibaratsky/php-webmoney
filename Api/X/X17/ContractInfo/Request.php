@@ -16,9 +16,6 @@ class Request extends X\Request
 {
     const TYPE_ACCEPT_DATE = 'acceptdate';
 
-    /** @var string wmid */
-    protected $signerWmid;
-
     /** @var int contractid */
     protected $contractId;
 
@@ -85,22 +82,6 @@ class Request extends X\Request
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign($this->contractId . $this->type);
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getSignerWmid()
-    {
-        return $this->signerWmid;
-    }
-
-    /**
-     * @param string $signerWmid
-     */
-    public function setSignerWmid($signerWmid)
-    {
-        $this->signerWmid = $signerWmid;
     }
 
     /**
