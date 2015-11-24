@@ -2,10 +2,10 @@
 
 namespace baibaratsky\WebMoney\Request\Requester;
 
+use baibaratsky\WebMoney\Api\X\Request;
+use baibaratsky\WebMoney\Exception\RequesterException;
 use baibaratsky\WebMoney\Request\AbstractRequest;
 use baibaratsky\WebMoney\Request\XmlRequest;
-use baibaratsky\WebMoney\Exception\RequesterException;
-use baibaratsky\WebMoney\Api\X\Request;
 
 class CurlRequester extends AbstractRequester
 {

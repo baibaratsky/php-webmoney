@@ -3,9 +3,9 @@
 namespace baibaratsky\WebMoney\Api\X\X5;
 
 use baibaratsky\WebMoney\Api\X;
-use baibaratsky\WebMoney\Signer;
-use baibaratsky\WebMoney\Request\RequestValidator;
 use baibaratsky\WebMoney\Exception\ApiException;
+use baibaratsky\WebMoney\Request\RequestValidator;
+use baibaratsky\WebMoney\Signer;
 
 /**
  * Class Request

@@ -2,8 +2,8 @@
 
 namespace baibaratsky\WebMoney\Api\MegaStock;
 
-use baibaratsky\WebMoney\Request\XmlRequest;
 use baibaratsky\WebMoney\Exception\ApiException;
+use baibaratsky\WebMoney\Request\XmlRequest;
 
 abstract class Request extends XmlRequest
 {

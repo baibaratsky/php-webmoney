@@ -2,10 +2,10 @@
 
 namespace baibaratsky\WebMoney;
 
+use baibaratsky\WebMoney\Exception\CoreException;
 use baibaratsky\WebMoney\Request\AbstractRequest;
 use baibaratsky\WebMoney\Request\AbstractResponse;
 use baibaratsky\WebMoney\Request\Requester\AbstractRequester;
-use baibaratsky\WebMoney\Exception\CoreException;
 
 class WebMoney
 {
