@@ -42,4 +42,3 @@ class Response extends AbstractResponse
         return $this->acceptances;
     }
 }
-

@@ -11,9 +11,6 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
-    /** @var int reqn */
-    protected $requestNumber;
-
     /** @var Operation[] operations */
     protected $operations = array();
 
@@ -25,7 +22,6 @@ class Response extends AbstractResponse
         parent::__construct($response);
 
         $responseObject = new \SimpleXMLElement($response);
-        $this->requestNumber = (int)$responseObject->reqn;
         $this->returnCode = (int)$responseObject->retval;
         $this->returnDescription = (string)$responseObject->retdesc;
         if (isset($responseObject->operations->operation)) {
@@ -33,14 +29,6 @@ class Response extends AbstractResponse
                 $this->operations[] = new Operation($this->operationXmlToArray($operation));
             }
         }
-    }
-
-    /**
-     * @return int
-     */
-    public function getRequestNumber()
-    {
-        return $this->requestNumber;
     }
 
     /**

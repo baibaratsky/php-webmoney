@@ -11,9 +11,6 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
-    /** @var int reqn */
-    protected $requestNumber;
-
     /** @var int operation\@id */
     protected $refundTransactionId;
 
@@ -49,7 +46,6 @@ class Response extends AbstractResponse
         parent::__construct($response);
 
         $responseObject = new \SimpleXMLElement($response);
-        $this->requestNumber = (int)$responseObject->reqn;
         $this->returnCode = (int)$responseObject->retval;
         $this->returnDescription = (string)$responseObject->retdesc;
         if (isset($responseObject->operation)) {
@@ -121,14 +117,6 @@ class Response extends AbstractResponse
     public function getRefundTransactionInternalId()
     {
         return $this->refundTransactionInternalId;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRequestNumber()
-    {
-        return $this->requestNumber;
     }
 
     /**
