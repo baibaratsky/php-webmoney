@@ -40,7 +40,7 @@ class Request extends X\Request
     protected $paymentNumber;
 
     /** @var string lmi_payment_desc */
-    protected $paymentDesc;
+    protected $paymentDescription;
 
     const SIM_MODE_SUCCESS = 0;
     const SIM_MODE_FAILURE = 1;
@@ -69,19 +69,19 @@ class Request extends X\Request
     protected $failMethod;
 
     /** @var string lmi_paymer_pinnumberinside */
-    protected $paymerPinnumberinside;
+    protected $paymerPinNumberInside;
 
     /** @var string lmi_wmnote_pinnumberinside */
-    protected $wmnotePinnumberinside;
+    protected $wmNotePinNumberInside;
 
     /** @var string lmi_paymer_email */
     protected $paymerEmail;
 
     /** @var string lmi_wmcheck_numberinside */
-    protected $wmcheckNumberinside;
+    protected $wmCheckNumberInside;
 
     /** @var string lmi_wmcheck_codeinside */
-    protected $wmcheckCodeinside;
+    protected $wmCheckCodeInside;
 
     const SDP_TYPE_MONEY_TRANSFER = 0;
     const SDP_TYPE_ALFA_CLICK = 3;
@@ -95,16 +95,16 @@ class Request extends X\Request
     protected $allowSdp;
 
     /** @var int lmi_fast_phonenumber */
-    protected $fastPhonenumber;
+    protected $fastPhoneNumber;
 
     /** @var int lmi_payment_creditdays */
-    protected $paymentCreditdays;
+    protected $paymentCreditDays;
 
     /** @var int lmi_shop_id */
     protected $shopId;
 
-    /** @var string[string] */
-    protected $userTags = [];
+    /** @var string[] */
+    protected $userTags = array();
 
     const PAYMENT_METHOD_KEEPER_WEB = 'authtype_2';
     const PAYMENT_METHOD_WM_CARD = 'authtype_3';
@@ -134,7 +134,10 @@ class Request extends X\Request
      */
     public function __construct($authType = self::AUTH_CLASSIC, $secretKey = null)
     {
-        if ($secretKey === null && in_array($authType, [self::AUTH_SHA256, self::AUTH_MD5, self::AUTH_SECRET_KEY])) {
+        if (
+                $secretKey === null
+                && in_array($authType, array(self::AUTH_SHA256, self::AUTH_MD5, self::AUTH_SECRET_KEY))
+        ) {
             throw new ApiException('Secret key is required for this authentication type.');
         }
 
@@ -150,24 +153,25 @@ class Request extends X\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array('signerWmid', 'validityPeriodInHours', 'payeePurse', 'paymentAmount', 'paymentDesc'),
-            RequestValidator::TYPE_RANGE => array(
-                'simMode' => array(
-                    self::SIM_MODE_SUCCESS,
-                    self::SIM_MODE_FAILURE,
-                    self::SIM_MODE_80x20,
+                RequestValidator::TYPE_REQUIRED => array('signerWmid', 'validityPeriodInHours', 'payeePurse',
+                                                         'paymentAmount', 'paymentDescription'),
+                RequestValidator::TYPE_RANGE => array(
+                        'simMode' => array(
+                                self::SIM_MODE_SUCCESS,
+                                self::SIM_MODE_FAILURE,
+                                self::SIM_MODE_80x20,
+                        ),
+                        'successMethod' => array(
+                                self::URL_METHOD_GET,
+                                self::URL_METHOD_POST,
+                                self::URL_METHOD_LINK,
+                        ),
+                        'failMethod' => array(
+                                self::URL_METHOD_GET,
+                                self::URL_METHOD_POST,
+                                self::URL_METHOD_LINK,
+                        ),
                 ),
-                'successMethod' => array(
-                    self::URL_METHOD_GET,
-                    self::URL_METHOD_POST,
-                    self::URL_METHOD_LINK,
-                ),
-                'failMethod' => array(
-                    self::URL_METHOD_GET,
-                    self::URL_METHOD_POST,
-                    self::URL_METHOD_LINK,
-                ),
-            ),
         );
     }
 
@@ -193,10 +197,10 @@ class Request extends X\Request
         $xml .= self::xmlElement('lmi_payee_purse', $this->payeePurse);
         $xml .= self::xmlElement('lmi_payment_amount', $this->paymentAmount);
         $xml .= self::xmlElement('lmi_payment_no', $this->paymentNumber);
-        if (preg_match('/[\x80-\xFF]/', $this->paymentDesc)) {  // utf8 ?
-            $xml .= self::xmlElement('lmi_payment_desc_base64', base64_encode($this->paymentDesc));
+        if (preg_match('/[\x80-\xFF]/', $this->paymentDescription)) {  // utf8 ?
+            $xml .= self::xmlElement('lmi_payment_desc_base64', base64_encode($this->paymentDescription));
         } else {
-            $xml .= self::xmlElement('lmi_payment_desc', $this->paymentDesc);
+            $xml .= self::xmlElement('lmi_payment_desc', $this->paymentDescription);
         }
         $xml .= self::xmlElement('lmi_sim_mode', $this->simMode);
         $xml .= self::xmlElement('lmi_result_url', $this->resultUrl);
@@ -204,14 +208,14 @@ class Request extends X\Request
         $xml .= self::xmlElement('lmi_success_method', $this->successMethod);
         $xml .= self::xmlElement('lmi_fail_url', $this->failUrl);
         $xml .= self::xmlElement('lmi_fail_method', $this->failMethod);
-        $xml .= self::xmlElement('lmi_paymer_pinnumberinside', $this->paymerPinnumberinside);
-        $xml .= self::xmlElement('lmi_wmnote_pinnumberinside', $this->wmnotePinnumberinside);
+        $xml .= self::xmlElement('lmi_paymer_pinnumberinside', $this->paymerPinNumberInside);
+        $xml .= self::xmlElement('lmi_wmnote_pinnumberinside', $this->wmNotePinNumberInside);
         $xml .= self::xmlElement('lmi_paymer_email', $this->paymerEmail);
-        $xml .= self::xmlElement('lmi_wmcheck_numberinside', $this->wmcheckNumberinside);
-        $xml .= self::xmlElement('lmi_wmcheck_codeinside', $this->wmcheckCodeinside);
+        $xml .= self::xmlElement('lmi_wmcheck_numberinside', $this->wmCheckNumberInside);
+        $xml .= self::xmlElement('lmi_wmcheck_codeinside', $this->wmCheckCodeInside);
         $xml .= self::xmlElement('lmi_allow_sdp', $this->allowSdp);
-        $xml .= self::xmlElement('lmi_fast_phonenumber', $this->fastPhonenumber);
-        $xml .= self::xmlElement('lmi_payment_creditdays', $this->paymentCreditdays);
+        $xml .= self::xmlElement('lmi_fast_phonenumber', $this->fastPhoneNumber);
+        $xml .= self::xmlElement('lmi_payment_creditdays', $this->paymentCreditDays);
         $xml .= self::xmlElement('lmi_shop_id', $this->shopId);
         $xml .= self::xmlElement('at', $this->paymentMethod);
         foreach ($this->userTags as $tagName => $tagValue) {
@@ -332,17 +336,17 @@ class Request extends X\Request
     /**
      * @return string lmi_payment_desc
      */
-    public function getPaymentDesc()
+    public function getPaymentDescription()
     {
-        return $this->paymentDesc;
+        return $this->paymentDescription;
     }
 
     /**
-     * @param string $paymentDesc lmi_payment_desc
+     * @param string $paymentDescription lmi_payment_desc
      */
-    public function setPaymentDesc($paymentDesc)
+    public function setPaymentDescription($paymentDescription)
     {
-        $this->paymentDesc = $paymentDesc;
+        $this->paymentDescription = $paymentDescription;
     }
 
     /**
@@ -444,33 +448,33 @@ class Request extends X\Request
     /**
      * @return string lmi_paymer_pinnumberinside
      */
-    public function getPaymerPinnumberinside()
+    public function getPaymerPinNumberInside()
     {
-        return $this->paymerPinnumberinside;
+        return $this->paymerPinNumberInside;
     }
 
     /**
-     * @param string $paymerPinnumberinside lmi_paymer_pinnumberinside
+     * @param string $paymerPinNumberInside lmi_paymer_pinnumberinside
      */
-    public function setPaymerPinnumberinside($paymerPinnumberinside)
+    public function setPaymerPinNumberInside($paymerPinNumberInside)
     {
-        $this->paymerPinnumberinside = $paymerPinnumberinside;
+        $this->paymerPinNumberInside = $paymerPinNumberInside;
     }
 
     /**
      * @return string lmi_wmnote_pinnumberinside
      */
-    public function getWmnotePinnumberinside()
+    public function getWmNotePinNumberInside()
     {
-        return $this->wmnotePinnumberinside;
+        return $this->wmNotePinNumberInside;
     }
 
     /**
-     * @param string $wmnotePinnumberinside lmi_wmnote_pinnumberinside
+     * @param string $wmNotePinNumberInside lmi_wmnote_pinnumberinside
      */
-    public function setWmnotePinnumberinside($wmnotePinnumberinside)
+    public function setWmNotePinNumberInside($wmNotePinNumberInside)
     {
-        $this->wmnotePinnumberinside = $wmnotePinnumberinside;
+        $this->wmNotePinNumberInside = $wmNotePinNumberInside;
     }
 
     /**
@@ -492,33 +496,33 @@ class Request extends X\Request
     /**
      * @return string lmi_wmcheck_numberinside
      */
-    public function getWmcheckNumberinside()
+    public function getWmCheckNumberInside()
     {
-        return $this->wmcheckNumberinside;
+        return $this->wmCheckNumberInside;
     }
 
     /**
-     * @param string $wmcheckNumberinside lmi_wmcheck_numberinside
+     * @param string $wmCheckNumberInside lmi_wmcheck_numberinside
      */
-    public function setWmcheckNumberinside($wmcheckNumberinside)
+    public function setWmCheckNumberInside($wmCheckNumberInside)
     {
-        $this->wmcheckNumberinside = $wmcheckNumberinside;
+        $this->wmCheckNumberInside = $wmCheckNumberInside;
     }
 
     /**
      * @return string lmi_wmcheck_codeinside
      */
-    public function getWmcheckCodeinside()
+    public function getWmCheckCodeInside()
     {
-        return $this->wmcheckCodeinside;
+        return $this->wmCheckCodeInside;
     }
 
     /**
-     * @param string $wmcheckCodeinside lmi_wmcheck_codeinside
+     * @param string $wmCheckCodeInside lmi_wmcheck_codeinside
      */
-    public function setWmcheckCodeinside($wmcheckCodeinside)
+    public function setWmCheckCodeInside($wmCheckCodeInside)
     {
-        $this->wmcheckCodeinside = $wmcheckCodeinside;
+        $this->wmCheckCodeInside = $wmCheckCodeInside;
     }
 
     /**
@@ -540,33 +544,33 @@ class Request extends X\Request
     /**
      * @return int lmi_fast_phonenumber
      */
-    public function getFastPhonenumber()
+    public function getFastPhoneNumber()
     {
-        return $this->fastPhonenumber;
+        return $this->fastPhoneNumber;
     }
 
     /**
-     * @param int $fastPhonenumber lmi_fast_phonenumber
+     * @param int $fastPhoneNumber lmi_fast_phonenumber
      */
-    public function setFastPhonenumber($fastPhonenumber)
+    public function setFastPhoneNumber($fastPhoneNumber)
     {
-        $this->fastPhonenumber = $fastPhonenumber;
+        $this->fastPhoneNumber = $fastPhoneNumber;
     }
 
     /**
      * @return int lmi_payment_creditdays
      */
-    public function getPaymentCreditdays()
+    public function getPaymentCreditDays()
     {
-        return $this->paymentCreditdays;
+        return $this->paymentCreditDays;
     }
 
     /**
-     * @param int $paymentCreditdays lmi_payment_creditdays
+     * @param int $paymentCreditDays lmi_payment_creditdays
      */
-    public function setPaymentCreditdays($paymentCreditdays)
+    public function setPaymentCreditDays($paymentCreditDays)
     {
-        $this->paymentCreditdays = $paymentCreditdays;
+        $this->paymentCreditDays = $paymentCreditDays;
     }
 
     /**

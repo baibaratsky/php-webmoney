@@ -8,7 +8,7 @@ use baibaratsky\WebMoney\Exception\ApiException;
 class Response extends AbstractResponse
 {
     /** @var string transtoken */
-    protected $transToken;
+    protected $transactionToken;
 
     /** @var int validityperiodinhours */
     protected $validityPeriodInHours;
@@ -25,7 +25,7 @@ class Response extends AbstractResponse
         $this->returnDescription = (string)$responseObject->retdesc;
 
         if (isset($responseObject->transtoken)) {
-            $this->transToken = (string)$responseObject->transtoken;
+            $this->transactionToken = (string)$responseObject->transtoken;
         }
 
         if (isset($responseObject->validityperiodinhours)) {
@@ -36,9 +36,9 @@ class Response extends AbstractResponse
     /**
      * @return string token
      */
-    public function getTransToken()
+    public function getTransactionToken()
     {
-        return $this->transToken;
+        return $this->transactionToken;
     }
 
     /**
@@ -61,9 +61,9 @@ class Response extends AbstractResponse
     {
         switch ($lang) {
             case self::URL_LANG_RU:
-                return 'https://merchant.webmoney.ru/lmi/payment.asp?gid=' . $this->transToken;
+                return 'https://merchant.webmoney.ru/lmi/payment.asp?gid=' . $this->transactionToken;
             case self::URL_LANG_EN:
-                return 'https://merchant.wmtransfer.com/lmi/payment.asp?gid=' . $this->transToken;
+                return 'https://merchant.wmtransfer.com/lmi/payment.asp?gid=' . $this->transactionToken;
             default:
                 throw new ApiException('Unknown lang value: ' . $lang);
         }
