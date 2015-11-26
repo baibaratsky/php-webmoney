@@ -34,8 +34,8 @@ class Response extends AbstractResponse
         parent::__construct($response);
 
         $responseObject = new \SimpleXMLElement($response);
-        $this->returnCode = (int) $responseObject->retval;
-        $this->returnDescription = (string) $responseObject->retdesc;
+        $this->returnCode = (int)$responseObject->retval;
+        $this->returnDescription = (string)$responseObject->retdesc;
 
         $this->trustId = (int)$responseObject->trust['id'];
         $this->slavePurse = (string)$responseObject->trust->slavepurse;
