@@ -38,8 +38,8 @@ class Request extends X\Request
     /** @var int trans/wminvid */
     protected $invoiceId;
 
-    /** @var string trans/onlyauth */
-    protected $onlyAuth = 1;
+    /** @var boolean trans/onlyauth */
+    protected $onlyAuth = true;
 
     /**
      * @param string $authType
@@ -98,7 +98,7 @@ class Request extends X\Request
         $xml .= self::xmlElement('pcode', $this->protectionCode);
         $xml .= self::xmlElement('desc', $this->description);
         $xml .= self::xmlElement('wminvid', $this->invoiceId);
-        $xml .= self::xmlElement('onlyauth', $this->onlyAuth);
+        $xml .= self::xmlElement('onlyauth', (int)$this->onlyAuth);
         $xml .= '</trans>';
         $xml .= '</w3s.request>';
 
