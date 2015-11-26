@@ -18,7 +18,7 @@ class Request extends X\Request
     protected $purseId;
 
     /** @var string lmi_clientnumber_code */
-    protected $clientNumberCode = 0;  // default value for USSD type
+    protected $clientNumberCode = 0;  // default value for SMS_TYPE_USSD
 
     const LANGUAGE_RU = 'ru-RU';
     const LANGUAGE_EN = 'en-US';
