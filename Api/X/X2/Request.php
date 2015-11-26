@@ -72,7 +72,7 @@ class Request extends X\Request
         return array(
                 RequestValidator::TYPE_REQUIRED => array(
                         'transactionExternalId', 'payerPurse', 'payeePurse', 'amount',
-                        'description', 'invoiceId', 'onlyAuth',
+                        'invoiceId', 'onlyAuth',
                 ),
                 RequestValidator::TYPE_DEPEND_REQUIRED => array(
                         'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
