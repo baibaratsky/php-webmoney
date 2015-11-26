@@ -36,7 +36,7 @@ class Request extends X\Request
     protected $description;
 
     /** @var int trans/wminvid */
-    protected $invoiceId;
+    protected $invoiceId = 0;
 
     /** @var string trans/onlyauth */
     protected $onlyAuth = 1;
