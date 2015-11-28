@@ -58,7 +58,7 @@ class Response extends AbstractResponse
             $this->refundTransactionInternalId = (int)$operation['ts'];
             $this->transactionId = (int)$operation->inwmtranid;
             $this->payerPurse = (string)$operation->pursesrc;
-            $this->payeePurse = (string)$operation->pursdest;
+            $this->payeePurse = (string)$operation->pursedest;
             $this->amount = (float)$operation->amount;
             $this->fee = (float)$operation->comiss;
             $this->description = (string)$operation->desc;
