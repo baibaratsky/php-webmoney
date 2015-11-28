@@ -52,20 +52,20 @@ class Request extends X\Request
     /** @var string lmi_result_url */
     protected $resultUrl;
 
-    const URL_METHOD_GET = 'GET';
-    const URL_METHOD_POST = 'POST';
-    const URL_METHOD_LINK = 'LINK';
+    const URL_METHOD_GET = 0;
+    const URL_METHOD_POST = 1;
+    const URL_METHOD_LINK = 2;
 
     /** @var string lmi_success_url */
     protected $successUrl;
 
-    /** @var string lmi_success_method */
+    /** @var int lmi_success_method */
     protected $successMethod;
 
     /** @var string lmi_fail_url */
     protected $failUrl;
 
-    /** @var string lmi_fail_method */
+    /** @var int lmi_fail_method */
     protected $failMethod;
 
     /** @var string lmi_paymer_pinnumberinside */
@@ -406,7 +406,7 @@ class Request extends X\Request
     }
 
     /**
-     * @param string $successMethod lmi_success_method
+     * @param int $successMethod lmi_success_method
      */
     public function setSuccessMethod($successMethod)
     {
@@ -430,7 +430,7 @@ class Request extends X\Request
     }
 
     /**
-     * @return string lmi_fail_method
+     * @return int lmi_fail_method
      */
     public function getFailMethod()
     {
