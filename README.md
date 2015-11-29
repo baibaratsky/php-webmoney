@@ -48,7 +48,7 @@ Installation
 0. Add the php-webmoney dependency:
 
     ```
-    php composer.phar require baibaratsky/php-webmoney:0.12.*
+    php composer.phar require baibaratsky/php-webmoney:0.13.*
     ```
 
 Usage
@@ -67,7 +67,10 @@ $request = new WebMoney\Api\X\X9\Request;
 $request->setSignerWmid('YOUR WMID');
 $request->setRequestedWmid('REQUESTED WMID');
 
-$request->sign(new Signer('YOUR WMID', 'FULL PATH TO KEY FILE', 'KEY FILE PASSWORD'));
+$request->sign(new Signer('YOUR WMID', 'FULL PATH TO THE KEY FILE', 'KEY FILE PASSWORD'));
+
+// Replace the sign() call with this string in case of authentication with a Light certificate:
+// $request->cert('FULL PATH TO THE CERTIFICATE FILE', 'FULL PATH TO THE CERTIFICATE KEY');
 
 // You can access the request XML: $request->getData()
 
