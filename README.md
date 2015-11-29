@@ -11,13 +11,17 @@ If you just need to sign your requests to the API, use [WebMoney Signer](https:/
 
 XML-interfaces supported
 ------------------------
+- [X1](https://github.com/baibaratsky/php-webmoney/wiki/X1): sending invoice from merchant to customer
 - [X2](https://github.com/baibaratsky/php-webmoney/wiki/X2): transferring funds from one purse to another
 - [X3](https://github.com/baibaratsky/php-webmoney/wiki/X3): receiving transaction history, checking transaction status
+- [X5](https://github.com/baibaratsky/php-webmoney/wiki/X5): completing a code-protected transaction
 - [X6](https://github.com/baibaratsky/php-webmoney/wiki/X6): sending message to any WM-identifier via internal mail
 - [X8](https://github.com/baibaratsky/php-webmoney/wiki/X8): retrieving information about purse ownership, searching for system user by his/her identifier or purse
 - [X9](https://github.com/baibaratsky/php-webmoney/wiki/X9): retrieving information about purse balance
 - [X11](https://github.com/baibaratsky/php-webmoney/wiki/X11): retrieving information from client’s passport by WM-identifier
+- [X13](https://github.com/baibaratsky/php-webmoney/wiki/X13): recalling incomplete protected transaction
 - [X14](https://github.com/baibaratsky/php-webmoney/wiki/X14): fee-free refund
+- [X15](https://github.com/baibaratsky/php-webmoney/wiki/X15): trust management
 - [X17](https://github.com/baibaratsky/php-webmoney/wiki/X17): operations with arbitration contracts
 - [X18](https://github.com/baibaratsky/php-webmoney/wiki/X18): getting transaction details via merchant.webmoney
 - [X19](https://github.com/baibaratsky/php-webmoney/wiki/X19): verifying personal information for the owner of a WM identifier
