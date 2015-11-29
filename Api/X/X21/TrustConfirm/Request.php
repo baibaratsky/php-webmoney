@@ -18,7 +18,7 @@ class Request extends X\Request
     protected $purseId;
 
     /** @var string lmi_clientnumber_code */
-    protected $clientNumberCode = 0;  // default value for SMS_TYPE_USSD
+    protected $confirmationCode = 0;  // default value for SMS_TYPE_USSD
 
     const LANGUAGE_RU = 'ru-RU';
     const LANGUAGE_EN = 'en-US';
@@ -58,7 +58,7 @@ class Request extends X\Request
             RequestValidator::TYPE_REQUIRED => array(
                 'signerWmid',
                 'purseId',
-                'clientNumberCode'
+                'confirmationCode'
             ),
             RequestValidator::TYPE_RANGE => array(
                 'language' => array(
@@ -77,7 +77,7 @@ class Request extends X\Request
         $xml = '<merchant.request>';
         $xml .= self::xmlElement('wmid', $this->signerWmid);
         $xml .= self::xmlElement('lmi_purseid', $this->purseId);
-        $xml .= self::xmlElement('lmi_clientnumber_code', $this->clientNumberCode);
+        $xml .= self::xmlElement('lmi_clientnumber_code', $this->confirmationCode);
         $xml .= self::xmlElement('sign', $this->signature);
         $xml .= self::xmlElement('lang', $this->language);
         $xml .= '</merchant.request>';
@@ -102,7 +102,7 @@ class Request extends X\Request
             $this->signature = $requestSigner->sign(
                 $this->signerWmid
                 . $this->purseId
-                . $this->clientNumberCode
+                . $this->confirmationCode
             );
         }
     }
@@ -126,17 +126,17 @@ class Request extends X\Request
     /**
      * @return string lmi_clientnumber_code
      */
-    public function getClientNumberCode()
+    public function getConfirmationCode()
     {
-        return $this->clientNumberCode;
+        return $this->confirmationCode;
     }
 
     /**
-     * @param string $clientNumberCode lmi_clientnumber_code
+     * @param string $confirmationCode lmi_clientnumber_code
      */
-    public function setClientNumberCode($clientNumberCode)
+    public function setConfirmationCode($confirmationCode)
     {
-        $this->clientNumberCode = $clientNumberCode;
+        $this->confirmationCode = $confirmationCode;
     }
 
     /**

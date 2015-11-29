@@ -26,25 +26,25 @@ class Trust
     protected $purse;
 
     /** @var string trust/daylimit */
-    protected $limit24h;
+    protected $_24hLimit;
 
     /** @var string trust/dlimit */
-    protected $limitDay;
+    protected $dayLimit;
 
     /** @var string trust/wlimit */
-    protected $limitWeek;
+    protected $weekLimit;
 
     /** @var string trust/mlimit */
-    protected $limitMonth;
+    protected $monthLimit;
 
     /** @var string trust/dsum */
-    protected $sumDay;
+    protected $daySum;
 
     /** @var string trust/wsum */
-    protected $sumWeek;
+    protected $weekSum;
 
     /** @var string trust/msum */
-    protected $sumMonth;
+    protected $monthSum;
 
     /** @var string trust/lastsumdate */
     protected $lastOperationDateTime;
@@ -61,13 +61,13 @@ class Trust
         $this->canViewHistory = $params['canViewHistory'];
         $this->masterWmid = $params['masterWmid'];
         $this->purse = $params['purse'];
-        $this->limit24h = $params['limit24h'];
-        $this->limitDay = $params['limitDay'];
-        $this->limitWeek = $params['limitWeek'];
-        $this->limitMonth = $params['limitMonth'];
-        $this->sumDay = $params['sumDay'];
-        $this->sumWeek = $params['sumWeek'];
-        $this->sumMonth = $params['sumMonth'];
+        $this->_24hLimit = $params['24hLimit'];
+        $this->dayLimit = $params['dayLimit'];
+        $this->weekLimit = $params['weekLimit'];
+        $this->monthLimit = $params['monthLimit'];
+        $this->daySum = $params['daySum'];
+        $this->weekSum = $params['weekSum'];
+        $this->monthSum = $params['monthSum'];
         $this->lastOperationDateTime = $params['lastOperationDateTime'];
         $this->payeeWmid = $params['payeeWmid'];
     }
@@ -102,39 +102,39 @@ class Trust
         return $this->purse;
     }
 
-    public function getLimit24h()
+    public function get24hLimit()
     {
-        return $this->limit24h;
+        return $this->_24hLimit;
     }
 
-    public function getLimitDay()
+    public function getDayLimit()
     {
-        return $this->limitDay;
+        return $this->dayLimit;
     }
 
-    public function getLimitWeek()
+    public function getWeekLimit()
     {
-        return $this->limitWeek;
+        return $this->weekLimit;
     }
 
-    public function getLimitMonth()
+    public function getMonthLimit()
     {
-        return $this->limitMonth;
+        return $this->monthLimit;
     }
 
-    public function getSumDay()
+    public function getDaySum()
     {
-        return $this->sumDay;
+        return $this->daySum;
     }
 
-    public function getSumWeek()
+    public function getWeekSum()
     {
-        return $this->sumWeek;
+        return $this->weekSum;
     }
 
-    public function getSumMonth()
+    public function getMonthSum()
     {
-        return $this->sumMonth;
+        return $this->monthSum;
     }
 
     public function getLastOperationDateTime()

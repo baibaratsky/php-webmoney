@@ -15,9 +15,6 @@ use baibaratsky\WebMoney\Request\RequestValidator;
  */
 class Request extends X\Request
 {
-    /** @var string wmid */
-    protected $signerWmid;
-
     /** @var string validityperiodinhours */
     protected $validityPeriodInHours;
 
@@ -251,22 +248,6 @@ class Request extends X\Request
         } elseif ($this->authType === self::AUTH_MD5) {
             $this->md5 = md5($this->signerWmid . $this->payeePurse . $this->paymentNumber . $this->validityPeriodInHours . $this->secretKey);
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getSignerWmid()
-    {
-        return $this->signerWmid;
-    }
-
-    /**
-     * @param string $signerWmid
-     */
-    public function setSignerWmid($signerWmid)
-    {
-        $this->signerWmid = $signerWmid;
     }
 
     /**
