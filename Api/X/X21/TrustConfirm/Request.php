@@ -15,7 +15,7 @@ use baibaratsky\WebMoney\Signer;
 class Request extends X\Request
 {
     /** @var int lmi_purseid */
-    protected $purseId;
+    protected $requestId;
 
     /** @var string lmi_clientnumber_code */
     protected $confirmationCode = 0;  // default value for SMS_TYPE_USSD
@@ -57,7 +57,7 @@ class Request extends X\Request
         return array(
             RequestValidator::TYPE_REQUIRED => array(
                 'signerWmid',
-                'purseId',
+                'requestId',
                 'confirmationCode'
             ),
             RequestValidator::TYPE_RANGE => array(
@@ -76,7 +76,7 @@ class Request extends X\Request
     {
         $xml = '<merchant.request>';
         $xml .= self::xmlElement('wmid', $this->signerWmid);
-        $xml .= self::xmlElement('lmi_purseid', $this->purseId);
+        $xml .= self::xmlElement('lmi_purseid', $this->requestId);
         $xml .= self::xmlElement('lmi_clientnumber_code', $this->confirmationCode);
         $xml .= self::xmlElement('sign', $this->signature);
         $xml .= self::xmlElement('lang', $this->language);
@@ -101,7 +101,7 @@ class Request extends X\Request
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign(
                 $this->signerWmid
-                . $this->purseId
+                . $this->requestId
                 . $this->confirmationCode
             );
         }
@@ -110,17 +110,17 @@ class Request extends X\Request
     /**
      * @return int lmi_purseid
      */
-    public function getPurseId()
+    public function getRequestId()
     {
-        return $this->purseId;
+        return $this->requestId;
     }
 
     /**
-     * @param int $purseId lmi_purseid
+     * @param int $requestId lmi_purseid
      */
-    public function setPurseId($purseId)
+    public function setRequestId($requestId)
     {
-        $this->purseId = $purseId;
+        $this->requestId = $requestId;
     }
 
     /**

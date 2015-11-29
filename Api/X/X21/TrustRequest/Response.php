@@ -12,7 +12,7 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
 class Response extends AbstractResponse
 {
     /** @var int trust/@purseid */
-    protected $purseId;
+    protected $requestId;
 
     /** @var int trust/realsmstype */
     protected $realSmsType;
@@ -40,7 +40,7 @@ class Response extends AbstractResponse
         $this->returnCode = (int)$responseObject->retval;
         $this->returnDescription = (string)$responseObject->retdesc;
 
-        $this->purseId = (int)$responseObject->trust['purseid'];
+        $this->requestId = (int)$responseObject->trust['purseid'];
         $this->realSmsType = (int)$responseObject->trust->realsmstype;
         $this->userDescription = (string)$responseObject->userdesc;
         if ($responseObject->slavepurse) {
@@ -57,9 +57,9 @@ class Response extends AbstractResponse
     /**
      * @return int trust/@purseid
      */
-    public function getPurseId()
+    public function getRequestId()
     {
-        return $this->purseId;
+        return $this->requestId;
     }
 
     /**
