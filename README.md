@@ -21,6 +21,7 @@ XML-interfaces supported
 - [X17](https://github.com/baibaratsky/php-webmoney/wiki/X17): operations with arbitration contracts
 - [X18](https://github.com/baibaratsky/php-webmoney/wiki/X18): getting transaction details via merchant.webmoney
 - [X19](https://github.com/baibaratsky/php-webmoney/wiki/X19): verifying personal information for the owner of a WM identifier
+- [X21](https://github.com/baibaratsky/php-webmoney/wiki/X21): setting trust for merchant payments by SMS
 - [X22](https://github.com/baibaratsky/php-webmoney/wiki/X22): receiving the ticket of prerequest payment form at merchant.webmoney
 
 Megastock interfaces supported
