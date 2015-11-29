@@ -203,10 +203,10 @@ class Request extends X\Request
             $xml .= self::xmlElement('lmi_payment_desc', $this->paymentDescription);
         }
         $xml .= self::xmlElement('lmi_sim_mode', $this->simMode);
-        $xml .= self::xmlElement('lmi_result_url', $this->resultUrl);
-        $xml .= self::xmlElement('lmi_success_url', $this->successUrl);
+        $xml .= self::xmlElement('lmi_result_url', htmlspecialchars($this->resultUrl));
+        $xml .= self::xmlElement('lmi_success_url', htmlspecialchars($this->successUrl));
         $xml .= self::xmlElement('lmi_success_method', $this->successMethod);
-        $xml .= self::xmlElement('lmi_fail_url', $this->failUrl);
+        $xml .= self::xmlElement('lmi_fail_url', htmlspecialchars($this->failUrl));
         $xml .= self::xmlElement('lmi_fail_method', $this->failMethod);
         $xml .= self::xmlElement('lmi_paymer_pinnumberinside', $this->paymerPinNumberInside);
         $xml .= self::xmlElement('lmi_wmnote_pinnumberinside', $this->wmNotePinNumberInside);
