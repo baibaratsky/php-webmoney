@@ -13,7 +13,8 @@ XML-interfaces supported
 ------------------------
 - [X1](https://github.com/baibaratsky/php-webmoney/wiki/X1): sending invoice from merchant to customer
 - [X2](https://github.com/baibaratsky/php-webmoney/wiki/X2): transferring funds from one purse to another
-- [X3](https://github.com/baibaratsky/php-webmoney/wiki/X3): receiving transaction history, checking transaction status
+- [X3](https://github.com/baibaratsky/php-webmoney/wiki/X3): transactions history, checking transactions status
+- [X4](https://github.com/baibaratsky/php-webmoney/wiki/X4): issued invoices history, verifying whether the invoices were paid
 - [X5](https://github.com/baibaratsky/php-webmoney/wiki/X5): completing a code-protected transaction
 - [X6](https://github.com/baibaratsky/php-webmoney/wiki/X6): sending message to any WM-identifier via internal mail
 - [X8](https://github.com/baibaratsky/php-webmoney/wiki/X8): retrieving information about purse ownership, searching for system user by his/her identifier or purse
@@ -48,7 +49,7 @@ Installation
 0. Add the php-webmoney dependency:
 
     ```
-    php composer.phar require baibaratsky/php-webmoney:0.13.*
+    php composer.phar require baibaratsky/php-webmoney:0.14.*
     ```
 
 Usage
