@@ -51,7 +51,8 @@ class Response extends AbstractResponse
                 'daySum' => $trust->dsum,
                 'weekSum' => $trust->wsum,
                 'monthSum' => $trust->msum,
-                'lastOperationDateTime' => self::createDateTime((string)$trust->lastsumdate),
+                'lastOperationDateTime' => \DateTime::createFromFormat('Y.m.d', (string)$trust->lastsumdate,
+                                                                       self::getTimeZone()),
                 'payeeWmid' => $trust->storeswmid,
         );
     }
