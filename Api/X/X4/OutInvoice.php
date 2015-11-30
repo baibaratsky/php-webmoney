@@ -1,6 +1,6 @@
 <?php
 
-namespace app\components\wm\Api\X\X4;
+namespace baibaratsky\WebMoney\Api\X\X4;
 
 class OutInvoice
 {

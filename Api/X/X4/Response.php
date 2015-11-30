@@ -1,6 +1,6 @@
 <?php
 
-namespace app\components\wm\Api\X\X4;
+namespace baibaratsky\WebMoney\Api\X\X4;
 
 use baibaratsky\WebMoney\Request\AbstractResponse;
 
@@ -15,7 +15,7 @@ class Response extends AbstractResponse
 	protected $requestNumber;
 
 	/** @var Trust[] trustlist */
-	protected $outinvoices = [];
+	protected $outInvoices = [];
 
 	public function __construct($response)
 	{
@@ -26,7 +26,7 @@ class Response extends AbstractResponse
 
 		if (isset($responseObject->outinvoices)) {
 			foreach ($responseObject->outinvoices->children() as $outinvoice) {
-				$this->outinvoices[] = new OutInvoice($this->operationXmlToArray($outinvoice));
+				$this->outInvoices[] = new OutInvoice($this->operationXmlToArray($outinvoice));
 			}
 		}
 	}
