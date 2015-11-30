@@ -2,10 +2,15 @@
 
 namespace baibaratsky\WebMoney\Api\X\X4;
 
-class OutInvoice
+class Invoice
 {
+    const STATUS_NOT_PAID = 0;
+    const STATUS_PAID_WITH_PROTECTION = 1;
+    const STATUS_PAID = 2;
+    const STATUS_DECLINED = 3;
+
     /** @var int @id */
-    protected $outInvoiceId;
+    protected $id;
 
     /** @var int orderid */
     protected $orderId;
@@ -26,16 +31,16 @@ class OutInvoice
     protected $address;
 
     /** @var int period */
-    protected $period;
+    protected $protectionPeriod;
 
     /** @var int expiration */
     protected $expiration;
 
     /** @var int state */
-    protected $state;
+    protected $status;
 
     /** @var int wmtranid */
-    protected $wmtranid;
+    protected $transactionId;
 
     /** @var \DateTime datecrt */
     protected $createDateTime;
@@ -48,28 +53,29 @@ class OutInvoice
 
     public function __construct(array $data)
     {
-        $this->outInvoiceId = $data['outInvoiceId'];
+        $this->id = $data['id'];
         $this->orderId = $data['orderId'];
         $this->customerWmid = $data['customerWmid'];
         $this->purse = $data['purse'];
         $this->amount = $data['amount'];
         $this->description = $data['description'];
         $this->address = $data['address'];
-        $this->period = $data['period'];
+        $this->protectionPeriod = $data['protectionPeriod'];
         $this->expiration = $data['expiration'];
-        $this->state = $data['state'];
-        $this->createDateTime = new \DateTime($data['createDateTime']);
-        $this->updateDateTime = new \DateTime($data['updateDateTime']);
-        $this->wmtranid = $data['wmtranid'];
+        $this->status = $data['status'];
+        $this->createDateTime = $data['createDateTime'];
+        $this->updateDateTime = $data['updateDateTime'];
+        $this->transactionId = $data['transactionId'];
         $this->customerPurse = $data['customerPurse'];
 
     }
+
     /**
      * @return int
      */
-    public function getOutInvoiceid()
+    public function getId()
     {
-        return $this->outInvoiceid;
+        return $this->id;
     }
 
     /**
@@ -123,9 +129,9 @@ class OutInvoice
     /**
      * @return string
      */
-    public function getPeriod()
+    public function getProtectionPeriod()
     {
-        return $this->period;
+        return $this->protectionPeriod;
     }
 
     /**
@@ -139,17 +145,17 @@ class OutInvoice
     /**
      * @return int
      */
-    public function getState()
+    public function getStatus()
     {
-        return $this->state;
+        return $this->status;
     }
 
     /**
      * @return int
      */
-    public function getWmtranid()
+    public function getTransactionId()
     {
-        return $this->wmtranid;
+        return $this->transactionId;
     }
 
     /**

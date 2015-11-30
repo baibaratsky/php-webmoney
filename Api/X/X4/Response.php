@@ -11,59 +11,60 @@ use baibaratsky\WebMoney\Request\AbstractResponse;
  */
 class Response extends AbstractResponse
 {
-	/** @var int reqn */
-	protected $requestNumber;
+    /** @var int reqn */
+    protected $requestNumber;
 
-	/** @var Trust[] trustlist */
-	protected $outInvoices = [];
+    /** @var Invoice[] outinvoices */
+    protected $invoices = array();
 
-	public function __construct($response)
-	{
-		$responseObject = new \SimpleXMLElement($response);
-		$this->requestNumber = (int)$responseObject->reqn;
-		$this->returnCode = (int)$responseObject->retval;
-		$this->returnDescription = (string)$responseObject->retdesc;
+    public function __construct($response)
+    {
+        parent::__construct($response);
 
-		if (isset($responseObject->outinvoices)) {
-			foreach ($responseObject->outinvoices->children() as $outinvoice) {
-				$this->outInvoices[] = new OutInvoice($this->operationXmlToArray($outinvoice));
-			}
-		}
-	}
+        $responseSimpleXml = new \SimpleXMLElement($response);
+        $this->requestNumber = (int)$responseSimpleXml->reqn;
+        $this->returnCode = (int)$responseSimpleXml->retval;
+        $this->returnDescription = (string)$responseSimpleXml->retdesc;
+        if (isset($responseSimpleXml->outinvoices)) {
+            foreach ($responseSimpleXml->outinvoices->children() as $invoiceSimpleXml) {
+                $this->invoices[] = new Invoice($this->invoiceSimpleXmlToArray($invoiceSimpleXml));
+            }
+        }
+    }
 
-	protected function operationXmlToArray($xml)
-	{
-		return array(
-			'outInvoiceId' => (int)$xml['id'],
-			'orderId' => (string)$xml->orderid,
-			'customerWmid' => (string)$xml->customerwmid,
-			'purse' => (string)$xml->storepurse,
-			'amount' => (float)$xml->amount,
-			'description' => (string)$xml->desc,
-			'address' => (string)$xml->address,
-			'period' => (int)$xml->period,
-			'expiration' => (int)$xml->expiration,
-			'state' => (int)$xml->state,
-			'createDateTime' => (string)$xml->datecrt,
-			'updateDateTime' => (string)$xml->dateupd,
-			'wmtranid' => (int)$xml->wmtranid,
-			'customerPurse' => (string)$xml->customerpurse,
-		);
-	}
-
-	/**
-	 * @return OutInvoice[]
-	 */
-	public function getOutinvoices()
-	{
-		return $this->outinvoices;
-	}
+    protected function invoiceSimpleXmlToArray($simpleXml)
+    {
+        return array(
+                'id' => (int)$simpleXml['id'],
+                'orderId' => (string)$simpleXml->orderid,
+                'customerWmid' => (string)$simpleXml->customerwmid,
+                'purse' => (string)$simpleXml->storepurse,
+                'amount' => (float)$simpleXml->amount,
+                'description' => (string)$simpleXml->desc,
+                'address' => (string)$simpleXml->address,
+                'protectionPeriod' => (int)$simpleXml->period,
+                'expiration' => (int)$simpleXml->expiration,
+                'status' => (int)$simpleXml->state,
+                'createDateTime' => self::createDateTime((string)$simpleXml->datecrt),
+                'updateDateTime' => self::createDateTime((string)$simpleXml->dateupd),
+                'transactionId' => (int)$simpleXml->wmtranid,
+                'customerPurse' => (string)$simpleXml->customerpurse,
+        );
+    }
 
     /**
-	 * @return int
-	 */
-	public function getReturnCode()
-	{
-		return $this->returnCode;
-	}
+     * @return int
+     */
+    public function getRequestNumber()
+    {
+        return $this->requestNumber;
+    }
+
+    /**
+     * @return Invoice[]
+     */
+    public function getInvoices()
+    {
+        return $this->invoices;
+    }
 }

@@ -66,14 +66,6 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @return int
-     */
-    public function getReturnCode()
-    {
-        return $this->returnCode;
-    }
-
-    /**
      * @return Trust[]
      */
     public function getTrusts()
