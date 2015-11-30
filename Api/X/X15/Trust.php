@@ -47,7 +47,7 @@ class Trust
     protected $monthSum;
 
     /** @var string trust/lastsumdate */
-    protected $lastOperationDateTime;
+    protected $lastOperationDate;
 
     /** @var string trust/storeswmid */
     protected $payeeWmid;
@@ -68,7 +68,7 @@ class Trust
         $this->daySum = $params['daySum'];
         $this->weekSum = $params['weekSum'];
         $this->monthSum = $params['monthSum'];
-        $this->lastOperationDateTime = $params['lastOperationDateTime'];
+        $this->lastOperationDate = $params['lastOperationDate'];
         $this->payeeWmid = $params['payeeWmid'];
     }
 
@@ -137,9 +137,9 @@ class Trust
         return $this->monthSum;
     }
 
-    public function getLastOperationDateTime()
+    public function getLastOperationDate()
     {
-        return $this->lastOperationDateTime;
+        return $this->lastOperationDate;
     }
 
     public function getPayeeWmid()
