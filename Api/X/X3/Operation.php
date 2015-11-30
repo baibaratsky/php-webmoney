@@ -4,8 +4,17 @@ namespace baibaratsky\WebMoney\Api\X\X3;
 
 class Operation
 {
+    const STATUS_COMPLETED = 0;
+    const STATUS_NOT_COMPLETED = 4;
+    const STATUS_REFUNDED = 12;
+
+    /** @deprecated Use STATUS_COMPLETED instead */
     const TYPE_SIMPLE = 0;
+
+    /** @deprecated Use STATUS_NOT_COMPLETED instead */
     const TYPE_PROTECTED_NOT_COMPLETED = 4;
+
+    /** @deprecated Use STATUS_REFUNDED instead */
     const TYPE_PROTECTED_REFUNDED = 12;
 
     /** @var int @id */
@@ -24,7 +33,7 @@ class Operation
     protected $fee;
 
     /** @var string opertype */
-    protected $operationType;
+    protected $status;
 
     /** @var int wminvid */
     protected $invoiceId;
@@ -36,7 +45,7 @@ class Operation
     protected $transactionExternalId;
 
     /** @var int period */
-    protected $period;
+    protected $protectionPeriod;
 
     /** @var string desc */
     protected $description;
@@ -63,14 +72,14 @@ class Operation
         $this->payeePurse = $data['payeePurse'];
         $this->amount = $data['amount'];
         $this->fee = $data['fee'];
-        $this->operationType = $data['operationType'];
+        $this->status = $data['status'];
         $this->invoiceId = $data['invoiceId'];
         $this->orderId = $data['orderId'];
         $this->transactionExternalId = $data['transactionExternalId'];
-        $this->period = $data['period'];
+        $this->protectionPeriod = $data['protectionPeriod'];
         $this->description = $data['description'];
-        $this->createDateTime = new \DateTime($data['createDateTime']);
-        $this->updateDateTime = new \DateTime($data['updateDateTime']);
+        $this->createDateTime = $data['createDateTime'];
+        $this->updateDateTime = $data['updateDateTime'];
         $this->correspondentWmid = $data['correspondentWmid'];
         $this->balance = $data['balance'];
 
@@ -122,9 +131,18 @@ class Operation
     /**
      * @return string
      */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @deprecated Use getStatus() instead
+     * @return string
+     */
     public function getOperationType()
     {
-        return $this->operationType;
+        return $this->getStatus();
     }
 
     /**
@@ -154,9 +172,18 @@ class Operation
     /**
      * @return int
      */
+    public function getProtectionPeriod()
+    {
+        return $this->protectionPeriod;
+    }
+
+    /**
+     * @deprecated Use getProtectionPeriod() instead
+     * @return int
+     */
     public function getPeriod()
     {
-        return $this->period;
+        return $this->getProtectionPeriod();
     }
 
     /**

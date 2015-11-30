@@ -28,9 +28,9 @@ class Response extends AbstractResponse
         $this->requestNumber = (int)$responseObject->reqn;
         $this->returnCode = (int)$responseObject->retval;
         $this->returnDescription = (string)$responseObject->retdesc;
-        if (isset($responseObject->operations->operation)) {
-            foreach ($responseObject->operations->operation as $operation) {
-                $this->operations[] = new Operation($this->operationXmlToArray($operation));
+        if (isset($responseObject->operations)) {
+            foreach ($responseObject->operations->children() as $operation) {
+                $this->operations[] = new Operation($this->operationSimpleXmlToArray($operation));
             }
         }
     }
@@ -51,28 +51,28 @@ class Response extends AbstractResponse
         return $this->operations;
     }
 
-    protected function operationXmlToArray($xml)
+    protected function operationSimpleXmlToArray($simpleXml)
     {
         $data = array(
-                'transactionId' => (int)$xml['id'],
-                'payerPurse' => (string)$xml->pursesrc,
-                'payeePurse' => (string)$xml->pursedest,
-                'amount' => (float)$xml->amount,
-                'fee' => (float)$xml->comiss,
-                'operationType' => (string)$xml->opertype,
-                'invoiceId' => (int)$xml->wminvid,
-                'orderId' => (int)$xml->orderid,
-                'transactionExternalId' => (int)$xml->tranid,
-                'period' => (int)$xml->period,
-                'description' => (string)$xml->desc,
-                'createDateTime' => (string)$xml->datecrt,
-                'updateDateTime' => (string)$xml->dateupd,
-                'correspondentWmid' => (string)$xml->corrwm,
-                'balance' => (float)$xml->rest,
+                'transactionId' => (int)$simpleXml['id'],
+                'payerPurse' => (string)$simpleXml->pursesrc,
+                'payeePurse' => (string)$simpleXml->pursedest,
+                'amount' => (float)$simpleXml->amount,
+                'fee' => (float)$simpleXml->comiss,
+                'status' => (string)$simpleXml->opertype,
+                'invoiceId' => (int)$simpleXml->wminvid,
+                'orderId' => (int)$simpleXml->orderid,
+                'transactionExternalId' => (int)$simpleXml->tranid,
+                'protectionPeriod' => (int)$simpleXml->period,
+                'description' => (string)$simpleXml->desc,
+                'createDateTime' => self::createDateTime((string)$simpleXml->datecrt),
+                'updateDateTime' => self::createDateTime((string)$simpleXml->dateupd),
+                'correspondentWmid' => (string)$simpleXml->corrwm,
+                'balance' => (float)$simpleXml->rest,
         );
 
-        if ($data['operationType'] != Operation::TYPE_SIMPLE) {
-            $data['incomplete'] = isset($xml->timelock);
+        if ($data['status'] != Operation::STATUS_COMPLETED) {
+            $data['incomplete'] = isset($simpleXml->timelock);
         }
 
         return $data;
