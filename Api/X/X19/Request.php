@@ -18,12 +18,15 @@ class Request extends X\Request
     const LANG_EN = 'en';
 
     const TYPE_CASH = 1;
-    const TYPE_SDP = 2;
+    const TYPE_TRANSFER = 2;
     const TYPE_BANK = 3;
     const TYPE_CARD = 4;
     const TYPE_EMONEY = 5;
     const TYPE_SMS = 6;
     const TYPE_MOBILE = 7;
+
+    /** @deprecated Use const TYPE_TRANSFER instead */
+    const TYPE_SDP = self::TYPE_TRANSFER;
 
     const DIRECTION_OUTPUT = 1;
     const DIRECTION_INPUT = 2;
@@ -125,9 +128,9 @@ class Request extends X\Request
                 RequestValidator::TYPE_DEPEND_REQUIRED => array(
                         'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
                         'userPassportNum' => array('operationType' => array(self::TYPE_CASH)),
-                        'userFirstName' => array('operationType' => array(self::TYPE_CASH, self::TYPE_SDP,
+                        'userFirstName' => array('operationType' => array(self::TYPE_CASH, self::TYPE_TRANSFER,
                                                                           self::TYPE_BANK, self::TYPE_CARD)),
-                        'userLastName' => array('operationType' => array(self::TYPE_CASH, self::TYPE_SDP,
+                        'userLastName' => array('operationType' => array(self::TYPE_CASH, self::TYPE_TRANSFER,
                                                                          self::TYPE_BANK, self::TYPE_CARD)),
                         'userBankName' => array('operationType' => array(self::TYPE_BANK, self::TYPE_CARD)),
                         'userBankAccount' => array('operationType' => array(self::TYPE_BANK)),
@@ -138,7 +141,7 @@ class Request extends X\Request
                 ),
                 RequestValidator::TYPE_RANGE => array(
                         'language' => array(self::LANG_RU, self::LANG_EN),
-                        'operationType' => array(self::TYPE_CASH, self::TYPE_SDP, self::TYPE_BANK, self::TYPE_CARD,
+                        'operationType' => array(self::TYPE_CASH, self::TYPE_TRANSFER, self::TYPE_BANK, self::TYPE_CARD,
                                                  self::TYPE_EMONEY, self::TYPE_SMS, self::TYPE_MOBILE),
                         'operationDirection' => array(self::DIRECTION_OUTPUT, self::DIRECTION_INPUT),
                         'operationPurseType' => array(self::PURSE_WMZ, self::PURSE_WMR, self::PURSE_WME,
