@@ -179,7 +179,7 @@ class Request extends MegaStock\Request
      */
     public function setIntegratorId($integratorId)
     {
-        $this->integratorId = $integratorId;
+        $this->integratorId = (int)$integratorId;
     }
 
     /**
@@ -195,7 +195,7 @@ class Request extends MegaStock\Request
      */
     public function setIntegratorWmid($integratorWmid)
     {
-        $this->integratorWmid = $integratorWmid;
+        $this->integratorWmid = (string)$integratorWmid;
     }
 
     /**
@@ -211,7 +211,7 @@ class Request extends MegaStock\Request
      */
     public function setBeneficiaryType($beneficiaryType)
     {
-        $this->beneficiaryType = $beneficiaryType;
+        $this->beneficiaryType = (int)$beneficiaryType;
     }
 
     /**
@@ -227,7 +227,7 @@ class Request extends MegaStock\Request
      */
     public function setBeneficiaryLegalName($beneficiaryLegalName)
     {
-        $this->beneficiaryLegalName = $beneficiaryLegalName;
+        $this->beneficiaryLegalName = (string)$beneficiaryLegalName;
     }
 
     /**
@@ -243,7 +243,7 @@ class Request extends MegaStock\Request
      */
     public function setBeneficiaryLegalOgrn($beneficiaryLegalOgrn)
     {
-        $this->beneficiaryLegalOgrn = $beneficiaryLegalOgrn;
+        $this->beneficiaryLegalOgrn = (int)$beneficiaryLegalOgrn;
     }
 
     /**
@@ -259,7 +259,7 @@ class Request extends MegaStock\Request
      */
     public function setBeneficiaryWmid($beneficiaryWmid)
     {
-        $this->beneficiaryWmid = $beneficiaryWmid;
+        $this->beneficiaryWmid = (string)$beneficiaryWmid;
     }
 
     /**
@@ -275,7 +275,7 @@ class Request extends MegaStock\Request
      */
     public function setMerchantUrl($merchantUrl)
     {
-        $this->merchantUrl = $merchantUrl;
+        $this->merchantUrl = (string)$merchantUrl;
     }
 
     /**
@@ -291,7 +291,7 @@ class Request extends MegaStock\Request
      */
     public function setCategoryId($categoryId)
     {
-        $this->categoryId = $categoryId;
+        $this->categoryId = (int)$categoryId;
     }
 
     /**
@@ -307,7 +307,7 @@ class Request extends MegaStock\Request
      */
     public function setKeywords($keywords)
     {
-        $this->keywords = $keywords;
+        $this->keywords = (string)$keywords;
     }
 
     /**
@@ -323,7 +323,7 @@ class Request extends MegaStock\Request
      */
     public function setLogoUrl($logoUrl)
     {
-        $this->logoUrl = $logoUrl;
+        $this->logoUrl = (string)$logoUrl;
     }
 
     /**
@@ -339,7 +339,7 @@ class Request extends MegaStock\Request
      */
     public function setAboutLanguage($aboutLanguage)
     {
-        $this->aboutLanguage = $aboutLanguage;
+        $this->aboutLanguage = (string)$aboutLanguage;
     }
 
     /**
@@ -355,7 +355,7 @@ class Request extends MegaStock\Request
      */
     public function setAboutName($aboutName)
     {
-        $this->aboutName = $aboutName;
+        $this->aboutName = (string)$aboutName;
     }
 
     /**
@@ -371,7 +371,7 @@ class Request extends MegaStock\Request
      */
     public function setAboutDescription($aboutDescription)
     {
-        $this->aboutDescription = $aboutDescription;
+        $this->aboutDescription = (string)$aboutDescription;
     }
 
     /**
@@ -387,7 +387,7 @@ class Request extends MegaStock\Request
      */
     public function setMerchantNameInComment($merchantNameInComment)
     {
-        $this->merchantNameInComment = $merchantNameInComment;
+        $this->merchantNameInComment = (string)$merchantNameInComment;
     }
 
     /**

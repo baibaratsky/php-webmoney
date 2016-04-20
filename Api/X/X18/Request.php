@@ -128,7 +128,7 @@ class Request extends X\Request
      */
     public function setPayeePurse($payeePurse)
     {
-        $this->payeePurse = $payeePurse;
+        $this->payeePurse = (string)$payeePurse;
     }
 
     /**
@@ -144,7 +144,7 @@ class Request extends X\Request
      */
     public function setPaymentNumber($paymentNumber)
     {
-        $this->paymentNumber = $paymentNumber;
+        $this->paymentNumber = (string)$paymentNumber;
     }
 
     /**
@@ -160,7 +160,7 @@ class Request extends X\Request
      */
     public function setPaymentNumberType($paymentNumberType)
     {
-        $this->paymentNumberType = $paymentNumberType;
+        $this->paymentNumberType = (int)$paymentNumberType;
     }
 
     /**

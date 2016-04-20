@@ -101,7 +101,7 @@ class Request extends X\Request
      */
     public function setTransactionId($transactionId)
     {
-        $this->transactionId = $transactionId;
+        $this->transactionId = (string)$transactionId;
     }
 
     /**
@@ -117,6 +117,6 @@ class Request extends X\Request
      */
     public function setProtectionCode($protectionCode)
     {
-        $this->protectionCode = $protectionCode;
+        $this->protectionCode = (string)$protectionCode;
     }
 }

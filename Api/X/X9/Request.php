@@ -97,6 +97,6 @@ class Request extends X\Request
      */
     public function setRequestedWmid($requestedWmid)
     {
-        $this->requestedWmid = $requestedWmid;
+        $this->requestedWmid = (string)$requestedWmid;
     }
 }

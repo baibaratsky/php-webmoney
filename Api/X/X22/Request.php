@@ -263,7 +263,7 @@ class Request extends X\Request
      */
     public function setValidityPeriodInHours($validityPeriodInHours)
     {
-        $this->validityPeriodInHours = $validityPeriodInHours;
+        $this->validityPeriodInHours = (int)$validityPeriodInHours;
     }
 
     /**
@@ -279,7 +279,7 @@ class Request extends X\Request
      */
     public function setPayeePurse($payeePurse)
     {
-        $this->payeePurse = $payeePurse;
+        $this->payeePurse = (int)$payeePurse;
     }
 
     /**
@@ -295,7 +295,7 @@ class Request extends X\Request
      */
     public function setPaymentAmount($paymentAmount)
     {
-        $this->paymentAmount = $paymentAmount;
+        $this->paymentAmount = (float)$paymentAmount;
     }
 
     /**
@@ -311,7 +311,7 @@ class Request extends X\Request
      */
     public function setPaymentNumber($paymentNumber)
     {
-        $this->paymentNumber = $paymentNumber;
+        $this->paymentNumber = (int)$paymentNumber;
     }
 
     /**
@@ -327,7 +327,7 @@ class Request extends X\Request
      */
     public function setPaymentDescription($paymentDescription)
     {
-        $this->paymentDescription = $paymentDescription;
+        $this->paymentDescription = (string)$paymentDescription;
     }
 
     /**
@@ -343,7 +343,7 @@ class Request extends X\Request
      */
     public function setSimMode($simMode)
     {
-        $this->simMode = $simMode;
+        $this->simMode = (int)$simMode;
     }
 
     /**
@@ -359,7 +359,7 @@ class Request extends X\Request
      */
     public function setResultUrl($resultUrl)
     {
-        $this->resultUrl = $resultUrl;
+        $this->resultUrl = (string)$resultUrl;
     }
 
     /**
@@ -375,7 +375,7 @@ class Request extends X\Request
      */
     public function setSuccessUrl($successUrl)
     {
-        $this->successUrl = $successUrl;
+        $this->successUrl = (string)$successUrl;
     }
 
     /**
@@ -391,7 +391,7 @@ class Request extends X\Request
      */
     public function setSuccessMethod($successMethod)
     {
-        $this->successMethod = $successMethod;
+        $this->successMethod = (int)$successMethod;
     }
 
     /**
@@ -407,7 +407,7 @@ class Request extends X\Request
      */
     public function setFailUrl($failUrl)
     {
-        $this->failUrl = $failUrl;
+        $this->failUrl = (string)$failUrl;
     }
 
     /**
@@ -419,11 +419,11 @@ class Request extends X\Request
     }
 
     /**
-     * @param string $failMethod lmi_fail_method
+     * @param int $failMethod lmi_fail_method
      */
     public function setFailMethod($failMethod)
     {
-        $this->failMethod = $failMethod;
+        $this->failMethod = (int)$failMethod;
     }
 
     /**
@@ -439,7 +439,7 @@ class Request extends X\Request
      */
     public function setPaymerPinNumberInside($paymerPinNumberInside)
     {
-        $this->paymerPinNumberInside = $paymerPinNumberInside;
+        $this->paymerPinNumberInside = (string)$paymerPinNumberInside;
     }
 
     /**
@@ -455,7 +455,7 @@ class Request extends X\Request
      */
     public function setWmNotePinNumberInside($wmNotePinNumberInside)
     {
-        $this->wmNotePinNumberInside = $wmNotePinNumberInside;
+        $this->wmNotePinNumberInside = (string)$wmNotePinNumberInside;
     }
 
     /**
@@ -471,7 +471,7 @@ class Request extends X\Request
      */
     public function setPaymerEmail($paymerEmail)
     {
-        $this->paymerEmail = $paymerEmail;
+        $this->paymerEmail = (string)$paymerEmail;
     }
 
     /**
@@ -487,7 +487,7 @@ class Request extends X\Request
      */
     public function setWmCheckNumberInside($wmCheckNumberInside)
     {
-        $this->wmCheckNumberInside = $wmCheckNumberInside;
+        $this->wmCheckNumberInside = (string)$wmCheckNumberInside;
     }
 
     /**
@@ -503,7 +503,7 @@ class Request extends X\Request
      */
     public function setWmCheckCodeInside($wmCheckCodeInside)
     {
-        $this->wmCheckCodeInside = $wmCheckCodeInside;
+        $this->wmCheckCodeInside = (string)$wmCheckCodeInside;
     }
 
     /**
@@ -519,7 +519,7 @@ class Request extends X\Request
      */
     public function setAllowSdp($allowSdp)
     {
-        $this->allowSdp = $allowSdp;
+        $this->allowSdp = (int)$allowSdp;
     }
 
     /**
@@ -535,7 +535,7 @@ class Request extends X\Request
      */
     public function setFastPhoneNumber($fastPhoneNumber)
     {
-        $this->fastPhoneNumber = $fastPhoneNumber;
+        $this->fastPhoneNumber = (int)$fastPhoneNumber;
     }
 
     /**
@@ -551,7 +551,7 @@ class Request extends X\Request
      */
     public function setPaymentCreditDays($paymentCreditDays)
     {
-        $this->paymentCreditDays = $paymentCreditDays;
+        $this->paymentCreditDays = (int)$paymentCreditDays;
     }
 
     /**
@@ -567,7 +567,7 @@ class Request extends X\Request
      */
     public function setShopId($shopId)
     {
-        $this->shopId = $shopId;
+        $this->shopId = (int)$shopId;
     }
 
     /**
@@ -615,6 +615,6 @@ class Request extends X\Request
      */
     public function setPaymentMethod($paymentMethod)
     {
-        $this->paymentMethod = $paymentMethod;
+        $this->paymentMethod = (string)$paymentMethod;
     }
 }

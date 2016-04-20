@@ -118,7 +118,7 @@ class Request extends X\Request
      */
     public function setMessageRecipientWmid($messageRecipientWmid)
     {
-        $this->messageRecipientWmid = $messageRecipientWmid;
+        $this->messageRecipientWmid = (string)$messageRecipientWmid;
     }
 
     /**
@@ -134,7 +134,7 @@ class Request extends X\Request
      */
     public function setMessageSubject($messageSubject)
     {
-        $this->messageSubject = $messageSubject;
+        $this->messageSubject = (string)$messageSubject;
     }
 
     /**
@@ -150,7 +150,7 @@ class Request extends X\Request
      */
     public function setMessageText($messageText)
     {
-        $this->messageText = $messageText;
+        $this->messageText = (string)$messageText;
     }
 
     /**
@@ -166,6 +166,6 @@ class Request extends X\Request
      */
     public function setMessageOnlyAuth($messageOnlyAuth)
     {
-        $this->messageOnlyAuth = $messageOnlyAuth;
+        $this->messageOnlyAuth = (int)$messageOnlyAuth;
     }
 }

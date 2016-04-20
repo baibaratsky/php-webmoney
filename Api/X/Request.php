@@ -80,7 +80,7 @@ abstract class Request extends XmlRequest
      */
     public function setRequestNumber($requestNumber)
     {
-        $this->requestNumber = $requestNumber;
+        $this->requestNumber = (int)$requestNumber;
     }
 
     /**
@@ -96,7 +96,7 @@ abstract class Request extends XmlRequest
      */
     public function setSignerWmid($signerWmid)
     {
-        $this->signerWmid = $signerWmid;
+        $this->signerWmid = (string)$signerWmid;
     }
 
     /**

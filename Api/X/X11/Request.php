@@ -121,7 +121,7 @@ class Request extends X\Request
      */
     public function setPassportWmid($passportWmid)
     {
-        $this->passportWmid = $passportWmid;
+        $this->passportWmid = (string)$passportWmid;
     }
 
     /**
@@ -137,7 +137,7 @@ class Request extends X\Request
      */
     public function setParamDict($paramDict)
     {
-        $this->paramDict = $paramDict;
+        $this->paramDict = (int)$paramDict;
     }
 
     /**
@@ -153,7 +153,7 @@ class Request extends X\Request
      */
     public function setParamInfo($paramInfo)
     {
-        $this->paramInfo = $paramInfo;
+        $this->paramInfo = (int)$paramInfo;
     }
 
     /**
@@ -169,6 +169,6 @@ class Request extends X\Request
      */
     public function setParamMode($paramMode)
     {
-        $this->paramMode = $paramMode;
+        $this->paramMode = (int)$paramMode;
     }
 }

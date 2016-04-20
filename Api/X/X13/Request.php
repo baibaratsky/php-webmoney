@@ -97,6 +97,6 @@ class Request extends X\Request
      */
     public function setTransactionId($transactionId)
     {
-        $this->transactionId = $transactionId;
+        $this->transactionId = (string)$transactionId;
     }
 }

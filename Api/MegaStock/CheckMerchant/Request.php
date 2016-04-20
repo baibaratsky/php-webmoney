@@ -95,7 +95,7 @@ class Request extends MegaStock\Request
      */
     public function setIntegratorId($integratorId)
     {
-        $this->integratorId = $integratorId;
+        $this->integratorId = (int)$integratorId;
     }
 
     /**
@@ -111,7 +111,7 @@ class Request extends MegaStock\Request
      */
     public function setIntegratorWmid($integratorWmid)
     {
-        $this->integratorWmid = $integratorWmid;
+        $this->integratorWmid = (string)$integratorWmid;
     }
 
     /**
@@ -127,6 +127,6 @@ class Request extends MegaStock\Request
      */
     public function setResourceId($resourceId)
     {
-        $this->resourceId = $resourceId;
+        $this->resourceId = (int)$resourceId;
     }
 }

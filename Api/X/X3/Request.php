@@ -113,7 +113,7 @@ class Request extends X\Request
      */
     public function setPurse($purse)
     {
-        $this->purse = $purse;
+        $this->purse = (string)$purse;
     }
 
     /**
@@ -129,7 +129,7 @@ class Request extends X\Request
      */
     public function setTransactionId($transactionId)
     {
-        $this->transactionId = $transactionId;
+        $this->transactionId = (int)$transactionId;
     }
 
     /**
@@ -145,7 +145,7 @@ class Request extends X\Request
      */
     public function setTransactionExternalId($transactionExternalId)
     {
-        $this->transactionExternalId = $transactionExternalId;
+        $this->transactionExternalId = (int)$transactionExternalId;
     }
 
     /**
@@ -161,7 +161,7 @@ class Request extends X\Request
      */
     public function setOrderId($orderId)
     {
-        $this->orderId = $orderId;
+        $this->orderId = (int)$orderId;
     }
 
     /**
@@ -195,7 +195,7 @@ class Request extends X\Request
      */
     public function setInvoiceId($invoiceId)
     {
-        $this->invoiceId = $invoiceId;
+        $this->invoiceId = (int)$invoiceId;
     }
 
     /**

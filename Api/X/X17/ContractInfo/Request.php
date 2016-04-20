@@ -97,7 +97,7 @@ class Request extends X\Request
      */
     public function setContractId($contractId)
     {
-        $this->contractId = $contractId;
+        $this->contractId = (int)$contractId;
     }
 
     /**
@@ -113,6 +113,6 @@ class Request extends X\Request
      */
     public function setType($type)
     {
-        $this->type = $type;
+        $this->type = (string)$type;
     }
 }

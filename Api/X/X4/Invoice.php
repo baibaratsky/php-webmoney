@@ -12,13 +12,13 @@ class Invoice
     /** @var int @id */
     protected $id;
 
-    /** @var int orderid */
+    /** @var string orderid */
     protected $orderId;
 
     /** @var string customerwmid */
     protected $customerWmid;
 
-    /** @var float storepurse */
+    /** @var string storepurse */
     protected $purse;
 
     /** @var float amount */
@@ -103,7 +103,7 @@ class Invoice
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getAmount()
     {
@@ -111,7 +111,7 @@ class Invoice
     }
 
     /**
-     * @return float
+     * @return string
      */
     public function getDescription()
     {
@@ -119,7 +119,7 @@ class Invoice
     }
 
     /**
-     * @return float
+     * @return string
      */
     public function getAddress()
     {
@@ -127,7 +127,7 @@ class Invoice
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getProtectionPeriod()
     {

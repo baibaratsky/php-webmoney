@@ -38,7 +38,7 @@ class Request extends X\Request
     /** @var int trans/wminvid */
     protected $invoiceId = 0;
 
-    /** @var boolean trans/onlyauth */
+    /** @var bool trans/onlyauth */
     protected $onlyAuth = true;
 
     /**
@@ -147,7 +147,7 @@ class Request extends X\Request
      */
     public function setTransactionExternalId($transactionExternalId)
     {
-        $this->transactionExternalId = $transactionExternalId;
+        $this->transactionExternalId = (int)$transactionExternalId;
     }
 
     /**
@@ -163,7 +163,7 @@ class Request extends X\Request
      */
     public function setPayerPurse($payerPurse)
     {
-        $this->payerPurse = $payerPurse;
+        $this->payerPurse = (string)$payerPurse;
     }
 
     /**
@@ -179,7 +179,7 @@ class Request extends X\Request
      */
     public function setPayeePurse($payeePurse)
     {
-        $this->payeePurse = $payeePurse;
+        $this->payeePurse = (string)$payeePurse;
     }
 
     /**
@@ -195,7 +195,7 @@ class Request extends X\Request
      */
     public function setAmount($amount)
     {
-        $this->amount = $amount;
+        $this->amount = (float)$amount;
     }
 
     /**
@@ -211,7 +211,7 @@ class Request extends X\Request
      */
     public function setProtectionPeriod($protectionPeriod)
     {
-        $this->protectionPeriod = $protectionPeriod;
+        $this->protectionPeriod = (int)$protectionPeriod;
     }
 
     /**
@@ -227,7 +227,7 @@ class Request extends X\Request
      */
     public function setProtectionCode($protectionCode)
     {
-        $this->protectionCode = $protectionCode;
+        $this->protectionCode = (string)$protectionCode;
     }
 
     /**
@@ -243,7 +243,7 @@ class Request extends X\Request
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->description = (string)$description;
     }
 
     /**
@@ -259,11 +259,11 @@ class Request extends X\Request
      */
     public function setInvoiceId($invoiceId)
     {
-        $this->invoiceId = $invoiceId;
+        $this->invoiceId = (int)$invoiceId;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getOnlyAuth()
     {
@@ -271,10 +271,10 @@ class Request extends X\Request
     }
 
     /**
-     * @param boolean $onlyAuth
+     * @param bool $onlyAuth
      */
     public function setOnlyAuth($onlyAuth)
     {
-        $this->onlyAuth = $onlyAuth;
+        $this->onlyAuth = (bool)$onlyAuth;
     }
 }

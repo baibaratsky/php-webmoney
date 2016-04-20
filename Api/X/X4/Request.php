@@ -97,11 +97,11 @@ class Request extends X\Request
     }
 
     /**
-     * @param $purse
+     * @param string $purse
      */
     public function setPurse($purse)
     {
-        $this->purse = $purse;
+        $this->purse = (string)$purse;
     }
 
     /**
@@ -117,7 +117,7 @@ class Request extends X\Request
      */
     public function setInvoiceId($invoiceId)
     {
-        $this->invoiceId = $invoiceId;
+        $this->invoiceId = (int)$invoiceId;
     }
 
     /**

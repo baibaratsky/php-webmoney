@@ -14,7 +14,7 @@ use baibaratsky\WebMoney\Signer;
  */
 class Request extends X\Request
 {
-    /** @var int trans\inwmtranid */
+    /** @var string trans\inwmtranid */
     protected $transactionId;
 
     /** @var float trans\amount */
@@ -94,15 +94,15 @@ class Request extends X\Request
     }
 
     /**
-     * @param int $transactionId
+     * @param string $transactionId
      */
     public function setTransactionId($transactionId)
     {
-        $this->transactionId = $transactionId;
+        $this->transactionId = (string)$transactionId;
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getTransactionId()
     {
@@ -130,7 +130,7 @@ class Request extends X\Request
      */
     public function setPhone($phone)
     {
-        $this->phone = $phone;
+        $this->phone = (string)$phone;
     }
 
     /**
@@ -146,7 +146,7 @@ class Request extends X\Request
      */
     public function setCapitallerPurse($capitallerPurse)
     {
-        $this->capitallerPurse = $capitallerPurse;
+        $this->capitallerPurse = (string)$capitallerPurse;
     }
 
     /**

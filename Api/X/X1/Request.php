@@ -139,13 +139,11 @@ class Request extends X\Request
     }
 
     /**
-     * @param $orderId
-     *
-     * @return string
+     * @param string $orderId
      */
     public function setOrderId($orderId)
     {
-        $this->orderId = $orderId;
+        $this->orderId = (string)$orderId;
     }
 
     /**
@@ -157,13 +155,11 @@ class Request extends X\Request
     }
 
     /**
-     * @param $customerWmid
-     *
-     * @return string
+     * @param string $customerWmid
      */
     public function setCustomerWmid($customerWmid)
     {
-        $this->customerWmid = $customerWmid;
+        $this->customerWmid = (string)$customerWmid;
     }
 
     /**
@@ -175,17 +171,15 @@ class Request extends X\Request
     }
 
     /**
-     * @param $purse
-     *
-     * @return string
+     * @param string $purse
      */
     public function setPurse($purse)
     {
-        $this->purse = $purse;
+        $this->purse = (string)$purse;
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getAmount()
     {
@@ -193,17 +187,15 @@ class Request extends X\Request
     }
 
     /**
-     * @param $amount
-     *
-     * @return string
+     * @param float $amount
      */
     public function setAmount($amount)
     {
-        $this->amount = $amount;
+        $this->amount = (float)$amount;
     }
 
     /**
-     * @return float
+     * @return string
      */
     public function getDescription()
     {
@@ -211,17 +203,15 @@ class Request extends X\Request
     }
 
     /**
-     * @param $description
-     *
-     * @return float
+     * @param string $description
      */
     public function setDescription($description)
     {
-        $this->description = $description;
+        $this->description = (string)$description;
     }
 
     /**
-     * @return float
+     * @return string
      */
     public function getAddress()
     {
@@ -229,17 +219,15 @@ class Request extends X\Request
     }
 
     /**
-     * @param $address
-     *
-     * @return float
+     * @param string $address
      */
     public function setAddress($address)
     {
-        $this->address = $address;
+        $this->address = (string)$address;
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getProtectionPeriod()
     {
@@ -247,13 +235,11 @@ class Request extends X\Request
     }
 
     /**
-     * @param $protectionPeriod
-     *
-     * @return string
+     * @param int $protectionPeriod
      */
     public function setProtectionPeriod($protectionPeriod)
     {
-        $this->protectionPeriod = $protectionPeriod;
+        $this->protectionPeriod = (int)$protectionPeriod;
     }
 
     /**
@@ -265,13 +251,11 @@ class Request extends X\Request
     }
 
     /**
-     * @param $expiration
-     *
-     * @return int
+     * @param int $expiration
      */
     public function setExpiration($expiration)
     {
-        $this->expiration = $expiration;
+        $this->expiration = (int)$expiration;
     }
 
     /**
@@ -284,12 +268,10 @@ class Request extends X\Request
 
     /**
      * @param bool $onlyAuth
-     *
-     * @return bool
      */
     public function setOnlyAuth($onlyAuth)
     {
-        $this->onlyAuth = $onlyAuth;
+        $this->onlyAuth = (bool)$onlyAuth;
     }
 
     /**
@@ -301,12 +283,10 @@ class Request extends X\Request
     }
 
     /**
-     * @param $shopId
-     *
-     * @return int
+     * @param int $shopId
      */
     public function setShopId($shopId)
     {
-        $this->shopId = $shopId;
+        $this->shopId = (int)$shopId;
     }
 }

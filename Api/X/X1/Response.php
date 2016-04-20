@@ -122,7 +122,7 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getAmount()
     {
@@ -130,7 +130,7 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @return float
+     * @return string
      */
     public function getDescription()
     {
@@ -138,7 +138,7 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @return float
+     * @return string
      */
     public function getAddress()
     {
@@ -146,7 +146,7 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getProtectionPeriod()
     {

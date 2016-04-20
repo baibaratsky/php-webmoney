@@ -96,7 +96,7 @@ class Request extends X\Request
      */
     public function setWmid($wmid)
     {
-        $this->wmid = $wmid;
+        $this->wmid = (string)$wmid;
     }
 
     /**
@@ -112,7 +112,7 @@ class Request extends X\Request
      */
     public function setPurse($testPurse)
     {
-        $this->purse = $testPurse;
+        $this->purse = (string)$testPurse;
     }
 
     /**

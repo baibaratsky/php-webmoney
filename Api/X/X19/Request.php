@@ -226,7 +226,7 @@ class Request extends X\Request
      */
     public function setLanguage($language)
     {
-        $this->language = $language;
+        $this->language = (string)$language;
     }
 
     /**
@@ -242,7 +242,7 @@ class Request extends X\Request
      */
     public function setOperationType($operationType)
     {
-        $this->operationType = $operationType;
+        $this->operationType = (int)$operationType;
     }
 
     /**
@@ -258,7 +258,7 @@ class Request extends X\Request
      */
     public function setOperationDirection($operationDirection)
     {
-        $this->operationDirection = $operationDirection;
+        $this->operationDirection = (int)$operationDirection;
     }
 
     /**
@@ -274,7 +274,7 @@ class Request extends X\Request
      */
     public function setOperationPurseType($operationPurseType)
     {
-        $this->operationPurseType = $operationPurseType;
+        $this->operationPurseType = (string)$operationPurseType;
     }
 
     /**
@@ -290,7 +290,7 @@ class Request extends X\Request
      */
     public function setOperationAmount($operationAmount)
     {
-        $this->operationAmount = $operationAmount;
+        $this->operationAmount = (float)$operationAmount;
     }
 
     /**
@@ -306,7 +306,7 @@ class Request extends X\Request
      */
     public function setOrderId($orderId)
     {
-        $this->orderId = $orderId;
+        $this->orderId = (int)$orderId;
     }
 
     /**
@@ -322,7 +322,7 @@ class Request extends X\Request
      */
     public function setUserWmid($userWmid)
     {
-        $this->userWmid = $userWmid;
+        $this->userWmid = (string)$userWmid;
     }
 
     /**
@@ -338,7 +338,7 @@ class Request extends X\Request
      */
     public function setUserPassportNum($userPassportNum)
     {
-        $this->userPassportNum = $userPassportNum;
+        $this->userPassportNum = (string)$userPassportNum;
     }
 
     /**
@@ -354,7 +354,7 @@ class Request extends X\Request
      */
     public function setUserLastName($userLastName)
     {
-        $this->userLastName = $userLastName;
+        $this->userLastName = (string)$userLastName;
     }
 
     /**
@@ -370,7 +370,7 @@ class Request extends X\Request
      */
     public function setUserFirstName($userFirstName)
     {
-        $this->userFirstName = $userFirstName;
+        $this->userFirstName = (string)$userFirstName;
     }
 
     /**
@@ -386,7 +386,7 @@ class Request extends X\Request
      */
     public function setUserBankName($userBankName)
     {
-        $this->userBankName = $userBankName;
+        $this->userBankName = (string)$userBankName;
     }
 
     /**
@@ -402,7 +402,7 @@ class Request extends X\Request
      */
     public function setUserBankAccount($userBankAccount)
     {
-        $this->userBankAccount = $userBankAccount;
+        $this->userBankAccount = (string)$userBankAccount;
     }
 
     /**
@@ -418,7 +418,7 @@ class Request extends X\Request
      */
     public function setUserCardNumber($userCardNumber)
     {
-        $this->userCardNumber = $userCardNumber;
+        $this->userCardNumber = (string)$userCardNumber;
     }
 
     /**
@@ -434,7 +434,7 @@ class Request extends X\Request
      */
     public function setUserEMoneyName($userEMoneyName)
     {
-        $this->userEMoneyName = $userEMoneyName;
+        $this->userEMoneyName = (string)$userEMoneyName;
     }
 
     /**
@@ -450,7 +450,7 @@ class Request extends X\Request
      */
     public function setUserEMoneyId($userEMoneyId)
     {
-        $this->userEMoneyId = $userEMoneyId;
+        $this->userEMoneyId = (string)$userEMoneyId;
     }
 
     /**
@@ -466,6 +466,6 @@ class Request extends X\Request
      */
     public function setUserPhone($userPhone)
     {
-        $this->userPhone = $userPhone;
+        $this->userPhone = (string)$userPhone;
     }
 }

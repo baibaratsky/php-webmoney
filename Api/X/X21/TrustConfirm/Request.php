@@ -120,7 +120,7 @@ class Request extends X\Request
      */
     public function setRequestId($requestId)
     {
-        $this->requestId = $requestId;
+        $this->requestId = (int)$requestId;
     }
 
     /**
@@ -136,7 +136,7 @@ class Request extends X\Request
      */
     public function setConfirmationCode($confirmationCode)
     {
-        $this->confirmationCode = $confirmationCode;
+        $this->confirmationCode = (string)$confirmationCode;
     }
 
     /**
@@ -152,6 +152,6 @@ class Request extends X\Request
      */
     public function setLanguage($language)
     {
-        $this->language = $language;
+        $this->language = (string)$language;
     }
 }

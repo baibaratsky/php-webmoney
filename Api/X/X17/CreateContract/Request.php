@@ -113,7 +113,7 @@ class Request extends X\Request
      */
     public function setContractName($contractName)
     {
-        $this->contractName = $contractName;
+        $this->contractName = (string)$contractName;
     }
 
     /**
@@ -129,7 +129,7 @@ class Request extends X\Request
      */
     public function setContractType($contractType)
     {
-        $this->contractType = $contractType;
+        $this->contractType = (int)$contractType;
     }
 
     /**
@@ -145,7 +145,7 @@ class Request extends X\Request
      */
     public function setContractText($contractText)
     {
-        $this->contractText = $contractText;
+        $this->contractText = (string)$contractText;
     }
 
     /**

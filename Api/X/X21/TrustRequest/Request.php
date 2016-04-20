@@ -162,7 +162,7 @@ class Request extends X\Request
      */
     public function setPayeePurse($payeePurse)
     {
-        $this->payeePurse = $payeePurse;
+        $this->payeePurse = (string)$payeePurse;
     }
 
     /**
@@ -178,7 +178,7 @@ class Request extends X\Request
      */
     public function setDayLimit($dayLimit)
     {
-        $this->dayLimit = $dayLimit;
+        $this->dayLimit = (float)$dayLimit;
     }
 
     /**
@@ -194,7 +194,7 @@ class Request extends X\Request
      */
     public function setWeekLimit($weekLimit)
     {
-        $this->weekLimit = $weekLimit;
+        $this->weekLimit = (float)$weekLimit;
     }
 
     /**
@@ -210,7 +210,7 @@ class Request extends X\Request
      */
     public function setMonthLimit($monthLimit)
     {
-        $this->monthLimit = $monthLimit;
+        $this->monthLimit = (float)$monthLimit;
     }
 
     /**
@@ -226,7 +226,7 @@ class Request extends X\Request
      */
     public function setClientNumber($clientNumber)
     {
-        $this->clientNumber = $clientNumber;
+        $this->clientNumber = (string)$clientNumber;
     }
 
     /**
@@ -242,7 +242,7 @@ class Request extends X\Request
      */
     public function setClientNumberType($clientNumberType)
     {
-        $this->clientNumberType = $clientNumberType;
+        $this->clientNumberType = (int)$clientNumberType;
     }
 
     /**
@@ -258,7 +258,7 @@ class Request extends X\Request
      */
     public function setSmsType($smsType)
     {
-        $this->smsType = $smsType;
+        $this->smsType = (int)$smsType;
     }
 
     /**
@@ -274,6 +274,6 @@ class Request extends X\Request
      */
     public function setLanguage($language)
     {
-        $this->language = $language;
+        $this->language = (string)$language;
     }
 }

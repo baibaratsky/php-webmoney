@@ -35,7 +35,7 @@ class Response extends AbstractResponse
     /** @var float operation\comiss */
     protected $fee;
 
-    /** @var float operation\desc */
+    /** @var string operation\desc */
     protected $description;
 
     /** @var \DateTime operation/datecrt */
@@ -84,7 +84,7 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @return float
+     * @return string
      */
     public function getDescription()
     {
