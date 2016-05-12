@@ -38,7 +38,7 @@ class Request extends X\Request
     /** @var int invoice/expiration */
     protected $expiration = 0;
 
-    /** @var bool invoice/onlyauth */
+    /** @var int invoice/onlyauth */
     protected $onlyAuth;
 
     /** @var int invoice/lmi_shop_id */
@@ -271,7 +271,7 @@ class Request extends X\Request
      */
     public function setOnlyAuth($onlyAuth)
     {
-        $this->onlyAuth = (bool)$onlyAuth;
+        $this->onlyAuth = (int)$onlyAuth;
     }
 
     /**
