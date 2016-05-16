@@ -116,8 +116,18 @@ class Request extends MegaStock\Request
 
         $xml .= self::xmlElement('url', $this->url);
         $xml .= self::xmlElement('group', $this->categoryId);
-        $xml .= self::xmlElement('keywords', $this->keywords);
-        $xml .= self::xmlElement('logourl', $this->logoUrl);
+        if ($this->keywords) {
+            $xml .= self::xmlElement('keywords', $this->keywords);
+        }
+        else {
+            $xml .= '<keywords></keywords>';
+        }
+        if ($this->logoUrl) {
+            $xml .= self::xmlElement('logourl', $this->logoUrl);
+        }
+        else {
+            $xml .= '<logourl></logourl>';
+        }
 
         $xml .= '<about lang="' . $this->aboutLanguage . '">';
         $xml .= self::xmlElement('name', $this->aboutName);
@@ -131,6 +141,9 @@ class Request extends MegaStock\Request
                 $xml .= '<country id="' . strtoupper($country) . '"></country>';
             }
             $xml .= '</geobindings>';
+        }
+        else {
+            $xml .= '<geobindings></geobindings>';
         }
         $xml .= self::xmlElement('sign', $this->signature);
 
