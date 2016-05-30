@@ -12,11 +12,15 @@ abstract class XmlRequest extends AbstractRequest
     /**
      * @param string $name
      * @param string|int|float $value
+     * @param bool $allowEmpty
      *
      * @return string
      */
-    protected static function xmlElement($name, $value)
+    protected static function xmlElement($name, $value, $allowEmpty = false)
     {
-        return !empty($value) || is_numeric($value) ? '<' . $name . '>' . $value . '</' . $name . '>' : '';
+        return !empty($value) || is_numeric($value) || $allowEmpty ?
+                '<' . $name . '>' . $value . '</' . $name . '>'
+                :
+                '';
     }
 }

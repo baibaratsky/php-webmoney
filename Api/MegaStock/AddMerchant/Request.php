@@ -116,8 +116,8 @@ class Request extends MegaStock\Request
 
         $xml .= self::xmlElement('url', $this->url);
         $xml .= self::xmlElement('group', $this->categoryId);
-        $xml .= self::xmlElement('keywords', $this->keywords);
-        $xml .= self::xmlElement('logourl', $this->logoUrl);
+        $xml .= self::xmlElement('keywords', $this->keywords, true);
+        $xml .= self::xmlElement('logourl', $this->logoUrl, true);
 
         $xml .= '<about lang="' . $this->aboutLanguage . '">';
         $xml .= self::xmlElement('name', $this->aboutName);
@@ -125,13 +125,13 @@ class Request extends MegaStock\Request
         $xml .= '</about>';
 
         $xml .= self::xmlElement('nameincomment', $this->merchantNameInComment);
-        if (count($this->geoBindings) > 0) {
-            $xml .= '<geobindings>';
-            foreach ($this->geoBindings as $country) {
-                $xml .= '<country id="' . strtoupper($country) . '"></country>';
-            }
-            $xml .= '</geobindings>';
+
+        $xml .= '<geobindings>';
+        foreach ($this->geoBindings as $country) {
+            $xml .= '<country id="' . strtoupper($country) . '"></country>';
         }
+        $xml .= '</geobindings>';
+
         $xml .= self::xmlElement('sign', $this->signature);
 
         $xml .= '</ms.request>';
