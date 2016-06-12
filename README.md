@@ -71,7 +71,11 @@ $request = new Request;
 $request->setSignerWmid('YOUR WMID');
 $request->setRequestedWmid('REQUESTED WMID');
 
-$request->sign(new Signer('YOUR WMID', 'FULL PATH TO THE KEY FILE', 'KEY FILE PASSWORD'));
+$key = 'FULL PATH TO THE KEY FILE';
+// or key is a data string from DB, cache, etc.
+// $key = getKeyData();
+
+$request->sign(new Signer('YOUR WMID', $key, 'KEY FILE PASSWORD'));
 
 // You can access the request XML: $request->getData()
 
