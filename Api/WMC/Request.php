@@ -11,9 +11,17 @@ abstract class Request extends XmlRequest
     const AUTH_SHA256 = 'sha256';
     const AUTH_MD5 = 'md5';
     const AUTH_SECRET_KEY = 'secret_key';
+    const AUTH_SIGN_TYPE_CLASSIC = 1;
+    const AUTH_SIGN_TYPE_LIGHT = 2;
+
+    /** @var string request/@lang */
+    protected $lang;
 
     /** @var string */
     protected $authType;
+
+    /** @var string */
+    protected $authTypeNum;
 
     /** @var string reqn */
     protected $requestNumber;
@@ -27,10 +35,21 @@ abstract class Request extends XmlRequest
     /** @var string Light auth key file name (PEM) */
     protected $lightKey;
 
-    public function __construct($authType = self::AUTH_CLASSIC)
+    /**
+     * @param string $authType
+     * @param string $lang [en|ru]
+     */
+    public function __construct($authType = self::AUTH_CLASSIC, $lang = 'en')
     {
         $this->authType = $authType;
         $this->requestNumber = $this->generateRequestNumber();
+
+        if (self::AUTH_CLASSIC == $authType) {
+            $this->authTypeNum = self::AUTH_SIGN_TYPE_CLASSIC;
+        } elseif(self::AUTH_LIGHT == $authType) {
+            $this->authTypeNum = self::AUTH_SIGN_TYPE_LIGHT;
+        }
+        $this->setLang($lang);
     }
 
     /**
@@ -106,5 +125,33 @@ abstract class Request extends XmlRequest
     {
         list($msec, $sec) = explode(' ', substr(microtime(), 2));
         return $sec . substr($msec, 0, 5);
+    }
+
+    /**
+     * @param $authTypeNum
+     */
+    public function setAuthTypeNum($authTypeNum) {
+        $this->authTypeNum = $authTypeNum;
+    }
+
+    /**
+     * @return int|string
+     */
+    public function getAuthTypeNum() {
+        return $this->authTypeNum;
+    }
+
+    /**
+     * @param $lang
+     */
+    public function setLang($lang) {
+        $this->lang = $lang;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLang() {
+       return $this->lang;
     }
 }

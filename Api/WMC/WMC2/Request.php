@@ -14,18 +14,32 @@ use baibaratsky\WebMoney\Signer;
  */
 class Request extends WMC\Request
 {
+    const TRANSACTION_TYPE_REAL = 0;
+    const TRANSACTION_TYPE_TEST = 1;
 
-    /** @var string payment/purse */
-    protected $payeePurse;
+    /** @var int payment/@id */
+    protected $transactionId;
 
     /** @var string payment/@currency */
     protected $currency;
 
-    /** @var float payment/price */
-    protected $price;
+    /** @var int payment/@test */
+    protected $test;
+
+    /** @var string payment/purse */
+    protected $payeePurse;
 
     /** @var int payment/phone */
     protected $phone = 0;
+
+    /** @var float payment/price */
+    protected $price;
+
+    /** @var string payment/date */
+    protected $date;
+
+    /** @var int payment/point */
+    protected $point;
 
     /**
      * @param string $authType
@@ -36,15 +50,17 @@ class Request extends WMC\Request
     {
         switch ($authType) {
             case self::AUTH_CLASSIC:
-                $this->url = 'https://transfer.gdcert.com/ATM/Xml/PrePayment1.ashx';
+                $this->url = 'https://transfer.gdcert.com/ATM/Xml/Payment1.ashx';
                 break;
 
             case self::AUTH_LIGHT:
-                $this->url = 'https://transfer.gdcert.com/ATM/Xml/PrePayment1.ashx';
+                $this->url = 'https://transfer.gdcert.com/ATM/Xml/Payment1.ashx';
                 $this->signature = base64_encode(
-                    $this->signerWmid . $this->currency .
-                    $this->payeePurse . $this->phone .
-                    $this->price
+                    $this->getSignerWmid() . $this->getTransactionId() .
+                    $this->getCurrency() . $this->getTest() .
+                    $this->getPayeePurse() . $this->getPhone() .
+                    $this->getPrice() . $this->getDate() .
+                    $this->getPoint()
                 );
 
                 break;
@@ -52,6 +68,8 @@ class Request extends WMC\Request
             default:
                 throw new ApiException('This interface doesn\'t support the authentication type given.');
         }
+
+        $this->setTest(self::TRANSACTION_TYPE_REAL);
 
         parent::__construct($authType);
     }
@@ -76,10 +94,12 @@ class Request extends WMC\Request
         $xml = '<w3s.request lang="' . $this->getLang() . '">';
         $xml .= self::xmlElement('wmid', $this->getSignerWmid());
         $xml .= '<sign type="' . $this->getAuthTypeNum() . '">' . $this->signature . '</sign>';
-        $xml .= '<payment currency="' . $this->getCurrency() . '">';
+        $xml .= '<payment id="' . $this->getTransactionId() . '" currency="' . $this->getCurrency() . '" test="' . $this->getTest() . '">';
         $xml .= self::xmlElement('purse', $this->getPayeePurse());
         $xml .= self::xmlElement('phone', $this->getPhone());
         $xml .= self::xmlElement('price', $this->getPrice());
+        $xml .= self::xmlElement('date', $this->getDate());
+        $xml .= self::xmlElement('point', $this->getPoint());
         $xml .= '</payment>';
         $xml .= '</w3s.request>';
 
@@ -101,11 +121,29 @@ class Request extends WMC\Request
     {
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign(
-                $this->signerWmid . $this->currency .
-                $this->payeePurse . $this->phone .
-                $this->price
+                $this->getSignerWmid() . $this->getTransactionId() .
+                $this->getCurrency() . $this->getTest() .
+                $this->getPayeePurse() . $this->getPhone() .
+                $this->getPrice() . $this->getDate() .
+                $this->getPoint()
             );
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getTransactionId()
+    {
+        return $this->transactionId;
+    }
+
+    /**
+     * @param int
+     */
+    public function setTransactionId($id)
+    {
+        $this->transactionId = (int)$id;
     }
 
     /**
@@ -157,6 +195,22 @@ class Request extends WMC\Request
     }
 
     /**
+     * @return int
+     */
+    public function getTest()
+    {
+        return $this->test;
+    }
+
+    /**
+     * @param $test
+     */
+    public function setTest($test)
+    {
+        $this->test = (int)$test;
+    }
+
+    /**
      * @return string "USD"|"EUR"
      */
     public function getCurrency()
@@ -170,5 +224,37 @@ class Request extends WMC\Request
     public function setCurrency($currency)
     {
         $this->currency = (string)$currency;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param string YYYYMMDD HH:mm:ss
+     */
+    public function setDate($date)
+    {
+        $this->date = (string)$date;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPoint()
+    {
+        return $this->point;
+    }
+
+    /**
+     * @param int
+     */
+    public function setPoint($point)
+    {
+        $this->point = (int)$point;
     }
 }
