@@ -1,6 +1,6 @@
 <?php
 
-namespace baibaratsky\WebMoney\Api\WMC\WMC1;
+namespace baibaratsky\WebMoney\Api\WMC\WMC2;
 
 use baibaratsky\WebMoney\Api\WMC;
 use baibaratsky\WebMoney\Exception\ApiException;
@@ -10,7 +10,7 @@ use baibaratsky\WebMoney\Signer;
 /**
  * Class Request
  *
- * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_WMC1
+ * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_WMC2
  */
 class Request extends WMC\Request
 {
@@ -81,7 +81,7 @@ class Request extends WMC\Request
     {
         return array(
             RequestValidator::TYPE_REQUIRED => array(
-                'price', 'currency'
+                'lang', 'transactionId', 'currency', 'test', 'price', 'date', 'point'
             )
         );
     }

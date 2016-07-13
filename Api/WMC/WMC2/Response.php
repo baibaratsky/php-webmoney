@@ -1,13 +1,13 @@
 <?php
 
-namespace baibaratsky\WebMoney\Api\WMC\WMC1;
+namespace baibaratsky\WebMoney\Api\WMC\WMC2;
 
 use baibaratsky\WebMoney\Request\AbstractResponse;
 
 /**
  * Class Response
  *
- * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_WMC1
+ * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_WMC2
  */
 class Response extends AbstractResponse
 {
