@@ -1,8 +1,8 @@
 <?php
 
-namespace baibaratsky\WebMoney\Api\WMC\WMC2;
+namespace baibaratsky\WebMoney\Api\ATM\ATM2;
 
-use baibaratsky\WebMoney\Api\WMC;
+use baibaratsky\WebMoney\Api\ATM;
 use baibaratsky\WebMoney\Exception\ApiException;
 use baibaratsky\WebMoney\Request\RequestValidator;
 use baibaratsky\WebMoney\Signer;
@@ -10,9 +10,9 @@ use baibaratsky\WebMoney\Signer;
 /**
  * Class Request
  *
- * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_WMC2
+ * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_ATM2
  */
-class Request extends WMC\Request
+class Request extends ATM\Request
 {
     const TRANSACTION_TYPE_REAL = 0;
     const TRANSACTION_TYPE_TEST = 1;
@@ -26,11 +26,14 @@ class Request extends WMC\Request
     /** @var int payment/@test */
     protected $test;
 
+    /** @var string payment/@exchange */
+    protected $exchange;
+
     /** @var string payment/purse */
     protected $payeePurse;
 
     /** @var int payment/phone */
-    protected $phone = '';
+    protected $phone = 0;
 
     /** @var float payment/price */
     protected $price;
@@ -50,11 +53,11 @@ class Request extends WMC\Request
     {
         switch ($authType) {
             case self::AUTH_CLASSIC:
-                $this->url = 'https://transfer.gdcert.com/ATM/Xml/Payment1.ashx';
+                $this->url = 'https://transfer.gdcert.com/ATM/Xml/Payment2.ashx';
                 break;
 
             case self::AUTH_LIGHT:
-                $this->url = 'https://transfer.gdcert.com/ATM/Xml/Payment1.ashx';
+                $this->url = 'https://transfer.gdcert.com/ATM/Xml/Payment2.ashx';
                 $this->signature = base64_encode(
                     $this->getSignerWmid() . $this->getTransactionId() .
                     $this->getCurrency() . $this->getTest() .
@@ -96,7 +99,7 @@ class Request extends WMC\Request
         $xml .= '<sign type="' . $this->getAuthTypeNum() . '">' . $this->signature . '</sign>';
         $xml .= '<payment id="' . $this->getTransactionId() . '" currency="' . $this->getCurrency() . '" test="' . $this->getTest() . '">';
         $xml .= self::xmlElement('purse', $this->getPayeePurse());
-        if (!empty($this->getPhone())) $xml .= self::xmlElement('phone', $this->getPhone());
+        $xml .= self::xmlElement('phone', $this->getPhone());
         $xml .= self::xmlElement('price', $this->getPrice());
         $xml .= self::xmlElement('date', $this->getDate());
         $xml .= self::xmlElement('point', $this->getPoint());
@@ -219,11 +222,27 @@ class Request extends WMC\Request
     }
 
     /**
-     * @param $currency "USD"|"EUR"
+     * @param string "USD"|"EUR"
      */
     public function setCurrency($currency)
     {
         $this->currency = (string)$currency;
+    }
+
+    /**
+     * @return int
+     */
+    public function getExchange()
+    {
+        return $this->exchange;
+    }
+
+    /**
+     * @param string
+     */
+    public function setExchange($exchange)
+    {
+        $this->exchange = (string)$exchange;
     }
 
     /**

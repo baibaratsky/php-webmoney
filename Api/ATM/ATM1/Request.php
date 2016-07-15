@@ -1,8 +1,8 @@
 <?php
 
-namespace baibaratsky\WebMoney\Api\WMC\WMC1;
+namespace baibaratsky\WebMoney\Api\ATM\ATM1;
 
-use baibaratsky\WebMoney\Api\WMC;
+use baibaratsky\WebMoney\Api\ATM;
 use baibaratsky\WebMoney\Exception\ApiException;
 use baibaratsky\WebMoney\Request\RequestValidator;
 use baibaratsky\WebMoney\Signer;
@@ -10,22 +10,21 @@ use baibaratsky\WebMoney\Signer;
 /**
  * Class Request
  *
- * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_WMC1
+ * @link http://wiki.wmtransfer.com/projects/webmoney/wiki/Interface_ATM1
  */
-class Request extends WMC\Request
+class Request extends ATM\Request
 {
+    /** @var string payment/@currency */
+    protected $currency;
+
+    /** @var string payment/@exchange */
+    protected $exchange;
 
     /** @var string payment/purse */
     protected $payeePurse;
 
-    /** @var string payment/@currency */
-    protected $currency;
-
     /** @var float payment/price */
     protected $price;
-
-    /** @var int payment/phone */
-    protected $phone = '';
 
     /**
      * @param string $authType
@@ -36,17 +35,11 @@ class Request extends WMC\Request
     {
         switch ($authType) {
             case self::AUTH_CLASSIC:
-                $this->url = 'https://transfer.gdcert.com/ATM/Xml/PrePayment1.ashx';
+                $this->url = 'https://transfer.gdcert.com/ATM/Xml/PrePayment2.ashx';
                 break;
 
             case self::AUTH_LIGHT:
-                $this->url = 'https://transfer.gdcert.com/ATM/Xml/PrePayment1.ashx';
-                $this->signature = base64_encode(
-                    $this->getSignerWmid() . $this->getCurrency() .
-                    $this->getPayeePurse() . $this->getPhone() .
-                    $this->getPrice()
-                );
-
+                $this->url = 'https://transfer.gdcert.com/ATM/Xml/PrePayment2.ashx';
                 break;
 
             default:
@@ -63,7 +56,7 @@ class Request extends WMC\Request
     {
         return array(
             RequestValidator::TYPE_REQUIRED => array(
-                'price', 'currency'
+                'price', 'payeePurse', 'currency'
             )
         );
     }
@@ -76,9 +69,8 @@ class Request extends WMC\Request
         $xml = '<w3s.request lang="' . $this->getLang() . '">';
         $xml .= self::xmlElement('wmid', $this->getSignerWmid());
         $xml .= '<sign type="' . $this->getAuthTypeNum() . '">' . $this->signature . '</sign>';
-        $xml .= '<payment currency="' . $this->getCurrency() . '">';
+        $xml .= '<payment currency="' . $this->getCurrency() . (!empty($this->getExchange()) ? '" exchange="' . $this->getExchange() : '') . '">';
         $xml .= self::xmlElement('purse', $this->getPayeePurse());
-        if (empty($this->getPhone())) $xml .= self::xmlElement('phone', $this->getPhone());
         $xml .= self::xmlElement('price', $this->getPrice());
         $xml .= '</payment>';
         $xml .= '</w3s.request>';
@@ -95,18 +87,47 @@ class Request extends WMC\Request
     }
 
     /**
+     * @param string $lightCertificate
+     * @param string $lightKey
+     */
+    public function cert($lightCertificate, $lightKey) {
+        if ($this->authType === self::AUTH_LIGHT) {
+            $this->signature = $this->getSignerWmid() . $this->getCurrency() .
+                $this->getPayeePurse() . $this->getPrice();
+
+        }
+        parent::cert($lightCertificate, $lightKey);
+    }
+
+    /**
      * @param Signer $requestSigner
      */
     public function sign(Signer $requestSigner = null)
     {
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign(
-                $this->signerWmid . $this->currency .
-                $this->payeePurse . $this->phone .
-                $this->price
+                $this->getSignerWmid() . $this->getCurrency() .
+                $this->getPayeePurse() . $this->getPrice()
             );
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getExchange()
+    {
+        return $this->exchange;
+    }
+
+    /**
+     * @param string
+     */
+    public function setExchange($exchange)
+    {
+        $this->exchange = (string)$exchange;
+    }
+
 
     /**
      * @return string
@@ -127,22 +148,6 @@ class Request extends WMC\Request
     /**
      * @return float
      */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * @param $phone
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = (string)$phone;
-    }
-
-    /**
-     * @return float
-     */
     public function getPrice()
     {
         return $this->price;
@@ -157,7 +162,7 @@ class Request extends WMC\Request
     }
 
     /**
-     * @return string "USD"|"EUR"
+     * @return string "USD"|"EUR"|"RUB"
      */
     public function getCurrency()
     {
@@ -165,7 +170,7 @@ class Request extends WMC\Request
     }
 
     /**
-     * @param $currency "USD"|"EUR"
+     * @param $currency "USD"|"EUR"|"RUB"
      */
     public function setCurrency($currency)
     {
