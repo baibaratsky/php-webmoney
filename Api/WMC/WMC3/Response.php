@@ -12,10 +12,10 @@ use DateTime;
  */
 class Response extends AbstractResponse
 {
-    /** @var \DateTime datestart */
+    /** @var DateTime datestart */
     protected $datestart;
 
-    /** @var \DateTime dateend */
+    /** @var DateTime dateend */
     protected $dateend;
 
     /** @var int history/@cnt */
@@ -75,7 +75,7 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDateStart()
     {
@@ -83,7 +83,7 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDateEnd()
     {

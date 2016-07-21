@@ -3,6 +3,7 @@
 namespace baibaratsky\WebMoney\Api\WMC\WMC2;
 
 use baibaratsky\WebMoney\Request\AbstractResponse;
+use DateTime;
 
 /**
  * Class Response
@@ -35,7 +36,7 @@ class Response extends AbstractResponse
     /** @var float payment/comiss */
     protected $comiss;
 
-    /** @var string payment/date */
+    /** @var DateTime payment/date */
     protected $date;
 
     /** @var int payment/point */
@@ -47,7 +48,7 @@ class Response extends AbstractResponse
     /** @var int payment/wmtranid */
     protected $wmtranid;
 
-    /** @var string payment/dateupd */
+    /** @var DateTime payment/dateupd */
     protected $dateupd;
 
     /**
@@ -72,10 +73,10 @@ class Response extends AbstractResponse
             $this->amount     = (float)  $payment->amount;
             $this->comiss     = (float)  $payment->comiss;
             $this->rest       = (float)  $payment->rest;
-            $this->date       = (string) $payment->date;
+            $this->date       = self::createDateTime((string)$payment->date);
             $this->point      = (int)    $payment->point;
             $this->wmtranid   = (int)    $payment->wmtranid;
-            $this->dateupd    = (string) $payment->dateupd;
+            $this->dateupd    = self::createDateTime((string)$payment->dateupd);
         }
     }
 
@@ -152,7 +153,7 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
     public function getDate()
     {
@@ -176,7 +177,7 @@ class Response extends AbstractResponse
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
     public function getDateupd()
     {

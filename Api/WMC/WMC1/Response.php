@@ -48,14 +48,14 @@ class Response extends AbstractResponse
 
         if (isset($responseObject->payment)) {
             $payment = $responseObject->payment;
-            $this->currency   = (string)$payment['currency'];
-            $this->merchant   = (int)   $payment['merchant'];
-            $this->status     = (string)$payment['status'];
-            $this->payeePurse = (string)$payment->purse;
-            $this->phone      = (string)$payment->phone;
-            $this->price      = (float) $payment->price;
-            $this->amount     = (float) $payment->amount;
-            $this->limit      = (float) $payment->limit;
+            $this->currency   = (string) $payment['currency'];
+            $this->merchant   = (int)    $payment['merchant'];
+            $this->status     = (string) $payment['status'];
+            $this->payeePurse = (string) $payment->purse;
+            $this->phone      = (string) $payment->phone;
+            $this->price      = (float)  $payment->price;
+            $this->amount     = (float)  $payment->amount;
+            $this->limit      = (float)  $payment->limit;
         }
     }
 

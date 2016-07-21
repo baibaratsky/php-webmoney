@@ -2,6 +2,8 @@
 
 namespace baibaratsky\WebMoney\Api\WMC\WMC3;
 
+use DateTime;
+
 class Payment
 {
     /** @var int @id */
@@ -31,7 +33,7 @@ class Payment
     /** @var float comiss */
     protected $comiss;
 
-    /** @var \DateTime date */
+    /** @var DateTime date */
     protected $date;
 
     /** @var int point */
@@ -43,7 +45,7 @@ class Payment
     /** @var int wmtranid */
     protected $wmtranid;
 
-    /** @var \DateTime dateupd */
+    /** @var DateTime dateupd */
     protected $dateupd;
 
     public function __construct(array $data)
@@ -136,7 +138,7 @@ class Payment
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
     public function getDate()
     {
@@ -160,7 +162,7 @@ class Payment
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
     public function getDateupd()
     {

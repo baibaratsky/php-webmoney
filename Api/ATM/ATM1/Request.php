@@ -37,11 +37,9 @@ class Request extends ATM\Request
             case self::AUTH_CLASSIC:
                 $this->url = 'https://transfer.gdcert.com/ATM/Xml/PrePayment2.ashx';
                 break;
-
             case self::AUTH_LIGHT:
                 $this->url = 'https://transfer.gdcert.com/ATM/Xml/PrePayment2.ashx';
                 break;
-
             default:
                 throw new ApiException('This interface doesn\'t support the authentication type given.');
         }
@@ -92,9 +90,9 @@ class Request extends ATM\Request
      */
     public function cert($lightCertificate, $lightKey) {
         if ($this->authType === self::AUTH_LIGHT) {
-            $this->signature = $this->getSignerWmid() . $this->getCurrency() .
-                $this->getPayeePurse() . $this->getPrice();
-
+            $this->signature = base64_encode(
+                $this->getSignerWmid() . $this->getCurrency() .
+                $this->getPayeePurse() . $this->getPrice());
         }
         parent::cert($lightCertificate, $lightKey);
     }
@@ -121,7 +119,7 @@ class Request extends ATM\Request
     }
 
     /**
-     * @param string
+     * @param string $exchange
      */
     public function setExchange($exchange)
     {
@@ -154,7 +152,7 @@ class Request extends ATM\Request
     }
 
     /**
-     * @param $price
+     * @param float $price
      */
     public function setPrice($price)
     {
@@ -162,7 +160,7 @@ class Request extends ATM\Request
     }
 
     /**
-     * @return string "USD"|"EUR"|"RUB"
+     * @return string CURRENCY_EUR|CURRENCY_RUB|CURRENCY_USD
      */
     public function getCurrency()
     {
@@ -170,7 +168,7 @@ class Request extends ATM\Request
     }
 
     /**
-     * @param $currency "USD"|"EUR"|"RUB"
+     * @param string $currency CURRENCY_EUR|CURRENCY_RUB|CURRENCY_USD
      */
     public function setCurrency($currency)
     {

@@ -25,7 +25,7 @@ class Request extends WMC\Request
     protected $price;
 
     /** @var int payment/phone */
-    protected $phone = '';
+    protected $phone;
 
     /**
      * @param string $authType
@@ -38,17 +38,9 @@ class Request extends WMC\Request
             case self::AUTH_CLASSIC:
                 $this->url = 'https://transfer.gdcert.com/ATM/Xml/PrePayment1.ashx';
                 break;
-
             case self::AUTH_LIGHT:
                 $this->url = 'https://transfer.gdcert.com/ATM/Xml/PrePayment1.ashx';
-                $this->signature = base64_encode(
-                    $this->getSignerWmid() . $this->getCurrency() .
-                    $this->getPayeePurse() . $this->getPhone() .
-                    $this->getPrice()
-                );
-
                 break;
-
             default:
                 throw new ApiException('This interface doesn\'t support the authentication type given.');
         }
@@ -78,7 +70,10 @@ class Request extends WMC\Request
         $xml .= '<sign type="' . $this->getAuthTypeNum() . '">' . $this->signature . '</sign>';
         $xml .= '<payment currency="' . $this->getCurrency() . '">';
         $xml .= self::xmlElement('purse', $this->getPayeePurse());
-        if (empty($this->getPhone())) $xml .= self::xmlElement('phone', $this->getPhone());
+        $phone = $this->getPhone();
+        if (empty($phone)) {
+          $xml .= self::xmlElement('phone', $phone);
+        }
         $xml .= self::xmlElement('price', $this->getPrice());
         $xml .= '</payment>';
         $xml .= '</w3s.request>';
@@ -93,6 +88,21 @@ class Request extends WMC\Request
     {
         return Response::className();
     }
+  
+    /**
+     * @param string $lightCertificate
+     * @param string $lightKey
+     */
+    public function cert($lightCertificate, $lightKey) {
+      if ($this->authType === self::AUTH_LIGHT) {
+        $this->signature = base64_encode(
+            $this->getSignerWmid() . $this->getCurrency() .
+            $this->getPayeePurse() . $this->getPhone() .
+            $this->getPrice()
+        );
+      }
+      parent::cert($lightCertificate, $lightKey);
+    }
 
     /**
      * @param Signer $requestSigner
@@ -101,9 +111,9 @@ class Request extends WMC\Request
     {
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->signature = $requestSigner->sign(
-                $this->signerWmid . $this->currency .
-                $this->payeePurse . $this->phone .
-                $this->price
+                $this->getSignerWmid() . $this->getCurrency() .
+                $this->getPayeePurse() . $this->getPhone() .
+                $this->getPrice()
             );
         }
     }
@@ -133,7 +143,7 @@ class Request extends WMC\Request
     }
 
     /**
-     * @param $phone
+     * @param string $phone
      */
     public function setPhone($phone)
     {
@@ -149,7 +159,7 @@ class Request extends WMC\Request
     }
 
     /**
-     * @param $price
+     * @param float $price
      */
     public function setPrice($price)
     {
@@ -157,7 +167,7 @@ class Request extends WMC\Request
     }
 
     /**
-     * @return string "USD"|"EUR"
+     * @return string CURRENCY_EUR|CURRENCY_RUB|CURRENCY_USD
      */
     public function getCurrency()
     {
@@ -165,7 +175,7 @@ class Request extends WMC\Request
     }
 
     /**
-     * @param $currency "USD"|"EUR"
+     * @param string $currency CURRENCY_EUR|CURRENCY_RUB|CURRENCY_USD
      */
     public function setCurrency($currency)
     {

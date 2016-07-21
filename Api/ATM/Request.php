@@ -13,6 +13,10 @@ abstract class Request extends XmlRequest
     const AUTH_SECRET_KEY = 'secret_key';
     const AUTH_SIGN_TYPE_CLASSIC = 1;
     const AUTH_SIGN_TYPE_LIGHT = 2;
+  
+    CONST CURRENCY_EUR = 'EUR';
+    CONST CURRENCY_USD = 'USD';
+    CONST CURRENCY_RUB = 'RUB';
 
     /** @var string request/@lang */
     protected $lang;
@@ -128,7 +132,7 @@ abstract class Request extends XmlRequest
     }
 
     /**
-     * @param $authTypeNum
+     * @param int $authTypeNum
      */
     public function setAuthTypeNum($authTypeNum) {
         $this->authTypeNum = $authTypeNum;
@@ -142,7 +146,7 @@ abstract class Request extends XmlRequest
     }
 
     /**
-     * @param $lang
+     * @param string $lang
      */
     public function setLang($lang) {
         $this->lang = $lang;

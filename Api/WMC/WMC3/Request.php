@@ -6,6 +6,7 @@ use baibaratsky\WebMoney\Api\WMC;
 use baibaratsky\WebMoney\Exception\ApiException;
 use baibaratsky\WebMoney\Request\RequestValidator;
 use baibaratsky\WebMoney\Signer;
+use DateTime;
 
 /**
  * Class Request
@@ -14,10 +15,10 @@ use baibaratsky\WebMoney\Signer;
  */
 class Request extends WMC\Request
 {
-    /** @var \DateTime datestart */
+    /** @var DateTime datestart */
     protected $dateStart;
 
-    /** @var \DateTime dateend */
+    /** @var DateTime dateend */
     protected $dateEnd;
 
     /** @var int wmtranid */
@@ -34,16 +35,9 @@ class Request extends WMC\Request
             case self::AUTH_CLASSIC:
                 $this->url = 'https://transfer.gdcert.com/ATM/Xml/History1.ashx';
                 break;
-
             case self::AUTH_LIGHT:
                 $this->url = 'https://transfer.gdcert.com/ATM/Xml/History1.ashx';
-                $this->signature = base64_encode(
-                    $this->getSignerWmid() . $this->getStartDateTime()->format('Ymd H:i:s') .
-                    $this->getEndDateTime()->format('Ymd H:i:s') . $this->getTransactionId()
-                );
-
                 break;
-
             default:
                 throw new ApiException('This interface doesn\'t support the authentication type given.');
         }
@@ -86,6 +80,20 @@ class Request extends WMC\Request
     {
         return Response::className();
     }
+  
+    /**
+     * @param string $lightCertificate
+     * @param string $lightKey
+     */
+    public function cert($lightCertificate, $lightKey) {
+      if ($this->authType === self::AUTH_LIGHT) {
+          $this->signature = base64_encode(
+              $this->getSignerWmid() . $this->getStartDateTime()->format('Ymd H:i:s') .
+              $this->getEndDateTime()->format('Ymd H:i:s') . $this->getTransactionId()
+          );
+      }
+      parent::cert($lightCertificate, $lightKey);
+    }
 
     /**
      * @param Signer $requestSigner
@@ -109,7 +117,7 @@ class Request extends WMC\Request
     }
 
     /**
-     * @param int
+     * @param int $id
      */
     public function setTransactionId($id)
     {
@@ -117,7 +125,7 @@ class Request extends WMC\Request
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getStartDateTime()
     {
@@ -125,15 +133,15 @@ class Request extends WMC\Request
     }
 
     /**
-     * @param \DateTime
+     * @param DateTime $date
      */
-    public function setStartDateTime($date)
+    public function setStartDateTime(DateTime $date)
     {
-        $this->datestart = (string)$date;
+        $this->datestart = $date;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getEndDateTime()
     {
@@ -141,10 +149,10 @@ class Request extends WMC\Request
     }
 
     /**
-     * @param \DateTime
+     * @param DateTime $date
      */
-    public function setEndDateTime($date)
+    public function setEndDateTime(DateTime $date)
     {
-        $this->dateend = (string)$date;
+        $this->dateend = $date;
     }
 }
