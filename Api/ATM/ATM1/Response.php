@@ -49,8 +49,9 @@ class Response extends AbstractResponse
         parent::__construct($response);
 
         $responseObject = new \SimpleXMLElement($response);
-        $this->returnCode = (int)$responseObject->retval;
-        $this->returnDescription = (string)$responseObject->retdesc;
+        
+        $this->returnCode        = (int) $responseObject->retval;
+        $this->returnDescription = (string) $responseObject->retdesc . '. '. (string) $responseObject->description;
 
         if (isset($responseObject->payment)) {
             $payment = $responseObject->payment;

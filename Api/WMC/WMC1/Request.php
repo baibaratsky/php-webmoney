@@ -67,7 +67,7 @@ class Request extends WMC\Request
     {
         $xml = '<w3s.request lang="' . $this->getLang() . '">';
         $xml .= self::xmlElement('wmid', $this->getSignerWmid());
-        $xml .= '<sign type="' . $this->getAuthTypeNum() . '">' . $this->signature . '</sign>';
+        $xml .= '<sign type="' . $this->getAuthTypeNum() . '">' . $this->getSignature() . '</sign>';
         $xml .= '<payment currency="' . $this->getCurrency() . '">';
         $xml .= self::xmlElement('purse', $this->getPayeePurse());
         $phone = $this->getPhone();
@@ -89,19 +89,23 @@ class Request extends WMC\Request
         return Response::className();
     }
   
-    /**
-     * @param string $lightCertificate
-     * @param string $lightKey
-     */
-    public function cert($lightCertificate, $lightKey) {
+  /**
+   * @param string $lightCertificate
+   * @param string $lightKey
+   * @param string $lightPass
+   */
+    public function cert($lightCertificate, $lightKey, $lightPass = '') {
       if ($this->authType === self::AUTH_LIGHT) {
-        $this->signature = base64_encode(
+        $this->setSignature(
+          $this->signLight(
             $this->getSignerWmid() . $this->getCurrency() .
             $this->getPayeePurse() . $this->getPhone() .
-            $this->getPrice()
+            $this->getPrice(),
+            $lightKey, $lightPass
+          )
         );
       }
-      parent::cert($lightCertificate, $lightKey);
+      parent::cert($lightCertificate, $lightKey, $lightPass);
     }
 
     /**
@@ -110,11 +114,11 @@ class Request extends WMC\Request
     public function sign(Signer $requestSigner = null)
     {
         if ($this->authType === self::AUTH_CLASSIC) {
-            $this->signature = $requestSigner->sign(
+            $this->setSignature($requestSigner->sign(
                 $this->getSignerWmid() . $this->getCurrency() .
                 $this->getPayeePurse() . $this->getPhone() .
                 $this->getPrice()
-            );
+            ));
         }
     }
 

@@ -52,17 +52,7 @@ class Request extends ATM\Request
      */
     public function __construct($authType = self::AUTH_CLASSIC)
     {
-        switch ($authType) {
-            case self::AUTH_CLASSIC:
-                $this->url = 'https://transfer.gdcert.com/ATM/Xml/Payment2.ashx';
-                break;
-            case self::AUTH_LIGHT:
-                $this->url = 'https://transfer.gdcert.com/ATM/Xml/Payment2.ashx';
-                break;
-            default:
-                throw new ApiException('This interface doesn\'t support the authentication type given.');
-        }
-
+        $this->url = 'https://transfer.gdcert.com/ATM/Xml/Payment2.ashx';
         $this->setTest(self::TRANSACTION_TYPE_REAL);
 
         parent::__construct($authType);
@@ -87,7 +77,7 @@ class Request extends ATM\Request
     {
         $xml = '<w3s.request lang="' . $this->getLang() . '">';
         $xml .= self::xmlElement('wmid', $this->getSignerWmid());
-        $xml .= '<sign type="' . $this->getAuthTypeNum() . '">' . $this->signature . '</sign>';
+        $xml .= '<sign type="' . $this->getAuthTypeNum() . '">' . $this->getSignature() . '</sign>';
         $xml .= '<payment id="' . $this->getTransactionId() . '" currency="' . $this->getCurrency() . '" test="' . $this->getTest() . '">';
         $xml .= self::xmlElement('purse', $this->getPayeePurse());
         $xml .= self::xmlElement('phone', $this->getPhone());
@@ -108,20 +98,25 @@ class Request extends ATM\Request
         return Response::className();
     }
   
-    /**
-     * @param string $lightCertificate
-     * @param string $lightKey
-     */
-    public function cert($lightCertificate, $lightKey) {
+  /**
+   * @param string $lightCertificate
+   * @param string $lightKey
+   * @param string $lightPass
+   */
+    public function cert($lightCertificate, $lightKey, $lightPass = '') {
       if ($this->authType === self::AUTH_LIGHT) {
-        $this->signature = base64_encode(
-          $this->getSignerWmid() . $this->getTransactionId() .
-          $this->getCurrency() . $this->getTest() .
-          $this->getPayeePurse() . $this->getPhone() .
-          $this->getPrice() . $this->getDate()->format('Ymd H:i:s') .
-          $this->getPoint());
+        $this->setSignature(
+          $this->signLight(
+            $this->getSignerWmid() . $this->getTransactionId() .
+            $this->getCurrency() . $this->getTest() .
+            $this->getPayeePurse() . $this->getPhone() .
+            $this->getPrice() . $this->getDate()->format('Ymd H:i:s') .
+            $this->getPoint(),
+            $lightKey, $lightPass
+          )
+        );
       }
-      parent::cert($lightCertificate, $lightKey);
+      parent::cert($lightCertificate, $lightKey, $lightPass);
     }
 
     /**
@@ -130,12 +125,14 @@ class Request extends ATM\Request
     public function sign(Signer $requestSigner = null)
     {
         if ($this->authType === self::AUTH_CLASSIC) {
-            $this->signature = $requestSigner->sign(
+            $this->setSignature(
+              $requestSigner->sign(
                 $this->getSignerWmid() . $this->getTransactionId() .
                 $this->getCurrency() . $this->getTest() .
                 $this->getPayeePurse() . $this->getPhone() .
-                $this->getPrice() . $this->getDate() .
+                $this->getPrice() . $this->getDate()->format('Ymd H:i:s') .
                 $this->getPoint()
+              )
             );
         }
     }

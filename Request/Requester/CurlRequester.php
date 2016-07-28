@@ -2,7 +2,9 @@
 
 namespace baibaratsky\WebMoney\Request\Requester;
 
-use baibaratsky\WebMoney\Api\X\Request;
+use baibaratsky\WebMoney\Api\X\Request AS XRequest;
+use baibaratsky\WebMoney\Api\ATM\Request AS ATMRequest;
+use baibaratsky\WebMoney\Api\WMC\Request AS WMCRequest;
 use baibaratsky\WebMoney\Exception\RequesterException;
 use baibaratsky\WebMoney\Request\AbstractRequest;
 use baibaratsky\WebMoney\Request\XmlRequest;
@@ -32,9 +34,19 @@ class CurlRequester extends AbstractRequester
         curl_setopt($handler, CURLOPT_SSL_VERIFYPEER, $this->verifyCertificate);
         curl_setopt($handler, CURLOPT_SSLVERSION, 1);
 
-        if ($request instanceof Request && $request->getAuthType() === Request::AUTH_LIGHT) {
+        if (($request instanceof XRequest ||
+             $request instanceof ATMRequest ||
+             $request instanceof WMCRequest) &&
+            ($request->getAuthType() === XRequest::AUTH_LIGHT ||
+             $request->getAuthType() === ATMRequest::AUTH_LIGHT ||
+             $request->getAuthType() === WMCRequest::AUTH_LIGHT)) {
             curl_setopt($handler, CURLOPT_SSLCERT, $request->getLightCertificate());
             curl_setopt($handler, CURLOPT_SSLKEY, $request->getLightKey());
+            
+            $pass = $request->getLightPass();
+            if (!empty($pass)) {
+              curl_setopt($handler, CURLOPT_KEYPASSWD, $request->getLightPass());
+            }
         }
 
         ob_start();

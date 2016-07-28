@@ -38,6 +38,9 @@ abstract class Request extends XmlRequest
 
     /** @var string Light auth key file name (PEM) */
     protected $lightKey;
+  
+    /** @var string Light auth key password */
+    protected $lightPass;
 
     /**
      * @param string $authType
@@ -55,15 +58,24 @@ abstract class Request extends XmlRequest
         }
         $this->setLang($lang);
     }
-
+  
     /**
      * @param string $lightCertificate Light auth certificate file name (PEM)
-     * @param string $lightKey Light auth key file name (PEM)
+     * @param string $lightKey         Light auth key file name (PEM)
+     * @param string $lightPass        Light auth key pass
      */
-    public function cert($lightCertificate, $lightKey)
+    public function cert($lightCertificate, $lightKey, $lightPass = '')
     {
-        $this->lightCertificate = $lightCertificate;
-        $this->lightKey = $lightKey;
+      $this->lightCertificate = $lightCertificate;
+      $this->lightKey = $lightKey;
+      $this->lightPass = $lightPass;
+    }
+  
+    /**
+     * @param $data
+     */
+    public function setSignature($data) {
+        $this->signature = $data;
     }
 
     /**
@@ -81,13 +93,20 @@ abstract class Request extends XmlRequest
     {
         return $this->lightCertificate;
     }
-
+  
     /**
      * @return string
      */
     public function getLightKey()
     {
-        return $this->lightKey;
+      return $this->lightKey;
+    }
+    
+    /**
+     * @return string
+     */
+    public function getLightPass() {
+      return $this->lightPass;
     }
 
     /**
