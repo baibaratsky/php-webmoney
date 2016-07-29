@@ -33,9 +33,6 @@ class Request extends ATM\Request
     /** @var string payment/purse */
     protected $payeePurse;
 
-    /** @var int payment/phone */
-    protected $phone = 0;
-
     /** @var float payment/price */
     protected $price;
 
@@ -78,9 +75,8 @@ class Request extends ATM\Request
         $xml = '<w3s.request lang="' . $this->getLang() . '">';
         $xml .= self::xmlElement('wmid', $this->getSignerWmid());
         $xml .= '<sign type="' . $this->getAuthTypeNum() . '">' . $this->getSignature() . '</sign>';
-        $xml .= '<payment id="' . $this->getTransactionId() . '" currency="' . $this->getCurrency() . '" test="' . $this->getTest() . '">';
+        $xml .= '<payment id="' . $this->getTransactionId() . '" currency="' . $this->getCurrency() . '" test="' . $this->getTest() . '" exchange="' . $this->getExchange() . '">';
         $xml .= self::xmlElement('purse', $this->getPayeePurse());
-        $xml .= self::xmlElement('phone', $this->getPhone());
         $xml .= self::xmlElement('price', $this->getPrice());
         $xml .= self::xmlElement('date', $this->getDate()->format('Ymd H:i:s'));
         $xml .= self::xmlElement('point', $this->getPoint());
@@ -109,9 +105,8 @@ class Request extends ATM\Request
           $this->signLight(
             $this->getSignerWmid() . $this->getTransactionId() .
             $this->getCurrency() . $this->getTest() .
-            $this->getPayeePurse() . $this->getPhone() .
-            $this->getPrice() . $this->getDate()->format('Ymd H:i:s') .
-            $this->getPoint(),
+            $this->getPayeePurse() . $this->getPrice() .
+            $this->getDate()->format('Ymd H:i:s') . $this->getPoint(),
             $lightKey, $lightPass
           )
         );
@@ -129,9 +124,8 @@ class Request extends ATM\Request
               $requestSigner->sign(
                 $this->getSignerWmid() . $this->getTransactionId() .
                 $this->getCurrency() . $this->getTest() .
-                $this->getPayeePurse() . $this->getPhone() .
-                $this->getPrice() . $this->getDate()->format('Ymd H:i:s') .
-                $this->getPoint()
+                $this->getPayeePurse() . $this->getPrice() .
+                $this->getDate()->format('Ymd H:i:s') . $this->getPoint()
               )
             );
         }
@@ -167,22 +161,6 @@ class Request extends ATM\Request
     public function setPayeePurse($payeePurse)
     {
         $this->payeePurse = (string)$payeePurse;
-    }
-
-    /**
-     * @return float
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * @param string $phone
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = (string)$phone;
     }
 
     /**
