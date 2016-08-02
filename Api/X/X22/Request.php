@@ -279,7 +279,7 @@ class Request extends X\Request
      */
     public function setPayeePurse($payeePurse)
     {
-        $this->payeePurse = (int)$payeePurse;
+        $this->payeePurse = (string)$payeePurse;
     }
 
     /**
