@@ -2,6 +2,7 @@
 
 namespace baibaratsky\WebMoney\Request;
 
+use baibaratsky\WebMoney\Exception\Exception;
 use baibaratsky\WebMoney\Signer;
 
 abstract class AbstractRequest
@@ -25,6 +26,25 @@ abstract class AbstractRequest
 
         return count($this->errors) == 0;
     }
+  
+    /**
+     * Sign data for light authentication keys - needed for ATM and WMC interface
+     * @param string $data data to sign
+     * @param string $lightKey filepath to private key
+     * @param string $lightPass (optional) password for private key
+     *
+     * @return string
+     * @throws Exception
+     */
+    public function signLight($data, $lightKey, $lightPass = '') {
+      if (!is_file($lightKey)) {
+        throw new Exception('Cannot access private key');
+      }
+      
+      $pkeyid = openssl_get_privatekey(file_get_contents($lightKey), $lightPass);
+      openssl_sign($data, $sig, $pkeyid, OPENSSL_ALGO_SHA1);
+      return base64_encode($sig);
+    }
 
     /**
      * @return string
@@ -46,6 +66,13 @@ abstract class AbstractRequest
     public function getErrors()
     {
         return $this->errors;
+    }
+  
+    /**
+     * @return string
+     */
+    public function getSignature() {
+      return $this->signature;
     }
 
     /**

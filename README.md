@@ -111,7 +111,7 @@ $webMoney = new WebMoney\WebMoney(new CurlRequester);
 $request = new Request(Request::AUTH_LIGHT);
 $request->setRequestedWmid('REQUESTED WMID');
 
-$request->cert('FULL PATH TO THE CERTIFICATE FILE', 'FULL PATH TO THE CERTIFICATE KEY');
+$request->cert('FULL PATH TO THE CERTIFICATE FILE', 'FULL PATH TO THE CERTIFICATE KEY', '(OPTIONAL) PASSWORD');
 
 // You can access the request XML: $request->getData()
 
