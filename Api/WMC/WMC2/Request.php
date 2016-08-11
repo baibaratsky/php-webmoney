@@ -71,9 +71,9 @@ class Request extends WMC\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array(
-                'lang', 'transactionId', 'currency', 'test', 'price', 'date', 'point'
-            )
+                RequestValidator::TYPE_REQUIRED => array(
+                        'lang', 'transactionId', 'currency', 'test', 'price', 'date', 'point'
+                )
         );
     }
 
@@ -107,28 +107,26 @@ class Request extends WMC\Request
     {
         return Response::className();
     }
-  
-  /**
-   * @param string $lightCertificate
-   * @param string $lightKey
-   * @param string $lightPass
-   */
-    public function cert($lightCertificate, $lightKey, $lightPass = '') {
-      if ($this->authType === self::AUTH_LIGHT) {
-        $this->setSignature(
-          $this->signLight(
-            $this->getSignerWmid() . $this->getTransactionId() .
-            $this->getCurrency() . $this->getTest() .
-            $this->getPayeePurse() . $this->getPhone() .
-            $this->getPrice() . $this->getDate()->format('Ymd H:i:s') .
-            $this->getPoint(),
-            $lightKey, $lightPass
-          )
-        );
-      }
-      parent::cert($lightCertificate, $lightKey, $lightPass);
+
+    /**
+     * @inheritdoc
+     */
+    public function lightAuth($certificate, $key, $keyPassword = '')
+    {
+        if ($this->authType === self::AUTH_LIGHT) {
+            $this->setSignature(
+                    $this->signLight(
+                            $this->getSignerWmid() . $this->getTransactionId() . $this->getCurrency()
+                            . $this->getTest() . $this->getPayeePurse() . $this->getPhone() . $this->getPrice()
+                            . $this->getDate()->format('Ymd H:i:s') . $this->getPoint(),
+                            $key,
+                            $keyPassword
+                    )
+            );
+        }
+        parent::lightAuth($certificate, $key, $keyPassword);
     }
-  
+
     /**
      * @param Signer $requestSigner
      */
@@ -136,11 +134,9 @@ class Request extends WMC\Request
     {
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->setSignature($requestSigner->sign(
-                  $this->getSignerWmid() . $this->getTransactionId() .
-                  $this->getCurrency() . $this->getTest() .
-                  $this->getPayeePurse() . $this->getPhone() .
-                  $this->getPrice() . $this->getDate()->format('Ymd H:i:s') .
-                  $this->getPoint()
+                    $this->getSignerWmid() . $this->getTransactionId() . $this->getCurrency() . $this->getTest()
+                    . $this->getPayeePurse() . $this->getPhone() . $this->getPrice()
+                    . $this->getDate()->format('Ymd H:i:s') . $this->getPoint()
             ));
         }
     }

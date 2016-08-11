@@ -50,19 +50,19 @@ class Payment
 
     public function __construct(array $data)
     {
-        $this->id         = $data['id'];
-        $this->currency   = $data['currency'];
-        $this->test       = $data['test'];
+        $this->id = $data['id'];
+        $this->currency = $data['currency'];
+        $this->test = $data['test'];
         $this->payeePurse = $data['purse'];
-        $this->phone      = $data['phone'];
-        $this->price      = $data['price'];
-        $this->amount     = $data['amount'];
-        $this->comiss     = $data['comiss'];
-        $this->rest       = $data['rest'];
-        $this->date       = $data['date'];
-        $this->point      = $data['point'];
-        $this->wmtranid   = $data['wmtranid'];
-        $this->dateupd    = $data['dateupd'];
+        $this->phone = $data['phone'];
+        $this->price = $data['price'];
+        $this->amount = $data['amount'];
+        $this->comiss = $data['comiss'];
+        $this->rest = $data['rest'];
+        $this->date = $data['date'];
+        $this->point = $data['point'];
+        $this->wmtranid = $data['wmtranid'];
+        $this->dateupd = $data['dateupd'];
     }
 
     /**

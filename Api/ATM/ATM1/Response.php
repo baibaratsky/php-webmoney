@@ -49,22 +49,22 @@ class Response extends AbstractResponse
         parent::__construct($response);
 
         $responseObject = new \SimpleXMLElement($response);
-        
-        $this->returnCode        = (int) $responseObject->retval;
-        $this->returnDescription = (string) $responseObject->retdesc . '. '. (string) $responseObject->description;
+
+        $this->returnCode = (int)$responseObject->retval;
+        $this->returnDescription = (string)$responseObject->retdesc . '. ' . (string)$responseObject->description;
 
         if (isset($responseObject->payment)) {
             $payment = $responseObject->payment;
-            $this->currency   = (string) $payment['currency'];
-            $this->exchange   = (string) $payment['exchange'];
-            $this->payeePurse = (string) $payment->purse;
-            $this->upExchange = (float)  $payment->upexchange;
-            $this->course     = (float)  $payment->course;
-            $this->price      = (float)  $payment->price;
-            $this->amount     = (float)  $payment->amount;
-            $this->rest       = (float)  $payment->rest;
-            $this->dayLimit   = (float)  $payment->limit->day;
-            $this->monthLimit = (float)  $payment->limit->month;
+            $this->currency = (string)$payment['currency'];
+            $this->exchange = (string)$payment['exchange'];
+            $this->payeePurse = (string)$payment->purse;
+            $this->upExchange = (float)$payment->upexchange;
+            $this->course = (float)$payment->course;
+            $this->price = (float)$payment->price;
+            $this->amount = (float)$payment->amount;
+            $this->rest = (float)$payment->rest;
+            $this->dayLimit = (float)$payment->limit->day;
+            $this->monthLimit = (float)$payment->limit->month;
         }
     }
 

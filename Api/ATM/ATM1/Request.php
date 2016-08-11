@@ -43,9 +43,7 @@ class Request extends ATM\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array(
-                'price', 'payeePurse', 'currency'
-            )
+                RequestValidator::TYPE_REQUIRED => array('price', 'payeePurse', 'currency'),
         );
     }
 
@@ -73,23 +71,23 @@ class Request extends ATM\Request
     {
         return Response::className();
     }
-  
-  /**
-   * @param string $lightCertificate
-   * @param string $lightKey
-   * @param string $lightPass
-   */
-    public function cert($lightCertificate, $lightKey, $lightPass = '') {
+
+    /**
+     * @inheritdoc
+     */
+    public function lightAuth($certificate, $key, $keyPassword = '')
+    {
         if ($this->authType === self::AUTH_LIGHT) {
             $this->setSignature(
-              $this->signLight(
-                $this->getSignerWmid() . $this->getCurrency() .
-                $this->getPayeePurse() . $this->getPrice(),
-                $lightKey, $lightPass
-              )
+                    $this->signLight(
+                            $this->getSignerWmid() . $this->getCurrency() . $this->getPayeePurse() . $this->getPrice(),
+                            $key,
+                            $keyPassword
+                    )
             );
         }
-        parent::cert($lightCertificate, $lightKey, $lightPass);
+
+        parent::lightAuth($certificate, $key, $keyPassword);
     }
 
     /**
@@ -98,12 +96,12 @@ class Request extends ATM\Request
     public function sign(Signer $requestSigner = null)
     {
         if ($this->authType === self::AUTH_CLASSIC) {
-          $this->setSignature(
-            $requestSigner->sign(
-                $this->getSignerWmid() . $this->getCurrency() .
-                $this->getPayeePurse() . $this->getPrice()
-            )
-          );
+            $this->setSignature(
+                    $requestSigner->sign(
+                            $this->getSignerWmid() . $this->getCurrency() .
+                            $this->getPayeePurse() . $this->getPrice()
+                    )
+            );
         }
     }
 

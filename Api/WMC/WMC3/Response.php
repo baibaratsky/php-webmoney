@@ -32,13 +32,13 @@ class Response extends AbstractResponse
         parent::__construct($response);
 
         $responseObject = new \SimpleXMLElement($response);
-        $this->returnCode  = (int) $responseObject->retval;
-        $this->returnDescription = (string) $responseObject->retdesc;
-        $this->datestart   = self::createDateTime((string)$responseObject->datestart);
-        $this->dateend     = self::createDateTime((string)$responseObject->dateend);
+        $this->returnCode = (int)$responseObject->retval;
+        $this->returnDescription = (string)$responseObject->retdesc;
+        $this->datestart = self::createDateTime((string)$responseObject->datestart);
+        $this->dateend = self::createDateTime((string)$responseObject->dateend);
 
         if (isset($responseObject->history)) {
-            $this->count       = (int) $responseObject->history['count'];
+            $this->count = (int)$responseObject->history['count'];
             foreach ($responseObject->history->children() as $payment) {
                 $this->payments[] = new Payment($this->operationSimpleXmlToArray($payment));
             }
@@ -56,19 +56,19 @@ class Response extends AbstractResponse
     protected function operationSimpleXmlToArray($simpleXml)
     {
         $data = array(
-            'id'         => (int) $simpleXml['id'],
-            'currency'   => (string) $simpleXml['currency'],
-            'test'       => (int)    $simpleXml['test'],
-            'payeePurse' => (string) $simpleXml->purse,
-            'phone'      => (string) $simpleXml->phone,
-            'price'      => (float)  $simpleXml->price,
-            'amount'     => (float)  $simpleXml->amount,
-            'comiss'     => (float)  $simpleXml->comiss,
-            'rest'       => (float)  $simpleXml->rest,
-            'date'       => self::createDateTime((string)$simpleXml->date),
-            'point'      => (int)    $simpleXml->point,
-            'wmtranid'   => (int)    $simpleXml->wmtranid,
-            'dateupd'    => self::createDateTime((string)$simpleXml->dateupd),
+                'id' => (int)$simpleXml['id'],
+                'currency' => (string)$simpleXml['currency'],
+                'test' => (int)$simpleXml['test'],
+                'payeePurse' => (string)$simpleXml->purse,
+                'phone' => (string)$simpleXml->phone,
+                'price' => (float)$simpleXml->price,
+                'amount' => (float)$simpleXml->amount,
+                'comiss' => (float)$simpleXml->comiss,
+                'rest' => (float)$simpleXml->rest,
+                'date' => self::createDateTime((string)$simpleXml->date),
+                'point' => (int)$simpleXml->point,
+                'wmtranid' => (int)$simpleXml->wmtranid,
+                'dateupd' => self::createDateTime((string)$simpleXml->dateupd),
         );
 
         return $data;

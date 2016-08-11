@@ -34,18 +34,16 @@ class CurlRequester extends AbstractRequester
         curl_setopt($handler, CURLOPT_SSL_VERIFYPEER, $this->verifyCertificate);
         curl_setopt($handler, CURLOPT_SSLVERSION, 1);
 
-        if (($request instanceof XRequest ||
-             $request instanceof ATMRequest ||
-             $request instanceof WMCRequest) &&
-            ($request->getAuthType() === XRequest::AUTH_LIGHT ||
-             $request->getAuthType() === ATMRequest::AUTH_LIGHT ||
-             $request->getAuthType() === WMCRequest::AUTH_LIGHT)) {
+        if (($request instanceof XRequest && $request->getAuthType() === XRequest::AUTH_LIGHT)
+                || ($request instanceof ATMRequest && $request->getAuthType() === ATMRequest::AUTH_LIGHT)
+                || ($request instanceof WMCRequest && $request->getAuthType() === WMCRequest::AUTH_LIGHT)
+        ) {
             curl_setopt($handler, CURLOPT_SSLCERT, $request->getLightCertificate());
             curl_setopt($handler, CURLOPT_SSLKEY, $request->getLightKey());
-            
-            $pass = $request->getLightPass();
-            if (!empty($pass)) {
-              curl_setopt($handler, CURLOPT_KEYPASSWD, $request->getLightPass());
+
+            $password = $request->getLightPassword();
+            if (!empty($password)) {
+                curl_setopt($handler, CURLOPT_KEYPASSWD, $password);
             }
         }
 

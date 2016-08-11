@@ -26,26 +26,36 @@ abstract class Request extends XmlRequest
 
     /** @var string Light auth key file name (PEM) */
     protected $lightKey;
-  
+
     /** @var string Light auth key password */
-    protected $lightPass;
+    protected $lightPassword;
 
     public function __construct($authType = self::AUTH_CLASSIC)
     {
         $this->authType = $authType;
         $this->requestNumber = $this->generateRequestNumber();
     }
-  
+
     /**
-     * @param string $lightCertificate Light auth certificate file name (PEM)
-     * @param string $lightKey         Light auth key file name (PEM)
-     * @param string $lightPass        Light auth key pass
+     * @param string $certificate Light auth certificate file name (PEM)
+     * @param string $key Light auth key file name (PEM)
+     * @param string $keyPassword Light auth key password
      */
-    public function cert($lightCertificate, $lightKey, $lightPass = '')
+    public function lightAuth($certificate, $key, $keyPassword = '')
     {
-      $this->lightCertificate = $lightCertificate;
-      $this->lightKey = $lightKey;
-      $this->lightPass = $lightPass;
+        $this->lightCertificate = $certificate;
+        $this->lightKey = $key;
+        $this->lightPassword = $keyPassword;
+    }
+
+    /**
+     * @deprecated Use lightAuth() instead
+     * @param string $certificate Light auth certificate file name (PEM)
+     * @param string $key Light auth key file name (PEM)
+     */
+    public function cert($certificate, $key)
+    {
+        $this->lightAuth($certificate, $key);
     }
 
     /**
@@ -63,20 +73,21 @@ abstract class Request extends XmlRequest
     {
         return $this->lightCertificate;
     }
-  
+
     /**
      * @return string
      */
     public function getLightKey()
     {
-      return $this->lightKey;
+        return $this->lightKey;
     }
-    
+
     /**
      * @return string
      */
-    public function getLightPass() {
-      return $this->lightPass;
+    public function getLightPassword()
+    {
+        return $this->lightPassword;
     }
 
     /**

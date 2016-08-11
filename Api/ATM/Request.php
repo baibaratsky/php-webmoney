@@ -11,12 +11,13 @@ abstract class Request extends XmlRequest
     const AUTH_SHA256 = 'sha256';
     const AUTH_MD5 = 'md5';
     const AUTH_SECRET_KEY = 'secret_key';
+
     const AUTH_SIGN_TYPE_CLASSIC = 1;
     const AUTH_SIGN_TYPE_LIGHT = 2;
-  
-    CONST CURRENCY_EUR = 'EUR';
-    CONST CURRENCY_USD = 'USD';
-    CONST CURRENCY_RUB = 'RUB';
+
+    const CURRENCY_EUR = 'EUR';
+    const CURRENCY_USD = 'USD';
+    const CURRENCY_RUB = 'RUB';
 
     /** @var string request/@lang */
     protected $lang;
@@ -38,9 +39,9 @@ abstract class Request extends XmlRequest
 
     /** @var string Light auth key file name (PEM) */
     protected $lightKey;
-  
+
     /** @var string Light auth key password */
-    protected $lightPass;
+    protected $lightPassword;
 
     /**
      * @param string $authType
@@ -53,28 +54,29 @@ abstract class Request extends XmlRequest
 
         if (self::AUTH_CLASSIC == $authType) {
             $this->authTypeNum = self::AUTH_SIGN_TYPE_CLASSIC;
-        } elseif(self::AUTH_LIGHT == $authType) {
+        } elseif (self::AUTH_LIGHT == $authType) {
             $this->authTypeNum = self::AUTH_SIGN_TYPE_LIGHT;
         }
         $this->setLang($lang);
     }
-  
+
     /**
-     * @param string $lightCertificate Light auth certificate file name (PEM)
-     * @param string $lightKey         Light auth key file name (PEM)
-     * @param string $lightPass        Light auth key pass
+     * @param string $certificate Light auth certificate file name (PEM)
+     * @param string $key Light auth key file name (PEM)
+     * @param string $keyPassword Light auth key password
      */
-    public function cert($lightCertificate, $lightKey, $lightPass = '')
+    public function lightAuth($certificate, $key, $keyPassword = '')
     {
-        $this->lightCertificate = $lightCertificate;
-        $this->lightKey = $lightKey;
-        $this->lightPass = $lightPass;
+        $this->lightCertificate = $certificate;
+        $this->lightKey = $key;
+        $this->lightPassword = $keyPassword;
     }
-  
+
     /**
      * @param $data
      */
-    public function setSignature($data) {
+    public function setSignature($data)
+    {
         $this->signature = $data;
     }
 
@@ -101,12 +103,13 @@ abstract class Request extends XmlRequest
     {
         return $this->lightKey;
     }
-  
+
     /**
      * @return string
      */
-    public function getLightPass() {
-        return $this->lightPass;
+    public function getLightPassword()
+    {
+        return $this->lightPassword;
     }
 
     /**
@@ -153,28 +156,32 @@ abstract class Request extends XmlRequest
     /**
      * @param int $authTypeNum
      */
-    public function setAuthTypeNum($authTypeNum) {
+    public function setAuthTypeNum($authTypeNum)
+    {
         $this->authTypeNum = $authTypeNum;
     }
 
     /**
      * @return int|string
      */
-    public function getAuthTypeNum() {
+    public function getAuthTypeNum()
+    {
         return $this->authTypeNum;
     }
 
     /**
      * @param string $lang
      */
-    public function setLang($lang) {
+    public function setLang($lang)
+    {
         $this->lang = $lang;
     }
 
     /**
      * @return string
      */
-    public function getLang() {
+    public function getLang()
+    {
         return $this->lang;
     }
 }

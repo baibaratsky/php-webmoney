@@ -64,19 +64,19 @@ class Response extends AbstractResponse
 
         if (isset($responseObject->payment)) {
             $payment = $responseObject->payment;
-            $this->id         = (int)    $payment['id'];
-            $this->currency   = (string) $payment['currency'];
-            $this->test       = (int)    $payment['test'];
-            $this->payeePurse = (string) $payment->purse;
-            $this->phone      = (string) $payment->phone;
-            $this->price      = (float)  $payment->price;
-            $this->amount     = (float)  $payment->amount;
-            $this->comiss     = (float)  $payment->comiss;
-            $this->rest       = (float)  $payment->rest;
-            $this->date       = self::createDateTime((string)$payment->date);
-            $this->point      = (int)    $payment->point;
-            $this->wmtranid   = (int)    $payment->wmtranid;
-            $this->dateupd    = self::createDateTime((string)$payment->dateupd);
+            $this->id = (int)$payment['id'];
+            $this->currency = (string)$payment['currency'];
+            $this->test = (int)$payment['test'];
+            $this->payeePurse = (string)$payment->purse;
+            $this->phone = (string)$payment->phone;
+            $this->price = (float)$payment->price;
+            $this->amount = (float)$payment->amount;
+            $this->comiss = (float)$payment->comiss;
+            $this->rest = (float)$payment->rest;
+            $this->date = self::createDateTime((string)$payment->date);
+            $this->point = (int)$payment->point;
+            $this->wmtranid = (int)$payment->wmtranid;
+            $this->dateupd = self::createDateTime((string)$payment->dateupd);
         }
     }
 

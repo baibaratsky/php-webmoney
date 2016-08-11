@@ -51,9 +51,9 @@ class Request extends WMC\Request
     protected function getValidationRules()
     {
         return array(
-            RequestValidator::TYPE_REQUIRED => array(
-                'datestart', 'dateend', 'transactionId'
-            )
+                RequestValidator::TYPE_REQUIRED => array(
+                        'datestart', 'dateend', 'transactionId'
+                )
         );
     }
 
@@ -80,23 +80,24 @@ class Request extends WMC\Request
     {
         return Response::className();
     }
-  
-  /**
-   * @param string $lightCertificate
-   * @param string $lightKey
-   * @param string $lightPass
-   */
-    public function cert($lightCertificate, $lightKey, $lightPass = '') {
-      if ($this->authType === self::AUTH_LIGHT) {
-        $this->setSignature(
-          $this->signLight(
-            $this->getSignerWmid() . $this->getStartDateTime()->format('Ymd H:i:s') .
-            $this->getEndDateTime()->format('Ymd H:i:s') . $this->getTransactionId(),
-            $lightKey, $lightPass
-          )
-        );
-      }
-      parent::cert($lightCertificate, $lightKey, $lightPass);
+
+    /**
+     * @inheritdoc
+     */
+    public function lightAuth($certificate, $key, $keyPassword = '')
+    {
+        if ($this->authType === self::AUTH_LIGHT) {
+            $this->setSignature(
+                    $this->signLight(
+                            $this->getSignerWmid() . $this->getStartDateTime()->format('Ymd H:i:s')
+                            . $this->getEndDateTime()->format('Ymd H:i:s') . $this->getTransactionId(),
+                            $key,
+                            $keyPassword
+                    )
+            );
+        }
+
+        parent::lightAuth($certificate, $key, $keyPassword);
     }
 
     /**
@@ -106,8 +107,8 @@ class Request extends WMC\Request
     {
         if ($this->authType === self::AUTH_CLASSIC) {
             $this->setSignature($requestSigner->sign(
-                $this->getSignerWmid() . $this->getStartDateTime()->format('Ymd H:i:s') .
-                $this->getEndDateTime()->format('Ymd H:i:s') . $this->getTransactionId()
+                    $this->getSignerWmid() . $this->getStartDateTime()->format('Ymd H:i:s')
+                    . $this->getEndDateTime()->format('Ymd H:i:s') . $this->getTransactionId()
             ));
         }
     }

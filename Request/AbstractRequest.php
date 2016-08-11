@@ -17,6 +17,26 @@ abstract class AbstractRequest
     protected $signature;
 
     /**
+     * Sign data for light authentication keys (for the ATM and WMC interfaces)
+     * @param string $data data to sign
+     * @param string $key full path to the private key file
+     * @param string $keyPassword (optional) password for the private key
+     *
+     * @return string
+     * @throws Exception
+     */
+    protected static function signLight($data, $key, $keyPassword = '')
+    {
+        if (!is_file($key)) {
+            throw new Exception('Cannot access private key');
+        }
+
+        $privateKey = openssl_get_privatekey(file_get_contents($key), $keyPassword);
+        openssl_sign($data, $signature, $privateKey, OPENSSL_ALGO_SHA1);
+        return base64_encode($signature);
+    }
+
+    /**
      * @return bool
      */
     public function validate()
@@ -25,25 +45,6 @@ abstract class AbstractRequest
         $this->errors = $validator->validate($this->getValidationRules());
 
         return count($this->errors) == 0;
-    }
-  
-    /**
-     * Sign data for light authentication keys - needed for ATM and WMC interface
-     * @param string $data data to sign
-     * @param string $lightKey filepath to private key
-     * @param string $lightPass (optional) password for private key
-     *
-     * @return string
-     * @throws Exception
-     */
-    public function signLight($data, $lightKey, $lightPass = '') {
-      if (!is_file($lightKey)) {
-        throw new Exception('Cannot access private key');
-      }
-      
-      $pkeyid = openssl_get_privatekey(file_get_contents($lightKey), $lightPass);
-      openssl_sign($data, $sig, $pkeyid, OPENSSL_ALGO_SHA1);
-      return base64_encode($sig);
     }
 
     /**
@@ -67,12 +68,13 @@ abstract class AbstractRequest
     {
         return $this->errors;
     }
-  
+
     /**
      * @return string
      */
-    public function getSignature() {
-      return $this->signature;
+    public function getSignature()
+    {
+        return $this->signature;
     }
 
     /**
