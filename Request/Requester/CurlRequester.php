@@ -11,6 +11,21 @@ use baibaratsky\WebMoney\Request\XmlRequest;
 
 class CurlRequester extends AbstractRequester
 {
+
+    /**
+     * default ssl version
+     * @var int
+     */
+    private $sslVersion = 1;
+
+    /**
+     * @param int $sslVersion
+     */
+    public function setSSLVersion($sslVersion)
+    {
+        $this->sslVersion = $sslVersion;
+    }
+
     /**
      * @param AbstractRequest $request
      *
@@ -32,7 +47,7 @@ class CurlRequester extends AbstractRequester
             curl_setopt($handler, CURLOPT_CAINFO, dirname(dirname(__DIR__)) . '/WMUsedRootCAs.cer');
         }
         curl_setopt($handler, CURLOPT_SSL_VERIFYPEER, $this->verifyCertificate);
-        curl_setopt($handler, CURLOPT_SSLVERSION, 1);
+        curl_setopt($handler, CURLOPT_SSLVERSION, $this->sslVersion);
 
         if (($request instanceof XRequest && $request->getAuthType() === XRequest::AUTH_LIGHT)
                 || ($request instanceof ATMRequest && $request->getAuthType() === ATMRequest::AUTH_LIGHT)
