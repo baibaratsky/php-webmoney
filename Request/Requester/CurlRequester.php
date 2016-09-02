@@ -2,9 +2,9 @@
 
 namespace baibaratsky\WebMoney\Request\Requester;
 
-use baibaratsky\WebMoney\Api\X\Request AS XRequest;
-use baibaratsky\WebMoney\Api\ATM\Request AS ATMRequest;
-use baibaratsky\WebMoney\Api\WMC\Request AS WMCRequest;
+use baibaratsky\WebMoney\Api\ATM\Request as ATMRequest;
+use baibaratsky\WebMoney\Api\WMC\Request as WMCRequest;
+use baibaratsky\WebMoney\Api\X\Request as XRequest;
 use baibaratsky\WebMoney\Exception\RequesterException;
 use baibaratsky\WebMoney\Request\AbstractRequest;
 use baibaratsky\WebMoney\Request\XmlRequest;
