@@ -34,7 +34,7 @@ class Request extends X\Request
                 break;
 
             case self::AUTH_LIGHT:
-                $this->url = 'https://w3s.webmoney.ru/asp/XMLOutInvoicesCert.asp';
+                $this->url = 'https://w3s.wmtransfer.com/asp/XMLOutInvoicesCert.asp';
                 break;
 
             default:
