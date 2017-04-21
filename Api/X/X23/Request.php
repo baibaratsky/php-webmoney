@@ -83,8 +83,8 @@ class Request extends X\Request
         $xml .= self::xmlElement('wmid', $this->signerWmid);
         $xml .= self::xmlElement('sign', $this->signature);
         $xml .= '<invoicerefuse>';
-        $xml .= self::xmlElement('wmid', $this->orderId);
-        $xml .= self::xmlElement('invoiceId', $this->customerWmid);
+        $xml .= self::xmlElement('wmid', $this->wmid);
+        $xml .= self::xmlElement('wminvid', $this->invoiceId);
         $xml .= '</invoicerefuse>';
         $xml .= '</w3s.request>';
 
