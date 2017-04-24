@@ -38,8 +38,8 @@ class Request extends X\Request
     /** @var int trans/wminvid */
     protected $invoiceId = 0;
 
-    /** @var bool trans/onlyauth */
-    protected $onlyAuth = true;
+    /** @var int trans/onlyauth */
+    protected $onlyAuth = 1;
 
     /**
      * @param string $authType
@@ -275,6 +275,6 @@ class Request extends X\Request
      */
     public function setOnlyAuth($onlyAuth)
     {
-        $this->onlyAuth = (bool)$onlyAuth;
+        $this->onlyAuth = (int)$onlyAuth;
     }
 }
