@@ -41,7 +41,7 @@ class Request extends X\Request
     /** @var bool trans/onlyauth */
     protected $onlyAuth = true;
 
-    /** @var bool trans/wmb_denomination */
+    /** @var bool wmb_denomination */
     protected $wmbDenomination = true;
 
     /**
