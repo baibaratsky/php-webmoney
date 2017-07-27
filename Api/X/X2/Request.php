@@ -103,7 +103,7 @@ class Request extends X\Request
         $xml .= self::xmlElement('wminvid', $this->invoiceId);
         $xml .= self::xmlElement('onlyauth', (int)$this->onlyAuth);
         $xml .= '</trans>';
-	     $xml .= self::xmlElement('wmb_denomination', $this->wmbDenomination);
+        $xml .= self::xmlElement('wmb_denomination', $this->wmbDenomination);
         $xml .= '</w3s.request>';
 
         return $xml;
