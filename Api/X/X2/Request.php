@@ -41,6 +41,9 @@ class Request extends X\Request
     /** @var bool trans/onlyauth */
     protected $onlyAuth = true;
 
+    /** @var bool wmb_denomination */
+    protected $wmbDenomination = true;
+
     /**
      * @param string $authType
      *
@@ -72,7 +75,7 @@ class Request extends X\Request
         return array(
                 RequestValidator::TYPE_REQUIRED => array(
                         'transactionExternalId', 'payerPurse', 'payeePurse', 'amount',
-                        'invoiceId', 'onlyAuth',
+                        'invoiceId', 'onlyAuth', 'wmbDenomination'
                 ),
                 RequestValidator::TYPE_DEPEND_REQUIRED => array(
                         'signerWmid' => array('authType' => array(self::AUTH_CLASSIC)),
@@ -100,6 +103,7 @@ class Request extends X\Request
         $xml .= self::xmlElement('wminvid', $this->invoiceId);
         $xml .= self::xmlElement('onlyauth', (int)$this->onlyAuth);
         $xml .= '</trans>';
+        $xml .= self::xmlElement('wmb_denomination', $this->wmbDenomination);
         $xml .= '</w3s.request>';
 
         return $xml;
@@ -276,5 +280,21 @@ class Request extends X\Request
     public function setOnlyAuth($onlyAuth)
     {
         $this->onlyAuth = (bool)$onlyAuth;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getWmbDenomination()
+    {
+        return $this->wmbDenomination;
+    }
+
+    /**
+     * @param bool $wmbDenomination
+     */
+    public function setWmbDenomination($wmbDenomination)
+    {
+        $this->wmbDenomination = (bool)$wmbDenomination;
     }
 }
