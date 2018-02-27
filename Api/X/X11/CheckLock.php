@@ -170,7 +170,9 @@ class CheckLock
         $this->middleName = $params['oname'];
         $this->passportNum = $params['pnomer'];
         $this->passportIssueDate = $params['pdate'];
-        $this->passportExpirationDate = $params['pdateend'];
+        if (isset($params['pdateend'])) {
+            $this->passportExpirationDate = $params['pdateend'];
+        }
         $this->passportIssuePlace = $params['pbywhom'];
         $this->passportIssueCountry = $params['pcountry'];
         $this->passportIssueCity = $params['pcity'];
