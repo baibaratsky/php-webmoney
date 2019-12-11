@@ -19,11 +19,24 @@ class CurlRequester extends AbstractRequester
     private $sslVersion = 1;
 
     /**
+     * @var int
+     */
+    private $curlConnectTimeout = 300;
+    
+    /**
      * @param int $sslVersion
      */
     public function setSSLVersion($sslVersion)
     {
         $this->sslVersion = $sslVersion;
+    }
+    
+    /**
+     * @param int $timeout
+     */
+    public function setCurlConnectTimeout($timeout)
+    {
+        $this->curlConnectTimeout = $timeout;
     }
 
     /**
@@ -40,6 +53,7 @@ class CurlRequester extends AbstractRequester
 
         $handler = curl_init($request->getUrl());
 
+        curl_setopt($handler, CURLOPT_CONNECTTIMEOUT, $this->curlConnectTimeout);
         curl_setopt($handler, CURLOPT_POST, true);
         curl_setopt($handler, CURLOPT_POSTFIELDS, $request->getData());
 
