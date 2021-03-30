@@ -38,6 +38,7 @@ class Request extends X\Request
     const PURSE_WMB = 'WMB';
     const PURSE_WMY = 'WMY';
     const PURSE_WMG = 'WMG';
+    const PURSE_WMP = 'WMP';
 
     const EMONEY_RBKM = 'rbkmoney.ru';
     const EMONEY_PP = 'paypal.com';
@@ -146,7 +147,7 @@ class Request extends X\Request
                         'operationDirection' => array(self::DIRECTION_OUTPUT, self::DIRECTION_INPUT),
                         'operationPurseType' => array(self::PURSE_WMZ, self::PURSE_WMR, self::PURSE_WME,
                                                       self::PURSE_WMU, self::PURSE_WMB, self::PURSE_WMY,
-                                                      self::PURSE_WMG),
+                                                      self::PURSE_WMG, self::PURSE_WMP),
                         'userEMoneyName' => array(self::EMONEY_RBKM, self::EMONEY_PP, self::EMONEY_SK, self::EMONEY_QW,
                                                   self::EMONEY_YAM, self::EMONEY_ESP),
                 ),
