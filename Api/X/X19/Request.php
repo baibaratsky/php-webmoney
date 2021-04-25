@@ -108,7 +108,7 @@ class Request extends X\Request
                 break;
 
             case self::AUTH_LIGHT:
-                $this->url = 'https://apipassport.webmoney.ru/XMLCheckUserCert.aspx';
+                $this->url = 'https://apipassportcrt.webmoney.ru/XMLCheckUserCert.aspx';
                 break;
 
             default:
